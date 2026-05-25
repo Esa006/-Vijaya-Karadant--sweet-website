@@ -1,0 +1,188 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: responsive-category.css
+ * Description: Fully responsive category grid with CSS Grid
+ * =============================================================
+ */
+
+/* ── Section Container ── */
+.c-res-category {
+    padding: 30px 10px; /* Reduced for 2-col mobile */
+    background-color: transparent;
+}
+
+.c-res-category__container {
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.c-res-category__header {
+    text-align: center;
+    margin-bottom: 25px; /* Tighter spacing */
+}
+
+.c-res-category__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(20px, 5vw, 36px); /* Scaled down for mobile */
+    color: #7b1e1e;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.c-res-category__subtitle {
+    font-size: clamp(13px, 2vw, 18px); /* Scaled down for mobile */
+    color: #5c3b31;
+    margin-bottom: 0;
+}
+
+/* ── Grid Layout (Mobile First) ── */
+.c-res-category__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    gap: 10px;
+}
+
+/* Tablet (768px - 1199px) */
+@media (min-width: 768px) {
+    .c-res-category {
+        padding: 60px 24px;
+    }
+    .c-res-category__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Desktop (≥1200px) */
+@media (min-width: 1200px) {
+    .c-res-category {
+        padding: 80px 0;
+    }
+    .c-res-category__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+}
+
+/* ── Category Card ── */
+.c-cat-card {
+    background: #ffffff;
+    border-radius: 12px; /* Slightly tighter */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Safety rule */
+}
+
+/* Hover Animation (Desktop Only) */
+@media (min-width: 1024px) {
+    .c-cat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(125, 30, 30, 0.1);
+    }
+}
+
+/* ── Image Wrapper & Rules ── */
+.c-cat-card__img-wrap {
+    position: relative;
+    width: 100%;
+    height: 160px; /* Shorter for mobile 2-col */
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .c-cat-card__img-wrap {
+        height: 220px;
+    }
+}
+
+.c-cat-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.c-cat-card:hover .c-cat-card__img {
+    transform: scale(1.08);
+}
+
+/* ── Badge Styling ── */
+.c-cat-card__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #059669; /* Green background */
+    color: #ffffff;
+    padding: 4px 10px; /* Tighter for mobile */
+    border-radius: 50px;
+    font-size: 10px; /* Smaller for mobile */
+    font-weight: 700;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Card Content ── */
+.c-cat-card__content {
+    padding: 12px; /* Tighter for mobile */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.c-cat-card__title {
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+    font-size: 13px; /* Mobile 2-col */
+}
+
+@media (min-width: 768px) {
+    .c-cat-card__title {
+        font-size: 16px; /* Tablet */
+    }
+}
+
+@media (min-width: 1200px) {
+    .c-cat-card__title {
+        font-size: 18px; /* Desktop */
+    }
+}
+
+.c-cat-card__desc {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* ── Action Button ── */
+.c-cat-card__btn {
+    width: 100%;
+    height: 42px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #7d1e1e 0%, #f59e0b 100%); /* Maroon to Orange */
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    text-decoration: none;
+}
+
+.c-cat-card__btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(123, 30, 30, 0.2);
+    color: #fff;
+}

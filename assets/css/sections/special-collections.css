@@ -1,0 +1,89 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: special-collections.css
+ * Description: Discover Our Special Collections card strip
+ * =============================================================
+ */
+
+.c-special-collections {
+    padding: 24px 0 36px;
+}
+
+.c-special-collections__header {
+    margin-bottom: 12px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.c-special-collections__title {
+    margin: 0;
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.2rem, 1.02rem + 0.7vw, 1.65rem);
+    color: #7b1d1d;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.c-special-collections__grid {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 0.75rem;
+}
+
+/* ── Card Styles ── */
+.c-special-card {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 41 / 20;
+    background: #e7dccf;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+    border: 1px solid #e8dccc;
+}
+
+.c-special-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(123, 29, 29, 0.12);
+}
+
+.c-special-card__bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.c-special-card:hover .c-special-card__bg {
+    transform: scale(1.02);
+}
+
+/* ── Responsive Rules ── */
+@media (max-width: 767.98px) {
+    .c-special-collections {
+        padding: 18px 0 28px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .c-special-card {
+        aspect-ratio: 16 / 8;
+    }
+}
+
+@media (max-width: 425px) {
+    .c-special-collections__header img {
+        height: 180px !important;
+        width: auto !important;
+    }
+    
+    .c-special-collections__header {
+        gap: 8px !important;
+        margin-bottom: 25px !important;
+    }
+}

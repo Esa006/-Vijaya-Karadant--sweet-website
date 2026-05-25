@@ -1,0 +1,1098 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: products.css
+ * Description: Product admin page-specific styles
+ * =============================================================
+ */
+
+.products-page .products-content-body {
+    background-color: #fcf8f5;
+}
+
+.products-page .products-header-sticky {
+    top: 80px;
+    z-index: 998;
+}
+
+.products-page .products-page-title {
+    color: #8c3333;
+    font-family: 'Playfair Display', serif, 'Inter';
+    font-size: 32px;
+}
+
+.products-page .products-outline-btn {
+    border: 1px solid #8c3333;
+    background: #fff;
+    color: #8c3333;
+}
+
+.products-page .products-add-btn {
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px 18px;
+}
+
+.products-page .products-export-btn {
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+
+.products-page .products-bulk-btn {
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+
+.products-page .products-stat-label {
+    font-size: 15px;
+}
+
+.products-page .products-stat-value {
+    font-size: 34px;
+    letter-spacing: -0.5px;
+}
+
+.products-page .products-stat-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.products-page .products-stat-copy {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.products-page .products-search-group {
+    width: 250px;
+    max-width: 100%;
+    border: 1px solid #8c3333;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.products-page .products-search-icon {
+    color: #8c3333;
+}
+
+.products-page .products-filter-input,
+.products-page .products-filter-select {
+    font-size: 13px;
+}
+
+.products-page .products-filter-select {
+    border: 1px solid #8c3333;
+    border-radius: 4px;
+    color: #555;
+    width: auto;
+    background-color: #fff;
+}
+
+.products-page .products-table-title {
+    font-size: 20px;
+}
+
+.products-page .products-table-head {
+    background-color: #faefe5;
+    border-radius: 12px;
+    border-bottom: none;
+}
+
+.products-page .products-table-th {
+    background-color: #fee7d6;
+    color: #8c3333;
+    border: none;
+    font-weight: 700;
+}
+
+.products-page .products-table-th-check {
+    width: 50px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.products-page .products-table-th-image {
+    width: 100px;
+}
+
+.products-page .products-table-th-actions {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.products-page .products-table-body {
+    border-top: 20px solid transparent;
+}
+
+.products-page .product-row {
+    border-bottom: 2px solid #8c3333;
+}
+
+.products-page .products-row-checkbox {
+    border-color: #fbbf24;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.products-page .products-thumb-lg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.products-page .products-product-name {
+    font-size: 13px;
+}
+
+.products-page .products-product-sku {
+    font-size: 10px;
+    font-weight: 700;
+    color: #4a4a4a;
+}
+
+.products-page .products-cell-md {
+    font-size: 14px;
+}
+
+.products-page .products-status-pill {
+    font-size: 13px;
+    padding: 6px 14px;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+.products-page .products-status-in {
+    color: #10b981;
+    background: #d1fae5;
+}
+
+.products-page .products-status-low {
+    color: #f59e0b;
+    background: #fef3c7;
+}
+
+.products-page .products-status-out {
+    color: #ef4444;
+    background: #fee2e2;
+}
+
+.products-page .products-empty-btn {
+    background-color: var(--admin-primary);
+    border: none;
+}
+
+.products-page .products-no-results-row {
+    display: none;
+}
+
+.products-page .products-page-link-active {
+    background-color: var(--admin-primary);
+}
+
+.products-page .products-add-offcanvas {
+    width: 550px;
+    background-color: #f8f5f2;
+}
+
+.products-page .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.products-page .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+.products-page .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ebb66c;
+    border-radius: 4px;
+}
+
+.products-page .form-label-custom {
+    color: #d67a35;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.products-page .form-control-custom {
+    background-color: #fff;
+    border: 1px solid #8c3333;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #555;
+}
+
+.products-page .form-control-custom::placeholder {
+    color: #a0a0a0;
+    font-weight: 500;
+}
+
+.products-page .form-select-custom {
+    background-color: #fff;
+    border: 1px solid #8c3333;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #7a7a7a;
+    font-weight: 500;
+}
+
+.products-page .products-stock-select {
+    font-size: 13px;
+}
+
+.products-page .products-no-resize {
+    resize: none;
+}
+
+.products-page .input-group-file {
+    display: flex;
+    border: 1px solid #8c3333;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+    height: 42px;
+}
+
+.products-page .input-group-file-text {
+    flex-grow: 1;
+    padding: 10px 14px;
+    color: #a0a0a0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.products-page .input-group-file-btn {
+    background: #fff;
+    border: none;
+    border-left: 1px solid #8c3333;
+    padding: 0 16px;
+    color: #7a7a7a;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.products-page .file-overlay-wrapper {
+    position: relative;
+}
+
+.products-page .file-overlay-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.products-page .products-add-title {
+    font-size: 26px;
+}
+
+.products-page .products-close-btn {
+    color: #9e3f15;
+}
+
+.products-page .products-close-icon {
+    font-size: 24px;
+    font-weight: 900;
+    -webkit-text-stroke: 1px #9e3f15;
+}
+
+.products-page .products-cancel-btn {
+    background-color: #dde0e2;
+    color: #5a5c5e;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.products-page .products-save-btn {
+    background-color: #a34316;
+    color: #fff;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.products-page .products-preview-dialog {
+    max-width: 520px;
+}
+
+.products-page .products-preview-content {
+    background-color: #f8f6f4;
+    border-radius: 12px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.products-page .products-preview-title {
+    font-size: 20px;
+}
+
+.products-page .products-preview-close-icon {
+    font-size: 20px;
+    font-weight: 900;
+    -webkit-text-stroke: 1px #9e3f15;
+}
+
+.products-page .products-preview-card {
+    border-radius: 10px !important;
+}
+
+.products-page .products-preview-image-wrap {
+    width: 100%;
+    height: 400px; /* BIG PREVIEW HEIGHT */
+    overflow: hidden;
+}
+
+.products-page .products-badge-best-seller {
+    background-color: #f59e0b;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.products-page .products-preview-heart-btn {
+    width: 28px;
+    height: 28px;
+    color: #f59e0b;
+}
+
+.products-page .products-preview-name {
+    font-size: 22px;
+}
+
+.products-page .products-badge-active {
+    background-color: #bbe5bd;
+    color: #166534;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+.products-page .products-preview-stat-box {
+    border-color: #e2c6a9 !important;
+}
+
+.products-page .products-preview-stat-value {
+    font-size: 16px;
+}
+
+.products-page .products-preview-stat-label {
+    font-size: 11px;
+}
+
+.products-page .products-weight-tabs {
+    background-color: #fafafa;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.products-page .products-weight-tab {
+    border: 1px solid transparent;
+}
+
+.products-page .products-weight-tab-active {
+    border: 1px solid #8c3333;
+    color: #8c3333;
+    background: #fff;
+}
+
+.products-page .products-preview-stock-label {
+    color: #d67a35;
+    font-size: 12px;
+}
+
+.products-page .products-stock-radio {
+    transform: scale(0.8);
+}
+
+.products-page .products-stock-radio-in {
+    border-color: #8c3333;
+    background-color: #8c3333;
+}
+
+.products-page .products-stock-radio-out {
+    border-color: #4b5563;
+}
+
+.products-page .products-stock-radio-label-in {
+    color: #8c3333;
+    font-size: 12px;
+}
+
+.products-page .products-stock-radio-label-out {
+    color: #4b5563;
+    font-size: 12px;
+}
+
+.products-page .products-preview-description-label {
+    color: #d67a35;
+    font-size: 12px;
+}
+
+.products-page .products-preview-description {
+    border-color: #8c3333;
+    border-radius: 4px;
+    resize: none;
+    font-size: 12px;
+}
+
+.products-page .products-preview-edit-btn {
+    background-color: #ba4a1b;
+    border: none;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.products-page .products-preview-close-btn {
+    background-color: transparent;
+    border: 1px solid #8c3333;
+    color: #4b5563;
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.products-page .products-delete-dialog {
+    max-width: 480px;
+}
+
+.products-page .products-delete-content {
+    background-color: #f8f6f4;
+    border-radius: 12px;
+}
+
+.products-page .products-delete-close-btn {
+    color: #ba4a1b;
+}
+
+.products-page .products-delete-close-icon {
+    font-size: 26px;
+    font-weight: 900;
+    -webkit-text-stroke: 2px #ba4a1b;
+}
+
+.products-page .products-delete-title {
+    font-size: 24px;
+}
+
+.products-page .products-delete-copy {
+    color: #4b5563;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 90%;
+}
+
+.products-page .products-delete-thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+}
+
+.products-page .products-delete-product-name {
+    font-size: 16px;
+}
+
+.products-page .products-delete-meta {
+    color: #4b5563;
+    font-size: 15px;
+}
+
+.products-page .products-delete-confirm-btn {
+    background-color: #ba4a1b;
+    border: none;
+    color: #fff;
+    padding: 12px 0;
+}
+
+.products-page .products-delete-cancel-btn {
+    background-color: #fff;
+    border: 1px solid #8c3333;
+    color: #4b5563;
+    padding: 12px 0;
+}
+
+/* ==========================================================================
+   ADD CATEGORY MODAL SPECIFIC (BASED ON MOCKUP)
+   ========================================================================== */
+.products-category-modal {
+    background-color: #fbf7f0;
+    /* Cream background matches reference */
+    border-radius: 12px;
+}
+
+.products-cat-label {
+    color: #ba4a1b !important;
+    font-weight: 600;
+}
+
+/* Custom switch based on screenshot */
+.category-switch-wrapper {
+    position: relative;
+    width: 50px;
+    height: 26px;
+}
+
+.category-switch-input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 50px;
+    height: 26px;
+    background-color: transparent;
+    border: 2px solid #e1cbb3;
+    /* outline matching thumb */
+    border-radius: 13px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+    margin: 0;
+}
+
+.category-switch-input::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #e1cbb3;
+    /* unchecked thumb */
+    top: 2px;
+    left: 4px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s;
+}
+
+/* When checked: thumb turns dark red/brown, background is transparent showing outline */
+.category-switch-input:checked::after {
+    transform: translateX(24px);
+    background-color: #8c3333;
+}
+
+/* Custom right-aligned scrollbar for the modal body */
+.category-modal-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.category-modal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border: 1px solid #f2e3d3;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.category-modal-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #f4a236;
+    /* vibrant orange */
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   MOBILE-FIRST CARD LAYOUT REDESIGN (MAX-WIDTH: 767.98px)
+   Transforms the data table into vertical cards for better UX
+   ========================================================================== */
+@media (max-width: 767.98px) {
+
+    /* Hide the conventional table header entirely */
+    .products-mobile-card-grid .products-table-head {
+        display: none !important;
+    }
+
+    /* Convert structural table elements to block */
+    .products-mobile-card-grid,
+    .products-mobile-card-grid tbody,
+    .products-mobile-card-grid tr,
+    .products-mobile-card-grid td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Card styling on the row */
+    .products-mobile-card-grid .product-row {
+        background: #fff;
+        border: 1px solid #fee7d6;
+        /* Premium cream border */
+        border-radius: 12px;
+        /* Softer card edges */
+        padding: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        position: relative;
+    }
+
+    /* Override any default padding and alignment on td cells */
+    .products-mobile-card-grid .product-row td {
+        border: none !important;
+        text-align: left !important;
+        padding: 6px 0 !important;
+    }
+
+    /* Layout specific cells */
+    /* 1. Checkbox positioned absolute top-right */
+    .products-mobile-card-grid .product-row .td-check {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: auto !important;
+        padding: 0 !important;
+        z-index: 2;
+    }
+
+    .products-mobile-card-grid .product-row .td-check .form-check {
+        margin: 0 !important;
+    }
+
+    .products-mobile-card-grid .product-row .td-check .form-check-input {
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+    /* 2. Image and Product Info Grouping */
+    .products-mobile-card-grid .product-row .td-image {
+        float: left;
+        width: 65px !important;
+        margin-right: 15px;
+        padding-bottom: 0 !important;
+    }
+
+    .products-mobile-card-grid .product-row .td-image img.product-thumb {
+        width: 65px !important;
+        height: 65px !important;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .products-mobile-card-grid .product-row .td-info {
+        min-height: 65px;
+        /* clear the floated image */
+        padding-top: 5px !important;
+        padding-bottom: 12px !important;
+        border-bottom: 1px solid #f8f9fa !important;
+        margin-bottom: 8px;
+        padding-right: 35px !important;
+        /* space for absolute checkbox */
+    }
+
+    .products-mobile-card-grid .product-row .td-info .products-product-name {
+        margin-left: 0 !important;
+        text-align: left !important;
+        font-size: 15px;
+        line-height: 1.2;
+        /* Line clamp for long names */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .products-mobile-card-grid .product-row .td-info .products-product-sku {
+        margin-left: 0 !important;
+        text-align: left !important;
+        font-size: 11px;
+    }
+
+    /* Clearfix for floated image */
+    .products-mobile-card-grid .product-row .td-info::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* 3. Micro-stats styling for Data Labels (e.g. Price, Stock, Category) */
+    .products-mobile-card-grid .product-row td[data-label] {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center;
+        font-size: 14px;
+        padding: 8px 0 !important;
+    }
+
+    /* Insert the pseudo-element label */
+    .products-mobile-card-grid .product-row td[data-label]::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #8c3333;
+        font-size: 13px;
+        flex-shrink: 0;
+        margin-right: 15px;
+        opacity: 0.8;
+    }
+
+    /* Force visibility on columns normally hidden by d-none classes on mobile */
+    .products-mobile-card-grid .product-row .d-none.d-md-table-cell,
+    .products-mobile-card-grid .product-row .d-none.d-lg-table-cell,
+    .products-mobile-card-grid .product-row .d-none.d-sm-table-cell {
+        display: flex !important;
+    }
+
+    /* Status Pill align right */
+    .products-mobile-card-grid .product-row .td-status {
+        margin-top: 4px;
+        padding-bottom: 12px !important;
+        border-bottom: 1px solid #f8f9fa !important;
+    }
+
+    /* 4. Action Footer Grouping */
+    .products-mobile-card-grid .product-row .td-actions {
+        padding-top: 15px !important;
+        padding-bottom: 0 !important;
+        margin-top: auto;
+    }
+
+    .products-mobile-card-grid .product-row .td-actions-wrapper {
+        justify-content: space-between !important;
+        width: 100%;
+        gap: 0 !important;
+    }
+
+    .products-mobile-card-grid .product-row .td-actions-wrapper a,
+    .products-mobile-card-grid .product-row .td-actions-wrapper button {
+        flex: 1;
+        text-align: center;
+        padding: 12px 0;
+        /* Huge 44px+ tap targets */
+        border-radius: 8px;
+        background-color: #fcfcfc;
+        border: 1px solid #f1f1f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #4b5563 !important;
+        transition: all 0.2s;
+    }
+
+    .products-mobile-card-grid .product-row .td-actions-wrapper a:hover,
+    .products-mobile-card-grid .product-row .td-actions-wrapper button:hover {
+        background-color: #f2f2f2;
+        color: #8c3333 !important;
+        border-color: #e5e7eb;
+    }
+
+    /* Add gaps between action buttons */
+    .products-mobile-card-grid .product-row .td-actions-wrapper>*:not(:last-child) {
+        margin-right: 12px;
+    }
+
+    /* Fix empty states on mobile */
+    .products-mobile-card-grid .products-no-results-row td,
+    .products-mobile-card-grid #emptyState td {
+        display: block;
+        padding: 30px 15px !important;
+    }
+
+    /* ==========================================================================
+       MOBILE BOTTOM SHEET FILTER (PROGRESSIVE DISCLOSURE)
+       ========================================================================== */
+    .products-filter-trigger {
+        width: 46px;
+        height: 46px;
+        /* 44+ px minimum touch target */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        color: #8c3333;
+        flex-shrink: 0;
+    }
+
+    .products-filter-offcanvas.offcanvas-md {
+        height: auto;
+        max-height: 85vh;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .products-filter-wrapper {
+        margin-bottom: 5px;
+    }
+
+    /* Make the select boxes taller easily */
+    .products-filter-select {
+        height: 50px;
+    }
+
+    .products-export-btn {
+        height: 50px;
+        font-weight: 600;
+    }
+}
+
+/* ==========================================================================
+   DESKTOP UI FIXES (Fixes search bar crushing filters)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .products-toolbar {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+    }
+
+    .products-search-container {
+        flex: 1 1 300px !important;
+        max-width: 450px !important;
+    }
+
+    .products-filter-offcanvas.offcanvas-md {
+        flex: 0 0 auto !important;
+        display: block !important;
+    }
+
+    .products-filter-select {
+        min-width: 180px !important;
+        /* Prevents "A v" squashing */
+    }
+
+    .products-table-title {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+}
+
+/* ==========================================================================
+   OTHERS PAGE � STAT CARDS
+   ========================================================================== */
+.others-stat-card {
+    border-radius: 12px;
+    border: 1px solid #f3e8de;
+    background: #fff;
+    transition: box-shadow 0.2s;
+}
+
+.others-stat-card:hover {
+    box-shadow: 0 6px 20px rgba(140, 51, 51, 0.07);
+}
+
+.others-stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.others-stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.others-stat-sub {
+    font-size: 11px;
+    color: #b0b0b0;
+    line-height: 1.4;
+    max-width: 140px;
+}
+
+.others-stat-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.others-icon-blue {
+    background: #e8eeff;
+    color: #5b7ff6;
+}
+
+.others-icon-orange {
+    background: #fff3e8;
+    color: #f59b42;
+}
+
+.others-icon-green {
+    background: #e6f9ee;
+    color: #2db76a;
+}
+
+.others-icon-purple {
+    background: #ece8ff;
+    color: #7c5cbf;
+}
+
+/* ==========================================================================
+   OTHERS PAGE � STATUS BADGES
+   ========================================================================== */
+.others-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.others-badge-paid {
+    background: #e6f9ee;
+    color: #1e7e34;
+}
+
+.others-badge-unpaid {
+    background: #fde8ea;
+    color: #c0392b;
+}
+
+.others-badge-processing {
+    background: #e8eeff;
+    color: #3a5bd9;
+}
+
+.others-badge-pending {
+    background: #fff3e0;
+    color: #d97706;
+}
+
+.others-badge-delivered {
+    background: #e6f9ee;
+    color: #1e7e34;
+}
+
+.others-badge-cancelled {
+    background: #fde8ea;
+    color: #c0392b;
+}
+
+.others-table tbody .product-row {
+    border-bottom: 1px solid #f4ede6 !important;
+    background: #fff;
+}
+
+.others-table tbody .product-row:last-child {
+    border-bottom: none !important;
+}
+
+/* ==========================================================================
+   RESEARCH-BASED RESPONSIVE TOOLBAR (768px FIX)
+   ========================================================================== */
+
+.products-toolbar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.products-toolbar-tier-primary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.products-toolbar-tier-primary .products-search-group {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.25rem 0.75rem;
+    height: 48px;
+    /* High-fidelity tap target */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.products-toolbar-tier-primary .products-search-group:focus-within {
+    border-color: #8c3333;
+    box-shadow: 0 0 0 3px rgba(140, 51, 51, 0.1);
+}
+
+.products-filter-trigger {
+    height: 48px;
+    padding: 0 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    white-space: nowrap;
+}
+
+/* Tier 2: Desktop Layout */
+.products-toolbar-tier-secondary {
+    gap: 1rem;
+    align-items: center;
+}
+
+.products-toolbar-tier-secondary .products-filter-select {
+    height: 48px;
+    min-width: 160px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.products-export-btn {
+    height: 48px;
+    padding: 0 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid #8c3333;
+    color: #8c3333;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.products-export-btn:hover {
+    background: #8c3333;
+    color: #fff;
+}
+
+/* Tablet & Desktop Specific Transitions */
+@media (min-width: 768px) {
+    .products-toolbar-container {
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .products-toolbar-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .products-toolbar-tier-primary {
+        width: 400px;
+    }
+}
+
+/* Mobile Polish */
+@media (max-width: 576px) {
+    .products-filter-trigger span {
+        display: none;
+        /* Icon-only on very small screens */
+    }
+
+    .products-filter-trigger {
+        padding: 0 0.75rem;
+    }
+}

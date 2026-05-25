@@ -1,0 +1,127 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: karadant-why.css
+ * Description: Styles for "Why Choose Our Karadant" section
+ * =============================================================
+ */
+
+.c-karadant-why {
+    background-color: transparent;
+}
+
+.c-karadant-why__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #4A1E1E;
+    font-weight: 700;
+}
+
+/* ── Why Choose Card ── */
+.c-karadant-why-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.c-karadant-why-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(74, 30, 30, 0.1);
+    border-color: rgba(74, 30, 30, 0.1);
+}
+
+.c-karadant-why-card__icon-wrap {
+    width: 64px;
+    height: 64px;
+    border: 1px solid #D4AF37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.c-karadant-why-card:hover .c-karadant-why-card__icon-wrap {
+    background-color: #D4AF37;
+    transform: rotateY(180deg);
+}
+
+.c-karadant-why-card__icon {
+    font-size: 1.75rem;
+    color: #D4AF37;
+    transition: all 0.3s ease;
+}
+
+.c-karadant-why-card:hover .c-karadant-why-card__icon {
+    color: #FFFFFF;
+}
+
+.c-karadant-why-card__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.45rem;
+    color: #2D2D2D;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.c-karadant-why-card__text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767.98px) {
+    .c-karadant-why-card {
+        max-width: 265px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .c-karadant-why-card__title {
+        font-size: 1.25rem !important;
+    }
+
+    .c-karadant-why-card__text {
+        font-size: 0.9rem !important;
+    }
+
+    .c-karadant-why-card__icon-wrap {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .c-karadant-why-card__icon {
+        font-size: 1.4rem !important;
+    }
+}
+
+/* 425px Micro-adjustments for Why Choose Section */
+@media (max-width: 425px) {
+    .c-karadant-why-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 1.5rem !important;
+    }
+
+    .c-karadant-why-card__title {
+        font-size: 1.2rem !important;
+    }
+
+    .c-karadant-why-card__icon-wrap {
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    .c-karadant-why-card__icon {
+        font-size: 1.25rem !important;
+    }
+}

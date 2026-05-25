@@ -1,0 +1,251 @@
+﻿assets/images/aboutpage/about-hero.png
+assets/images/aboutpage/Ingredients (1).png
+assets/images/aboutpage/Ingredients (2).png
+assets/images/aboutpage/Ingredients (3).png
+assets/images/aboutpage/Serve.png
+assets/images/aboutpage/The First Storefront.png
+assets/images/aboutpage/vision (1).png
+assets/images/aboutpage/vision (3).png
+assets/images/banners/branches/branches-img.png
+assets/images/banners/branches/branches.png
+assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228075 (2).png
+assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228127 (1).png
+assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228128.png
+assets/images/banners/gifing/Component 288 (4).png
+assets/images/banners/gifing/corporate-gift.png
+assets/images/banners/gifing/Featured Gifting Specials (1).png
+assets/images/banners/gifing/Featured Gifting Specials (2).png
+assets/images/banners/gifing/Featured Gifting Specials (3).png
+assets/images/banners/gifing/Featured Gifting Specials (4).png
+assets/images/banners/gifing/Featured Gifting Specials (5).png
+assets/images/banners/gifing/Featured Gifting Specials (6).png
+assets/images/banners/gifing/Featured Gifting Specials (8.png
+assets/images/banners/gifing/Featured Gifting Specials(7).png
+assets/images/banners/gifing/gifting.png
+assets/images/banners/gifing/Joy of Traditions.png
+assets/images/banners/namkeen-page/phone-screen/Component 340.png
+assets/images/banners/namkeen-page/Crunch.png
+assets/images/banners/namkeen-page/joy-of-crunch.png
+assets/images/banners/namkeen-page/nakeen.png
+assets/images/banners/namkeen-page/namkeen-banner.png
+assets/images/banners/namkeen-page/namkeen-joy.png
+assets/images/banners/namkeen-page/our signature  (1).png
+assets/images/banners/namkeen-page/our signature  (10).png
+assets/images/banners/namkeen-page/our signature  (11).png
+assets/images/banners/namkeen-page/our signature  (5).png
+assets/images/banners/namkeen-page/our signature  (6).png
+assets/images/banners/namkeen-page/our signature  (7).png
+assets/images/banners/namkeen-page/our signature  (8).png
+assets/images/banners/namkeen-page/our signature  (9).png
+assets/images/banners/phone-screen-banner/about banner.png
+assets/images/banners/phone-screen-banner/branches-moblie screen.png
+assets/images/banners/phone-screen-banner/Component 294 (3).png
+assets/images/banners/phone-screen-banner/Component 321.png
+assets/images/banners/phone-screen-banner/Component 322.png
+assets/images/banners/phone-screen-banner/Component 323.png
+assets/images/banners/phone-screen-banner/Component 325.png
+assets/images/banners/phone-screen-banner/Component 326.png
+assets/images/banners/phone-screen-banner/Component 340.png
+assets/images/banners/phone-screen-banner/Frame 2147228118.png
+assets/images/banners/phone-screen-banner/global Shipping (2).png
+assets/images/banners/phone-screen-banner/Karadant-bg.png
+assets/images/banners/phone-screen-banner/Namkeen.png
+assets/images/banners/about-banner.png
+assets/images/banners/Component 291 (3).png
+assets/images/banners/Component 294 (3).png
+assets/images/banners/contack-bg.png
+assets/images/banners/golbal-banner.png
+assets/images/banners/hero-icon (1).png
+assets/images/banners/hero-icon (2).png
+assets/images/banners/hero-icon (3).png
+assets/images/banners/home-banner  (1).png
+assets/images/banners/home-banner  (2).png
+assets/images/banners/home-banner  (3).png
+assets/images/banners/home-banner  (4).png
+assets/images/banners/home-banner  (5).png
+assets/images/banners/home-banner.png
+assets/images/banners/home-sub-banner.png
+assets/images/banners/homepage bg.png
+assets/images/banners/Karadant-banner.png
+assets/images/banners/Order Details.png
+assets/images/banners/review-banner.png
+assets/images/banners/soli.png
+assets/images/banners/tradition-baneer.png
+assets/images/banners/WhatsApp Image 2026-03-11 at 2.10.57 PM 1 (1).png
+assets/images/cart/hope (1).png
+assets/images/cart/hope (2).png
+assets/images/cart/hope (3).png
+assets/images/cart/map.png
+assets/images/cart/premium vijaya karadant.png
+assets/images/cart/relatedproducts (1).png
+assets/images/cart/relatedproducts (2).png
+assets/images/cart/relatedproducts (3).png
+assets/images/cart/Traditional (1).png
+assets/images/cart/Traditional (2).png
+assets/images/cart/Traditional (3).png
+assets/images/cart/Traditional (4).png
+assets/images/golbal/Customers (1).png
+assets/images/golbal/Customers (2).png
+assets/images/golbal/Customers (3).png
+assets/images/golbal/Frame 2147228641.png
+assets/images/homepage/New folder/karant/bestseeler karadant (1).png
+assets/images/homepage/New folder/karant/bestseeler karadant (2).png
+assets/images/homepage/New folder/karant/bestseeler karadant (3).png
+assets/images/homepage/New folder/karant/bestseeler karadant (4).png
+assets/images/homepage/New folder/karant/bestseeler karadant (5).png
+assets/images/homepage/New folder/karant/bestseeler karadant (6).png
+assets/images/homepage/New folder/karant/bestseeler karadant (7).png
+assets/images/homepage/New folder/karant/bestseeler karadant (8).png
+assets/images/homepage/New folder/bestseller-laddu  7.png
+assets/images/homepage/New folder/bestseller-laddu 1.png
+assets/images/homepage/New folder/bestseller-laddu 2.png
+assets/images/homepage/New folder/bestseller-laddu 3.png
+assets/images/homepage/New folder/bestseller-laddu 4.png
+assets/images/homepage/New folder/bestseller-laddu 5.png
+assets/images/homepage/New folder/bestseller-laddu 8.png
+assets/images/homepage/New folder/bestseller-laddu6.png
+assets/images/homepage/Best Sellers (1).png
+assets/images/homepage/Best Sellers (2).png
+assets/images/homepage/Best Sellers (4).png
+assets/images/homepage/Best Sellers (5).png
+assets/images/homepage/Best Sellers (6).png
+assets/images/homepage/Best Sellers (7).png
+assets/images/homepage/Best Sellers (8).png
+assets/images/homepage/bestseller-laddu (8).png
+assets/images/homepage/bestseller-laddu(8).png
+assets/images/homepage/cards.png (1).png
+assets/images/homepage/Celebration.png
+assets/images/homepage/ChatGPT_Image_Mar_10__2026__02_50_06_PM-removebg-preview 12.png
+assets/images/homepage/ChatGPT_Image_Mar_10__2026__02_50_06_PM-removebg-preview 14.png
+assets/images/homepage/Collections (1).png
+assets/images/homepage/Collections (2).png
+assets/images/homepage/Collections (3).png
+assets/images/homepage/download (4) 2.png
+assets/images/homepage/download (4) 4.png
+assets/images/homepage/empower.png
+assets/images/homepage/Explore (1).png
+assets/images/homepage/Explore (2).png
+assets/images/homepage/Explore (3).png
+assets/images/homepage/Explore (4).png
+assets/images/homepage/Explore-5.png
+assets/images/homepage/expore-bg (1).png
+assets/images/homepage/expore-bg (2).png
+assets/images/homepage/Frame 2147228088.png
+assets/images/homepage/Frame 2147228089.png
+assets/images/homepage/Frame 2147228090.png
+assets/images/homepage/Franchise.png
+assets/images/homepage/gift-box.png
+assets/images/homepage/hero (1).png
+assets/images/homepage/hero (2).png
+assets/images/homepage/hero (3).png
+assets/images/homepage/hero (4).png
+assets/images/homepage/hero-img.png
+assets/images/homepage/home-offer (1).png
+assets/images/homepage/home-offer (2).png
+assets/images/homepage/home-offer.png
+assets/images/homepage/Ingredients  (1).png
+assets/images/homepage/Ingredients  (2).png
+assets/images/homepage/Ingredients  (3).png
+assets/images/homepage/joy (1).png
+assets/images/homepage/joy (2).png
+assets/images/homepage/joy (3).png
+assets/images/homepage/Legacy.png
+assets/images/homepage/newsletter (1).png
+assets/images/homepage/newsletter (2).png
+assets/images/homepage/newsletter (3).png
+assets/images/homepage/offer.png
+assets/images/homepage/Our Special Collections  (1).png
+assets/images/homepage/Our Special Collections  (2).png
+assets/images/homepage/Our Special Collections  (3).png
+assets/images/homepage/Our Special Collections (4).png
+assets/images/homepage/Our Special Collections (5).png
+assets/images/homepage/Our Special Collections (6).png
+assets/images/homepage/Promotional Popup.png
+assets/images/homepage/right.png
+assets/images/homepage/smart-deal.png
+assets/images/homepage/soli.png
+assets/images/homepage/Sub Container.png
+assets/images/homepage/The Karadant Range (1).png
+assets/images/homepage/The Karadant Range (2).png
+assets/images/homepage/The Karadant Range (3).png
+assets/images/homepage/The Karadant Range (4).png
+assets/images/homepage/Tradition You Can Taste.png
+assets/images/homepage/Vector 5.png
+assets/images/homepage/vector-left.png
+assets/images/icon/contact-icon (1).png
+assets/images/icon/contact-icon (2).png
+assets/images/icon/contact-icon (3).png
+assets/images/icon/contact-icon (4).png
+assets/images/icon/crispy.png
+assets/images/icon/el_star-alt.png
+assets/images/icon/explorelogo.png
+assets/images/icon/exporelogo.png
+assets/images/icon/footer-icon (1).png
+assets/images/icon/footer-icon (2).png
+assets/images/icon/footer-icon (3).png
+assets/images/icon/Frame 2147228516.png
+assets/images/icon/Frame 2147228517.png
+assets/images/icon/Group (1).png
+assets/images/icon/Handmade.png
+assets/images/icon/ingredients.png
+assets/images/icon/offer (1).png
+assets/images/icon/offer (3).png
+assets/images/icon/offer-2.png
+assets/images/icon/product-info.png
+assets/images/icon/serve (1).png
+assets/images/icon/serve (2).png
+assets/images/icon/serve (3).png
+assets/images/icon/serve (4).png
+assets/images/icon/Signature Collections (1).png
+assets/images/icon/Signature Collections (2).png
+assets/images/icon/Signature Collections (3).png
+assets/images/icon/Tradition  (1).png
+assets/images/icon/Tradition  (2).png
+assets/images/icon/Tradition  (3).png
+assets/images/icon/Twitter.png
+assets/images/icon/Vector (2).png
+assets/images/icon/Vector (3).png
+assets/images/icons/amazon-logo.png
+assets/images/icons/image 165.png
+assets/images/icons/Link (1).png
+assets/images/icons/Link (2).png
+assets/images/icons/Link (3).png
+assets/images/icons/Link.png
+assets/images/icons/swiggy-logo.png
+assets/images/icons/swiggy.png
+assets/images/icons/zomato-logo.png
+assets/images/Karadant/art.png
+assets/images/Karadant/banner-kardant.png
+assets/images/Karadant/Frame 2147228066 (1).png
+assets/images/Karadant/giftpack 1 (1).png
+assets/images/Karadant/giftpack 1 (2).png
+assets/images/Karadant/karadant-product-1 (1).png
+assets/images/Karadant/karadant-product-1 (2).png
+assets/images/Karadant/karadant-product-1 (3).png
+assets/images/Karadant/karadant-product-1 (4).png
+assets/images/Karadant/karadant-product-1 (5).png
+assets/images/Karadant/karadant-product-1 (6).png
+assets/images/Karadant/karadant-product-1 (7).png
+assets/images/Karadant/karadant-product-1 (8).png
+assets/images/Karadant/Karadant-sweet.png
+assets/images/payment/card 11.png
+assets/images/payment/card 3.png
+assets/images/payment/Frame 2147228621.png
+assets/images/payment/Frame 2147228622.png
+assets/images/payment/image 180.png
+assets/images/payment/image 184.png
+assets/images/products/Crispy (1).png
+assets/images/products/Crispy (2).png
+assets/images/products/Crispy (3).png
+assets/images/products/Crispy (4).png
+assets/images/products/Frame 178 (1).png
+assets/images/products/Frame 178 (3).png
+assets/images/products/khatta-meetha-mix.png
+assets/images/products/royal-dal-moth.png
+assets/images/products/spiced-bikaneri-bhujia.png
+assets/images/products/spicy-ratlami-sev.png
+assets/images/profile/Edit Profile.png
+assets/images/profile/my-profile.png
+assets/images/promotions/offer-popup.png
+assets/images/contackus.png
+assets/images/logo-1.png

@@ -1,0 +1,267 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: create-offer.css
+ * Description: Styles for the Offer creation dashboard & Live Preview
+ * =============================================================
+ */
+
+/* ── FORM LABELS & INPUTS ── */
+.offer-label {
+    color: #6B201F;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.offer-input,
+.offer-select {
+    background-color: #FFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #1F2937;
+    transition: all 0.2s ease;
+}
+
+.offer-input:focus,
+.offer-select:focus {
+    border-color: #8C3333;
+    box-shadow: 0 0 0 4px rgba(140, 51, 51, 0.05);
+    outline: none;
+}
+
+.offer-input::placeholder {
+    color: #9CA3AF;
+}
+
+.offer-section-title {
+    color: #8C3333;
+    font-weight: 800;
+    font-size: 17px;
+    margin-bottom: 24px;
+    font-family: 'Playfair Display', serif;
+}
+
+.offer-hint {
+    font-size: 11px;
+    color: #9CA3AF;
+    margin-top: 4px;
+}
+
+/* ── RADIO BUTTONS (Applicability) ── */
+.offer-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.offer-radio-item {
+    flex: 1;
+    min-width: 140px;
+}
+
+.offer-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #FFF;
+    transition: all 0.2s ease;
+}
+
+.offer-radio-input:checked + .offer-radio-label {
+    border-color: #8C3333;
+    background-color: #FFF9F9;
+    box-shadow: 0 4px 6px rgba(140, 51, 51, 0.04);
+}
+
+.offer-radio-input:checked + .offer-radio-label .bi-circle {
+    display: none;
+}
+
+.offer-radio-input:checked + .offer-radio-label .bi-record-circle-fill {
+    display: inline-block !important;
+    color: #8C3333;
+}
+
+/* ── TAG PILLS ── */
+.offer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #FFFAF1;
+    border: 1px solid #E2A078;
+    border-radius: 20px;
+    color: #8C3333;
+    font-weight: 600;
+    font-size: 13px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.offer-tag i {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ── LIVE PREVIEW PANEL ── */
+.preview-panel {
+    background-color: #FFF;
+    border-radius: 12px;
+    border: 1px solid #F3DBCC;
+    padding: 30px;
+    position: sticky;
+    top: 100px;
+}
+
+.preview-title {
+    color: #1F2937;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* ── MOCKUP ELEMENTS ── */
+.mockup-banner {
+    background: linear-gradient(135deg, #A34316 0%, #6B201F 100%);
+    border-radius: 12px;
+    padding: 24px;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.mockup-banner::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.mockup-banner-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.mockup-banner-desc {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 16px;
+    max-width: 80%;
+}
+
+.mockup-banner-discount {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.mockup-coupon-card {
+    border: 1px dashed #E2A078;
+    background: #FFF;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.mockup-coupon-code {
+    font-weight: 800;
+    background: #FDF3E7;
+    border: 1px solid #F3DBCC;
+    padding: 8px 24px;
+    border-radius: 6px;
+    color: #6B201F;
+    letter-spacing: 2px;
+    display: inline-block;
+}
+
+.mockup-coupon-summary {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+/* ── STATS BOX ── */
+.mockup-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.mockup-stat-box {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.mockup-stat-label {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 600;
+}
+
+.mockup-stat-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+/* ── CHECKLIST ── */
+.preview-checklist {
+    border: 1px solid #E2A078;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.checklist-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.checklist-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.dot-pending { background: #F59E0B; }
+.dot-done { background: #10B981; }
+
+.checklist-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+.checklist-hint {
+    font-size: 11px;
+    color: #6B7280;
+    font-weight: 400;
+}

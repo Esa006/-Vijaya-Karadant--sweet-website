@@ -1,0 +1,33 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/pages/privacy-policy.css
+ * Description: Styling for the Privacy Policy page
+ * =============================================================
+ */
+
+.p-privacy-page {
+    background-color: #fdfaf7;
+    background-image: url("../../images/homepage/main%20-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.p-privacy-page h1 {
+    font-family: var(--ff-heading, 'Quando', serif);
+    color: #7b1d1d;
+    font-weight: 800;
+}
+
+.p-privacy-page h3 {
+    font-family: var(--ff-heading, 'Quando', serif);
+    color: #7b1d1d;
+    font-weight: 700;
+}
+
+.p-privacy-page p, .p-privacy-page li {
+    line-height: 1.8;
+    color: #444;
+}

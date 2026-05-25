@@ -1,0 +1,157 @@
+/**
+ * Sweets Website
+ * Gift Packs Section Styles
+ */
+
+.c-gift-packs {
+    padding: 4rem 0;
+}
+
+.c-gift-packs__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+}
+
+/* ── Card Styling ── */
+.c-gp-card {
+    background-color: #faf7f2; /* Creamy warm base */
+    border: 1px solid #333333; /* Dark outline like screenshot */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.c-gp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* ── Image Area with Gradient ── */
+.c-gp-card__img-wrap {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #9d5050 0%, #ffffff 70%, #ffffff 100%);
+    border-bottom: 1px solid transparent;
+}
+
+.c-gp-card__img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+/* ── Content Area ── */
+.c-gp-card__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.c-gp-card__name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #222222;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.c-gp-card__desc {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* ── Pricing Row ── */
+.c-gp-card__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.c-gp-card__price-current {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #7b1d1d;
+}
+
+.c-gp-card__price-old {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #7b1d1d;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.c-gp-card__weight {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #333333;
+    margin-left: 0.25rem;
+}
+
+/* ── Action Buttons ── */
+.c-gp-card__actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.c-gp-card__btn {
+    flex: 1;
+    padding: 0.6rem 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+}
+
+.c-gp-card__btn--outline {
+    background-color: transparent;
+    border: 1px solid #7b1d1d;
+    color: #333333; /* Dark grey font for outline button based on screenshot */
+}
+
+.c-gp-card__btn--outline:hover {
+    background-color: #7b1d1d;
+    color: #ffffff;
+}
+
+.c-gp-card__btn--solid {
+    background-color: #7b1d1d;
+    border: 1px solid #7b1d1d;
+    color: #ffffff;
+}
+
+.c-gp-card__btn--solid:hover {
+    background-color: #5d1515;
+}
+
+/* ── Responsive adjustments ── */
+@media (max-width: 767.98px) {
+    .c-gift-packs__title {
+        font-size: 2rem;
+        text-align: center;
+    }
+}

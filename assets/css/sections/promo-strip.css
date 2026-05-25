@@ -1,0 +1,99 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * Component: Promotion Strip (Animated Marquee)
+ * =============================================================
+ */
+
+.c-promo-strip {
+    background-color: #791e1d;
+    /* Dark maroon matching the design */
+    padding: 10px 0;
+    position: relative;
+    z-index: 1060;
+    overflow: hidden;
+    width: 100%;
+}
+
+.c-promo-strip__slider {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.c-promo-strip__track {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 100%;
+    /* CSS animation: run horizontally */
+    animation: marquee 35s linear infinite;
+}
+
+.c-promo-strip__item {
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0 2rem;
+    flex-shrink: 0;
+}
+
+.c-promo-strip__item i {
+    color: var(--clr-accent, #CBAE54);
+    /* Gold color for icons */
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Keyframes for the marquee animation */
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pause animation on hover (optional, good for UX) */
+.c-promo-strip:hover .c-promo-strip__track {
+    animation-play-state: paused;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .c-promo-strip {
+        display: block;
+        padding: 8px 0;
+        min-height: 36px;
+    }
+
+    .c-promo-strip__track {
+        animation-duration: 24s;
+    }
+
+    .c-promo-strip__item {
+        min-height: 20px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        line-height: 1.15;
+        padding: 0 2rem;
+        white-space: nowrap;
+    }
+
+    .c-promo-strip__item i {
+        margin-right: 0.45rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .c-promo-strip__item {
+        font-size: 0.78rem;
+        padding: 0 1.6rem;
+    }
+}

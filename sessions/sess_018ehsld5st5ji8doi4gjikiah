@@ -1,0 +1,1 @@
+csrf_token|s:64:"cc4d590bad8c2cc41ccf60f98cd69ae6003b8cc3be3499d2bc8e8384014c3be5";user_id|i:2;user_role|s:5:"admin";user_name|s:20:"Principal Admin Test";user_ip|s:3:"::1";permissions|a:1:{i:0;s:3:"all";}user_role_slug|s:11:"super_admin";

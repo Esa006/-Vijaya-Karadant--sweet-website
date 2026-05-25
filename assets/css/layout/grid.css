@@ -1,0 +1,19 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: grid.css
+ * Description: Grid, layout, and utility classes
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+/* Project-specific Background Utilities */
+.u-bg-warm {
+    background-color: var(--clr-bg-warm);
+}
+
+/* Custom Text Helpers */
+.u-text-accent {
+    color: var(--clr-accent);
+}

@@ -1,0 +1,227 @@
+.c-hero-collection {
+    background-color: #FDF8F2;
+    background-image: url('../../images/banners/Karadant-banner.png');
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    overflow: hidden  ;  
+}
+
+.c-hero-collection__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #4A1E1E;
+    margin-bottom: 1.5rem;
+}
+
+.c-hero-collection__title--highlight {
+    color: #A9431E;
+}
+
+.c-hero-collection__desc {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: #5D4037;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* ── Buttons ── */
+.c-hero-collection__actions {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.c-hero-collection__btn-primary {
+    background: linear-gradient(90deg, #6C191D 0%, #A9431E 100%);
+    color: #FFFFFF !important;
+    padding: 0.85rem 2.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(108, 25, 29, 0.2);
+    transition: all 0.3s ease;
+}
+
+.c-hero-collection__btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 25, 29, 0.3);
+}
+
+.c-hero-collection__btn-outline {
+    background: transparent;
+    color: #4A1E1E !important;
+    padding: 0.85rem 2.5rem;
+    font-weight: 700;
+    border: 1.5px solid #6C191D;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.c-hero-collection__btn-outline:hover {
+    background: rgba(108, 25, 29, 0.05);
+    transform: translateY(-2px);
+}
+
+/* ── Social Proof ── */
+.c-hero-collection__avatars {
+    position: relative;
+    height: 40px;
+    width: 90px;
+}
+
+.c-hero-collection__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #FDF8F2;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+}
+
+.c-hero-collection__avatar--1 {
+    background-image: url('../../images/homepage/Best\ Sellers\ \(1\).png');
+    left: 0;
+    z-index: 3;
+}
+
+.c-hero-collection__avatar--2 {
+    background-image: url('../../images/homepage/Best\ Sellers\ \(2\).png');
+    left: 25px;
+    z-index: 2;
+}
+
+.c-hero-collection__avatar--3 {
+    background-image: url('../../images/homepage/Best\ Sellers\ \(3\).png');
+    left: 50px;
+    z-index: 1;
+}
+
+.c-hero-collection__rating-text {
+    font-size: 0.95rem;
+    color: #5D4037;
+}
+
+.c-hero-collection__rating-text strong {
+    color: #A9431E;
+}
+
+/* ── Visual ── */
+.c-hero-collection__img-wrap {
+    perspective: 1000px;
+}
+
+.c-hero-collection__img {
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    transition: transform 0.5s ease;
+}
+
+.c-hero-collection__img:hover {
+    transform: scale(1.02) rotateY(-5deg);
+}
+
+
+
+/* ── Responsive ── */
+@media (max-width: 991.98px) {
+    .c-hero-collection {
+        background-size: cover;
+        min-height: 40vh;
+        height: 500px;
+        
+    }
+    .c-hero-collection__title {
+text-align: start;
+position: relative;
+left: -10%;
+    }
+    .c-hero-collection__desc {
+        text-align: start;
+        position: relative;
+        left: -10%;
+         max-width: 392px;
+        
+    }
+
+    .c-hero-collection__actions {
+        position: relative;
+        left: -10%;
+                top: -18px;
+    }
+
+    .c-hero-collection__social {
+       position: relative;
+       left: -10%;
+       top: -50px;
+    }
+
+    .c-hero-collection__content {
+        margin-bottom: 4rem;
+    }
+}
+@media (max-width: 768px) {
+    .c-hero-collection {
+        background-size: cover;
+        min-height: 40vh;
+        height: 400px;
+        
+    }
+    .c-hero-collection__title   {
+        position: relative;
+         left:0;
+    }
+    .c-hero-collection__desc {
+        position: relative;
+        left:0;
+    }
+    .c-hero-collection__actions {
+        position: relative;
+        left:0;
+        top: -32px;
+    }
+    .c-hero-collection__social {
+        position: relative;
+        left:0;
+    }
+    .c-hero-collection__social {
+        position: relative;
+        left:0;
+        top: -63px;
+    }
+    
+}
+
+@media (max-width: 576px) {
+    .c-hero-collection {
+        background-image: url("../../images/banners/phone-screen-banner/Karadant-bg.png") !important;
+        background-size: cover !important;
+        background-position: center;
+        min-height: 172px;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        height: 150px;
+    }
+
+    .c-hero-collection__content,
+    .c-hero-collection__img-wrap {
+        display: none !important;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .c-hero-collection {
+           min-height: 152px;
+           height: 131px;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-hero-collection {
+        min-height: 132px;
+    }
+}

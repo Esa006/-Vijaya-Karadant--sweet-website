@@ -1,0 +1,174 @@
+:root {
+    --brand-brown: #822D1D;
+    --brand-peach: #FDF2E9;
+    --text-dark: #2D3436;
+    --text-muted: #636E72;
+    --border-light: #f1f1f1;
+}
+
+.inventory-report-page {
+    background-color: #fcfcfc;
+    padding: 20px 0;
+}
+
+.dashboard-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--brand-brown);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Container & Scroll handling */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.scroll-container {
+    max-height: 600px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* --- DESKTOP TABLE STYLES --- */
+.table-report {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Sticky Header */
+.table-report thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--brand-peach) !important;
+    color: var(--brand-brown);
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 0.95rem;
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.table-report tbody td {
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-dark);
+    transition: background 0.2s;
+}
+
+/* Zebra Stripes & Hover */
+.table-report tbody tr:nth-of-type(even) {
+    background-color: #fafafa;
+}
+
+.table-report tbody tr:hover td {
+    background-color: #fff9f5 !important;
+}
+
+/* Selection highlight */
+.table-report tr.is-selected td {
+    background-color: #fef4ec !important;
+}
+
+/* Custom Elements */
+.product-bold { font-weight: 600; display: block; }
+.sku-sub { font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 2px; }
+
+.status-pill {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 120px;
+    text-align: center;
+}
+.status-healthy { background: #E8F5E9; color: #2E7D32; }
+.status-low { background: #FFF3E0; color: #EF6C00; }
+.status-out { background: #FFEBEE; color: #C62828; }
+
+.progress-custom {
+    height: 6px;
+    background-color: #eee;
+    border-radius: 10px;
+    width: 110px;
+}
+
+/* Form Controls */
+.form-check-input:checked {
+    background-color: var(--brand-brown);
+    border-color: var(--brand-brown);
+}
+
+/* --- MOBILE CARD TRANSFORMATION (< 576px) --- */
+@media (max-width: 575.98px) {
+    .scroll-container {
+        max-height: none; /* Let it expand on mobile */
+        overflow: visible;
+    }
+
+    .table-report thead {
+        display: none; /* Hide standard headers */
+    }
+
+    .table-report, .table-report tbody, .table-report tr, .table-report td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-report tr {
+        margin-bottom: 1rem;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 1rem;
+        position: relative;
+        background: white;
+    }
+
+    .table-report td {
+        border: none;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+    }
+
+    /* Add labels before values on mobile */
+    .table-report td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #888;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    /* Product info layout on mobile */
+    .table-report td[data-label="Product"] {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding-top: 1rem;
+        border-top: 1px solid #f8f9fa;
+    }
+    .table-report td[data-label="Product"]::before { margin-bottom: 5px; }
+
+    /* Checkbox positioning on mobile card */
+    .table-report td:first-child {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: auto;
+        padding: 0;
+    }
+    .table-report td:first-child::before { display: none; }
+}

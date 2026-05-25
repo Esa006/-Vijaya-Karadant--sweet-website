@@ -1,0 +1,318 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: footer.css
+ * Description: Layout styles for the global footer
+ * Author: Sweets Website Team
+ * Version: 2.0.0
+ * =============================================================
+ */
+
+.c-footer {
+    background-color: #581515;
+    /* Rich Maroon */
+    color: #ffffff;
+    font-family: var(--ff-body, sans-serif);
+}
+
+/* ── Newsletter Section ───────────────────────────────────── */
+.c-footer__newsletter {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.c-footer__newsletter-title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(1.2rem, 3vw, 2.25rem);
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+}
+
+.c-footer__subscribe-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+@media (max-width: 991px) {
+    .c-footer__subscribe-form {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 575px) {
+    .c-footer__subscribe-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.c-footer__subscribe-input {
+    flex: 1;
+    max-width: 350px;
+    padding: 14px 20px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333333;
+    outline: none;
+}
+
+.c-footer__subscribe-btn {
+    background-color: #f7ede2;
+    color: #581515;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.c-footer__subscribe-btn:hover {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.c-footer__subscribe-btn svg {
+    color: #581515;
+    transform: rotate(0deg);
+}
+
+/* ── Main Footer Section ──────────────────────────────────── */
+.c-footer__main {
+    padding: 2rem 0;
+}
+
+.c-footer__logo {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.c-footer__logo-img {
+    max-width: 150px;
+}
+
+.c-footer__desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.c-footer__socials {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.c-footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #4c1111;
+    color: #F59223;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 146, 35, 0.1);
+}
+
+.c-footer__social-link:hover {
+    background-color: #F59223;
+    color: #4c1111;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.c-footer__social-link img {
+    height: 18px;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.c-footer__social-link:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.c-footer__heading {
+    font-family: var(--ff-heading, serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 2rem;
+}
+
+.c-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.c-footer__list li {
+    margin-bottom: 1rem;
+}
+
+.c-footer__link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.c-footer__link:hover {
+    color: #ffffff;
+}
+
+.c-footer__chevron {
+    color: #F59223;
+    /* Brand Orange chevron */
+    font-size: 0.8rem;
+    margin-right: 12px;
+}
+
+/* ── Contact Column ───────────────────────────────────────── */
+.c-footer__contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.c-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.c-footer__contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #4c1111;
+    padding: 10px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    border: 1.5px solid rgba(245, 146, 35, 0.15);
+}
+
+.c-footer__contact-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.c-footer__contact-item:hover .c-footer__contact-icon {
+    transform: translateY(-3px);
+    background-color: #F59223;
+    border-color: #F59223;
+}
+
+.c-footer__contact-item:hover .c-footer__contact-icon img {
+    filter: brightness(0) invert(1);
+}
+
+.c-footer__contact-text {
+    font-size: 0.95rem;
+    color: #ffffff;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.c-footer__contact-text a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.c-footer__contact-text a:hover {
+    color: #F59223;
+
+}
+
+
+
+/* ── Bottom Section ───────────────────────────────────────── */
+.c-footer__bottom {
+    background-color: #4c1111;
+    /* Darker Maroon for bottom bar */
+    color: #ffffff;
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.c-footer__copyright {
+    margin: 0;
+    opacity: 0.8;
+}
+
+.c-footer__payments {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.c-footer__payment-list {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.c-footer__we-accept {
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.c-footer__payment-icon {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 3px 6px;
+    display: inline-flex;
+    align-items: center;
+    min-width: 45px;
+    justify-content: center;
+    height: 24px;
+}
+
+.c-footer__payment-sep {
+    width: 1px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 2px;
+}
+
+/* Newsletter Refinement Mobile */
+@media (max-width:768px) {
+    .c-footer__contact-item {
+        gap: 0.2rem;
+    }
+
+}
+
+@media (max-width: 585px) {
+    .c-footer__subscribe-input {
+        max-width: 275px;
+        line-height: 1.3;
+    }
+
+    .c-footer__subscribe-form {
+        justify-content: center;
+        max-width: 275px;
+    }
+}

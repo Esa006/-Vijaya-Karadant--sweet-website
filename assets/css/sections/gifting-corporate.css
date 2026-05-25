@@ -1,0 +1,126 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: gifting-corporate.css
+ * Description: Styles for Corporate & Bulk Gifting section
+ * =============================================================
+ */
+
+.c-gifting-corporate {
+    position: relative;
+    padding: 4.5rem 0;
+    background-color: #f8f1e9;
+    background-image: none;
+    overflow: hidden;
+}
+
+.c-gifting-corporate::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36%;
+    height: 100%;
+    background-color: #f3e0c8;
+    z-index: 0;
+}
+
+.c-gifting-corporate__container {
+    position: relative;
+    z-index: 1;
+}
+
+.c-gifting-corporate__title {
+    color: #7b1d1d;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.c-gifting-corporate__text {
+    color: #4a4a4a;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+    max-width: 520px;
+}
+
+.c-gifting-corporate__list {
+    color: #5a5a5a;
+    list-style: disc;
+    padding-left: 1.2rem;
+    margin-bottom: 1.6rem;
+    column-count: 2;
+    column-gap: 2rem;
+}
+
+.c-gifting-corporate__list li {
+    margin-bottom: 0.6rem;
+    break-inside: avoid;
+}
+
+.c-gifting-corporate__cta {
+    display: inline-block;
+    padding: 0.85rem 2.4rem;
+    background-color: #b3471d;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 10px 20px rgba(123, 29, 29, 0.15);
+}
+
+.c-gifting-corporate__cta:hover {
+    background-color: #9c3d18;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(123, 29, 29, 0.2);
+}
+
+.c-gifting-corporate__image-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #2f241c;
+    box-shadow: 0 18px 35px rgba(50, 30, 18, 0.18);
+    padding: 0.5rem;
+}
+
+.c-gifting-corporate__image-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+@media (max-width: 991px) {
+    .c-gifting-corporate {
+        padding: 3.5rem 0;
+    }
+
+    .c-gifting-corporate::after {
+        width: 100%;
+        height: 45%;
+        top: auto;
+        bottom: 0;
+    }
+
+    .c-gifting-corporate__list {
+        column-count: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .c-gifting-corporate__title {
+        font-size: 2rem;
+    }
+
+    .c-gifting-corporate__cta {
+        width: 100%;
+        text-align: center;
+    }
+    .c-gifting-corporate{
+        padding: 0 !important;
+       margin-bottom: 24px;
+    }
+}

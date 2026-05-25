@@ -1,0 +1,23 @@
+# Environment Variables
+.env
+.env.*
+
+# Secrets & Configs
+config/config.php
+
+# Logs
+logs/
+*.log
+
+# Dependencies
+vendor/
+node_modules/
+
+# User Uploads
+assets/uploads/
+
+# OS/Editor Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

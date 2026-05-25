@@ -1,0 +1,94 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: about-cta.css
+ * Description: Styles for the About Us "Bring The Legacy" CTA section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.about-cta {
+    padding: 0 0 80px 0;
+    /* Only bottom padding, flush with above section */
+    background-color: #ffffff;
+}
+
+.about-cta__inner {
+    background-color: #7A2518;
+    /* Dark maroon red */
+    border-radius: 12px;
+    padding: 60px 40px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(122, 37, 24, 0.15);
+    /* Soft maroon shadow */
+}
+
+.about-cta__title {
+    font-family: var(--ff-heading, 'Playfair Display', serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+}
+
+.about-cta__text {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.about-cta__btn {
+    display: inline-block;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 40px;
+    border: 1px solid #C5A059;
+    /* Gold border */
+    border-radius: 4px;
+    /* Slight rounding on button */
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.about-cta__btn:hover {
+    background-color: #C5A059;
+    /* Gold fill on hover */
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .about-cta {
+        padding: 0 0 50px 0;
+    }
+
+    .about-cta__inner {
+        padding: 40px 20px;
+    }
+
+    .about-cta__title {
+        font-size: 1.75rem;
+    }
+
+    .about-cta__text {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+    }
+
+    .about-cta__btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}

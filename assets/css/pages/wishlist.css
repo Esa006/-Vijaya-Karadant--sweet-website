@@ -1,0 +1,162 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: wishlist.css
+ * Description: Premium Wishlist Page Styles
+ * =============================================================
+ */
+
+.p-wishlist {
+    background-color: #fdfaf7;
+    background-image: url("../../images/banners/contack-bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* ── BREADCRUMB ── */
+.c-breadcrumb .breadcrumb-item a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.c-breadcrumb .breadcrumb-item.active {
+    color: #7b1d1d;
+    font-weight: 700;
+}
+
+/* ── PAGE HEADER ── */
+.p-wishlist__header {
+    margin-bottom: 3rem;
+}
+
+.p-wishlist__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 0.5rem;
+}
+
+.p-wishlist__subtitle {
+    font-size: 1.25rem;
+    color: #888;
+    margin: 0;
+}
+
+/* ── WISHLIST CARD ── */
+.c-wishlist-card {
+    background: #fff;
+    border: 1px solid #d67a1822;
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.c-wishlist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(123, 29, 29, 0.1);
+}
+
+.c-wishlist-remove {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 5;
+    width: 36px;
+    height: 36px;
+    background: #fdf2f2;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc3545;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.c-wishlist-remove:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+.c-wishlist-card__img {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    background: #fdfaf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-wishlist-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.5s ease;
+}
+
+.c-wishlist-card:hover .c-wishlist-card__img img {
+    transform: scale(1.05);
+}
+
+.c-wishlist-card__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.c-wishlist-card__name {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #4a1b14;
+    margin-bottom: 0.5rem;
+}
+
+.c-wishlist-card__price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #7b1d1d;
+    margin-bottom: 1.25rem;
+}
+
+.c-wishlist-card__actions {
+    margin-top: auto;
+}
+
+/* ── BUTTONS ── */
+.btn-maroon-outline {
+    border: 1.5px solid #7b1d1d;
+    color: #7b1d1d;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-maroon-outline:hover {
+    background: #7b1d1d;
+    color: #fff;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 576px) {
+    .p-wishlist__title {
+        font-size: 2rem;
+    }
+    .p-wishlist__subtitle {
+        font-size: 1.1rem;
+    }
+}

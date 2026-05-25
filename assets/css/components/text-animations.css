@@ -1,0 +1,85 @@
+/**
+ * Sweets Website - Text Animations Component
+ * =============================================================
+ * File: text-animations.css
+ * Description: High-end text reveal and word animations
+ * Style: Marco Giannini "Animated Words - Pack 01" (Elastic Pop)
+ * =============================================================
+ */
+
+/* Elastic Pop Animation Base */
+.ani-word-elastic {
+    display: inline-block;
+}
+
+.ani-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+}
+
+/* Triggered when 'in-view' class is added (via JS Intersection Observer) */
+.in-view .ani-letter,
+.ani-word-elastic.is-animated .ani-letter {
+    animation: elasticPop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes elasticPop {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3); /* Slight overshoot for elastic effect */
+    }
+    70% {
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Space characters should maintain width but not animate */
+.ani-letter.is-space {
+    width: 0.25em;
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* =============================================================
+ * NEW: Premium Mask Slant Reveal (Motion Graphics Style)
+ * ============================================================= */
+.ani-mask-slant {
+    display: inline-block;
+    overflow: hidden; /* The Mask */
+    vertical-align: bottom;
+}
+
+.ani-slant-char {
+    display: inline-block;
+    transform: translateY(110%) skewY(10deg);
+    opacity: 0;
+    transition: none;
+}
+
+.in-view .ani-slant-char,
+.is-animated .ani-slant-char {
+    animation: maskSlantReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes maskSlantReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(110%) skewY(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) skewY(0deg);
+    }
+}
+

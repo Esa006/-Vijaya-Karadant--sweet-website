@@ -1,0 +1,159 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: order-success.css
+ * Description: Premium Order Confirmation Page Styles
+ * =============================================================
+ */
+
+.c-order-success {
+    background-color: #fdfaf7;
+    background-image: url("../../images/banners/Order%20Details.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.text-maroon {
+    color: #7b1d1d;
+}
+
+.text-orange {
+    color: #d67a18;
+}
+
+/* ── Success Hero ── */
+.c-success-icon-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.c-success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #ffffff;
+    border: 2px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #d67a18;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.c-order-success__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #4a1b14;
+    font-weight: 800;
+}
+
+.c-order-success__subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ── Order Reference Card ── */
+.c-order-ref-card {
+    background: #fff;
+    border: 1px solid #d67a1822;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.c-badge-confirmed {
+    background: #fffdfb;
+    border: 2px solid #7b1d1d;
+    color: #7b1d1d;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+}
+
+.c-order-info-icon {
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border: 1.5px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d67a18;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* ── Buttons ── */
+.c-order-btn {
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    font-family: var(--ff-heading, 'Quando', serif);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.c-order-btn--primary {
+    background: linear-gradient(90deg, #7A1E1E 0%, #C65D00 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 6px 15px rgba(122, 30, 30, 0.25);
+}
+
+.c-order-btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(122, 30, 30, 0.35);
+    opacity: 0.95;
+}
+
+.c-order-btn--outline {
+    background: #fff;
+    border: 2px solid #7b1d1d;
+    color: #7b1d1d;
+}
+
+.c-order-btn--outline:hover {
+    background: linear-gradient(90deg, #7A1E1E 0%, #C65D00 100%);
+    border-color: #9a3d07;
+    color: #fff !important;
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 585px) {
+    .c-order-ref-card {
+        padding: 1.5rem;
+    }
+
+    .c-order-ref-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    .c-badge-confirmed {
+        padding: 0.4rem 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .c-order-success__title {
+        font-size: 1.85rem;
+    }
+
+    .c-order-success__subtitle {
+        font-size: 0.95rem;
+    }
+}

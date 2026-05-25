@@ -1,0 +1,100 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: admin-customers.css
+ * Description: Custom styles for the Admin Customers CRM page (Responsive Support)
+ * =============================================================
+ */
+
+/* ── CUSTOMER SPECIFIC TWEAKS ── */
+.products-page .products-thumb-lg {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.products-page .products-product-name {
+    font-size: 0.95rem;
+    color: #4B2C20;
+}
+
+.products-page .products-product-sku {
+    font-size: 0.8rem;
+    color: #8C3333;
+    opacity: 0.8;
+}
+
+/* ── RESPONSIVE TWEAKS ── */
+@media (max-width: 768px) {
+    /* Ensure stat cards stack well on mobile */
+    .products-page .products-stat-value {
+        font-size: 1.5rem;
+    }
+    
+    /* Responsive Table Enhancements */
+    .products-mobile-card-grid tbody tr {
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        background: #fff;
+        display: block;
+        padding: 1rem;
+    }
+
+    .products-mobile-card-grid td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0 !important;
+        border: none !important;
+        text-align: right !important;
+    }
+
+    .products-mobile-card-grid td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-align: left;
+        color: #8C3333;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Hide label for check, image, and info (they are self-evident or primary) */
+    .products-mobile-card-grid td.td-check::before,
+    .products-mobile-card-grid td.td-image::before,
+    .products-mobile-card-grid td.td-info::before,
+    .products-mobile-card-grid td.td-actions::before {
+        display: none;
+    }
+
+    /* Special layout for primary info on mobile */
+    .products-mobile-card-grid td.td-image,
+    .products-mobile-card-grid td.td-info {
+        justify-content: center;
+        text-align: center !important;
+    }
+
+    .products-mobile-card-grid td.td-info .products-product-name {
+        font-size: 1.1rem;
+    }
+
+    .products-mobile-card-grid td.td-actions {
+        border-top: 1px solid #eee !important;
+        margin-top: 0.5rem;
+        padding-top: 1rem !important;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-page .products-header-sticky {
+        padding: 1rem !important;
+    }
+    
+    .products-page .products-page-title {
+        font-size: 1.5rem;
+    }
+}
+

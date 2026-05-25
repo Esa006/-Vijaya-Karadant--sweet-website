@@ -1,0 +1,78 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: product-card.css
+ * Description: Styles for product display cards
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.c-product-card {
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    background: var(--clr-white);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-smooth);
+    height: 100%;
+}
+
+.c-product-card:hover {
+    box-shadow: var(--shadow-premium);
+    transform: translateY(-5px);
+}
+
+.c-product-card__image-wrapper {
+    height: 250px;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.c-product-card__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--ff-poppins) !important;
+}
+
+.c-product-card__price {
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+    color: var(--clr-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* ── Stock Status Styles ─────────────────────────── */
+.c-badge--out-of-stock {
+    background-color: #dc3545 !important; /* Prominent red */
+    color: white !important;
+}
+
+.c-product-card-premium--out-of-stock {
+    opacity: 0.7;
+}
+
+.c-product-card-v2--out-of-stock {
+    opacity: 0.75;
+}
+
+.btn-disabled {
+    background-color: #e9ecef !important;
+    border-color: #e9ecef !important;
+    color: #6c757d !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+.c-product-card-v2__badge--out-of-stock {
+    background: #6c757d !important;
+    color: #fff !important;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 10;
+}

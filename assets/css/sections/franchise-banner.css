@@ -1,0 +1,197 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: franchise-banner.css
+ * Description: Styles for the Franchise Journey section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.c-franchise-banner {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+}
+
+.c-franchise-banner .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Decorative Background Elements ── */
+.c-franchise-banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -82px;
+    width: clamp(200px, 30vw, 400px);
+    height: 100%;
+    background-image: url('../../images/homepage/download (4) 2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.c-franchise-banner::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 55px;
+    width: clamp(200px, 30vw, 400px);
+    height: 100%;
+    background-image: url('../../images/homepage/download (4) 4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.c-franchise-banner__outer {
+    background-color: #ffffff;
+    border: 3px solid #6C191D;
+    border-radius: 40px;
+    padding: 15px;
+    /* The white border spacing */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.c-franchise-banner__inner {
+    background-image: linear-gradient(to right, rgba(253, 248, 242, 0.1) 30%, rgba(253, 248, 242, 0.1) 100%),
+        url('../../images/homepage/Legacy.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+    padding: 5rem 3rem;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+}
+
+.c-franchise-banner__content {
+    max-width: 100%;
+}
+
+.c-franchise-banner__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #6C191D;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.c-franchise-banner__line {
+    display: block;
+}
+
+.c-franchise-banner__line--highlight {
+    color: #d35400; /* Matching the button gradient start */
+}
+
+.c-franchise-banner__subtitle {
+    font-family: var(--ff-body, sans-serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #4A1D1A;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.c-franchise-banner__subtitle span {
+    display: block;
+}
+
+.c-franchise-banner__text {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: #333333;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.c-franchise-banner__btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: linear-gradient(90deg, #8b1c1c, #d35400);
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(139, 28, 28, 0.3);
+}
+
+.c-franchise-banner__btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 28, 28, 0.4);
+    color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+    .c-franchise-banner__inner {
+        padding: 4rem 2rem;
+        text-align: center;
+        background-image: linear-gradient(rgba(253, 248, 242, 0.6), rgba(253, 248, 242, 0.6)),
+            url('../../images/homepage/Legacy.png');
+    }
+
+    .c-franchise-banner::before,
+    .c-franchise-banner::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .c-franchise-banner {
+        padding: 1.5rem 0;
+    }
+
+    .c-franchise-banner__outer {
+        border-radius: 20px;
+        padding: 8px;
+        border-width: 2px;
+    }
+
+    .c-franchise-banner__inner {
+        padding: 0;
+        border-radius: 15px;
+        min-height: 200px;
+        background-image: url('../../images/banners/phone-screen-banner/Frame 2147228118.png') !important;
+        background-position: center;
+        background-size: cover;
+    }
+
+    /* Hide HTML text since the mobile image has pre-rendered text */
+    .c-franchise-banner__content {
+        display: none !important;
+    }
+}
+
+/* ── Mobile Optimization (426px) ── */
+@media (max-width: 426px) {
+    .c-franchise-banner__inner {
+        min-height: 154px !important;
+    }
+}
+@media (max-width: 375px) {
+    .c-franchise-banner__inner {
+        min-height: 130px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-franchise-banner__inner {
+        min-height: 110px !important;
+    }
+}

@@ -1,0 +1,121 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: shop-range.css
+ * Description: Styles for the "Shop our Range" section on cart page
+ * =============================================================
+ */
+
+.c-shop-range {
+
+    background-image: url('../../images/homepage/Group.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.c-shop-range__title {
+    color: #7b1d1d;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.c-range-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 1.4 / 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.c-range-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.c-range-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.c-range-card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: transparent; /* Assuming the image has the background */
+    z-index: 2;
+}
+
+.c-range-card__badge {
+    background: #F86E1B;
+    color: #fff;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.c-range-card__name {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.c-range-card__desc {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.c-range-card__btn {
+    background: #F86E1B;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(248, 110, 27, 0.3);
+    transition: all 0.3s ease;
+}
+
+.c-range-card__btn:hover {
+    background: #e05e11;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Specific overrides for Card 1 if needed (it has a lighter desc in screenshot) */
+.col-md-4:first-child .c-range-card__name {
+     color: #fff;
+}
+
+@media (max-width: 768px) {
+    .c-range-card {
+        aspect-ratio: 1.6 / 1;
+    }
+    
+    .c-range-card__content {
+        padding: 1.5rem;
+    }
+    
+    .c-range-card__name {
+        font-size: 1.25rem;
+    }
+}

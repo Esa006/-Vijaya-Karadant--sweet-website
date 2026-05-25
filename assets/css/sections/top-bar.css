@@ -1,0 +1,92 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * Component: Top Bar Header Strip
+ * =============================================================
+ */
+
+.c-top-bar {
+    background-color: #000000;
+    padding: 10px 0;
+    position: relative;
+    z-index: 1050;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.c-top-bar__marquee {
+    display: flex;
+    width: 100%;
+}
+
+.c-top-bar__track {
+    display: flex;
+    flex-shrink: 0;
+    width: max-content;
+    align-items: center;
+    animation: marquee-scroll 30s linear infinite;
+    gap: 0;
+}
+
+/* Static modifier for Home Page */
+.c-top-bar--static .c-top-bar__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+}
+
+.c-top-bar--static .c-top-bar__item:not(:first-child) {
+    display: none;
+    /* Only show first instance when static */
+}
+
+.c-top-bar__item {
+    color: #ffffff;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 0 4rem;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover for readability */
+.c-top-bar:hover .c-top-bar__track {
+    animation-play-state: paused;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 992px) {
+    .c-top-bar__item {
+        font-size: 0.8rem;
+        padding: 0 2rem;
+    }
+
+    .c-top-bar__track {
+        animation-duration: 20s;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .c-top-bar__item {
+        font-size: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .c-top-bar__track {
+        animation-duration: 10s;
+    }
+
+}

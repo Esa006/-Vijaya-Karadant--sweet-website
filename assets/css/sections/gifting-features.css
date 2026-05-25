@@ -1,0 +1,38 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: gifting-features.css
+ * Description: Styles for the gifting features section
+ * =============================================================
+ */
+
+.special-moment {
+    font-family: 'Quando', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+}
+
+/* Specific font size adjustment for very small screens */
+@media (max-width: 320px) {
+    .special-moment {
+        font-size: 1.25rem !important;
+    }
+
+    .special-moment p {
+        font-size: 0.9rem !important;
+    }
+
+    .special-moment {
+        padding: 0 !important;
+
+    }
+
+    .special-moment-section {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    .justify-content-center {
+        justify-content:start !important;
+    }
+}
+

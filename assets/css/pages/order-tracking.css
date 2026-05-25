@@ -1,0 +1,318 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: order-tracking.css
+ * Description: High-fidelity styling for Order Tracking/Status
+ * =============================================================
+ */
+
+:root {
+    --ot-primary: #8a2c22;
+    --ot-bg: #fffdfb;
+    --ot-card-bg: #ffffff;
+    --ot-border: #f0f0f0;
+    --ot-text-muted: #6c757d;
+    --ot-success: #28a745;
+}
+
+.ot-page {
+    background-image: url('../../images/homepage/Group.svg');
+    background-size: cover;
+    background-position: center top;
+    background-color: var(--clr-bg-warm, #F5EFE6);
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Breadcrumbs */
+.ot-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+.ot-breadcrumb .breadcrumb-item a {
+    color: var(--ot-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.ot-breadcrumb .breadcrumb-item.active {
+    color: var(--ot-primary);
+    font-weight: 600;
+}
+
+/* Header */
+.ot-page-title {
+    font-family: 'Quando', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.ot-badge {
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.ot-badge--confirmed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--ot-success);
+}
+
+.ot-meta {
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.ot-btn-outline {
+    border: 1px solid #ddd;
+    color: #333;
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    background: #fff;
+}
+.ot-btn-outline:hover {
+    background: #f8f9fa;
+    border-color: #ccc;
+}
+
+.ot-btn-solid {
+    background-color: var(--ot-primary);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+}
+.ot-btn-solid:hover {
+    background-color: #6d231b;
+    color: #fff;
+}
+
+/* Cards */
+.ot-card {
+    background: var(--ot-card-bg);
+    border: 1px solid var(--ot-border);
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+
+.ot-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Tracker */
+.ot-tracker {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.ot-tracker-line {
+    position: absolute;
+    top: 50px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: #eee;
+    z-index: 1;
+}
+
+.ot-tracker-line-fill {
+    height: 100%;
+    background: var(--ot-primary);
+    transition: width 0.5s ease;
+}
+
+.ot-tracker-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.ot-step {
+    text-align: center;
+    width: 120px;
+}
+
+.ot-step-icon {
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+    color: #ccc;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.ot-step-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.ot-step.is-completed .ot-step-icon {
+    background: var(--ot-primary);
+    border-color: var(--ot-primary);
+    color: #fff;
+}
+
+.ot-step.is-active .ot-step-icon {
+    box-shadow: 0 0 0 6px rgba(138, 44, 34, 0.15);
+}
+
+.ot-step.is-completed .ot-step-label {
+    color: #333;
+}
+
+/* Estimated Delivery Box */
+.ot-delivery-box {
+    background: #fff5f4;
+    border: 1px solid rgba(138, 44, 34, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+.ot-delivery-box h4 {
+    color: #333;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+/* Info Section */
+.ot-info-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.ot-edit-link {
+    color: var(--ot-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.ot-user-name {
+    font-weight: 700;
+    color: #333;
+}
+
+.ot-address-box {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+}
+.ot-address-box i {
+    color: var(--ot-primary);
+    font-size: 1.1rem;
+}
+
+.ot-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.ot-info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+.ot-info-item span {
+    color: var(--ot-text-muted);
+}
+.ot-info-item strong {
+    color: #333;
+}
+
+/* Items List */
+.ot-item-row {
+    transition: all 0.2s;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.ot-item-row:hover {
+    background: #fdfdfd;
+    border-color: #ddd !important;
+}
+
+/* Summary */
+.ot-price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.ot-price-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Features Bar */
+.ot-features-bar {
+    background: #fffdfb;
+    border: 1px solid rgba(138, 44, 34, 0.05);
+}
+.ot-feature-icon {
+    font-size: 1.5rem;
+    color: var(--ot-primary);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .ot-tracker-line {
+        display: none;
+    }
+    .ot-tracker-steps {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .ot-step {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+    }
+    .ot-step-icon {
+        margin: 0;
+    }
+    .ot-step-date {
+        margin-left: auto;
+    }
+    .ot-features-bar {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .ot-feature-item {
+        border: none !important;
+        padding-left: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .ot-page-title {
+        font-size: 1.5rem;
+    }
+    .ot-item-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+    .ot-item-total {
+        width: 100%;
+        text-align: left !important;
+        border-top: 1px solid #eee;
+        padding-top: 0.75rem;
+    }
+}

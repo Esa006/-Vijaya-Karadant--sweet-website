@@ -1,0 +1,478 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/pages/contact.css
+ * Description: Premium styles for the Contact Page
+ * =============================================================
+ */
+
+/* ── Page Background ── */
+.p-contact-page {
+    background-color: #fdf6ed;
+    background-image: url("../../images/banners/contack-bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* ── Hero Section ── */
+.c-contact-hero {
+    padding: 5rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.c-contact-hero__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: #4a1c1d;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.c-contact-hero__title--highlight {
+    color: #A9431E;
+}
+
+.c-contact-hero__desc {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+}
+
+/* Pill CTA buttons */
+.c-contact-hero__pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.c-contact-hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #6c191d;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(108,25,29,0.2);
+}
+
+.c-contact-hero__pill--light {
+    background: #fff;
+    color: #4a1c1d;
+    border: 1.5px solid #d4c3b3;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.c-contact-hero__pill:hover {
+    background: #4a1c1d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.c-contact-hero__pill--light:hover {
+    background: #fdf0e0;
+    color: #4a1c1d;
+    border-color: #A9431E;
+}
+
+.c-contact-hero__pill-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.c-contact-hero__pill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(10);
+}
+
+.c-contact-hero__pill--light .c-contact-hero__pill-icon img {
+    filter: none;
+}
+
+/* Hero Image */
+.c-contact-hero__image-wrap {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.c-contact-hero__img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 24px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+}
+
+/* ── Contact Highlights ── */
+.c-contact-highlights {
+    padding: 4rem 0;
+}
+
+.c-contact-highlights__heading {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 2rem;
+    color: #4a1c1d;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+.c-contact-highlight-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem 1.75rem;
+    text-align: center;
+    border: 1px solid rgba(176, 26, 26, 0.08);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.c-contact-highlight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.09);
+}
+
+.c-contact-highlight-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fdf0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    border: 1px solid rgba(169, 67, 30, 0.15);
+}
+
+.c-contact-highlight-card__icon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.c-contact-highlight-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4a1c1d;
+    margin-bottom: 0.75rem;
+}
+
+.c-contact-highlight-card__text {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ── Message Form Section ── */
+.c-contact-form-section {
+    padding: 4rem 0;
+}
+
+.c-contact-form-section__heading {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 2rem;
+    color: #4a1c1d;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+.c-contact-form__input,
+.c-contact-form__textarea {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    border: 1.5px solid #e0ccb8;
+    border-radius: 10px;
+    background: #fffaf4;
+    font-size: 1rem;
+    color: #444;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+}
+
+.c-contact-form__input:focus,
+.c-contact-form__textarea:focus {
+    border-color: #A9431E;
+    box-shadow: 0 0 0 3px rgba(169, 67, 30, 0.1);
+    background: #fff;
+}
+
+.c-contact-form__input::placeholder,
+.c-contact-form__textarea::placeholder {
+    color: #aaa;
+}
+
+.c-contact-form__textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.c-contact-form__btn {
+    background: #6c191d;
+    color: #fff;
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(108, 25, 29, 0.25);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.c-contact-form__btn:hover {
+    background: #4a1c1d;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(108, 25, 29, 0.35);
+}
+
+/* Side Panel */
+.c-contact-side-panel {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+    border: 1px solid rgba(176, 26, 26, 0.07);
+}
+
+.c-contact-side-panel__img-wrap {
+    overflow: hidden;
+    height: 180px;
+}
+
+.c-contact-side-panel__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.c-contact-side-panel__body {
+    padding: 1.5rem;
+}
+
+.c-contact-side-panel__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.2rem;
+    color: #4a1c1d;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.c-contact-side-panel__desc {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.c-contact-side-panel__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.c-contact-side-panel__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.c-contact-side-panel__check {
+    color: #A9431E;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ── Map Section ── */
+.c-contact-map-section {
+    padding: 4rem 0;
+}
+
+.c-contact-map-section__heading {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 2rem;
+    color: #4a1c1d;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.c-contact-map-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.c-contact-map-link {
+    display: block;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.c-contact-map-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    transition: transform 0.4s ease;
+}
+
+.c-contact-map-link:hover .c-contact-map-img {
+    transform: scale(1.02);
+}
+
+.c-contact-map-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #6c191d;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 16px rgba(108,25,29,0.3);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+}
+
+.c-contact-map-link:hover .c-contact-map-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ── CTA Banner ── */
+.c-contact-cta {
+    padding: 4rem 0 5rem;
+}
+
+.c-contact-cta__inner {
+    background: #4a1c1d;
+    border-radius: 20px;
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.c-contact-cta__inner::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+}
+
+.c-contact-cta__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.75rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.c-contact-cta__desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+
+.c-contact-cta__btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.c-contact-cta__btn--outline {
+    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff;
+    background: transparent;
+}
+
+.c-contact-cta__btn--outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #fff;
+    color: #fff;
+}
+
+.c-contact-cta__btn--solid {
+    background: #A9431E;
+    color: #fff;
+    border: 2px solid #A9431E;
+}
+
+.c-contact-cta__btn--solid:hover {
+    background: #8a3418;
+    border-color: #8a3418;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+    .c-contact-hero { padding: 3rem 0 2rem; }
+    .c-contact-hero__title { font-size: 2.25rem; }
+    .c-contact-cta__inner { padding: 2rem; }
+    .c-contact-cta__title { font-size: 1.5rem; }
+}
+
+@media (max-width: 576px) {
+    .c-contact-hero__title { font-size: 1.85rem; }
+    .c-contact-hero__pill-group { flex-direction: column; }
+    .c-contact-hero__pill { justify-content: center; }
+    .c-contact-cta__inner { padding: 1.75rem 1.5rem; }
+}
+@media (max-width: 425px) {
+    .c-contact-map-section__heading {
+        font-size: 1.2rem;
+    }
+    .c-contact-map-section{
+      padding-bottom: 5px;
+      padding-top: 0px;
+    }
+    .c-contact-form-section{
+        padding-top: 00px;
+    }
+    .c-contact-form-section__heading{
+        font-size: 1.2rem;
+    }
+    .c-contact-form-section__heading{
+        margin-bottom: 19px;
+    }
+    
+}

@@ -1,0 +1,124 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: joy-banners.css
+ * Description: Styles for the Joy Banners promotional section
+ * =============================================================
+ */
+
+.c-joy-banners {
+    padding: 3rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.c-joy-banners__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.c-joy-banner {
+    flex: 1 1 calc(33.333% - 16px);
+    height: 120px;
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--clr-white, #fff);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.c-joy-banner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradients */
+.c-joy-banner--orange {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    /* orange to amber approx */
+}
+
+.c-joy-banner--green {
+    background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+    /* lime-green to olive approx */
+}
+
+.c-joy-banner--blue {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    /* cyan to blue approx */
+}
+
+/* Content */
+.c-joy-banner__content {
+    position: relative;
+    z-index: 2;
+    max-width: 65%;
+}
+
+.c-joy-banner__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    color: var(--clr-white, #fff);
+    text-transform: none;
+}
+
+.c-joy-banner--blue .c-joy-banner__title {
+    text-transform: uppercase;
+}
+
+.c-joy-banner__subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Images */
+.c-joy-banner__image {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 90px;
+    width: auto;
+    object-fit: contain;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.c-joy-banner:hover .c-joy-banner__image {
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .c-joy-banner {
+        flex: 1 1 calc(50% - 12px);
+    }
+}
+
+@media (max-width: 576px) {
+    .c-joy-banner {
+        flex: 1 1 100%;
+        height: auto;
+        min-height: 120px;
+    }
+
+    .c-joy-banner__image {
+        max-height: 80px;
+        right: -5px;
+    }
+
+    .c-joy-banner__content {
+        max-width: 70%;
+    }
+}

@@ -1,0 +1,406 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/pages/admin-permissions.css
+ * Description: Premium styling for Admin Permissions Management
+ * =============================================================
+ */
+
+:root {
+    --primary: #7a1f1f;
+    --primary-light: #fef3e2;
+    --primary-dark: #5a1414;
+    --green: #166534;
+    --green-light: #f0fdf4;
+    --orange: #c5a059;
+    --orange-light: #fffbeb;
+    --purple: #7e22ce;
+    --purple-light: #f5f3ff;
+    --border: #f1e6d6;
+    --text-dark: #2d0a0a;
+    --text-secondary: #5a4b4b;
+    --text-muted: #8b7d7d;
+    --bg-page: #fdfaf7;
+    --bg-white: #ffffff;
+    --danger: #991b1b;
+}
+
+.perm-page-body {
+    background: var(--bg-page);
+    color: var(--text-dark);
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header-perm {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page-header-perm h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+}
+
+.breadcrumb-custom-perm {
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.breadcrumb-custom-perm a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.breadcrumb-custom-perm a:hover {
+    color: var(--primary);
+}
+
+.btn-add-permission {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(122, 31, 31, 0.15);
+}
+
+.btn-add-permission:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(122, 31, 31, 0.2);
+}
+
+/* ===== STAT CARDS ===== */
+.stats-section-perm {
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.stat-card-perm {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(122, 31, 31, 0.02);
+}
+
+.stat-card-perm:hover {
+    box-shadow: 0 8px 24px rgba(122, 31, 31, 0.06);
+    border-color: var(--orange);
+    transform: translateY(-4px);
+}
+
+.stat-icon-perm {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.stat-icon-perm.blue { background: var(--primary-light); color: var(--primary); }
+.stat-icon-perm.green { background: var(--green-light); color: var(--green); }
+.stat-icon-perm.orange { background: var(--orange-light); color: var(--orange); }
+.stat-icon-perm.purple { background: var(--purple-light); color: var(--purple); }
+
+.stat-content-perm .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.stat-content-perm .stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 4px 0;
+}
+
+.stat-content-perm .stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-layout-perm {
+    padding: 0 32px 32px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+}
+
+/* ===== ROLES SIDEBAR ===== */
+.roles-panel {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(122, 31, 31, 0.04);
+}
+
+.roles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 16px;
+}
+
+.roles-header h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0;
+}
+
+.btn-add-role {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.roles-search {
+    padding: 0 24px 16px;
+}
+
+.roles-search input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    background: var(--bg-page);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.roles-search input:focus {
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(122, 31, 31, 0.05);
+}
+
+.role-item {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.role-item:hover {
+    background: var(--primary-light);
+}
+
+.role-item.active {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+}
+
+.role-item.active .role-name {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.role-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.role-users {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ===== PERMISSIONS PANEL ===== */
+.permissions-panel {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(122, 31, 31, 0.04);
+}
+
+.permissions-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.perm-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.perm-title span {
+    color: var(--orange);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.perm-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.module-filter {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    outline: none;
+    cursor: pointer;
+}
+
+/* ===== PERMISSIONS TABLE ===== */
+.permissions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.permissions-table thead th {
+    padding: 16px 24px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.permissions-table tbody td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.perm-name-cell .perm-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.perm-name-cell .perm-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Custom Checkbox Integration */
+.custom-check-perm {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fff;
+}
+
+.custom-check-perm.checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.custom-check-perm.checked::after {
+    content: '✓';
+    font-weight: 900;
+    font-size: 0.9rem;
+}
+
+.custom-check-perm:hover {
+    border-color: var(--primary);
+}
+
+/* ===== FOOTER ===== */
+.permissions-footer {
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary-light);
+}
+
+.btn-save-perm {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-save-perm:hover {
+    background: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+.btn-reset-perm {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 991px) {
+    .main-layout-perm {
+        grid-template-columns: 1fr;
+    }
+}

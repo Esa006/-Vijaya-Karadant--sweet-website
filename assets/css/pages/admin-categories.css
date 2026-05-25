@@ -1,0 +1,152 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: admin-categories.css
+ * Description: Premium layout for Category management
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+:root {
+    --page-bg: #f5f4f1;
+    --panel-bg: #f7f6f3;
+    --brand: #8a2c17;
+    --brand-strong: #a73d00;
+    --muted: #8f8f8f;
+    --field-bg: #ffffff;
+    --field-border: #8a2c17;
+    --soft-border: #d7cbbf;
+}
+
+/* Modal Body Scrollable with Custom Styling */
+.category-modal-scroll-area {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 1.5rem; /* Space for the scrollbar */
+}
+
+/* Right-aligned premium scrollbar */
+.category-modal-scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.category-modal-scroll-area::-webkit-scrollbar-track {
+    background: #fff;
+    border: 1px solid #f2b877;
+    border-radius: 999px;
+}
+
+.category-modal-scroll-area::-webkit-scrollbar-thumb {
+    background: #f8a53d;
+    border-radius: 999px;
+}
+
+.category-form-label {
+    color: var(--brand-strong);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    margin-bottom: 0.55rem;
+}
+
+.category-form-control,
+.category-form-select {
+    border: 2px solid var(--field-border);
+    border-radius: 0.55rem;
+    background: var(--field-bg);
+    min-height: 3.5rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    color: #3a3a3a;
+    padding-left: 1rem;
+}
+
+.category-form-control::placeholder {
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.category-upload-btn {
+    border: 2px solid var(--field-border);
+    border-left: none;
+    border-top-right-radius: 0.55rem;
+    border-bottom-right-radius: 0.55rem;
+    background: #fff;
+    color: #808080;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 8rem;
+}
+
+/* Custom switch based on screenshot */
+.category-switch-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-switch {
+    width: 3.8rem;
+    height: 2.1rem;
+    border-radius: 2rem;
+    border: 2px solid #d5a976;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.category-switch::after {
+    content: "";
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background: #e1cbb3; /* unchecked thumb */
+    position: absolute;
+    top: 50%;
+    left: 0.15rem;
+    transform: translateY(-50%);
+    transition: 0.25s;
+}
+
+.category-switch.active::after {
+    left: calc(100% - 1.85rem);
+    background: #8d1f1f;
+}
+
+.category-btn-cancel {
+    min-width: 8rem;
+    min-height: 3.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #c7c8cb;
+    color: #565656;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.category-btn-save {
+    min-width: 12rem;
+    min-height: 3.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, #8f2320, #c65b00);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.category-field-space {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .category-modal-scroll-area {
+        padding-right: 0.5rem;
+    }
+    .category-btn-cancel,
+    .category-btn-save {
+        font-size: 1.2rem;
+        min-height: 3rem;
+        width: 100%;
+    }
+}

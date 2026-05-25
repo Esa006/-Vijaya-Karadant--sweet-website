@@ -1,0 +1,98 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: create-offer.css
+ * Description: Specialized styles for the standalone Create Offer page.
+ * Includes live preview components and promo card styling.
+ * =============================================================
+ */
+
+/* Layout & General */
+.create-offer-wrapper { background-color: #FDF8F3; min-height: 100vh; }
+
+/* Sticky Header */
+.create-offer-header { 
+    background: #FDF8F3; border-bottom: 1px solid #E8DDD3; padding: 16px 0; 
+    position: sticky; top: 70px; z-index: 100;
+}
+
+.btn-nav-back {
+    background: #fff; border: 1px solid #D4C5B4; color: #5B2C0E; font-size: 13px; font-weight: 500;
+    padding: 6px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none !important; transition: all 0.2s;
+}
+.btn-nav-back:hover { background: #F5EDE3; border-color: #5B2C0E; color: #5B2C0E; }
+
+/* Section Styling */
+.offer-section-title { font-size: 16px; font-weight: 700; color: #2D2D2D; margin: 28px 0 16px; }
+.offer-section-title:first-of-type { margin-top: 0; }
+
+.offer-field-label { font-size: 12.5px; font-weight: 600; color: #7B2D12; margin-bottom: 6px; display: block; }
+.offer-field-hint { font-size: 11px; color: #9E9484; margin-top: 4px; display: block; }
+
+/* Custom Inputs */
+.offer-input-control {
+    background: #fff; border: 1.5px solid #E0D5C7; border-radius: 8px; font-size: 13.5px;
+    padding: 10px 14px; width: 100%; outline: none; transition: all 0.2s;
+}
+.offer-input-control:focus { border-color: #7B2D12; box-shadow: 0 0 0 3px rgba(123, 45, 18, 0.08); }
+
+/* Live Preview Panel */
+.sticky-preview-panel { position: sticky; top: 120px; }
+.preview-label-text { font-size: 18px; font-weight: 700; color: #5B2C0E; margin-bottom: 4px; }
+.preview-sub-text { font-size: 13px; color: #8C7E6E; margin-bottom: 20px; }
+
+/* Promo Card Visualization */
+.promo-visual-card {
+    background: linear-gradient(135deg, #7B2D12 0%, #A0522D 60%, #C4813D 100%);
+    border-radius: 16px; padding: 28px; color: #fff; position: relative; overflow: hidden; margin-bottom: 20px;
+}
+.promo-visual-card::after {
+    content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px;
+    background: rgba(255,255,255,0.08); border-radius: 50%;
+}
+.promo-card-name { font-size: 20px; font-weight: 700; margin-bottom: 6px; position: relative; z-index: 1; }
+.promo-card-snippet { font-size: 13px; opacity: 0.9; margin-bottom: 16px; line-height: 1.4; position: relative; z-index: 1; }
+.promo-card-discount-badge {
+    display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 18px; border-radius: 6px; font-size: 15px; font-weight: 700; position: relative; z-index: 1;
+}
+
+/* Coupon Code Visualization */
+.coupon-visual-badge {
+    display: inline-block; border: 2px dashed #7B2D12; color: #7B2D12; font-size: 15px; font-weight: 700;
+    padding: 8px 20px; border-radius: 10px; letter-spacing: 1px; margin-bottom: 12px; background: #FFF9F2;
+}
+
+/* Radio Pills */
+.offer-radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.offer-radio-pill {
+    display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #E0D5C7;
+    padding: 9px 18px; border-radius: 25px; cursor: pointer; font-size: 13px; transition: all 0.2s;
+}
+.offer-radio-pill.active { border-color: #7B2D12; background: #FFF9F2; color: #7B2D12; font-weight: 500; }
+.radio-indicator { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #C4B8A8; display: flex; align-items: center; justify-content: center; }
+.offer-radio-pill.active .radio-indicator { border-color: #7B2D12; }
+.offer-radio-pill.active .radio-indicator::after { content: ''; width: 8px; height: 8px; background: #7B2D12; border-radius: 50%; }
+
+/* Category Tags */
+.offer-category-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.offer-category-tag {
+    background: #FFF9F2; border: 1px solid #E0D5C7; padding: 6px 14px; border-radius: 20px;
+    font-size: 12.5px; color: #5B2C0E; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;
+}
+.remove-offer-tag { cursor: pointer; font-size: 16px; color: #9E8E7A; }
+.remove-offer-tag:hover { color: #7B2D12; }
+
+/* Checklist */
+.publishing-checklist-card { background: #fff; border: 1px solid #E8DDD3; border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.checklist-status-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+.dot-wait   { background: #E8A020; }
+.dot-ready  { background: #2E9E5A; }
+.dot-warn   { background: #E8A020; }
+
+/* Success Messages */
+.offer-success-note {
+    display: flex; gap: 10px; background: #F0FAF0; border: 1px solid #C5E8C5;
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; font-size: 12px; color: #3D6E3D;
+}

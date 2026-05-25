@@ -1,0 +1,59 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: variables.css
+ * Description: Design tokens and CSS custom properties
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Quando&family=Outfit:wght@400;500;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+:root {
+
+    /* Font Weights */
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-bold: 700;
+
+    /* Primary Colors */
+    --clr-primary: #F59223;
+    /* primary 1 (Orange) */
+    --clr-secondary: #7D1C1C;
+    /* Secondary (Deep Maroon) - Sweets Website Theme */
+    --clr-accent: #CBAE54;
+    /* Accent - Muted Gold */
+
+    /* Neutral / Backgrounds */
+    --clr-bg-warm: #F5EFE6;
+    /* Background - Warm Cream */
+    --clr-white: #F5EFE6;
+    --clr-black: #000000;
+
+    /* Text Colors & Grays */
+    --clr-text-main: #222222;
+    /* text 1 / 222222 */
+    --clr-text-muted: #666666;
+    /* 6666 */
+    --clr-text-light: #888888;
+    /* trxt color 4 / 8888 */
+    --clr-dark-alt: #444444;
+    /* 4444 */
+
+    /* Typography */
+    --ff-heading: 'Quando', serif;
+    --ff-body: 'Outfit', sans-serif;
+    --ff-secondary: 'Playfair Display', serif;
+    --ff-poppins: 'Poppins', sans-serif;
+
+    /* Spacing & Borders */
+    --spacer: 1rem;
+    --border-radius: 8px;
+    --transition-fast: 0.2s ease-in-out;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 10px 40px rgba(125, 28, 28, 0.1);
+}

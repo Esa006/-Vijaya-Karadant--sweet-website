@@ -1,0 +1,45 @@
+# ----------------------------------------------------------------------
+# Sweets Website - Production Security & Performance Config
+# ----------------------------------------------------------------------
+
+# 1. SECURITY: Prevent Directory Listing
+Options -Indexes
+
+# 2. SECURITY: Block access to sensitive files
+<FilesMatch "^\.env|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|.*\.sql$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# 3. SECURITY: Protect against clickjacking
+Header set X-Frame-Options "SAMEORIGIN"
+
+# 4. SECURITY: Block MIME-type sniffing
+Header set X-Content-Type-Options "nosniff"
+
+# 5. HTTPS: Redirect HTTP to HTTPS (Commented out for XAMPP compatibility)
+# Uncomment the following lines when deploying to live server with SSL
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 6. ROUTING: Forward to Enterprise Core
+DirectoryIndex public/index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # For local XAMPP, uncomment the line below:
+    RewriteBase /sweet-website/
+    
+    # For Live Server, use this:
+    # RewriteBase "/"
+
+    # Direct access to existing files/directories in the root (legacy assets, etc.)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redirect everything else to the new public entry point
+    RewriteRule ^(.*)$ public/index.php [L,QSA]
+    RewriteRule ^$ public/index.php [L,QSA]
+</IfModule>

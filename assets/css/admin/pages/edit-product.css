@@ -1,0 +1,478 @@
+:root {
+    --brand-dark: #6b1d1d;
+    --brand-red: #8b2020;
+    --brand-orange: #c4601a;
+    --label-color: #b84c1c;
+    --section-title: #6b1d1d;
+    --bg-light: #f5f5f5;
+}
+
+.edit-product-content {
+    background: var(--bg-light);
+    padding-bottom: 40px;
+}
+
+.edit-product-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.edit-product-wrapper .breadcrumb-custom {
+    font-size: 0.95rem;
+}
+
+.edit-product-wrapper .breadcrumb-custom a {
+    color: var(--brand-orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.edit-product-wrapper .breadcrumb-custom a:hover {
+    text-decoration: underline;
+}
+
+.edit-product-wrapper .breadcrumb-custom .separator {
+    color: #999;
+    margin: 0 6px;
+}
+
+.edit-product-wrapper .breadcrumb-custom span:last-child {
+    color: var(--brand-dark);
+    font-weight: 600;
+}
+
+.edit-product-wrapper .page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.edit-product-wrapper .preview-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.edit-product-wrapper .preview-link:hover {
+    color: var(--brand-dark);
+}
+
+.edit-product-wrapper .btn-cancel-top {
+    border: 1.5px solid #ccc;
+    background: #fff;
+    color: #333;
+    font-weight: 600;
+    padding: 10px 40px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.edit-product-wrapper .btn-cancel-top:hover {
+    background: #f0f0f0;
+    border-color: #aaa;
+}
+
+.edit-product-wrapper .btn-update {
+    background: var(--brand-dark);
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.edit-product-wrapper .btn-update:hover {
+    background: #551616;
+}
+
+.edit-product-wrapper .section-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.edit-product-wrapper .section-title,
+.edit-product-wrapper .right-section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--section-title);
+    margin-bottom: 20px;
+}
+
+.edit-product-wrapper .form-label-custom {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--label-color);
+    margin-bottom: 6px;
+}
+
+.edit-product-wrapper .form-control-custom,
+.edit-product-wrapper .form-select-custom {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    color: #555;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: none;
+}
+
+.edit-product-wrapper .form-control-custom:focus,
+.edit-product-wrapper .form-select-custom:focus {
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 0 3px rgba(196, 96, 26, 0.1);
+    outline: none;
+}
+
+.edit-product-wrapper .product-thumb-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 0 12px 12px 0;
+    transition: transform 0.2s ease;
+}
+
+.edit-product-wrapper .product-thumb-wrapper:hover {
+    transform: translateY(-2px);
+}
+
+.edit-product-wrapper .product-thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    transition: all 0.2s ease;
+}
+
+.edit-product-wrapper .product-thumb.is-main {
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 0 3px rgba(196, 96, 26, 0.2);
+}
+
+.edit-product-wrapper .thumb-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.edit-product-wrapper .product-thumb-wrapper:hover .thumb-actions {
+    opacity: 1;
+}
+
+.edit-product-wrapper .is-main-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.edit-product-wrapper .thumb-action-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.edit-product-wrapper .thumb-action-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.edit-product-wrapper .thumb-action-btn.set-main:hover {
+    color: var(--brand-orange);
+}
+
+.edit-product-wrapper .thumb-action-btn.remove {
+    color: #d9534f;
+}
+
+.edit-product-wrapper .thumb-action-btn.remove:hover {
+    background: #d9534f;
+    color: #fff;
+}
+
+.edit-product-wrapper .drop-zone {
+    border: 2px dashed #d0d0d0;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    background: #fafafa;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.edit-product-wrapper .drop-zone.is-dragging {
+    border-color: var(--brand-orange);
+    background: #fef8f3;
+}
+
+.edit-product-wrapper .drop-zone .upload-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--brand-orange);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.edit-product-wrapper .drop-zone .upload-icon i {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.edit-product-wrapper .drop-zone p {
+    margin: 0;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.edit-product-wrapper .browse-link {
+    border: none;
+    background: transparent;
+    color: var(--brand-orange);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+}
+
+.edit-product-wrapper .browse-link:hover {
+    text-decoration: underline;
+}
+
+.edit-product-wrapper .drop-zone .file-support {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.edit-product-wrapper .status-card {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.edit-product-wrapper .status-label {
+    font-weight: 700;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.edit-product-wrapper .status-desc {
+    color: #888;
+    font-size: 0.82rem;
+    margin-top: 2px;
+}
+
+.edit-product-wrapper .form-check-input-custom {
+    width: 44px;
+    height: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #ccc;
+    box-shadow: none;
+}
+
+.edit-product-wrapper .form-check-input-custom:checked {
+    background-color: var(--brand-dark);
+}
+
+.edit-product-wrapper .form-check-input-custom:focus {
+    box-shadow: 0 0 0 3px rgba(107, 29, 29, 0.15);
+}
+
+.edit-product-wrapper .price-input-group {
+    position: relative;
+}
+
+.edit-product-wrapper .price-input-group .currency-symbol {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-right: 1.5px solid #e0e0e0;
+    border-radius: 10px 0 0 10px;
+    font-weight: 700;
+    color: #666;
+    font-size: 1rem;
+}
+
+.edit-product-wrapper .price-input-group .form-control-custom {
+    padding-left: 56px;
+}
+
+.edit-product-wrapper .textarea-desc {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.edit-product-wrapper .btn-cancel-bottom {
+    border: 1.5px solid #ccc;
+    background: #fff;
+    color: #555;
+    font-weight: 600;
+    padding: 11px 36px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    transition: background 0.2s ease;
+}
+
+.edit-product-wrapper .btn-cancel-bottom:hover {
+    background: #f0f0f0;
+}
+
+.edit-product-wrapper .btn-save {
+    background: linear-gradient(135deg, #c4601a, #8b2020);
+    color: #fff;
+    font-weight: 700;
+    padding: 11px 36px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.92rem;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s ease;
+}
+
+.edit-product-wrapper .btn-save:hover {
+    opacity: 0.9;
+}
+
+.edit-product-wrapper .header-actions {
+    flex-wrap: wrap;
+}
+
+/* ── File Overlay Input Styles ── */
+.edit-product-wrapper .file-overlay-wrapper {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.edit-product-wrapper .file-overlay-wrapper:hover {
+    border-color: var(--brand-orange);
+}
+
+.edit-product-wrapper .input-group-file-text {
+    flex: 1;
+    padding: 0 16px;
+    font-size: 0.9rem;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.edit-product-wrapper .input-group-file-btn {
+    height: 100%;
+    padding: 0 20px;
+    background: #f5f5f5;
+    border: none;
+    border-left: 1.5px solid #e0e0e0;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #555;
+    transition: background 0.2s;
+}
+
+.edit-product-wrapper .file-overlay-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.edit-product-wrapper .product-thumbs:empty::before {
+    content: 'No images added yet';
+    display: inline-block;
+    color: #aaa;
+    font-size: 0.9rem;
+    border: 1px dashed #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .edit-product-wrapper .page-title {
+        font-size: 1.5rem;
+    }
+
+    .edit-product-wrapper .section-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .edit-product-wrapper .product-thumb {
+        width: 70px;
+        height: 70px;
+    }
+
+    .edit-product-wrapper .btn-cancel-top,
+    .edit-product-wrapper .btn-update {
+        width: 100%;
+    }
+
+    .edit-product-wrapper .header-actions {
+        width: 100%;
+    }
+}

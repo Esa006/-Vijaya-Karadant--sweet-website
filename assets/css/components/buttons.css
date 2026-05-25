@@ -1,0 +1,53 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: buttons.css
+ * Description: Reusable button components with premium styling
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+/* Base Button */
+.c-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    font-family: var(--ff-body);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--border-radius);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Premium Variant */
+.c-btn--premium {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+}
+
+.c-btn--premium:hover {
+    background-color: var(--clr-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-premium);
+    color: var(--clr-white);
+}
+
+/* Outline Variant */
+.c-btn--outline {
+    background-color: transparent;
+    border: 2px solid var(--clr-secondary);
+    color: var(--clr-secondary);
+}
+
+.c-btn--outline:hover {
+    background-color: var(--clr-secondary);
+    color: var(--clr-white);
+}

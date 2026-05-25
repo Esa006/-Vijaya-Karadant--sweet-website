@@ -1,0 +1,150 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: admin-inventory.css
+ * Description: Custom controls for the Inventory management page
+ * =============================================================
+ */
+
+/* ── QUANTITY SELECTOR ── */
+.inventory-qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    max-width: 140px;
+    margin: 0 auto;
+}
+
+.qty-btn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #6B7280;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.qty-btn:hover {
+    background: #F9FAFB;
+    color: var(--admin-primary);
+}
+
+.qty-btn:active {
+    background: #F3F4F6;
+}
+
+.qty-input {
+    width: 50px;
+    height: 38px;
+    border: none;
+    border-left: 1.5px solid #E5E7EB;
+    border-right: 1.5px solid #E5E7EB;
+    text-align: center;
+    font-weight: 700;
+    color: var(--admin-text-main);
+    font-size: 14px;
+    background: transparent;
+    -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.expand-toggle {
+    color: #6b7280;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.expand-toggle i {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.expand-toggle.is-open i {
+    transform: rotate(90deg);
+    color: var(--admin-primary);
+}
+
+.variant-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    background: #f5ede9;
+    color: #8c3333;
+    border: 1px solid #ead8cf;
+}
+
+.variant-details-wrap {
+    margin: 0 1rem;
+    border: 1px solid #f0e6e0;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fffaf7 0%, #fff 100%);
+    padding: 0.5rem 0.75rem;
+}
+
+.variant-row td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.92rem;
+    vertical-align: middle;
+}
+
+.variant-qty .qty-btn,
+.variant-qty .qty-input {
+    height: 34px;
+}
+
+/* ── UPDATED STATUSES ── */
+.inventory-time {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--admin-text-muted);
+}
+
+/* ── RESPONSIVE TWEAKS ── */
+@media (max-width: 768px) {
+    .inventory-qty-control {
+        margin: 5px 0;
+        width: 100%;
+        max-width: unset;
+    }
+    .qty-input {
+        flex: 1;
+    }
+
+    .variant-details-wrap {
+        margin: 0;
+        padding: 0.5rem;
+    }
+
+    .variant-details-wrap table th,
+    .variant-details-wrap table td {
+        font-size: 12px;
+    }
+}
+
+/* ── STAT CARDS HOVER ── */
+.admin-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.admin-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+    border-color: rgba(140, 51, 51, 0.2);
+}

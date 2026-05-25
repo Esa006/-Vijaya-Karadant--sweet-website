@@ -1,0 +1,171 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: karadant-art.css
+ * Description: Styles for "The Art of Crafting" section
+ * =============================================================
+ */
+
+.c-karadant-art {
+    background-color: transparent;
+}
+
+.c-karadant-art__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #4A1E1E;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.c-karadant-art__image-container {
+    padding-bottom: 60px; /* Space for the quote box */
+}
+
+.c-karadant-art__img-wrap img {
+    border: 1px solid #4A1E1E;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.c-karadant-art__image-container:hover .c-karadant-art__img-wrap img {
+    transform: scale(1.02);
+}
+
+/* ── Quote Box ── */
+.c-karadant-art__quote-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #72201e;
+    color: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 320px;
+    box-shadow: 0 15px 35px rgba(114, 32, 30, 0.25);
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.c-karadant-art__image-container:hover .c-karadant-art__quote-box {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(114, 32, 30, 0.35);
+}
+
+.c-karadant-art__quote-text {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.c-karadant-art__quote-author {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* ── Content ── */
+.c-karadant-art__description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.7;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+}
+
+.c-karadant-art__feature-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #FFFFFF;
+    border: 1px solid #4A1E1E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #4A1E1E;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.d-flex:hover .c-karadant-art__feature-icon {
+    background-color: #4A1E1E;
+    color: #FFFFFF;
+}
+
+.c-karadant-art__btn {
+    background: linear-gradient(90deg, #6C191D 0%, #A9431E 100%);
+    color: #FFFFFF !important;
+    padding: 0.85rem 2.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(108, 25, 29, 0.2);
+    transition: all 0.3s ease;
+}
+
+.c-karadant-art__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 25, 29, 0.3);
+}
+
+@media (max-width: 767.98px) {
+    .c-karadant-art__title {
+        font-size: 1.4rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .c-karadant-art__img-wrap {
+        max-width: 85%;
+        margin: 0 auto;
+    }
+
+    .c-karadant-art__quote-box {
+        padding: 1rem !important;
+        margin-top: -20px !important;
+    }
+
+    .c-karadant-art__quote-text {
+        font-size: 0.85rem !important;
+    }
+
+    .c-karadant-art__description {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+}
+
+/* 425px Micro-adjustments for Art of Crafting */
+@media (max-width: 425px) {
+    .c-karadant-art__title {
+        font-size: 1.3rem !important;
+        text-align: center !important;
+    }
+
+    .c-karadant-art__img-wrap {
+        max-width: 100% !important;
+    }
+
+    .c-karadant-art__quote-box {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        max-width: 100% !important;
+        margin-top: 1rem !important;
+        padding: 1.25rem !important;
+        text-align: center !important;
+    }
+
+    .c-karadant-art__feature-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.2rem !important;
+    }
+
+    .c-karadant-art__description {
+        font-size: 0.9rem !important;
+        text-align: center !important;
+    }
+}

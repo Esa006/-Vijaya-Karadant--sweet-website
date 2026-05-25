@@ -1,0 +1,200 @@
+/* 
+ * Store Policy Modal - Premium Design
+ * Matches the requested screenshot with a vertical timeline and clear conditions.
+ */
+
+.c-policy-modal .modal-content {
+    border-radius: 24px;
+    border: none;
+    background-color: #FDFBF8; /* Light warm cream */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.c-policy-modal .modal-body {
+    padding: 2.5rem;
+}
+
+/* Header Section */
+.c-policy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.c-policy-header__title {
+    font-family: var(--ff-body);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+.c-policy-header__icons {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.c-policy-icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.c-policy-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--clr-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #fff;
+}
+
+.c-policy-icon-wrapper i {
+    font-size: 1.5rem;
+    color: var(--clr-secondary);
+}
+
+.c-policy-icon-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #F59223;
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
+}
+
+.c-policy-icon-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #666;
+}
+
+/* Conditions Section */
+.c-policy-conditions {
+    margin-bottom: 2rem;
+}
+
+.c-policy-section-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.c-policy-conditions__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.c-policy-conditions__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.c-policy-conditions__item i.bi-check-lg { color: #28a745; font-weight: 900; }
+.c-policy-conditions__item i.bi-x-lg { color: #dc3545; font-weight: 900; }
+
+/* Timeline Section */
+.c-policy-timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.c-policy-timeline::before {
+    content: '';
+    position: absolute;
+    left: 4.5px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background-color: #FADFB7; /* Light orange line */
+}
+
+.c-policy-timeline__step {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.c-policy-timeline__step::before {
+    content: '';
+    position: absolute;
+    left: -1.45rem;
+    top: 5px;
+    width: 11px;
+    height: 11px;
+    background-color: #fff;
+    border: 2px solid #D67A18; /* Main orange point */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.c-policy-timeline__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 0.25rem;
+}
+
+.c-policy-timeline__desc {
+    font-size: 0.75rem;
+    color: #777;
+    margin: 0;
+    padding-left: 0.5rem;
+    line-height: 1.4;
+}
+
+/* Button Section */
+.c-policy-footer {
+    padding-top: 1rem;
+}
+
+.c-policy-btn-goback {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(90deg, #7D1C1C 0%, #D67A18 100%);
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 20px rgba(125, 28, 28, 0.25);
+}
+
+.c-policy-btn-goback:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(125, 28, 28, 0.35);
+    color: #fff;
+}
+
+.c-policy-btn-goback:active {
+    transform: translateY(1px);
+}
+
+/* Modal Divider (Blue dashed in screenshot) */
+.c-policy-divider {
+    border-top: 1.5px dashed #A3D1FF;
+    margin: 1.5rem 0;
+}

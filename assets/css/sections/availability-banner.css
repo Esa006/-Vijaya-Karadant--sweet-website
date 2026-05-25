@@ -1,0 +1,43 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/sections/availability-banner.css
+ * Description: Styling for "We Are Also Available On" section
+ * =============================================================
+ */
+
+.c-availability {
+    background-color: #fcfcfc; /* Very light grey */
+    border-top: 1px solid #f0f0f0;
+}
+
+.c-availability__title {
+    color: #4a4a4a;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.c-availability__logo-wrap {
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.c-availability__logo-wrap:hover {
+ 
+    transform: translateY(-5px);
+}
+
+.c-availability__logo {
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .c-availability__logo {
+        max-height: 35px;
+    }
+}

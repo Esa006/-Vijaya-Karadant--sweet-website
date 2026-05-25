@@ -1,0 +1,200 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/sections/countdown-timer.css
+ * Description: Pinpoint accurate luxury styles for Festival Countdown Timer
+ * =============================================================
+ */
+
+.c-countdown {
+    margin-bottom: 3.5rem;
+    padding: 2rem 0 1rem;
+}
+
+/* ── Ornamental Header ── */
+.c-countdown__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    color: var(--color-maroon, #7b1d1d);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(15px, 2.5vw, 35px);
+    width: 100%;
+}
+
+.c-header-flourish-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.c-header-flourish-img {
+    width: clamp(60px, 10vw, 110px);
+    height: auto;
+    flex-shrink: 0;
+}
+
+.c-countdown__title .c-header-icon {
+    width: clamp(30px, 5vw, 55px);
+    height: auto;
+    flex-shrink: 0;
+}
+
+.c-countdown__subtitle {
+    margin-bottom: 2rem;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    color: #a04124;
+    font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+.c-countdown__subtitle i {
+    font-size: 0.8em;
+}
+
+/* ── Timer Grid & Cards ── */
+.c-countdown__timer {
+    --bs-gutter-x: 1.25rem;
+    --bs-gutter-y: 1.25rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.c-timer-block {
+    position: relative;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 12px;
+    background-color: #7b1d1d;
+    box-shadow: 0 12px 30px rgba(56, 10, 10, 0.3);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.c-timer-block:hover {
+    transform: translateY(-5px);
+}
+
+.c-timer-block__icon {
+    font-size: 2.1rem;
+    color: #d1b58d;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Decorative Separator ── */
+.c-timer-block__sep {
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d1b58d 50%, transparent);
+    position: relative;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.c-timer-block__sep::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background-color: #d1b58d;
+}
+
+.c-timer-block__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+}
+
+.c-timer-block__value {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.c-timer-block__label {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: #d1b58d;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ── Responsive Rules ── */
+
+@media (max-width: 991.98px) {
+    .c-timer-block {
+        min-height: 125px;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .c-countdown {
+        padding: 1.5rem 0;
+    }
+
+    .c-countdown__title {
+        gap: 15px;
+    }
+
+    .c-timer-block {
+        min-height: 110px;
+    }
+
+    .c-timer-block__icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .c-timer-block__sep {
+        margin-bottom: 10px;
+    }
+
+    .c-timer-block__value {
+        font-size: 1.4rem;
+    }
+
+    .c-timer-block__label {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .c-countdown__title {
+        font-size: 1.2rem;
+    }
+    
+    .c-header-flourish-img {
+        width: 45px;
+    }
+    
+    .c-countdown__title .c-header-icon {
+        width: 24px;
+    }
+
+    .c-timer-block {
+        min-height: 100px;
+    }
+}

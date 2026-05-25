@@ -1,0 +1,44 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: heritage-growth.css
+ * Description: Heritage growth text section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.heritage-growth {
+    padding: 80px 15px 40px 15px;
+    /* Less bottom padding since franchise follows */
+    text-align: center;
+}
+
+.heritage-growth__title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--clr-text-main, #222222);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.heritage-growth__text {
+    font-family: var(--ff-body, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ── Responsive Rules ────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .heritage-growth {
+        padding: 50px 15px 30px 15px;
+    }
+
+    .heritage-growth__text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}

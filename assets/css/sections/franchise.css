@@ -1,0 +1,200 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: franchise.css
+ * Description: Premium franchise call-to-action section
+ * =============================================================
+ */
+
+.franchise {
+    position: relative;
+    overflow: hidden;
+    background-color: #fdfaf5; /* Clean cream background */
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.franchise__header {
+    margin-bottom: 3rem;
+}
+
+.franchise__title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #7b1d1d; /* Branding Maroon */
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.c-header-icon {
+    flex-shrink: 0;
+    width: clamp(35px, 6vw, 75px);
+    height: auto;
+    display: block;
+}
+
+.c-header-text {
+    flex: 0 1 auto;
+}
+
+.franchise .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Decorative Background Elements ── */
+.franchise::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -80px;
+    width: clamp(200px, 25vw, 400px);
+    height: 100%;
+    background-image: url('../../images/homepage/download (4) 2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.franchise::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    width: clamp(200px, 25vw, 400px);
+    height: 100%;
+    background-image: url('../../images/homepage/download (4) 4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* ── Banner Card ── */
+.franchise__card-banner {
+    background: #ffffff;
+    border: 2.5px solid #7b1d1d;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 1300px;
+    margin: 0 auto;
+    box-shadow: 0 15px 45px rgba(123, 29, 29, 0.08);
+}
+
+.franchise__banner-content {
+    padding: clamp(1.5rem, 6vw, 4.5rem);
+    background: url('../../images/homepage/expore-bg\ \(1\).png') no-repeat center left / contain;
+}
+
+.franchise__banner-title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(1.6rem, 4vw, 2.75rem);
+    color: #7b1d1d;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+.franchise__banner-subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.45rem);
+    color: #d67a18; /* Luxury Orange/Gold */
+    font-weight: 650;
+    margin-bottom: 1.5rem;
+}
+
+.franchise__banner-text {
+    font-size: clamp(0.92rem, 2vw, 1.1rem);
+    color: #5a5a5a;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+}
+
+.franchise__banner-btn {
+    background: linear-gradient(135deg, #7b1d1d 0%, #9e2a2a 100%);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 15px rgba(123, 29, 29, 0.2);
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.franchise__banner-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(123, 29, 29, 0.35);
+    background: linear-gradient(135deg, #9e2a2a 0%, #7b1d1d 100%);
+}
+
+.franchise__banner-img-wrap {
+    width: 100%;
+    height: 100%;
+    background-color: #fdfaf5;
+    overflow: hidden;
+}
+
+.franchise__banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.franchise__card-banner:hover .franchise__banner-img {
+    transform: scale(1.03);
+}
+
+/* ── Responsive Refinements ──────────────────────────────────── */
+
+@media (max-width: 991.98px) {
+    .franchise {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .franchise::before,
+    .franchise::after {
+        display: none !important;
+    }
+
+    .franchise__banner-img-wrap {
+        height: 400px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .franchise__banner-content {
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        background-position: center bottom;
+    }
+
+    .franchise__banner-text {
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .franchise__banner-img-wrap {
+        height: 280px;
+    }
+
+    .franchise__banner-btn {
+        width: 100%;
+        padding: 12px 25px;
+    }
+}

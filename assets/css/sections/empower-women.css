@@ -1,0 +1,262 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: empower-women.css
+ * Description: Styles for the Empowering Women section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.c-empower {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.c-empower .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Decorative Background Elements ── */
+.c-empower::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    width: clamp(140px, 15vw, 250px);
+    height: 100%;
+    background-image: url('../../images/homepage/ChatGPT_Image_Mar_10__2026__02_50_06_PM-removebg-preview 14.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.c-empower::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: clamp(140px, 15vw, 250px);
+    height: 100%;
+    background-image: url('../../images/homepage/vector-left.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+    pointer-events: none;
+    transform: translateY(-50%) scaleX(-1);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.c-empower__header {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+}
+
+.c-empower__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.6rem, 3.80vw, 2.3rem);
+    color: #7b1d1d;
+    /* Maroon from reference */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.c-empower__header.c-header-icon {
+    flex-shrink: 0;
+    width: clamp(55px, 15vw, 55px);
+    height: auto;
+    display: block;
+}
+
+.c-header-text {
+    flex: 0 1 auto;
+}
+
+.c-empower__desc {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #444;
+    margin: 0 auto;
+}
+
+/* ── Video Area ── */
+.c-empower__video-wrap {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto 2rem;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    aspect-ratio: 16 / 9;
+}
+
+.c-empower__video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.c-empower__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0.8;
+}
+
+/* Subtle button when video is playing AND NOT muted (to allow pausing) */
+.c-empower__video-wrap.is-playing:not(.is-muted) .c-empower__play-btn {
+    opacity: 0.4;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Fully visible button on wrapper hover */
+.c-empower__video-wrap:hover .c-empower__play-btn {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.c-empower__play-btn i {
+    font-size: 2rem;
+    color: #F86E1B;
+    margin-left: 5px;
+}
+
+.c-empower__play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: #ffffff;
+    opacity: 1;
+}
+
+/* ── Bottom Bar ── */
+.c-empower__footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.c-empower__runtime {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #6C191D;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.c-empower__btn {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background-color: #A64B10;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.c-empower__btn:hover {
+    background-color: #8C3E0D;
+    transform: translateY(-2px);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(166, 75, 16, 0.3);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 991px) {
+
+    .c-empower::before,
+    .c-empower::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .c-empower {
+        padding: 4rem 0;
+    }
+
+    .c-empower__footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .c-empower__runtime {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .c-empower__btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-empower {
+        margin-top: 6px;
+        padding: 0rem 0;
+    }
+
+    .c-empower__title {
+        font-size: 0.95rem;
+        margin-top: 20px;
+    
+    }
+
+    .c-empower__desc {
+        font-size: 0.95rem;
+    }
+
+    .c-empower__runtime {
+        font-size: 0.95rem;
+    }
+
+    .c-empower__btn {
+        font-size: 0.95rem;
+    }
+
+    .c-empower__video-wrap {
+        margin-top: 10px;
+    }
+    
+
+
+}

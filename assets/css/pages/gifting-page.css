@@ -1,0 +1,321 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/pages/gifting-page.css
+ * Description: Consolidation of Gifting page styles and mobile refinements
+ * =============================================================
+ */
+
+/* ── Hero Section ── */
+.c-gifting-hero {
+    background-image: url('../../images/banners/gifing/gifting.png');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .c-gifting-hero {
+        background-position: center;
+        background-size: cover;
+        height: 463px;
+    }
+
+    .ani-mask-slant {
+        font-size: 2rem;
+    }
+
+    .gift-hero-content {
+        position: relative;
+        /* top: -141px; */
+        left: 30px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .c-gifting-hero {
+        background-position: center bottom;
+        height: 360px;
+    }
+
+    .c-gifting-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .gift-hero-content {
+        text-align: left !important;
+        position: relative;
+        top: -69px;
+        padding-top: 5rem !important;
+    }
+
+    .ani-mask-slant {
+        font-size: 1.8rem !important;
+        max-width: 100%;
+    }
+
+    .lead {
+        font-size: 1.05rem !important;
+        max-width: 100% !important;
+    }
+
+    .gift-hero-content .btn {
+        padding: 10px 24px !important;
+        /* Decreased button size */
+        font-size: 0.95rem !important;
+        /* Decreased font size */
+    }
+
+    .gift-hero-content .d-flex.align-items-center.gap-3.mt-4 {
+        justify-content: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .d-flex.flex-wrap.gap-3.mb-4 {
+        position: relative;
+        top: -10px;
+    }
+
+    .d-flex.align-items-center.gap-3.mt-4 {
+        position: relative;
+        top: -21px;
+    }
+
+}
+
+
+
+@media (max-width: 576px) {
+    .c-gifting-hero {
+        background-image: url('../../images/banners/phone-screen-banner/Karadant-bg.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 152px !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        height: 100px;
+    }
+
+    .c-gifting-hero::before,
+    .c-gifting-hero .container {
+        display: none !important;
+    }
+
+    .c-gifting-features {
+        padding: 0px;
+        margin: 0px;
+
+    }
+}
+
+@media (max-width: 375px) {
+    .c-gifting-hero {
+        min-height: 152px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-gifting-hero {
+        min-height: 132px !important;
+    }
+}
+
+/* ── Hero Review Avatars ── */
+.c-gifting-hero__review-group {
+    position: relative;
+    height: 48px;
+    display: flex;
+    margin-right: 1rem;
+}
+
+.c-gifting-hero__avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid white !important;
+    position: absolute;
+    background: #e5e7eb;
+}
+
+.c-gifting-hero__avatar--1 {
+    left: 0;
+    z-index: 3;
+}
+
+.c-gifting-hero__avatar--2 {
+    left: 24px;
+    z-index: 2;
+}
+
+.c-gifting-hero__avatar--3 {
+    left: 48px;
+    z-index: 1;
+}
+
+.c-gifting-hero__review-spacer {
+    width: 96px;
+}
+
+@media (max-width: 768px) {
+    .c-gifting-hero__review-group {
+        height: 32px;
+        margin-right: 0.5rem;
+    }
+
+    .c-gifting-hero__avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .c-gifting-hero__avatar--2 {
+        left: 16px;
+    }
+
+    .c-gifting-hero__avatar--3 {
+        left: 32px;
+    }
+
+    .c-gifting-hero__review-spacer {
+        width: 64px;
+    }
+
+    .c-gifting-hero .d-flex.align-items-center.gap-3.mt-4 {
+        gap: 0px !important;
+    }
+
+
+    /* ── Features Section ── */
+    .c-gifting-features {
+        background-color: #7b1d1d;
+        color: white;
+    }
+
+    .c-gifting-features__icon-wrap {
+        width: 60px;
+        height: 60px;
+        background-color: #fdf5d3;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .c-gifting-features__icon {
+        color: #b28c46;
+        font-size: 1.75rem;
+    }
+
+    .c-gifting-features__label {
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-align: left;
+    }
+
+    @media (max-width: 426px) {
+        .c-gifting-features h2 {
+            font-size: 1.5rem !important;
+        }
+
+        .c-gifting-features p {
+            font-size: 0.95rem !important;
+        }
+
+        .c-gifting-features .row>div {
+            flex-direction: column !important;
+            text-align: center;
+            margin-bottom: 2rem !important;
+        }
+
+        .c-gifting-features__label {
+            text-align: center !important;
+            margin-top: 0.75rem;
+        }
+    }
+
+    /* ── Collection Grid Overrides ── */
+    @media (max-width: 426px) {
+        .gifting-collection-title {
+            font-size: 1.5rem !important;
+        }
+
+        .gifting-grid-1-col .col-md-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+
+        .c-product-card__image-wrapper {
+            height: 280px !important;
+        }
+
+        .c-product-card__title {
+            font-size: 1.25rem !important;
+        }
+    }
+
+    /* ── Gifting Curated 426px Adjustments ── */
+    @media (max-width: 426px) {
+        .c-gifting-curated__title {
+            font-size: 1.5rem !important;
+            text-align: center;
+        }
+
+        .c-gifting-curated__title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .c-gifting-curated__figure {
+            width: 140px !important;
+            height: 140px !important;
+        }
+    }
+
+    /* ── Gifting Corporate 426px Adjustments ── */
+    @media (max-width: 426px) {
+        .c-gifting-corporate__title {
+            font-size: 1.5rem !important;
+            text-align: center;
+        }
+
+        .c-gifting-corporate__text {
+            font-size: 0.95rem !important;
+            text-align: center;
+        }
+
+        .c-gifting-corporate__cta {
+            padding: 0.75rem 1.5rem !important;
+        }
+    }
+
+    /* ── Gifting CTA 426px Adjustments ── */
+    @media (max-width: 426px) {
+        .c-gifting-cta {
+            background-image: url('../../images/banners/phone-screen-banner/Component 340.png') !important;
+            background-position: center !important;
+            padding: 0 !important;
+            min-height: 150px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px;
+            margin-bottom: 20px !important;
+        }
+
+        .c-gifting-cta .container,
+        .c-gifting-cta::before {
+            display: none !important;
+        }
+    }}

@@ -1,0 +1,225 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: about-hero.css
+ * Description: Premium Light-Themed Styles for About Us Hero
+ * =============================================================
+ */
+
+.c-about-hero {
+    background-image: url('../../images/aboutpage/about-hero.png');
+    min-height: 80vh; /* or 100vh if full screen needed */
+    padding: 80px 20px;
+    position: relative;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ── Typography ── */
+.c-about-hero__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: #4a1c1d; 
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.c-about-hero__title--highlight {
+    color: #A9431E; /* Rich Artisanal Orange */
+    display: block;
+    margin-top: 0.2rem;
+}
+
+.c-about-hero__desc {
+    font-size: 1.35rem;
+    color: #6C4E3D; /* Muted brown */
+    line-height: 1.6;
+    max-width: 580px;
+}
+
+/* ── Button ── */
+.c-about-hero__btn {
+    background: #6C191D; /* The specific maroon from design */
+    color: #fff;
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 16px 42px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(108, 25, 29, 0.25);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    text-decoration: none;
+}
+
+.c-about-hero__btn:hover {
+    background: #4a1c1d;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(108, 25, 29, 0.35);
+}
+
+/* ── Social Proof / Avatars ── */
+.c-about-hero__social {
+    margin-top: 2rem;
+}
+
+.c-about-hero__avatars {
+    display: flex;
+    margin-right: 18px;
+}
+
+.c-about-hero__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-left: -15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.c-about-hero__avatar:first-child {
+    margin-left: 0;
+}
+
+.c-about-hero__avatar--1 { background-image: url('https://i.pravatar.cc/150?u=a'); }
+.c-about-hero__avatar--2 { background-image: url('https://i.pravatar.cc/150?u=b'); }
+.c-about-hero__avatar--3 { background-image: url('https://i.pravatar.cc/150?u=c'); }
+
+.c-about-hero__rating-text {
+    font-size: 1.05rem;
+    color: #6C4E3D;
+}
+
+.c-about-hero__rating-text strong {
+    color: #A9431E;
+    font-size: 1.15rem;
+}
+
+/* ── Image Display ── */
+.c-about-hero__image-wrap {
+    perspective: 1000px;
+}
+
+.c-about-hero__img {
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 100%; /* Changed to 100% to fill col-lg-6 properly */
+    height: auto;
+}
+
+.c-about-hero__img:hover {
+    transform: rotateY(-5deg) rotateX(2deg) scale(1.03);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1199px) {
+    .c-about-hero__title { font-size: 3.2rem; }
+}
+
+@media (max-width: 1024px) {
+    
+    .c-about-hero {
+        background-size: cover;
+        min-height: 50vh;
+        padding: 60px 0;
+        height: 55px;
+    }
+    .c-about-hero__title { font-size: 2.8rem; 
+    position: relative;
+    top: -10px;
+    }
+    .c-about-hero__btn{
+        position: relative;
+        top: -64px;
+    }
+    .c-about-hero__desc{
+        position: relative;
+        top: -30px;
+    }
+    .c-about-hero__social{
+        position: relative;
+        top: -100px;
+    }
+    .c-main-nav__list{
+     gap: 0.5rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .c-about-hero {
+        padding: 60px 0 !important;
+      min-height: 311px;
+        background-size: cover !important;
+        display: flex;
+        align-items: center;
+        height: 119px;
+    }
+    .c-about-hero__content { 
+        position: relative;
+        top: 75px;
+    
+        display: block !important; 
+    }
+    .c-about-hero__title { font-size: 1.4rem; }
+    .c-about-hero__desc { font-size: 1.1rem; max-width: 300px; }
+    .c-about-hero__image-wrap { 
+        display: none !important; 
+    }
+    .c-about-hero__btn{
+        position: relative;
+        top: -36px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    .c-about-hero__social{
+        position: relative;
+        top: -78px;
+        font-size: 1.2rem;
+    }
+    .c-about-hero__avatar{
+        width: 30px;
+        height: 30px;
+    }
+    .c-about-hero__desc{
+       position: relative;
+       top: -10px;
+       max-width: 350px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .c-about-hero {
+        background-image: url("../../images/banners/phone-screen-banner/about banner.png") !important;
+        background-size: cover !important;
+        background-position: center;
+        min-height: 169px;
+        display: flex;
+        align-items: center;
+        padding: 0 !important;
+    }
+
+    /* Only show the banner image, hide all HTML content on mobile */
+    .c-about-hero__content,
+    .c-about-hero__image-wrap {
+        display: none !important;
+    }
+    @media (max-width: 375px){
+        .c-about-hero {
+            min-height: 150px;
+        }
+    }
+    @media (max-width: 320px){
+        .c-about-hero {
+            min-height: 120px;
+        }
+    }
+}

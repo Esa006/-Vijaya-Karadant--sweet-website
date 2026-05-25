@@ -1,0 +1,133 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: franchise-benefits.css
+ * Description: Franchise benefits section with two-column layout
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.franchise-benefits {
+    padding: 80px 15px;
+    width: 100%;
+}
+
+.franchise-benefits__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.franchise-benefits__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-right: 2rem;
+}
+
+.franchise-benefits__title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    color: var(--clr-text-main, #222222);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.franchise-benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+}
+
+.franchise-benefits__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.franchise-benefits__icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background-color: #F4B400;
+    /* Yellow */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 14px;
+    margin-right: 18px;
+}
+
+.franchise-benefits__text {
+    color: #4a4a4a;
+    /* Light gray text */
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.franchise-benefits__cta {
+    display: inline-block;
+    background-color: #8B1E1E;
+    /* Maroon */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    border: none;
+}
+
+.franchise-benefits__cta:hover {
+    background-color: #a12424;
+    transform: translateY(-2px);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(139, 30, 30, 0.4);
+}
+
+.franchise-benefits__media {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.franchise-benefits__image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    display: block;
+}
+
+/* ── Responsive Rules ────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .franchise-benefits__content {
+        padding-right: 0;
+        margin-bottom: 3rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 767px) {
+    .franchise-benefits {
+        padding: 60px 15px;
+    }
+
+    .franchise-benefits__title {
+        margin-bottom: 1.5rem;
+    }
+
+    .franchise-benefits__cta {
+        width: 100%;
+        text-align: center;
+    }
+}

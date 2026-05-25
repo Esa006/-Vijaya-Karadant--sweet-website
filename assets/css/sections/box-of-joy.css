@@ -1,0 +1,281 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: box-of-joy.css
+ * Description: Premium "Box of Joy" overhaul styles
+ * =============================================================
+ */
+
+
+.c-box-of-joy {
+    position: relative;
+    overflow: hidden;
+}
+
+.c-box-of-joy .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Subtle Side Backgrounds ── */
+.c-box-of-joy__bg-side {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(249px, 3vw, 212px);
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    /* Higher to be above section background */
+    opacity: 0.5;
+    /* More visible for debugging */
+}
+
+.c-box-of-joy__bg-side--left {
+    left: 0;
+    /* Align to edge */
+}
+
+.c-box-of-joy__bg-side--right {
+    right: 0;
+    /* Align to edge */
+}
+
+/* ── Decorative Background Elements ── */
+
+
+
+
+@media (max-width: 991px) {
+    .c-box-of-joy__bg-side {
+        display: none !important;
+    }
+}
+
+.c-box-of-joy__header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+    width: 100%;
+}
+
+.c-box-of-joy__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1rem, 4vw, 2.8rem);
+    color: #7b1d1d;
+    /* Maroon from reference */
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.c-box-of-joy__header-inner .c-header-icon {
+    flex-shrink: 0;
+    width: clamp(80px, 15vw, 200px);
+    /* Restored large scale flourish */
+    height: auto;
+    display: block;
+}
+
+.c-header-text {
+    flex: 0 1 auto;
+}
+
+
+/* ── Left Column: Showcase ── */
+.c-box-of-joy__image-container {
+    position: relative;
+    padding-bottom: 60px;
+    /* Space for overlay */
+}
+
+.c-box-of-joy__img-frame {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    /* aspect-ratio: 1 / 1; */
+}
+
+.c-box-of-joy__main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Overlapping Label Overlay */
+.c-box-of-joy__overlay {
+    position: absolute;
+    bottom: -8px;
+    /* left: 4%; */
+    right: 4%;
+    background: #F9F7F5;
+    /* Matches the screenshot's soft white */
+    border: 1px solid #eee;
+    padding: 1.2rem;
+    text-align: center;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.c-box-of-joy__overlay-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #8B2C2C;
+    /* Deep Maroon */
+    text-transform: capitalize;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.c-box-of-joy__overlay-title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.8rem;
+    color: #4a1c1d;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* ── Right Column: Steps ── */
+.c-box-step {
+    background: #F9F7F5;
+    border-radius: 12px;
+    padding: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.c-box-step:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border-color: #eee;
+    transform: translateX(5px);
+}
+
+.c-box-step__icon-wrap {
+    width: 54px;
+    height: 54px;
+    border: 1.5px solid #6C191D;
+    /* Maroon border */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.c-box-step__icon-wrap i {
+    font-size: 1.5rem;
+    color: #6C191D;
+}
+
+.c-box-step__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.c-box-step__text {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ── CTA Button ── */
+.c-box-of-joy__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(90deg, #8B2C2C, #D35400);
+    color: #fff;
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.c-box-of-joy__cta:hover {
+    opacity: 0.9;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 44, 44, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+    .c-box-of-joy__overlay-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 585px) {
+    .c-box-of-joy {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .c-box-of-joy__image-container {
+        padding-bottom: 0px;
+        margin-bottom: 1rem;
+    }
+
+    .c-box-of-joy__img-frame {
+        border-radius: 8px 8px 0 0;
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .c-box-of-joy__overlay {
+        position: static;
+        margin-top: 0;
+        width: 100%;
+        padding: 1.5rem 1.25rem;
+        background: #fff;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .c-box-of-joy__overlay-title {
+        font-size: 1.35rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .c-box-of-joy__overlay-title {
+        font-size: 1.2rem;
+    }
+
+    .c-box-of-joy__overlay-label {
+        font-size: 0.8rem;
+    }
+
+    .c-box-of-joy__cta {
+        margin: 0px;
+        width: 70%;
+        margin-left: 48px;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-box-of-joy__cta {
+        font-size: 1rem !important;
+    }
+
+    .c-box-of-joy__header-inner {
+        gap: 0px;
+    }
+}

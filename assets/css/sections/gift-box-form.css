@@ -1,0 +1,137 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: gift-box-form.css
+ * Description: Custom gift box request form section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.gift-box-form {
+    padding: 80px 15px;
+    background-color: #ffffff;
+    /* Page background */
+    width: 100%;
+}
+
+.gift-box-form__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.gift-box-form__title {
+    font-family: var(--ff-heading, serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--clr-text-main, #222222);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.gift-box-form__subtitle {
+    font-family: var(--ff-body, sans-serif);
+    font-size: 1.25rem;
+    color: #666666;
+    /* Light gray text */
+    font-weight: 500;
+    margin: 0;
+}
+
+.gift-box-form__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    /* Light gray border as seen in the image */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Soft drop shadow */
+}
+
+.gift-box-form__label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 0.5rem;
+}
+
+.gift-box-form__input,
+.gift-box-form__select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #F6921E;
+    /* Orange border */
+    border-radius: 8px;
+    outline: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gift-box-form__input::placeholder,
+.gift-box-form__select:invalid {
+    color: #a0a0a0;
+}
+
+.gift-box-form__input:focus,
+.gift-box-form__select:focus {
+    box-shadow: 0 0 0 3px rgba(246, 146, 30, 0.2);
+    border-color: #e08316;
+}
+
+.gift-box-form__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+.gift-box-form__submit {
+    display: inline-block;
+    background-color: #8B1E1E;
+    /* Maroon */
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+}
+
+.gift-box-form__submit:hover {
+    background-color: #a12424;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 30, 30, 0.3);
+}
+
+/* ── Responsive Rules ────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .gift-box-form__container {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .gift-box-form {
+        padding: 50px 15px;
+    }
+
+    .gift-box-form__title {
+        font-size: 1.75rem;
+    }
+
+    .gift-box-form__subtitle {
+        font-size: 1.1rem;
+    }
+
+    .gift-box-form__submit {
+        width: 100%;
+    }
+}

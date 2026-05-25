@@ -1,0 +1,311 @@
+/**
+ * Sweets Website - Admin
+ * =============================================================
+ * File: assets/css/admin/components/preview-modal.css
+ * Description: Custom styling based on user-provided design
+ * =============================================================
+ */
+
+.preview-container-wrapper {
+    background-color: #FDFBF7 !important; /* Very light peach/cream */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.preview-header-custom {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-title-custom {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.btn-close-custom {
+    color: var(--clr-secondary);
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.btn-close-custom:hover {
+    opacity: 1;
+}
+
+.product-image-wrapper-custom {
+    position: relative;
+    padding: 0 24px;
+}
+
+.product-img-custom {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid var(--clr-accent);
+}
+
+.img-badge-custom {
+    position: absolute;
+    top: 16px;
+    left: 40px;
+    background-color: var(--clr-primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.img-heart-btn-custom {
+    position: absolute;
+    top: 16px;
+    right: 40px;
+    background-color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-primary);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.img-heart-btn-custom.active {
+    background-color: var(--clr-primary);
+    color: white;
+}
+
+.product-details-custom {
+    padding: 24px;
+}
+
+.title-row-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-title-custom {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.status-badge-custom {
+    background-color: #D4EDDA;
+    color: #155724;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #C3E6CB;
+}
+
+/* Stats Grid */
+.stats-grid-custom {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.stat-card-custom {
+    background-color: white;
+    border: 1px solid #E0C0A0;
+    border-radius: 12px;
+    padding: 12px 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.stat-card-custom:hover {
+    transform: translateY(-2px);
+}
+
+.stat-icon-custom {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.stat-value-custom {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.stat-label-custom {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* Weight Selector */
+.weight-selector-custom {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.weight-selector-custom::-webkit-scrollbar {
+    display: none;
+}
+
+.btn-weight-custom {
+    flex: 1;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #aaa;
+    white-space: nowrap;
+}
+
+.btn-weight-custom.active {
+    background-color: white;
+    border: 2px solid #8B2E2E;
+    color: #8B2E2E;
+}
+
+/* Stock Status */
+.stock-status-group-custom {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stock-label-custom {
+    font-weight: 600;
+    color: var(--clr-primary);
+    font-size: 0.9rem;
+}
+
+.form-check-input:checked {
+    background-color: #8B2E2E;
+    border-color: #8B2E2E;
+}
+
+/* SKU */
+.sku-row-custom {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.sku-code-custom {
+    color: #8B2E2E;
+    margin-left: 5px;
+}
+
+/* Description */
+.desc-section-custom {
+    margin-bottom: 24px;
+}
+
+.desc-label-custom {
+    color: var(--clr-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.desc-box-custom {
+    border: 1px solid #8B2E2E;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: white;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+/* Bottom Buttons */
+.action-row-custom {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-action-custom {
+    flex: 1;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn-edit-custom {
+    background-color: #8B2E2E;
+    color: white !important;
+}
+
+.btn-edit-custom:hover {
+    background-color: #702525;
+    color: white !important;
+}
+
+.btn-close-action-custom {
+    background-color: transparent;
+    border: 1px solid #8B2E2E;
+    color: #444;
+}
+
+/* SKELETON */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-img { height: 200px; width: 100%; border-radius: 12px; }
+.skeleton-title { height: 24px; width: 60%; }
+.skeleton-stat { height: 60px; width: 100%; border-radius: 12px; }
+
+/* Real-time Flash */
+.value-update-flash {
+    animation: flash-highlight 1.5s ease-out;
+}
+
+@keyframes flash-highlight {
+    0% { background-color: rgba(245, 146, 35, 0.2); }
+    100% { background-color: transparent; }
+}

@@ -1,0 +1,94 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: admin-offers.css
+ * Description: Custom progress bars and tracking for Offers & Coupons
+ * =============================================================
+ */
+
+/* ── PROGRESS BARS ── */
+.offer-progress-container {
+    width: 80px;
+    height: 6px;
+    background: #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.offer-progress-bar {
+    height: 100%;
+    background: #6B201F; /* Primary Dark */
+    border-radius: 10px;
+}
+
+.usage-progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.usage-limit-bar {
+    width: 90px;
+    height: 8px;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.usage-limit-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.usage-limit-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--admin-text-muted);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ── COLORS ── */
+.fill-green { background: #10B981; }
+.fill-orange { background: #F59E0B; }
+.fill-red { background: #EF4444; }
+
+/* ── CUSTOM STATUS ── */
+.status-scheduled {
+    background: rgba(102, 16, 242, 0.08) !important;
+    color: #6610f2 !important;
+    border: 1px solid rgba(102, 16, 242, 0.2) !important;
+}
+
+.status-expired {
+    background: #F3F4F6 !important;
+    color: #6B7280 !important;
+    border: 1px solid #E5E7EB !important;
+}
+
+/* ── TABLE ADJUSTMENTS ── */
+.td-discount-val {
+    font-weight: 700;
+    color: var(--admin-text-main);
+    font-size: 14px;
+}
+
+.td-discount-type {
+    font-size: 11px;
+    color: var(--admin-text-muted);
+    display: block;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .offer-progress-container,
+    .usage-limit-bar {
+        width: 100%;
+    }
+}

@@ -1,0 +1,351 @@
+/**
+ * Sweets Website - Admin
+ * =============================================================
+ * File: assets/css/admin/pages/reports.css
+ * Description: Premium high-fidelity Analytics Dashboard UI (Mobile-First)
+ * =============================================================
+ */
+
+:root {
+    --primary: #8B1538;
+    --primary-light: #a61c4a;
+    --secondary: #F4A261;
+    --success: #2A9D8F;
+    --danger: #E63946;
+    --info: #457B9D;
+    --warning: #E9C46A;
+    --bg-body: #efe8e1;
+    --bg-card: #FFFFFF;
+    --text-primary: #1D1D1D;
+    --text-secondary: #6C757D;
+    --border-color: #E5E5E5;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+}
+
+.reports-page {
+    background: var(--bg-body);
+    color: var(--text-primary);
+}
+
+/* Header */
+.reports-page .page-header {
+    margin-bottom: var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reports-page .page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Buttons */
+.reports-page .btn-export {
+    background: white;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    min-height: 40px;
+    padding: 8px 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.reports-page .btn-export:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Report Tabs */
+.report-tabs {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 0 0 auto;
+    min-width: 100px;
+    border: 1px solid var(--border-color);
+    background: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Period Selector */
+.period-selector {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    justify-content: center;
+}
+
+.period-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    min-height: 32px;
+    flex: 1;
+    max-width: 80px;
+    border: 1px solid var(--border-color);
+    background: white;
+    border-radius: 6px;
+}
+
+.period-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Summary Cards */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.summary-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+}
+
+.summary-card.orders::before {
+    background: var(--info);
+}
+
+.summary-card.units::before {
+    background: var(--success);
+}
+
+.summary-card.aov::before {
+    background: var(--warning);
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-sm);
+}
+
+.card-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.card-icon.revenue {
+    background: #FCE4EC;
+    color: var(--primary);
+}
+
+.card-icon.orders {
+    background: #E3F2FD;
+    color: var(--info);
+}
+
+.card-icon.units {
+    background: #E8F5E9;
+    color: var(--success);
+}
+
+.card-icon.aov {
+    background: #FFF3E0;
+    color: #F57C00;
+}
+
+.card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.card-change {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.card-change.positive {
+    color: var(--success);
+}
+
+.card-change.negative {
+    color: var(--danger);
+}
+
+/* Filters */
+.filters-section {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--shadow);
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+}
+
+/* Charts */
+.chart-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--space-md);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.chart-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.category-chart-container {
+    height: 200px;
+}
+
+/* Table Section */
+.table-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+}
+
+/* Mobile Products */
+.products-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.product-mobile-card {
+    background: var(--bg-body);
+    border-radius: 8px;
+    padding: var(--space-md);
+    border: 1px solid var(--border-color);
+}
+
+.product-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-sm);
+}
+
+.table-desktop {
+    display: none;
+}
+
+/* Media Queries */
+@media (min-width: 576px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .table-desktop {
+        display: block;
+    }
+
+    .products-mobile {
+        display: none;
+    }
+
+    .chart-container {
+        height: 350px;
+    }
+
+    .charts-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--space-lg);
+    }
+
+    .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: var(--space-lg);
+    }
+}

@@ -1,0 +1,211 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: notifications.css
+ * Description: Styling for Admin Notifications UI
+ * =============================================================
+ */
+
+.notifications-container {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.notifications-title {
+    color: #7B1F1F;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Control Bar styling */
+.notif-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.notif-search {
+    flex: 1;
+    position: relative;
+    max-width: 380px;
+}
+
+.notif-search input {
+    width: 100%;
+    border: 1.5px solid var(--border-maroon, #E2D8CE);
+    border-radius: 10px;
+    padding: 12px 18px;
+    padding-right: 48px;
+    background-color: #FFF;
+    color: #333;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+}
+
+.notif-search input:focus {
+    outline: none;
+    border-color: #8B2E2E;
+    box-shadow: 0 4px 10px rgba(139, 46, 46, 0.1);
+}
+
+.notif-search button {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8B2E2E;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.notif-filter-btn {
+    background-color: #FFF;
+    border: 1.5px solid var(--border-maroon, #E2D8CE);
+    color: #8B2E2E;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.notif-filter-btn:hover {
+    background-color: #FDF8F5;
+    border-color: #8B2E2E;
+}
+
+/* List Items styling */
+.notif-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.notif-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1.5px solid #BC5B4A;
+    transition: background-color 0.2s ease;
+}
+
+.notif-item:first-child {
+    border-top: 1.5px solid #BC5B4A;
+}
+
+.notif-item.unread {
+    background-color: rgba(230, 230, 230, 0.4);
+}
+
+.notif-checkbox {
+    margin: 0 20px;
+}
+
+.notif-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #BC5B4A;
+    border-radius: 3px;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    position: relative;
+}
+
+.notif-checkbox input[type="checkbox"]:checked {
+    background-color: #BC5B4A;
+}
+
+.notif-checkbox input[type="checkbox"]:checked::after {
+    content: '\F26A'; /* Bootstrap check mark */
+    font-family: 'bootstrap-icons';
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    line-height: 1;
+}
+
+.notif-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notif-headline {
+    color: #333;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0;
+}
+
+.notif-desc {
+    color: #666;
+    font-size: 13px;
+    margin: 0;
+}
+
+.notif-meta {
+    color: #999;
+    font-size: 13px;
+    padding-right: 20px;
+    white-space: nowrap;
+}
+
+/* Pagination container */
+.notif-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    color: #666;
+    font-size: 14px;
+}
+
+.notif-pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.notif-page-btn {
+    border: 1px solid #ddd;
+    background-color: transparent;
+    color: #666;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.notif-page-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.notif-page-btn.active {
+    background-color: #7B1F1F;
+    color: white;
+    border-color: #7B1F1F;
+}
+
+.notif-page-text {
+    font-size: 12px;
+    color: #999;
+    margin: 0 8px;
+}

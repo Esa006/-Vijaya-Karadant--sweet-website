@@ -1,0 +1,61 @@
+/**
+ * Modern CSS Reset
+ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    overflow-x: hidden;
+    position: relative;
+    max-width: 100%;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

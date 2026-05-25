@@ -1,0 +1,374 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: admin.css
+ * Description: High-fidelity design system for the admin panel
+ * =============================================================
+ */
+
+:root {
+    --admin-bg: #F9FAFB;
+    --admin-sidebar-bg: #FFFFFF;
+    --admin-sidebar-active: #FEE7D6;
+    --admin-primary: #AE4B3A;
+    --admin-secondary: #22222E;
+    --admin-text-main: #2D2D2D;
+    --admin-text-muted: #7A7A7A;
+    --admin-card-bg: #ffffff;
+    --admin-card-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    --admin-radius: 15px;
+    
+    /* Specific Accent Colors for Stats */
+    --clr-emerald: #10B981;
+    --clr-amber: #F59E0B;
+    --clr-red: #EF4444;
+    --clr-sky: #0EA5E9;
+    
+    --admin-border-color: #F1F1F1;
+}
+
+body.admin-body {
+    background-color: var(--admin-bg);
+    background-image: url('../../images/admin/admin-bg-texture.png');
+    background-repeat: repeat;
+    color: var(--admin-text-main);
+    font-family: 'Inter', 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ── LAYOUT ── */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 280px;
+    background: var(--admin-sidebar-bg);
+    border-right: 1px solid var(--admin-border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: ;
+}
+
+.admin-topbar {
+    height: 70px;
+    background: #ffc46f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    top: 0;
+    position: sticky;
+    z-index: 999;
+}
+
+.content-body {
+    padding: 30px;
+    flex: 1;
+}
+
+/* ── SIDEBAR ── */
+.sidebar-header {
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-logo img {
+    height: 50px;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0 15px;
+    overflow-y: auto;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-divider {
+    padding: 20px 15px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--admin-text-muted);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: var(--admin-text-main);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s;
+    margin-bottom: 5px;
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.nav-link.active {
+    background: var(--admin-sidebar-active);
+    color: var(--admin-primary);
+    font-weight: 600;
+}
+
+/* ── TOPBAR ── */
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar-search .form-control:focus {
+    box-shadow: none;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.topbar-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--admin-text-main);
+    text-decoration: none;
+    background: #F8F9FA;
+    border-radius: 50%;
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: var(--admin-primary);
+    border-radius: 50%;
+    border: 2px solid #FFF;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.profile-name {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.profile-role {
+    display: block;
+    font-size: 12px;
+    color: var(--admin-text-muted);
+}
+
+/* ── CARDS ── */
+.admin-card {
+    background: var(--admin-card-bg); 
+    border-radius: var(--admin-radius);
+    border: none;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--admin-card-shadow);
+    transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* ── STAT CARDS ENHANCED ── */
+.stat-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
+
+.icon-emerald { background: rgba(16, 185, 129, 0.1); color: var(--clr-emerald); }
+.icon-amber   { background: rgba(245, 158, 11, 0.1); color: var(--clr-amber); }
+.icon-red     { background: rgba(239, 68, 68, 0.1); color: var(--clr-red); }
+.icon-sky     { background: rgba(14, 165, 233, 0.1); color: var(--clr-sky); }
+
+.stat-card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--admin-text-main);
+    margin-bottom: 0px;
+}
+
+.stat-card-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--admin-text-muted);
+}
+
+/* ── TABLE ENHANCEMENTS ── */
+.table-hover tbody tr:hover {
+    background-color: rgba(174, 75, 58, 0.02) !important;
+    transition: background-color 0.2s ease;
+}
+
+.status-pill {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f1f1f1;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--admin-text-muted);
+    transition: all 0.2s;
+    background: #f8f9fa;
+    border: none;
+    text-decoration: none;
+}
+
+.action-btn:hover {
+    background: var(--admin-sidebar-active);
+    color: var(--admin-primary);
+}
+
+.action-btn.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--clr-red);
+}
+
+/* ── CUSTOM CHECKBOX ── */
+.form-check-input:checked {
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state-card {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991px) {
+    .admin-sidebar { 
+        left: -280px; 
+        visibility: hidden;
+    }
+    .main-content { 
+        margin-left: 0; 
+    }
+    .sidebar-active .admin-sidebar { 
+        left: 0; 
+        visibility: visible;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+    }
+    
+    /* Ensure content-body has enough room */
+    .content-body {
+        padding: 20px;
+    }
+    
+    /* Stat cards stacking */
+    .stat-card-header {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-topbar {
+        padding: 0 15px;
+    }
+    .topbar-search {
+        display: none; /* Hide search on very small mobile for space */
+    }
+}
+
+@media (max-width: 420px) {
+    .content-body {
+        padding: 15px;
+    }
+    /* Stack Dashboard/Page headers */
+    .content-body > .d-flex.justify-content-between {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px;
+        margin-bottom: 20px !important;
+    }
+    .content-body > .d-flex.justify-content-between > .d-flex {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    .content-body h2 {
+        font-size: 1.4rem;
+    }
+    /* Adjust buttons for small screens */
+    .btn.px-4 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        font-size: 13px;
+    }
+}

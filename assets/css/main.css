@@ -1,0 +1,152 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: main.css
+ * Description: Main entry point for all CSS styles
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+
+/* 1. Base Styles */
+@import url('base/typography.css');
+
+/* 2. Layout Elements */
+/* @import url('sections/promo-strip.css'); - Moved to header.php */
+/* @import url('sections/top-bar.css'); - Moved to header.php */
+/* @import url('layout/footer.css'); - Moved to header.php */
+
+/* 3. Reusable Components */
+/* @import url('components/buttons.css'); - Moved to header.php */
+/* @import url('components/product-card.css'); - Moved to header.php */
+@import url('components/video-card.css');
+
+/* 4. Section Specifics */
+@import url('sections/joy-banners.css');
+@import url('sections/home-hero.css');
+@import url('sections/hero-collection.css');
+/* @import url('sections/product-catalog.css'); - Moved to header.php */
+@import url('sections/why-karadant.css');
+@import url('sections/feature-strip.css');
+@import url('sections/collections.css');
+@import url('sections/special-collections.css');
+@import url('sections/ingredients-process.css');
+/* @import url('sections/bestsellers.css'); - Moved to header.php */
+@import url('sections/amingad-heritage.css');
+@import url('sections/namkeens-gallery.css');
+@import url('sections/box-of-joy.css');
+@import url('sections/gallery.css');
+@import url('sections/hero-combos.css');
+@import url('sections/promo-banner.css');
+@import url('sections/corporate-offer.css');
+@import url('sections/empower-women.css');
+@import url('sections/heritage-growth.css');
+@import url('sections/franchise-banner.css');
+@import url('sections/franchise.css');
+@import url('sections/franchise-benefits.css');
+@import url('sections/gift-box-form.css');
+@import url('sections/gift-boxes.css');
+@import url('sections/gifting-cta.css');
+@import url('sections/gifting-corporate.css');
+@import url('sections/gifting-curated.css');
+@import url('sections/testimonials.css');
+@import url('sections/about-hero.css');
+@import url('sections/about-story.css');
+@import url('sections/about-signature.css');
+@import url('sections/about-vision.css');
+@import url('sections/about-distinction.css');
+@import url('sections/about-serve.css');
+@import url('sections/about-timeline.css');
+@import url('sections/about-cta.css');
+@import url('sections/tradition-taste.css');
+@import url('sections/trust-signals.css');
+@import url('sections/shop-range.css');
+@import url('pages/cart.css');
+
+/* 5. Global Section Background Override */
+section {
+    background-image: url('../images/homepage/Group.svg');
+    background-size: cover;
+    background-position: center top;
+    background-color: var(--clr-bg-warm, #Fdf8f2);
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+
+/* 6. Global Theme Adjustments */
+/* 7. Global Swiper Pagination (Premium Flipkart Style) */
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #F86E1B !important;
+    width: 22px !important;
+    border-radius: 5px !important;
+    opacity: 1 !important;
+}
+
+/* (Add any global overrides here) */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    scroll-behavior: smooth;
+}
+
+/* =============================================================
+ * MULTI-PURPOSE ANIMATIONS (Observer-based)
+ * ============================================================= */
+/* Base Reveal - Fade In & Shift Up */
+.sc-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+}
+
+.sc-reveal.sc-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered Delays for Grid Items/Cards */
+.sc-reveal.delay-100 { transition-delay: 100ms; }
+.sc-reveal.delay-200 { transition-delay: 200ms; }
+.sc-reveal.delay-300 { transition-delay: 300ms; }
+.sc-reveal.delay-400 { transition-delay: 400ms; }
+.sc-reveal.delay-500 { transition-delay: 500ms; }
+
+/* Scale Reveal - Great for images or hero elements */
+.sc-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sc-reveal-scale.sc-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Slide Right Reveal - Great for left-side content */
+.sc-reveal-right {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sc-reveal-right.sc-visible {
+    opacity: 1;
+    transform: translateX(0);
+}

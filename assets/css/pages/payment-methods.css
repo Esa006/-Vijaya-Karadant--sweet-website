@@ -1,0 +1,186 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: payment-methods.css
+ * Description: Styling for the Payment Methods page
+ * =============================================================
+ */
+
+.pm-page {
+    background-color: #fdfaf7;
+    background-image: url("../../images/banners/contack-bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.pm-title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 0.5rem;
+}
+
+.pm-subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin: 0;
+}
+
+/* ── SAVED CARDS ── */
+.pm-section-title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 1.5rem;
+}
+
+.pm-card-img-wrap {
+    background: #fff;
+    border: 1px solid #d67a1811;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.pm-card-img-wrap:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(123, 29, 29, 0.1);
+}
+
+.pm-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* ── ADD PAYMENT CARD ── */
+.pm-add-card {
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px dashed #d67a1833;
+    border-radius: 12px;
+    padding: 2.5rem 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.pm-add-card:hover {
+    border-color: #7b1d1d;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(123, 29, 29, 0.08);
+}
+
+.pm-add-icon {
+    width: 50px;
+    height: 50px;
+    background: #fdfaf5;
+    border: 1.5px solid #eee;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d67a18;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.pm-add-card:hover .pm-add-icon {
+    background: #7b1d1d;
+    color: #fff;
+    border-color: #7b1d1d;
+    transform: scale(1.1);
+}
+
+.pm-add-title {
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.pm-add-sub {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ── WALLETS LIST ── */
+.pm-wallets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pm-wallet-item {
+    background: #fff;
+    border: 1px solid #d67a1811;
+    border-radius: 14px;
+    padding: 1rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+}
+
+.pm-wallet-item:hover {
+    border-color: #d67a1833;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.pm-wallet-brand {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.pm-wallet-icon {
+    width: 90px;
+    height: 90px;
+    background: #f6eada;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pm-wallet-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.pm-wallet-name {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.pm-custom-check {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid #d67a1844;
+    border-radius: 8px;
+    background: #fdfaf5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+    .pm-wallet-brand {
+        gap: 1rem;
+    }
+    .pm-wallet-name {
+        font-size: 1rem;
+    }
+}

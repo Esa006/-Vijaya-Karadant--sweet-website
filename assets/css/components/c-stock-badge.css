@@ -1,0 +1,189 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: assets/css/components/c-stock-badge.css
+ * Description: Amazon/Flipkart-style stock status badge styles
+ * =============================================================
+ */
+
+/* ── Badge Base ─────────────────────────────────────────────── */
+.c-stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.c-stock-badge::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ── In Stock — green ───────────────────────────────────────── */
+.c-stock-badge--in {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+.c-stock-badge--in::before { background: #10b981; }
+
+/* ── Low Stock — orange warning ─────────────────────────────── */
+.c-stock-badge--low {
+    background: #fff7ed;
+    color: #92400e;
+    border: 1px solid #fed7aa;
+}
+.c-stock-badge--low::before { background: #f59e0b; animation: pulse-dot 1.4s infinite; }
+
+/* ── Out of Stock — red ──────────────────────────────────────── */
+.c-stock-badge--out {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+.c-stock-badge--out::before { background: #ef4444; }
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+/* ── "Only X left" urgency bar ───────────────────────────────── */
+.c-stock-urgency {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #c2410c;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.c-stock-urgency__bar-track {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: #fde68a;
+    overflow: hidden;
+    min-width: 60px;
+}
+
+.c-stock-urgency__bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    transition: width 0.4s ease;
+}
+
+/* ── Add to Cart — disabled state (out of stock) ────────────── */
+.btn-add-to-cart[disabled],
+.btn-add-to-cart.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #d1d5db !important;
+    color: #6b7280 !important;
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* ── Product card out-of-stock overlay ───────────────────────── */
+.c-product-card--oos {
+    position: relative;
+}
+.c-product-card--oos .c-product-card__img-wrap::after {
+    content: 'Out of Stock';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(254, 242, 242, 0.85); /* Reddish tint */
+    color: #b91c1c; /* Red text */
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+}
+
+/* ── Notify Me button ────────────────────────────────────────── */
+.btn-notify-me {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1.5px solid #8b4513;
+    background: #fff;
+    color: #8b4513;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+}
+.btn-notify-me:hover {
+    background: #fff7ed;
+    border-color: #7c3a1a;
+}
+.btn-notify-me.is-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+.btn-notify-me.is-success {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+/* ── Notify Me modal / inline form ──────────────────────────── */
+.c-notify-form {
+    display: none;
+    margin-top: 10px;
+    animation: slide-down 0.2s ease;
+}
+.c-notify-form.is-open { display: block; }
+
+@keyframes slide-down {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.c-notify-form__input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.c-notify-form__input:focus { border-color: #8b4513; }
+
+.c-notify-form__submit {
+    margin-top: 8px;
+    padding: 10px;
+    width: 100%;
+    background: #8b4513;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.c-notify-form__submit:hover { background: #7c3a1a; }

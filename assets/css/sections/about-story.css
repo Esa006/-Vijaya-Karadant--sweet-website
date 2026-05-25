@@ -1,0 +1,225 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: about-story.css
+ * Description: High-Fidelity Historical Styles for "The Beginning"
+ * =============================================================
+ */
+
+.about-story {
+    padding: 100px 0 !important;
+    /* Pure background to let the image pop */
+}
+
+/* ── Heading ── */
+.about-story__title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    color: #7A1E1E;
+    /* Requested Deep Maroon */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.about-story__subtitle {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.1rem;
+    color: #7A1E1E;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ── Image & Badge ── */
+.about-story__figure {
+    border-radius: 24px;
+    overflow: hidden;
+    margin: 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+}
+
+.about-story__figure:hover {
+    transform: translateY(-8px);
+}
+
+.about-story__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Badge Est. 1907 */
+.about-story__badge {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background: linear-gradient(135deg, #D48D2A 0%, #B67822 100%);
+    /* Goldish Orange */
+    color: #fff;
+    padding: 10px 24px;
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Bottom Overlay */
+.about-story__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px 40px 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+    color: #fff;
+    z-index: 5;
+}
+
+.about-story__img-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.5px;
+}
+
+.about-story__img-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/* ── Text Content ── */
+.about-story__text-col {
+    padding-left: 2rem;
+}
+
+.about-story__paragraph {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.35rem;
+    line-height: 1.7;
+    color: #4A1C1D;
+    /* Warm dark brown-maroon */
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
+
+.about-story__paragraph:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1440px) {
+    .about-story__paragraph {
+        margin-bottom: 1.25rem;
+        line-height: 1.8;
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1199px) {
+
+    .about-story__paragraph {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .about-story {
+        padding: 10px 0 !important;
+    }
+
+    .about-story__header {
+        text-align: center;
+    }
+
+    .about-story__text-col {
+        padding: 0 15px !important;
+    }
+
+    .about-story__image-col {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .about-timeline__title {
+        font-size: 1rem !important;
+    }
+  .about-story__title {
+        font-size: 1rem !important;
+    }
+    
+    .about-story__subtitle {
+        font-size: 0.8rem;
+        margin-bottom: -35px;
+    }
+
+    .about-story__badge {
+        top: 15px;
+        left: 15px;
+        padding: 8px 18px;
+        font-size: 1rem;
+    }
+
+    .about-story__overlay {
+        padding: 40px 20px 20px;
+    }
+    .about-feature-card{
+        padding: 1rem 1.5rem;
+    }
+
+    .about-story__img-title {
+        font-size: 1.4rem;
+    }
+
+    .about-story__img-desc {
+        font-size: 0.95rem;
+    }
+
+    .about-story__paragraph {
+        font-size: 0.90rem;
+        margin-bottom: 5px;
+    }
+}
+/* 425px Micro-adjustments for Story Section */
+@media (max-width: 425px) {
+    .about-story__title {
+        margin-top: 10px;
+
+        font-size: 1.35rem !important;
+        margin-bottom: 0.75rem;
+    }
+
+    .about-story__subtitle {
+        font-size: 0.75rem !important;
+        letter-spacing: 1.5px;
+    }
+
+    .about-story__paragraph {
+        font-size: 0.95rem !important;
+        line-height: 1.5;
+        margin-bottom: 15px !important;
+    }
+
+    .about-story__figure {
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-story__img-title {
+        font-size: 1.25rem !important;
+    }
+
+    .about-story__img-desc {
+        font-size: 0.85rem !important;
+    }
+}
+    

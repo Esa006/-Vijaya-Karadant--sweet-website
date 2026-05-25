@@ -1,0 +1,159 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: home-offers-slider.css
+ * Description: Styles for the Home Offers Slider
+ * =============================================================
+ */
+
+.c-home-offers-slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.c-home-offers-slider .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Decorative Background Elements ── */
+.c-home-offers-slider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    width: clamp(150px, 20vw, 300px);
+    height: 100%;
+    background-image: url('../../images/homepage/ChatGPT_Image_Mar_10__2026__02_50_06_PM-removebg-preview 12.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.c-home-offers-slider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    width: clamp(150px, 20vw, 300px);
+    height: 100%;
+    background-image: url('../../images/homepage/ChatGPT_Image_Mar_10__2026__02_50_06_PM-removebg-preview 14.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.homeOffersSwiper {
+    height: auto !important;
+}
+
+.homeOffersSwiper .swiper-wrapper {
+    height: auto !important;
+}
+
+.c-home-offers__banner {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
+
+.c-home-offers__banner img {
+    object-fit: contain;
+    /* Changed from cover to contain to respect image aspect ratio */
+    width: 100%;
+    height: auto;
+    /* Remove fixed height constraints */
+}
+
+.c-home-offers__overlay-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/* Custom Navigation Styling */
+.swiper-nav-custom {
+    color: #fff !important;
+    background: rgba(123, 31, 31, 0.5);
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.swiper-nav-custom::after {
+    font-size: 1.25rem !important;
+}
+
+.swiper-nav-custom:hover {
+    background: rgba(123, 31, 31, 0.8);
+    transform: scale(1.1);
+}
+
+/* Pagination Overrides */
+.offers-pagination .swiper-pagination-bullet {
+    background: #d67a18;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+}
+
+.offers-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #7b1d1d;
+    width: 25px;
+    border-radius: 5px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 991px) {
+
+    .c-home-offers-slider::before,
+    .c-home-offers-slider::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .c-home-offers-slider {
+        padding: 1.5rem 0;
+        /* Reduced padding from 3rem to 1.5rem */
+    }
+
+    .c-home-offers__banner img {
+        min-height: 180px;
+        /* Reduced min-height slightly for tighter look */
+    }
+
+    .swiper-nav-custom {
+        display: none;
+        /* Hide nav on mobile */
+    }
+}
+
+/* Responsive Overrides */
+@media (max-width: 568px) {
+    /* Responsive Overrides */
+
+    .c-home-offers-slider {
+        padding-top: 0px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .c-home-offers-slider {
+        padding-bottom: 0px !important;
+    }
+}

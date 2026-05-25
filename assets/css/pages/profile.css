@@ -1,0 +1,464 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: profile.css
+ * Description: My Profile page – matches design screenshot
+ * =============================================================
+ */
+
+/* ── PAGE WRAPPER ── */
+.p-profile {
+    background-color: #fdfaf5;
+    background-image: url("../../images/banners/contack-bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── HERO STRIP ── */
+.p-profile__hero-strip {
+    padding: 2.5rem 0 1.5rem;
+}
+
+.p-profile__strip-title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 0.4rem;
+}
+
+.p-profile__strip-sub {
+    font-size: 1rem;
+    color: #888;
+    margin: 0;
+}
+
+/* ── IDENTITY CARD ── */
+.p-profile__identity-card {
+    background: #fff;
+    border: 1px solid #e8d8c8;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    margin-bottom: 0.5rem;
+}
+
+.p-profile__avatar-wrap {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #e8d8c8;
+    background: #f3e6d8;
+    flex-shrink: 0;
+}
+
+.p-profile__avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.p-profile__identity-info {
+    flex: 1;
+}
+
+.p-profile__name {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 0.4rem;
+}
+
+.p-profile__meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: #888;
+    font-size: 0.92rem;
+}
+
+.p-profile__meta-row i {
+    color: #7b1d1d;
+    margin-right: 4px;
+}
+
+.p-profile__identity-action {
+    flex-shrink: 0;
+}
+
+.p-profile__btn-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #fff;
+    border: 1.5px solid #7b1d1d;
+    color: #7b1d1d;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.p-profile__btn-edit:hover {
+    background: #7b1d1d;
+    color: #fff;
+}
+
+/* ── PANEL (white card) ── */
+.p-profile__panel {
+    background: #fff;
+    border: 1px solid #e8d8c8;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+}
+
+.p-profile__panel-title {
+    font-family: var(--ff-heading, 'Quando', serif);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #7b1d1d;
+    margin-bottom: 1.25rem;
+}
+
+.p-profile__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+/* ── FORM LABELS ── */
+.p-profile__form-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #8a6d59;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── INPUT FIELDS ── */
+.p-profile__input {
+    width: 100%;
+    border: 1.5px solid #e0ccc0;
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.95rem;
+    background: #fdfaf5;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-profile__input:focus {
+    border-color: #7b1d1d;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(123,29,29,0.06);
+}
+
+.p-profile__input::placeholder {
+    color: #bbb;
+}
+
+/* ── ADD NEW BUTTON ── */
+.p-profile__btn-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #fff;
+    border: 1.5px solid #e0ccc0;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.p-profile__btn-add:hover {
+    border-color: #7b1d1d;
+    color: #7b1d1d;
+}
+
+/* ── ADDRESS CARDS ── */
+.p-profile__addr-card {
+    background: #fdfaf5;
+    border: 1px solid #e8d8c8;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    height: 100%;
+}
+
+.p-profile__addr-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+}
+
+.p-profile__addr-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.p-profile__badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(123,29,29,0.1);
+    color: #7b1d1d;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.p-profile__addr-text {
+    font-size: 0.88rem;
+    color: #777;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ── ICON BUTTONS (edit/delete) ── */
+.p-profile__icon-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e0ccc0;
+    border-radius: 7px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #7b1d1d;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.p-profile__icon-btn:hover {
+    background: rgba(123,29,29,0.1);
+    border-color: #7b1d1d;
+}
+
+/* ── PANEL ACTION BUTTONS ── */
+.p-profile__panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.p-profile__btn-logout {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    border: 1.5px solid #e0ccc0;
+    background: #fff;
+    color: #555;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.p-profile__btn-logout:hover {
+    border-color: #7b1d1d;
+    color: #7b1d1d;
+}
+
+.p-profile__btn-save {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    background: linear-gradient(90deg, #7b1d1d 0%, #c15500 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 18px rgba(123,29,29,0.25);
+}
+
+.p-profile__btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(123,29,29,0.3);
+}
+
+/* ── QUICK LINK CARDS (right column) ── */
+.p-profile__ql-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid #e8d8c8;
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.p-profile__ql-card:hover {
+    border-color: #d67a18;
+    box-shadow: 0 4px 14px rgba(214,122,24,0.1);
+    transform: translateY(-1px);
+    color: inherit;
+}
+
+.p-profile__ql-card--help {
+    display: block;
+    cursor: default;
+}
+
+.p-profile__ql-card--help:hover {
+    transform: none;
+}
+
+.p-profile__ql-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #e8d8c8;
+    background: #fdfaf5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7b1d1d;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.p-profile__ql-text h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.15rem;
+}
+
+.p-profile__ql-text p {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0;
+}
+
+.p-profile__ql-support-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.p-profile__ql-support-link:hover {
+    color: #7b1d1d;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 767px) {
+    .p-profile .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .p-profile__identity-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.9rem;
+        padding: 1.35rem 1rem 1.5rem;
+        border-radius: 14px;
+    }
+
+    .p-profile__avatar-wrap {
+        width: 82px;
+        height: 82px;
+    }
+
+    .p-profile__identity-info {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .p-profile__name {
+        font-size: 1.45rem;
+        overflow-wrap: anywhere;
+    }
+
+    .p-profile__meta-row {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.86rem;
+    }
+
+    .p-profile__meta-row span {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .p-profile__identity-action,
+    .p-profile__btn-edit {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .p-profile__panel-actions {
+        flex-direction: column;
+    }
+
+    .p-profile__panel-header {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .p-profile__addr-head {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .p-profile__hero-strip { padding: 1.35rem 0 0.65rem; }
+    .p-profile__strip-title { font-size: 1.55rem; }
+    .p-profile__strip-sub {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        max-width: 20rem;
+    }
+    .p-profile__panel {
+        padding: 1.15rem;
+        border-radius: 14px;
+    }
+    .p-profile__panel-title {
+        font-size: 1.05rem;
+    }
+    .p-profile__input {
+        min-height: 52px;
+    }
+    .p-profile__btn-save,
+    .p-profile__btn-logout,
+    .p-profile__btn-add {
+        width: 100%;
+        justify-content: center;
+    }
+}

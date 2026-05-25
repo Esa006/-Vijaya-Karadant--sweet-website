@@ -1,0 +1,137 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: promo-banner.css
+ * Description: Premium promotional banner component
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.promo-banner {
+    padding: 4rem 15px;
+    background-color: var(--clr-bg-warm);
+}
+
+.promo-banner__container {
+    background: linear-gradient(135deg, #7b1f1f, #a52a2a);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(123, 31, 31, 0.15);
+}
+
+.promo-banner__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+/* Fading the right edge of the image into the red background */
+.promo-banner__media::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, transparent 60%, rgba(135, 36, 36, 0.8) 85%, #8f2626 100%);
+    pointer-events: none;
+}
+
+.promo-banner__image {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.promo-banner__content {
+    padding: 3rem 4rem 3rem 2rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.promo-banner__label {
+    font-size: 0.9rem;
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.promo-banner__title {
+    font-family: var(--ff-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: var(--fw-bold);
+    color: #ffffff;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+}
+
+.promo-banner__highlight {
+    display: block;
+    color: #C8A24A;
+    /* Gold */
+}
+
+.promo-banner__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 400px;
+}
+
+.promo-banner__cta {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #7b1f1f;
+    font-weight: var(--fw-bold);
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.promo-banner__cta:hover {
+    transform: translateY(-3px);
+    background-color: #f8f8f8;
+    color: #7b1f1f;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Responsive Rules ────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .promo-banner__media::after {
+        /* Change fade direction for stacked layout */
+        background: linear-gradient(to bottom, transparent 60%, rgba(135, 36, 36, 0.8) 85%, #8f2626 100%);
+    }
+
+    .promo-banner__content {
+        padding: 2rem 2rem 3rem 2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .promo-banner__description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 575px) {
+    .promo-banner__content {
+        padding: 1.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .promo-banner__cta {
+        width: 100%;
+        text-align: center;
+    }
+}

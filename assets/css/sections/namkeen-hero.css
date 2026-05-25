@@ -1,0 +1,208 @@
+/* assets/css/sections/namkeen-hero.css */
+@import url('https://fonts.googleapis.com/css2?family=Quando&display=swap');
+
+.page-namkeen {
+  --page-bg:#fcf8f3;
+  --card-bg:#fff8f2;
+  --card-stroke:rgba(120,71,34,.10);
+  --text:#4a2d1f;
+  --muted:#7e5e4d;
+  --accent:#d9791f;
+  --brand:#6c2719;
+  --brand-dark:#581d11;
+  --outline:#d7b59b;
+  --shadow:0 20px 50px rgba(95,56,27,.12);
+  --radius:24px;
+}
+
+.page-namkeen-section {
+  display: grid;
+  place-items: center;
+  padding: 40px 12px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(241,185,120,.08) 0 4px, transparent 5px),
+    radial-gradient(circle at 22% 32%, rgba(241,185,120,.08) 0 3px, transparent 4px),
+    radial-gradient(circle at 80% 18%, rgba(181,121,62,.06) 0 5px, transparent 6px),
+    linear-gradient(180deg,#fffaf6 0%, var(--page-bg) 100%);
+  background-size: 120px 120px, 160px 160px, 200px 200px, 100% 100%;
+}
+
+.nh-hero {
+  background: url('../../images/banners/namkeen-page/namkeen-banner.png') right center / cover no-repeat;
+  background-color: var(--card-bg);
+  position: relative;
+  min-height: 600px;
+  padding: 80px 50px; /* Increased from 50px to address height request */
+}
+
+.nh-hero__row {
+  min-height: min(72vh, 430px);
+}
+
+.nh-hero__title {
+  margin: 0;
+  font-family: 'Quando', Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.2vw, 3rem);
+  line-height: .98;
+  letter-spacing: -.03em;
+  color: var(--text);
+}
+
+.nh-hero__desc {
+  margin: 16px 0 0;
+  max-width: 48ch;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.nh-btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  font-weight: 700;
+  font-size: .96rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(78,39,18,.08);
+  text-decoration: none;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.nh-btn--primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.nh-btn--primary:hover {
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+.nh-btn--secondary {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--outline);
+}
+
+.nh-btn--secondary:hover {
+  background: #fffaf6;
+}
+
+.nh-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-left: -8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nh-avatar:first-child { margin-left: 0; }
+
+.nh-hero__art {
+  position: relative;
+  min-height: clamp(280px, 35vw, 380px);
+}
+
+@media (max-width: 1024px) {
+    .nh-hero {
+           min-height: 393px;
+    padding: 17px 50px;
+    }
+}
+/* ── Responsive ── */
+@media (max-width: 991.98px) {
+    .nh-hero__row { 
+        min-height: auto; 
+        text-align: center; 
+     
+        padding-bottom: 2rem !important;
+    }
+    .nh-hero__content { margin-bottom: 2rem; }
+    
+  
+    .nh-hero__art { min-height: 280px; }
+    .nh-hero {
+        min-height: 480px;
+        height: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .nh-hero {
+      background-size: contain;
+        background-position: center bottom !important;
+              min-height: 285px;
+        padding: 0px 0px;
+    }
+    .nh-hero__title {
+    font-size: 1.25rem;
+        /* max-width: 200px; */
+        position: relative;
+        left: -194px;
+        top: 66px;
+    }
+    .nh-hero__desc {
+        font-size: 1rem;
+        position: relative;
+        top:48px;
+        left: -28px;
+  
+    }
+    .nh-hero__art {
+        display: none !important; /* Hide empty art column on tablets to keep title/desc as focus */
+    }
+    .nh-hero__content {
+        margin-bottom: 1.5rem;
+            margin-top: -31px;
+    }
+    .nh-hero__actions  {
+       position: relative;
+       top: 40px;
+    }
+.nh-proof{
+    position: relative;
+    top: 40px;
+}
+    }
+   
+@media (max-width: 576px) {
+    .nh-hero {
+        background: url('../../images/banners/phone-screen-banner/Namkeen.png') center center / cover no-repeat !important;
+        min-height: 172px;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        height: 163px !important;
+    }
+
+    .nh-hero__content,
+    .nh-hero__art {
+        display: none !important;
+    }
+    .nk-card {
+        height: 0px;
+}}
+
+@media (max-width: 375px) {
+    .nh-hero {
+        min-height: 152px;
+        height: 80px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .nh-hero {
+        min-height: 132px;
+    }
+}

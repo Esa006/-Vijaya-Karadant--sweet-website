@@ -1,0 +1,352 @@
+/**
+ * Sweets Website - Premium Product Preview Styles
+ * =============================================================
+ * File: product-preview.css
+ * Description: High-fidelity styling for the admin product preview modal
+ * =============================================================
+ */
+
+/* Override Bootstrap Modal for the custom look */
+#productPreviewModal .modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#productPreviewModal .modal-dialog {
+    max-width: 440px;
+}
+
+/* Main Modal Card */
+.preview-card {
+    background-color: #faf6ef;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 0;
+}
+
+/* Header */
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 12px;
+}
+
+.preview-header h5 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.preview-header .close-x {
+    background: none;
+    border: none;
+    color: #7a2518;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s;
+}
+
+.preview-header .close-x:hover {
+    transform: scale(1.15);
+}
+
+.preview-modal-body {
+    padding: 0 24px 24px;
+}
+
+/* Product Image Section */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px; /* Reduced from 320px */
+    background: #fdfaf7; /* High-fidelity light cream bg */
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 1px solid rgba(139, 69, 19, 0.08); /* Subtle border for definition */
+}
+
+.product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Spans container while preserving aspect ratio */
+    object-position: center;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-image-wrapper:hover img {
+    transform: scale(1.04); /* Subtle interactive zoom */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .product-image-wrapper {
+        height: 240px; /* Scaled down for mobile consistency */
+        margin-bottom: 18px;
+    }
+}
+
+.badge-best-seller {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background-color: #e63b2e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 20px;
+}
+
+.heart-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+/* Product Title Row */
+.product-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.product-title-row h6 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.badge-active {
+    background-color: #36b37e;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #e8e2d8;
+    border-radius: 12px;
+    text-align: center;
+    padding: 12px 4px;
+}
+
+.stat-icon {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Weight Options */
+.weight-options {
+    display: flex;
+    background: #fff;
+    border: 1.5px solid #d6d0c6;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.weight-btn {
+    flex: 1;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.weight-btn:not(:last-child) {
+    border-right: 1.5px solid #d6d0c6;
+}
+
+.weight-btn.active {
+    background: #f5f0e8;
+    color: #1a1a1a;
+}
+
+/* Stock Status Row */
+.stock-status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.stock-status-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #b34a2e;
+}
+
+.stock-status-row .form-check {
+    margin-bottom: 0;
+}
+
+.stock-status-row .form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.stock-status-row .form-check-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+}
+
+/* SKU Row */
+.sku-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.sku-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #b34a2e;
+}
+
+.sku-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #e8e2d8;
+    margin: 16px 0;
+}
+
+/* Description Section */
+.desc-section {
+    margin-bottom: 15px;
+}
+
+.desc-section label {
+    display: block;
+    font-size: 15px;
+    font-weight: 800;
+    color: #b34a2e;
+    margin-bottom: 8px;
+}
+
+.desc-section textarea {
+    width: 100%;
+    border: 1.5px solid #d6d0c6;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+    resize: none;
+}
+
+/* Action Buttons */
+.action-btns {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-edit {
+    flex: 1;
+    background: linear-gradient(135deg, #d4752e, #9c3a1a);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-edit:hover {
+    opacity: 0.9;
+}
+
+.btn-close-modal {
+    flex: 1;
+    background: #fff;
+    color: #7a2518;
+    font-weight: 700;
+    font-size: 15px;
+    border: 1.5px solid #b5a89a;
+    border-radius: 10px;
+    padding: 14px 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-close-modal:hover {
+    background: #f5f0e8;
+}
+
+/* Responsive Overrides */
+@media (max-width: 576px) {
+    .preview-card {
+        border-radius: 0;
+    }
+    
+    .product-image-wrapper {
+        height: 280px;
+    }
+    
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

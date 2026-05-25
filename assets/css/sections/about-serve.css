@@ -1,0 +1,221 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: about-serve.css
+ * Description: Styles for the About Us "Who We Serve" section
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.about-serve {
+    padding: 80px 0;
+}
+
+.about-serve__header {
+    margin-bottom: 2.5rem;
+}
+
+.about-serve__title {
+    font-family: var(--ff-heading, 'Playfair Display', serif);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.about-serve__subtitle {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.15rem;
+    color: #6c757d;
+    line-height: 1.6;
+    max-width: 800px;
+    font-weight: 500;
+}
+
+/* ── Content Layout ───────────────────────────── */
+.about-serve__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+/* ── Image Column ───────────────────────────── */
+.about-serve__image-col {
+    flex: 1;
+    min-width: 320px;
+}
+
+.about-serve__figure {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0;
+    height: 100%;
+    min-height: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.about-serve__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.about-serve__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px 30px 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0) 100%);
+    color: #ffffff;
+}
+
+.about-serve__img-desc {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* ── List Column ───────────────────────────── */
+.about-serve__list-col {
+    flex: 1.2;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.about-serve-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-serve-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    border-color: #e5e5e5;
+}
+
+.about-serve-item__icon-wrapper {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #C5A059;
+    /* Gold background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-serve-item__icon {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+    /* White icon fill */
+}
+
+/* Used an image instead of SVG for precise match to user requests if preferred, 
+   but SVG is standard. Let's stick with SVG struct holding the user's images. */
+.about-serve-item__img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.about-serve-item__content {
+    flex-grow: 1;
+}
+
+.about-serve-item__title {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+.about-serve-item__text {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* ── Responsive ───────────────────────────── */
+@media (max-width: 991px) {
+    .about-serve__content {
+        flex-direction: column;
+    }
+
+    .about-serve__figure {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-serve {
+        padding: 50px 0;
+    }
+
+    .about-serve__title {
+        font-size: 2rem;
+    }
+
+    .about-serve__subtitle {
+        font-size: 1.05rem;
+    }
+
+    .about-serve__content {
+        gap: 2rem;
+    }
+
+    .about-serve__figure {
+        min-height: 300px;
+    }
+
+    .about-serve-item {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .about-serve-item:hover {
+        transform: translateY(-5px);
+    }
+}
+
+@media (max-width: 320px) {
+
+    .about-serve-item {
+        margin-right: 22px;
+    }
+
+    .about-distinction__title {
+        font-size: 1rem;
+    }
+
+    .about-distinction__text {
+        font-size: 0.95rem;
+    }
+    .about-serve__subtitle {
+        font-size: 0.75rem !important;
+    }
+}

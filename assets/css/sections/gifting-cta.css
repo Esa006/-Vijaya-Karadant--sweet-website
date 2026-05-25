@@ -1,0 +1,117 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: gifting-cta.css
+ * Description: CTA banner for gifting page
+ * =============================================================
+ */
+
+.c-gifting-cta {
+    position: relative;
+    padding: 5rem 0;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    background: url('../../images/banners/gifing/Joy%20of%20Traditions.png') center center / cover no-repeat;
+    border-radius: 18px;
+    border: 2px solid #d67a18;
+    overflow: hidden;
+    margin: 2.5rem auto;
+}
+
+.c-gifting-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.c-gifting-cta .container {
+    position: relative;
+    z-index: 1;
+}
+
+.c-gifting-cta__content {
+    max-width: 663px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.c-gifting-cta__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.2rem;
+    color: #ffff;
+}
+
+
+.c-gifting-cta__text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 663px;
+}
+
+.c-gifting-cta__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.c-gifting-cta__btn {
+    display: inline-block;
+    padding: 0.85rem 2.6rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.c-gifting-cta__btn--solid {
+    background-color: #7b1d1d;
+    color: #ffffff;
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+}
+
+.c-gifting-cta__btn--solid:hover {
+    background-color: #6a1717;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.c-gifting-cta__btn--outline {
+    background-color: #ffffff;
+    color: #7b1d1d;
+    border: 1.5px solid #7b1d1d;
+}
+
+.c-gifting-cta__btn--outline:hover {
+    color: #6a1717;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 991px) {
+    .c-gifting-cta {
+        border-radius: 14px;
+        margin: 2rem 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .c-gifting-cta {
+        padding: 4rem 0;
+        min-height: 380px;
+    }
+
+    .c-gifting-cta__text {
+        font-size: 1rem;
+    }
+
+    .c-gifting-cta__btn {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,214 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: hero-combos.css
+ * Description: Hero Section component for curated combos
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.hero {
+    padding: 6rem 0;
+    background-color: var(--clr-bg-warm);
+    /* Or #0f0f0f depending on preference, but warm fits the image */
+    overflow: hidden;
+}
+
+.hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero__title {
+    font-family: var(--ff-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-main);
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0;
+}
+
+.hero__description {
+    font-size: 1.1rem;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+}
+
+.hero__actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+}
+
+.hero__btn {
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: var(--fw-bold);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.hero__btn--primary {
+    background-color: #8B2C2C;
+    color: #ffffff;
+    border: 2px solid #8B2C2C;
+}
+
+.hero__btn--primary:hover {
+    background-color: #6d1e1e;
+    border-color: #6d1e1e;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 44, 44, 0.2);
+}
+
+.hero__btn--outline {
+    background-color: transparent;
+    color: #8B2C2C;
+    border: 2px solid #8B2C2C;
+}
+
+.hero__btn--outline:hover {
+    background-color: #8B2C2C;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.hero-stats__item {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.hero-stats__item:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+
+.hero-stats__value {
+    font-family: var(--ff-body);
+    font-size: 1.75rem;
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-main);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.hero-stats__label {
+    font-size: 0.9rem;
+    color: var(--clr-text-muted);
+    text-transform: capitalize;
+}
+
+.hero__media {
+    position: relative;
+    width: 100%;
+}
+
+.hero__figure {
+    margin: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+    aspect-ratio: 1 / 1; /* Forced Square Ratio */
+}
+
+/* Swiper overrides */
+.hero-combo-swiper {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+/* ── Responsive Rules ────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .hero__container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .hero__media {
+        grid-row: 2;
+        /* Image below text */
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero__actions {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-stats__item {
+        padding-right: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-stats {
+        gap: 1rem;
+    }
+
+    .hero-stats__item {
+        padding-right: 1rem;
+    }
+
+    .hero-stats__value {
+        font-size: 1.5rem;
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero__btn {
+        width: 100%;
+        text-align: center;
+    }
+}

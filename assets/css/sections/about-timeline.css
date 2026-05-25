@@ -1,0 +1,325 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: about-timeline.css
+ * Description: Styles for the About Us "Our Journey Through the Years" timeline
+ * Author: Sweets Website Team
+ * Version: 1.0.0
+ * =============================================================
+ */
+
+.about-timeline {
+    padding: 80px 0;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from the line */
+}
+
+/* Header Styles */
+.about-timeline__title {
+    font-family: var(--ff-heading, 'Playfair Display', serif);
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #0a0a0a;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.about-timeline__subtitle {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.15rem;
+    color: #6c757d;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-bottom: 4rem;
+}
+
+/* Timeline Container */
+.about-timeline__container {
+    position: relative;
+    padding-top: 20px;
+}
+
+/* The continuous horizontal line - made to bleed out */
+.about-timeline__line {
+    position: absolute;
+    top: 140px;
+    /* Aligns with the dots */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1px;
+    background-color: #f3c693;
+    /* Light orange/gold line */
+    z-index: 1;
+}
+
+/* Individual Timeline Item */
+.about-timeline__item {
+    position: relative;
+    z-index: 2;
+    padding: 0 15px;
+}
+
+/* Top Section: Years */
+.about-timeline__top {
+    position: relative;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/* Watermark Background Year */
+.about-timeline__year-bg {
+    position: absolute;
+    font-family: var(--ff-heading, 'Playfair Display', serif);
+    /* Better number styling */
+    font-size: 5.5rem;
+    font-weight: 800;
+    color: #f5ebe8;
+    /* Pale pinkish-grey */
+    z-index: 0;
+    letter-spacing: -2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    user-select: none;
+}
+
+/* Foreground Year */
+.about-timeline__year-fg {
+    position: relative;
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #7A2518;
+    /* Dark maroon */
+    z-index: 1;
+    transform: translateX(-35px) translateY(15px);
+    /* Offset to the bottom left */
+}
+
+/* Custom Timeline Dot */
+.about-timeline__dot-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.about-timeline__dot {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: transform 0.3s ease;
+}
+
+.about-timeline__item:hover .about-timeline__dot {
+    transform: scale(1.2);
+}
+
+.about-timeline__dot::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #b54517;
+    /* Orange/Brown center */
+    border-radius: 50%;
+}
+
+/* Bottom Section: Details */
+.about-timeline__step-title {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #212529;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.about-timeline__step-desc {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness (Converts to Vertical Timeline) */
+@media (max-width: 768px) {
+    .about-timeline {
+        padding: 50px 0;
+    }
+
+    .about-timeline__title {
+        font-size: 2rem;
+    }
+
+    .about-timeline__subtitle {
+        margin-bottom: 2rem;
+    }
+
+    .about-timeline__line {
+        top: 0;
+        bottom: 0;
+        left: 20px;
+        width: 1px;
+        height: 100%;
+        transform: none;
+    }
+
+    .about-timeline__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left !important;
+        margin-bottom: 40px;
+        padding-left: 50px;
+        position: relative;
+    }
+
+    .about-timeline__top {
+        height: auto;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+    }
+
+    .about-timeline__year-bg {
+        font-size: 3.5rem; /* Reduced to prevent messy overlaps */
+        left: 0;
+        transform: translate(5%, -50%);
+        opacity: 0.4; /* Slightly fainted for better foreground contrast */
+    }
+
+    .about-timeline__year-fg {
+        transform: translateX(0) translateY(10px);
+        font-size: 1.15rem;
+    }
+
+    .about-timeline__dot-wrapper {
+        position: absolute;
+        left: 8px;
+        top: 5px;
+        margin-bottom: 0;
+    }
+
+    .about-timeline__step-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .about-timeline__step-desc {
+        padding: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+/* Specific micro-adjustments for 425px and below */
+@media (max-width: 425px) {
+    .about-timeline {
+        padding: 40px 0;
+    }
+
+    .about-timeline__item {
+        padding-left: 45px; /* Save space on horizontal */
+        margin-bottom: 35px;
+    }
+
+    .about-timeline__top {
+        display: flex;
+        flex-wrap: wrap; /* Group year and title if they fit */
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .about-timeline__year-bg {
+        font-size: 2.8rem !important;
+        transform: translate(0, -60%) !important;
+        opacity: 0.15 !important; /* Low opacity to prevent obscuring text */
+    }
+
+    .about-timeline__year-fg {
+        font-size: 1.1rem !important;
+        margin-right: 10px;
+        transform: translateY(0) !important;
+    }
+
+    .about-timeline__step-title {
+        font-size: 0.95rem !important;
+        margin-bottom: 5px;
+    }
+
+    .about-timeline__step-desc {
+        font-size: 0.825rem !important;
+        line-height: 1.4;
+    }
+
+    .about-timeline__line {
+        left: -27px !important;
+    }
+
+    .about-timeline__dot-wrapper {
+        left: 3px !important;
+    }
+}
+
+/* ── Entry Animations ───────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes growLine {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 100vw;
+        opacity: 1;
+    }
+}
+
+.about-timeline__line {
+    /* Existing line styles in CSS */
+    animation: growLine 1.5s ease-out forwards;
+}
+
+.about-timeline__item {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Staggered Delays for Timeline Items */
+.about-timeline__item:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.about-timeline__item:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.about-timeline__item:nth-child(3) {
+    animation-delay: 0.9s;
+}
+
+.about-timeline__item:nth-child(4) {
+    animation-delay: 1.2s;
+}

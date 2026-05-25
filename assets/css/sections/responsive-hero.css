@@ -1,0 +1,143 @@
+/* 
+ * Sweets Website
+ * =============================================================
+ * File: responsive-hero.css
+ * Description: Specialized Responsive Hero with Mobile-First Grid
+ * =============================================================
+ */
+
+/* ── Section Container ── */
+.c-res-hero {
+    width: 100%;
+    background-color: #fff9f5;
+    overflow: hidden;
+    padding: 40px 16px; /* Mobile Default */
+}
+
+.c-res-hero__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile Default */
+    align-items: center;
+    gap: 30px;
+}
+
+/* ── Tablet Breakpoint (768px+) ── */
+@media (min-width: 768px) {
+    .c-res-hero {
+        padding: 60px 24px;
+    }
+    
+    .c-res-hero__container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+/* ── Desktop Breakpoint (1200px+) ── */
+@media (min-width: 1200px) {
+    .c-res-hero {
+        padding: 80px 0;
+    }
+}
+
+/* ── Content Area ── */
+.c-res-hero__content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile: Center Text / Tablet+: Left Text */
+@media (max-width: 767px) {
+    .c-res-hero__content {
+        text-align: center;
+        align-items: center;
+        order: 2; /* Content below image on mobile */
+    }
+}
+
+.c-res-hero__tag {
+    font-size: 14px;
+    font-weight: 700;
+    color: #b45309;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.c-res-hero__title {
+    font-weight: 800;
+    color: #222;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-size: 28px; /* Mobile */
+}
+
+@media (min-width: 768px) {
+    .c-res-hero__title {
+        font-size: 42px; /* Tablet */
+    }
+}
+
+@media (min-width: 1200px) {
+    .c-res-hero__title {
+        font-size: 56px; /* Desktop */
+    }
+}
+
+.c-res-hero__subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: #f59223; /* Highlight color */
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+}
+
+/* ── Button ── */
+.c-res-hero__btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: linear-gradient(90deg, #f59e0b 0%, #7b1e1e 100%); /* Orange to Maroon */
+    color: #ffffff;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(123, 30, 30, 0.25);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.c-res-hero__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(123, 30, 30, 0.4);
+    color: #ffffff;
+    filter: brightness(1.1);
+}
+
+/* ── Image Area ── */
+.c-res-hero__image-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    .c-res-hero__image-wrap {
+        order: 1; /* Image first on mobile */
+        margin-bottom: 20px;
+    }
+}
+
+.c-res-hero__img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.c-res-hero:hover .c-res-hero__img {
+    transform: scale(1.03);
+}

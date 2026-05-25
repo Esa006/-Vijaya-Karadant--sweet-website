@@ -1,0 +1,60 @@
+/**
+ * Sweets Website
+ * =============================================================
+ * File: trust-signals.css
+ * Description: Styles for the trust signals / feature strip
+ * =============================================================
+ */
+
+.c-trust-signals {
+    background-color: #fff;
+    border-top: 1px solid rgba(108, 25, 29, 0.05);
+    border-bottom: 1px solid rgba(108, 25, 29, 0.05);
+}
+
+.c-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.c-trust-item:hover {
+    transform: translateY(-3px);
+}
+
+.c-trust-item svg {
+    color: #f7941d;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.c-trust-content h5 {
+    font-family: var(--ff-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #4a1d1a;
+    margin: 0;
+}
+
+.c-trust-content p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+    opacity: 0.8;
+}
+
+@media (max-width: 767.98px) {
+    .c-trust-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .c-trust-item svg {
+        width: 28px;
+        height: 28px;
+    }
+}

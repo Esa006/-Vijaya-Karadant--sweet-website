@@ -1,0 +1,234 @@
+/**
+ * Sweets Website - Premium Product Delete Modal Styles
+ * =============================================================
+ * File: product-delete.css
+ * Description: High-fidelity, luxury styling for delete confirmation
+ * =============================================================
+ */
+
+/* Override Bootstrap Modal for the custom look */
+#deleteConfirmModal .modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#deleteConfirmModal .modal-dialog {
+    max-width: 512px;
+}
+
+/* Main Card */
+.delete-modal-card {
+    position: relative;
+    width: 100%;
+    background-color: #f7f2eb;
+    border-radius: 26px;
+    padding: 24px 32px 20px;
+    box-shadow: 0 18px 50px rgba(82, 43, 11, 0.14);
+    overflow: hidden;
+}
+
+/* Header Close Button */
+.delete-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: transparent;
+    border: none;
+    color: #b55d1f;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0;
+    line-height: 1;
+    z-index: 10;
+}
+
+.delete-modal-close:hover {
+    transform: scale(1.05);
+    color: #9f4f18;
+}
+
+/* Text Content */
+.delete-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.delete-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #121212;
+    margin-bottom: 12px;
+}
+
+.delete-subtitle {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #55514d;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Product Preview Section */
+.delete-product-preview {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 28px;
+    margin-bottom: 32px;
+}
+
+/* Image Wrap with Gradient Border */
+.delete-image-outer {
+    position: relative;
+    height: 82px;
+    width: 82px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    padding: 3px;
+    background: linear-gradient(135deg, #ff9c50 0%, #f47b22 50%, #dd6a0d 100%);
+    box-shadow: 0 10px 20px rgba(219, 114, 27, 0.28);
+    overflow: hidden;
+}
+
+.delete-image-inner {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(145deg, #f7fafc, #e8eef6);
+    border-radius: 13px;
+    overflow: hidden;
+    position: relative;
+}
+
+.delete-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Decorative Illustration Overlay (if image fails) */
+.delete-image-placeholder {
+    position: absolute;
+    inset: 0;
+    background: #e8eef6;
+    z-index: 1;
+}
+
+/* Mini Close Badge on Image */
+.delete-image-badge {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 10;
+    height: 20px;
+    width: 20px;
+    background-color: #fff5eb;
+    color: #a85a22;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Product Info */
+.delete-info {
+    min-width: 0;
+    /* for truncation */
+}
+
+.delete-product-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: #2b2927;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.delete-product-meta {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #4d4946;
+    margin-bottom: 2px;
+    letter-spacing: 0.01em;
+}
+
+/* Action Buttons */
+.delete-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.btn-confirm-del {
+    background: linear-gradient(90deg, #982f22, #d8740b);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    box-shadow: 0 10px 18px rgba(191, 96, 23, 0.2);
+    transition: filter 0.2s ease;
+}
+
+.btn-confirm-del:hover {
+    filter: brightness(1.05);
+    color: #fff;
+}
+
+.btn-cancel-del {
+    background-color: #fbf7f2;
+    color: #4b4744;
+    border: 1px solid #d57954;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.btn-cancel-del:hover {
+    background-color: #fff;
+    color: #4b4744;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .delete-modal-card {
+        padding: 24px 20px 20px;
+        border-radius: 20px;
+    }
+
+    .delete-title {
+        font-size: 1.7rem;
+    }
+
+    .delete-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .delete-product-preview {
+        gap: 12px;
+    }
+
+    .delete-image-outer {
+        height: 70px;
+        width: 70px;
+    }
+
+    .delete-product-name {
+        font-size: 1rem;
+    }
+
+    .delete-product-meta {
+        font-size: 0.95rem;
+    }
+}
