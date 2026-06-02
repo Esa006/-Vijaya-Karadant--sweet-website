@@ -71,7 +71,7 @@ class ErrorHandler
 
         LogService::exception(LogService::CH_PHP, $e, ['ref' => $ref]);
 
-        self::sendUserResponse($ref);
+        self::sendUserResponse($ref, $e);
         exit(1);
     }
 
@@ -99,7 +99,7 @@ class ErrorHandler
     }
 
     // ── User-facing response ─────────────────────────────────────
-    private static function sendUserResponse(string $ref): void
+    private static function sendUserResponse(string $ref, ?\Throwable $e = null): void
     {
         if (!headers_sent()) {
             http_response_code(500);
@@ -116,14 +116,29 @@ class ErrorHandler
             header('Content-Type: application/json');
             echo json_encode([
                 'success' => false,
-                'message' => 'An unexpected error occurred. Please try again.',
+                'message' => (defined('APP_DEBUG') && APP_DEBUG === true && $e) ? $e->getMessage() : 'An unexpected error occurred. Please try again.',
                 'ref'     => $ref,
             ]);
             return;
         }
 
         // Browser users get a friendly HTML page
-        echo self::friendlyHtml($ref);
+        if (defined('APP_DEBUG') && APP_DEBUG === true) {
+            echo "<h1>Application Error</h1>";
+            echo "<pre>Reference: " . htmlspecialchars($ref) . "</pre>";
+            if ($e) {
+                echo "<h2>Exception Details:</h2>";
+                echo "<pre style='background:#f4f4f4;padding:15px;border:1px solid #ccc;overflow:auto;white-space:pre-wrap;'>";
+                echo "<strong>" . get_class($e) . "</strong>: " . htmlspecialchars($e->getMessage()) . "\n\n";
+                echo "File: " . htmlspecialchars($e->getFile()) . " (Line " . $e->getLine() . ")\n\n";
+                echo "Stack Trace:\n" . htmlspecialchars($e->getTraceAsString());
+                echo "</pre>";
+            } else {
+                echo "<p><em>Check the logs for details. Set APP_DEBUG=false to hide this.</em></p>";
+            }
+        } else {
+            echo self::friendlyHtml($ref);
+        }
     }
 
     private static function friendlyHtml(string $ref): string
