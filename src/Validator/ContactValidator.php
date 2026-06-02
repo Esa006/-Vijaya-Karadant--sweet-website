@@ -32,12 +32,12 @@ class ContactValidator {
         }
 
         return new ContactRequestDTO(
-            name: htmlspecialchars($name, ENT_QUOTES),
-            email: $email,
-            phone: preg_replace('/[^0-9\+]/', '', $input['phone'] ?? ''),
-            message: htmlspecialchars(trim($input['message'] ?? ''), ENT_QUOTES),
-            ipAddress: $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
-            userAgent: $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
+            htmlspecialchars($name, ENT_QUOTES),
+            $email,
+            preg_replace('/[^0-9\+]/', '', $input['phone'] ?? ''),
+            htmlspecialchars(trim($input['message'] ?? ''), ENT_QUOTES),
+            $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
+            $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
         );
     }
 }
