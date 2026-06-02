@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on push and pull requests to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # ==========================================
+  # JOB 1: Continuous Integration (CI)
+  # ==========================================
+  ci-syntax-check:
+    name: CI - PHP Syntax Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: cs2pr # Optional: helps format error output
+
+      - name: Run PHP Syntax Checker (Lint)
+        run: |
+          echo "Checking PHP syntax for all .php files..."
+          # Find all PHP files and run 'php -l' on them. If any file fails, the job fails.
+          for file in $(find . -type f -name "*.php"); do
+            php -l "$file" || exit 1
+          done
+          echo "All PHP files passed syntax check!"
+
+  # ==========================================
+  # JOB 2: Continuous Deployment (CD)
+  # ==========================================
+  cd-deploy:
+    name: CD - Deploy to Live Server
+    # This job ONLY runs if the 'ci-syntax-check' job passes successfully
+    needs: ci-syntax-check
+    runs-on: ubuntu-latest
+    # ONLY run deployment on pushes to main (do not deploy on pull requests)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # -------------------------------------------------------------
+      # DEPLOYMENT METHOD: FTP (Example using SamKirkland/FTP-Deploy)
+      # -------------------------------------------------------------
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # server-dir: /public_html/  # Uncomment and adjust if your app lives in a subfolder
+          
+      # Note: If you prefer SFTP or SSH/Rsync, replace the step above. 
+      # Let me know your preference and I can update this section!
