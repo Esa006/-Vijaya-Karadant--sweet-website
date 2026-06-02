@@ -21,10 +21,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup PHP 7.4
+      - name: Setup PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.2'
           tools: cs2pr # Optional: helps format error output
 
       - name: Run PHP Syntax Checker (Lint)
