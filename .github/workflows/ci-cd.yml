@@ -62,7 +62,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # server-dir: /public_html/  # Uncomment and adjust if your app lives in a subfolder
+          server-dir: htdocs/
           
       # Note: If you prefer SFTP or SSH/Rsync, replace the step above. 
       # Let me know your preference and I can update this section!
