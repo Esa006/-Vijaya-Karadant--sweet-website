@@ -159,7 +159,7 @@ class HeroSlideService {
             if ($slide) {
                 foreach (['desktop_image', 'mobile_image'] as $field) {
                     $path = $slide[$field] ?? '';
-                    if ($path && str_contains($path, 'assets/images/hero-slides/') && file_exists(ROOT_PATH . '/' . $path)) {
+                    if ($path && strpos($path, 'assets/images/hero-slides/') !== false && file_exists(ROOT_PATH . '/' . $path)) {
                         @unlink(ROOT_PATH . '/' . $path);
                     }
                 }

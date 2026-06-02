@@ -109,7 +109,7 @@ class ErrorHandler
         $wantsJson = (
             ($_SERVER['HTTP_ACCEPT'] ?? '') === 'application/json' ||
             ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest' ||
-            str_contains($_SERVER['REQUEST_URI'] ?? '', '/api/')
+            strpos($_SERVER['REQUEST_URI'] ?? '', '/api/') !== false
         );
 
         if ($wantsJson) {
