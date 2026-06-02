@@ -3,7 +3,7 @@
  * Sweets Website
  * =============================================================
  * File: admin/api/v1/combos.php
- * Description: Admin Combo CRUD API Controller
+ * Description: Admin Combo CRUD API Controller (with Gallery)
  * =============================================================
  */
 
@@ -18,7 +18,7 @@ $method  = $_SERVER['REQUEST_METHOD'];
 $action  = $_POST['action'] ?? ($_GET['action'] ?? '');
 $service = new ComboService();
 
-// ── GET: load combo items for edit panel ──────────────────────────────────
+// ── GET: load combo items and images for edit panel ───────────────────────
 if ($method === 'GET' && $action === 'get_items') {
     $id = (int)($_GET['combo_id'] ?? 0);
     if ($id <= 0) {
@@ -31,11 +31,25 @@ if ($method === 'GET' && $action === 'get_items') {
         require_once REPOS_PATH . '/ComboRepository.php';
         $repo  = new ComboRepository();
         $combo = $repo->getById($id);
+        $combo['gallery'] = $repo->getImagesForCombo($id);
     }
     echo json_encode([
-        'status' => 'success',
-        'items'  => $combo['items'] ?? [],
+        'status'  => 'success',
+        'items'   => $combo['items']   ?? [],
+        'gallery' => $combo['gallery'] ?? [],
     ]);
+    exit;
+}
+
+// ── GET: list gallery images for a combo ─────────────────────────────────
+if ($method === 'GET' && $action === 'get_images') {
+    $id = (int)($_GET['combo_id'] ?? 0);
+    if ($id <= 0) {
+        echo json_encode(['status' => 'error', 'message' => 'Missing ID']);
+        exit;
+    }
+    $images = $service->getComboImages($id);
+    echo json_encode(['status' => 'success', 'images' => $images]);
     exit;
 }
 
@@ -76,6 +90,39 @@ try {
             require_once REPOS_PATH . '/ComboRepository.php';
             (new ComboRepository())->update($id, ['is_active' => $status]);
             echo json_encode(['status' => 'success', 'message' => 'Status updated.']);
+            break;
+
+        // ── Gallery Actions ──────────────────────────────────────────────────
+
+        case 'upload_image':
+            $comboId    = (int)($_POST['combo_id'] ?? 0);
+            $makePrimary = !empty($_POST['make_primary']);
+            if ($comboId <= 0) throw new Exception('Missing combo ID.', 400);
+            if (empty($_FILES['gallery_image']['tmp_name'])) throw new Exception('No image file received.', 400);
+            $result = $service->uploadComboImage($comboId, $_FILES['gallery_image'], $makePrimary);
+            if (!$result['success']) throw new Exception($result['message'], 500);
+            echo json_encode([
+                'status'     => 'success',
+                'message'    => 'Image uploaded.',
+                'id'         => $result['id'],
+                'image_path' => $result['image_path'],
+                'is_primary' => $result['is_primary'],
+            ]);
+            break;
+
+        case 'delete_image':
+            $imageId = (int)($_POST['image_id'] ?? 0);
+            if ($imageId <= 0) throw new Exception('Missing image ID.', 400);
+            $service->deleteComboImage($imageId);
+            echo json_encode(['status' => 'success', 'message' => 'Image deleted.']);
+            break;
+
+        case 'set_primary_image':
+            $comboId = (int)($_POST['combo_id'] ?? 0);
+            $imageId = (int)($_POST['image_id'] ?? 0);
+            if ($comboId <= 0 || $imageId <= 0) throw new Exception('Missing IDs.', 400);
+            $service->setPrimaryComboImage($comboId, $imageId);
+            echo json_encode(['status' => 'success', 'message' => 'Primary image updated.']);
             break;
 
         default:

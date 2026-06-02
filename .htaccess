@@ -6,7 +6,7 @@
 Options -Indexes
 
 # 2. SECURITY: Block access to sensitive files
-<FilesMatch "^\.env|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|.*\.sql$">
+<FilesMatch "(^\.env|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|.*\.sql$|.*\.log$)">
     Order deny,allow
     Deny from all
 </FilesMatch>
@@ -17,29 +17,56 @@ Header set X-Frame-Options "SAMEORIGIN"
 # 4. SECURITY: Block MIME-type sniffing
 Header set X-Content-Type-Options "nosniff"
 
-# 5. HTTPS: Redirect HTTP to HTTPS (Commented out for XAMPP compatibility)
-# Uncomment the following lines when deploying to live server with SSL
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# 5. SECURITY: XSS Protection
+Header set X-XSS-Protection "1; mode=block"
 
-# 6. ROUTING: Forward to Enterprise Core
-DirectoryIndex public/index.php
+# 6. HTTPS: Redirect HTTP → HTTPS (Skips localhost automatically)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !=localhost
+    RewriteCond %{HTTP_HOST} !=127.0.0.1
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# 7. ROUTING: Forward to Enterprise Core
+DirectoryIndex index.php public/index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
-    # For local XAMPP, uncomment the line below:
-    RewriteBase /sweet-website/
-    
-    # For Live Server, use this:
-    # RewriteBase "/"
 
-    # Direct access to existing files/directories in the root (legacy assets, etc.)
+    # No RewriteBase needed. Apache will dynamically resolve relative paths
+    # which makes this work in root (Live) and subfolders (XAMPP).
+
+    # Sitemap rule
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+    # Skip rewrite for real files and directories (CSS, JS, images, etc.)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Redirect everything else to the new public entry point
+    # Redirect everything else to the entry point
     RewriteRule ^(.*)$ public/index.php [L,QSA]
-    RewriteRule ^$ public/index.php [L,QSA]
+</IfModule>
+
+
+# 8. PERFORMANCE: Enable gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
+</IfModule>
+
+# 9. PERFORMANCE: Browser caching for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>

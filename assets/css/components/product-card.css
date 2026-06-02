@@ -52,11 +52,23 @@
 }
 
 .c-product-card-premium--out-of-stock {
-    opacity: 0.7;
+    opacity: 0.8;
+}
+
+.c-product-card-premium--out-of-stock .c-product-card-premium__image {
+    filter: grayscale(100%) contrast(0.85);
+    opacity: 0.55;
+    transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .c-product-card-v2--out-of-stock {
-    opacity: 0.75;
+    opacity: 0.8;
+}
+
+.c-product-card-v2--out-of-stock .c-product-card-v2__img {
+    filter: grayscale(100%) contrast(0.85);
+    opacity: 0.55;
+    transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .btn-disabled {

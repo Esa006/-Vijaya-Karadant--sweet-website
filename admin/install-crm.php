@@ -7,6 +7,7 @@
  */
 
 require_once '../config/config.php';
+require_once 'includes/auth.php';
 
 try {
     // Get DB instance from config (assuming $db is available via singleton or global)

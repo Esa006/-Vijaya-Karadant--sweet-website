@@ -48,8 +48,8 @@ export class Renderer {
         if (loading || error || !product) return;
 
         // 2. Partial Updates (Only if values changed)
-        if (product.name !== prevState.product?.name) {
-            this.elements.name.textContent = product.name;
+        if (product.name !== prevState.product?.name || prevState.loading) {
+            if (this.elements.name) this.elements.name.textContent = product.name || 'Product Name';
         }
 
         this.renderHeader(product);

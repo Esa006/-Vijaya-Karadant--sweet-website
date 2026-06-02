@@ -26,7 +26,12 @@ if (empty($giftProducts)) {
 // Sort options (Default)
 $currentSort = 'newest';
 
-$pageTitle = "Gifting Collection – Premium Gift Boxes | " . SITE_NAME;
+$seoContext = [
+    'title' => 'Premium Gifting Collection & Gift Boxes | ' . SITE_NAME,
+    'description' => 'Discover our handcrafted, premium gift boxes for every occasion. Authentic traditional sweets and namkeens packed with love and heritage.',
+    'canonical' => BASE_URL . 'gifting.php',
+    'type' => 'website'
+];
 
 require_once 'includes/header.php';
 ?>

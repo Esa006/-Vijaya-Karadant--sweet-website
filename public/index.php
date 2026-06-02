@@ -6,12 +6,6 @@
 // Define application start time for performance tracking
 define('APP_START', microtime(true));
 
-// Load configuration
-// Disable caching for development
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
 require_once __DIR__ . '/../config/config.php';
 
 use App\Core\Router;

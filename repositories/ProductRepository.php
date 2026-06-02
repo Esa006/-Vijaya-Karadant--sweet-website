@@ -47,7 +47,7 @@ class ProductRepository extends BaseRepository {
     }
 
     private function getStockSelector(): string {
-        return 'COALESCE(i.stock, 0) as stock_quantity';
+        return 'COALESCE(i.stock, p.stock_quantity, 0) as stock_quantity';
     }
 
     private function getImageSelector(): string {
@@ -356,14 +356,16 @@ class ProductRepository extends BaseRepository {
             // Special handling for inventory if passed here
             if ($key === 'stock_quantity') {
                 if ($this->supportsInventory()) {
-                    $stmtInv = $this->db->prepare("UPDATE inventory SET stock = :stock WHERE product_id = :id");
+                    $stmtInv = $this->db->prepare("INSERT INTO inventory (product_id, stock) VALUES (:id, :stock) ON DUPLICATE KEY UPDATE stock = VALUES(stock)");
                     $stmtInv->execute(['stock' => $value, 'id' => $id]);
-                } elseif ($this->hasColumn('products', 'stock_quantity')) {
-                    $stmtInv = $this->db->prepare("UPDATE products SET stock_quantity = :stock WHERE id = :id");
-                    $stmtInv->execute(['stock' => $value, 'id' => $id]);
+                }
+                
+                if ($this->hasColumn('products', 'stock_quantity')) {
+                    $stmtInv2 = $this->db->prepare("UPDATE products SET stock_quantity = :stock WHERE id = :id");
+                    $stmtInv2->execute(['stock' => $value, 'id' => $id]);
                 } elseif ($this->hasColumn('products', 'stock_qty')) {
-                    $stmtInv = $this->db->prepare("UPDATE products SET stock_qty = :stock WHERE id = :id");
-                    $stmtInv->execute(['stock' => $value, 'id' => $id]);
+                    $stmtInv2 = $this->db->prepare("UPDATE products SET stock_qty = :stock WHERE id = :id");
+                    $stmtInv2->execute(['stock' => $value, 'id' => $id]);
                 }
                 continue;
             }
@@ -398,6 +400,42 @@ class ProductRepository extends BaseRepository {
         $sql = "UPDATE products SET " . implode(', ', $fields) . " WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($params);
+    }
+
+    /**
+     * Upsert a single product variant (insert if id=0, update otherwise)
+     */
+    public function upsertVariant(int $productId, array $data): bool {
+        $variantId = (int)($data['id'] ?? 0);
+        $weight    = trim((string)($data['weight'] ?? ''));
+        $label     = trim((string)($data['label'] ?? ($weight . ' Pack')));
+        $price     = (float)($data['price'] ?? 0);
+        $stock     = (int)($data['stock'] ?? 0);
+
+        if ($weight === '' || $price <= 0) return false;
+
+        if ($variantId > 0) {
+            $stmt = $this->db->prepare(
+                "UPDATE product_variants SET weight=:w, label=:l, price=:p, stock=:s WHERE id=:id AND product_id=:pid"
+            );
+            return $stmt->execute([':w'=>$weight, ':l'=>$label, ':p'=>$price, ':s'=>$stock, ':id'=>$variantId, ':pid'=>$productId]);
+        } else {
+            // Upsert by weight so duplicate weights are updated, not duplicated
+            $stmt = $this->db->prepare(
+                "INSERT INTO product_variants (product_id, weight, label, price, stock)
+                 VALUES (:pid, :w, :l, :p, :s)
+                 ON DUPLICATE KEY UPDATE label=VALUES(label), price=VALUES(price), stock=VALUES(stock)"
+            );
+            return $stmt->execute([':pid'=>$productId, ':w'=>$weight, ':l'=>$label, ':p'=>$price, ':s'=>$stock]);
+        }
+    }
+
+    /**
+     * Delete a single variant by id (must belong to product)
+     */
+    public function deleteVariant(int $productId, int $variantId): bool {
+        $stmt = $this->db->prepare("DELETE FROM product_variants WHERE id=:id AND product_id=:pid");
+        return $stmt->execute([':id'=>$variantId, ':pid'=>$productId]);
     }
 
     /**

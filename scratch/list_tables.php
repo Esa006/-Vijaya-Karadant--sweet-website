@@ -1,13 +1,9 @@
 <?php
-require_once 'config/config.php';
-use App\Core\Database;
+require_once __DIR__ . '/../config/config.php';
+$db = Database::getInstance();
 
-try {
-    $stmt = Database::query("SHOW TABLES");
-    echo "Tables in database:\n";
-    while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-        echo " - {$row[0]}\n";
-    }
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage() . "\n";
+echo "=== DATABASE TABLES ===\n";
+$tables = $db->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+foreach ($tables as $t) {
+    echo "- $t\n";
 }

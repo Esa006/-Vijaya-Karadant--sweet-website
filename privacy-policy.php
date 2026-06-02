@@ -8,6 +8,13 @@
  */
 
 require_once 'config/config.php';
+
+$seoContext = [
+    'title'       => 'Privacy Policy | ' . SITE_NAME,
+    'description' => 'Read the Privacy Policy of ' . SITE_NAME . '. Learn how we collect, use, and protect your personal information when you shop with us.',
+    'canonical'   => BASE_URL . 'privacy-policy.php',
+];
+
 require_once 'includes/header.php';
 ?>
 

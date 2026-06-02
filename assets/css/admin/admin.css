@@ -40,8 +40,12 @@ body.admin-body {
 .admin-wrapper {
     display: flex;
     min-height: 100vh;
+    position: relative;
 }
 
+/* ─────────────────────────────────────────────
+   SIDEBAR  (desktop: fixed strip, mobile: drawer)
+───────────────────────────────────────────── */
 .admin-sidebar {
     width: 280px;
     background: var(--admin-sidebar-bg);
@@ -50,20 +54,66 @@ body.admin-body {
     flex-direction: column;
     position: fixed;
     top: 0;
+    left: 0;
     bottom: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+    z-index: 1050;           /* sits above overlay (1040) and topbar (999) */
+    overflow-y: auto;        /* sidebar itself scrolls, not a nested child */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* smooth momentum on iOS */
+    overscroll-behavior: contain;      /* prevent body scroll bleed-through */
+
+    /* Use transform for GPU-accelerated slide — avoids layout reflow */
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+    will-change: transform;
 }
 
+/* ─────────────────────────────────────────────
+   DARK OVERLAY BACKDROP
+   Injected via JS as <div id="sidebarOverlay">
+───────────────────────────────────────────── */
+#sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;                /* top/right/bottom/left: 0 */
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1040;           /* below sidebar (1050), above everything else */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;         /* signals it's clickable (closes drawer) */
+    touch-action: none;      /* prevent scroll pass-through on mobile */
+}
+
+#sidebarOverlay.overlay-visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Scroll-lock helper applied to <body> */
+body.sidebar-open {
+    overflow: hidden;
+    /* On iOS, position:fixed is needed to truly lock body scroll */
+    /* We handle this in JS by saving/restoring scrollY */
+}
+
+/* ─────────────────────────────────────────────
+   MAIN CONTENT AREA
+───────────────────────────────────────────── */
 .main-content {
     flex: 1;
     margin-left: 280px;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    background-color: ;
+    background-color: transparent;
 }
 
+/* ─────────────────────────────────────────────
+   TOP BAR
+───────────────────────────────────────────── */
 .admin-topbar {
     height: 70px;
     background: #ffc46f;
@@ -73,7 +123,7 @@ body.admin-body {
     padding: 0 30px;
     top: 0;
     position: sticky;
-    z-index: 999;
+    z-index: 999;            /* below overlay (1040) intentionally */
 }
 
 .content-body {
@@ -96,7 +146,9 @@ body.admin-body {
 .sidebar-nav {
     flex: 1;
     padding: 0 15px;
-    overflow-y: auto;
+    /* Removed overflow-y here — the sidebar element itself scrolls now.
+       Having nested scroll containers causes double-scroll on mobile. */
+    overflow: visible;
 }
 
 .nav-list {
@@ -311,45 +363,92 @@ body.admin-body {
     margin-bottom: 20px;
 }
 
-/* ── RESPONSIVE ── */
+/* ════════════════════════════════════════════
+   RESPONSIVE — MOBILE-FIRST DRAWER
+   Breakpoint: ≤ 991px  →  sidebar becomes a
+   slide-in drawer with backdrop overlay.
+════════════════════════════════════════════ */
 @media (max-width: 991px) {
-    .admin-sidebar { 
-        left: -280px; 
-        visibility: hidden;
+
+    /* ── Sidebar: off-screen by default ── */
+    .admin-sidebar {
+        /* 80vw or max 280px — real mobile drawer sizing */
+        width: min(280px, 82vw);
+
+        /* Slide off the left edge using transform (GPU layer, no reflow) */
+        transform: translateX(-100%);
+
+        /* No visibility trick — transform alone hides it,
+           and we avoid the visibility flash */
+        box-shadow: none;
+
+        /* Allow the sidebar to use full viewport height */
+        height: 100dvh;      /* dvh respects mobile browser chrome */
+        height: 100vh;       /* fallback for older browsers */
     }
-    .main-content { 
-        margin-left: 0; 
+
+    /* ── Sidebar OPEN state (class on <body>) ── */
+    body.sidebar-open .admin-sidebar {
+        transform: translateX(0);
+        box-shadow: 4px 0 40px rgba(0, 0, 0, 0.25);
     }
-    .sidebar-active .admin-sidebar { 
-        left: 0; 
-        visibility: visible;
-        box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+
+    /* ── Main content: full width on mobile ── */
+    .main-content {
+        margin-left: 0;
+        /* Prevent content from shifting when drawer opens */
+        width: 100%;
     }
-    
-    /* Ensure content-body has enough room */
+
+    /* ── Topbar: tighter padding on mobile ── */
+    .admin-topbar {
+        padding: 0 16px;
+    }
+
+    /* ── Content body spacing ── */
     .content-body {
-        padding: 20px;
+        padding: 20px 16px;
     }
-    
-    /* Stat cards stacking */
+
+    /* ── Stat cards spacing ── */
     .stat-card-header {
         margin-bottom: 10px;
     }
+
+    /* ── Show the sidebar close button ── */
+    .sidebar-close.d-lg-none {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: #f5f0eb;
+        border: 1px solid var(--admin-border-color);
+        color: var(--admin-primary);
+        font-size: 1.3rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+    }
+    .sidebar-close.d-lg-none:hover {
+        background: #fee7d6;
+    }
 }
 
+/* ── Very small: hide search bar ── */
 @media (max-width: 576px) {
-    .admin-topbar {
-        padding: 0 15px;
-    }
     .topbar-search {
-        display: none; /* Hide search on very small mobile for space */
+        display: none;
     }
 }
 
+/* ── Extra small: tighter spacing ── */
 @media (max-width: 420px) {
     .content-body {
-        padding: 15px;
+        padding: 15px 12px;
     }
+
     /* Stack Dashboard/Page headers */
     .content-body > .d-flex.justify-content-between {
         flex-direction: column !important;
@@ -365,10 +464,25 @@ body.admin-body {
     .content-body h2 {
         font-size: 1.4rem;
     }
-    /* Adjust buttons for small screens */
+
+    /* Compact buttons */
     .btn.px-4 {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
         font-size: 13px;
+    }
+}
+
+/* ── Desktop: ensure sidebar is always visible ── */
+@media (min-width: 992px) {
+    .admin-sidebar {
+        transform: translateX(0) !important; /* Always visible on desktop */
+        box-shadow: none;
+    }
+    #sidebarOverlay {
+        display: none !important; /* Never show overlay on desktop */
+    }
+    .sidebar-close.d-lg-none {
+        display: none !important;
     }
 }

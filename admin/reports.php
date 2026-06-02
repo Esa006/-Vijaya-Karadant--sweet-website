@@ -308,5 +308,5 @@ require_once 'includes/sidebar.php';
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="<?php echo BASE_URL; ?>assets/js/admin/pages/reports.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/admin/pages/reports.js?v=<?php echo time(); ?>"></script>
 <?php require_once 'includes/footer.php'; ?>

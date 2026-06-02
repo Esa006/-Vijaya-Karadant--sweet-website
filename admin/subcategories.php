@@ -100,9 +100,11 @@ require_once 'includes/sidebar.php';
                     </div>
 
                     <select class="form-select shadow-none products-filter-select" id="dateFilter" style="width: auto; min-width: 130px;">
+                        <option value="all">All Time</option>
                         <option value="30">Last 30 Days</option>
-                        <option value="90">Last 90 Days</option>
-                        <option value="all">Lifetime</option>
+                        <option value="90" selected>Last 90 Days</option>
+                        <option value="180">Last 6 Months</option>
+                        <option value="365">Last 1 Year</option>
                     </select>
 
                     <select class="form-select shadow-none products-filter-select" id="statusFilter" style="width: auto; min-width: 130px;">
@@ -132,7 +134,7 @@ require_once 'includes/sidebar.php';
                         <tbody class="products-table-body">
                             <?php if (!empty($subcategories)): ?>
                                 <?php foreach ($subcategories as $index => $sub): ?>
-                                    <tr class="product-row" data-name="<?php echo htmlspecialchars(strtolower($sub['name'])); ?>" data-slug="<?php echo htmlspecialchars(strtolower($sub['slug'] ?? '')); ?>" data-status="<?php echo htmlspecialchars(strtolower($sub['status'])); ?>">
+                                    <tr class="product-row" data-name="<?php echo htmlspecialchars(strtolower($sub['name'])); ?>" data-slug="<?php echo htmlspecialchars(strtolower($sub['slug'] ?? '')); ?>" data-status="<?php echo htmlspecialchars(strtolower($sub['status'])); ?>" data-created="<?php echo !empty($sub['created_at']) ? strtotime($sub['created_at']) : time(); ?>">
                                         <td class="border-0 ps-4 py-3 td-check">
                                             <div class="form-check">
                                                 <input class="form-check-input products-row-checkbox" type="checkbox" value="<?php echo $sub['id']; ?>">
@@ -298,22 +300,30 @@ require_once 'includes/sidebar.php';
         const body = document.body;
 
         // Filtering
+        const dateFilter = document.getElementById('dateFilter');
+
         function filterTable() {
             if (!searchInput) return;
             const searchTerm = searchInput.value.toLowerCase();
             const selStatus = statusFilter ? statusFilter.value : 'all';
+            const selDays   = dateFilter  ? dateFilter.value  : 'all';
+
+            const nowTs = Math.floor(Date.now() / 1000);
+            const cutoff = selDays !== 'all' ? nowTs - (parseInt(selDays) * 86400) : 0;
 
             let visibleCount = 0;
 
             rows.forEach(row => {
-                const name = row.getAttribute('data-name') || '';
-                const slug = row.getAttribute('data-slug') || '';
-                const status = row.getAttribute('data-status') || '';
-                
+                const name      = row.getAttribute('data-name')    || '';
+                const slug      = row.getAttribute('data-slug')    || '';
+                const status    = row.getAttribute('data-status')  || '';
+                const createdTs = parseInt(row.getAttribute('data-created') || '0');
+
                 const matchesSearch = name.includes(searchTerm) || slug.includes(searchTerm);
                 const matchesStatus = (selStatus === 'all' || status === selStatus);
+                const matchesDate   = (selDays === 'all' || createdTs >= cutoff);
 
-                if (matchesSearch && matchesStatus) {
+                if (matchesSearch && matchesStatus && matchesDate) {
                     row.style.display = '';
                     visibleCount++;
                 } else {
@@ -328,6 +338,10 @@ require_once 'includes/sidebar.php';
 
         if (searchInput) searchInput.addEventListener('input', filterTable);
         if (statusFilter) statusFilter.addEventListener('change', filterTable);
+        if (dateFilter)   dateFilter.addEventListener('change', filterTable);
+
+        // Apply initial filter on load
+        filterTable();
 
         // Map status toggle to hidden input and text (For Add/Edit Modal)
         const checkbox = document.getElementById('statusCheckbox');

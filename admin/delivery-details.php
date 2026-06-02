@@ -427,7 +427,7 @@ $timeline = $orderRepo->getDeliveryTimeline($orderId);
             border-radius: 0.5rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             display: none;
-            z-index: 1050;
+            z-index: 1060;
         }
         .modal-content {
             border-radius: 0.75rem;
@@ -553,6 +553,14 @@ $timeline = $orderRepo->getDeliveryTimeline($orderId);
                                 </td>
                             </tr>
                             <?php endforeach; ?>
+                            <?php if (empty($items)): ?>
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">
+                                    <i class="bi bi-inbox fs-4 d-block mb-2 text-orange-300"></i>
+                                    No products found for this order.
+                                </td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                     <div class="summary-bar">
@@ -607,12 +615,12 @@ $timeline = $orderRepo->getDeliveryTimeline($orderId);
                                 <p class="customer-value-bold text-sm" style="font-size: 0.875rem; line-height: 1.5;">
                                     <?php 
                                     $addr = array_filter([
-                                        $order['address_line1'],
-                                        $order['address_line2'],
-                                        $order['city'],
-                                        $order['state'],
-                                        $order['zip_code'],
-                                        $order['country']
+                                        $order['shipping_line1'] ?? '',
+                                        $order['shipping_line2'] ?? '',
+                                        $order['shipping_city'] ?? '',
+                                        $order['shipping_state'] ?? '',
+                                        $order['shipping_zip'] ?? '',
+                                        $order['shipping_country'] ?? ''
                                     ]);
                                     echo htmlspecialchars(implode(', ', $addr) ?: 'Address Not Provided');
                                     ?>
@@ -792,16 +800,17 @@ $timeline = $orderRepo->getDeliveryTimeline($orderId);
                 e.preventDefault();
                 const formData = new FormData(form);
                 try {
-                    const res = await fetch(form.action, {
+                    const res = await fetch(form.getAttribute('action'), {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        credentials: 'same-origin'
                     });
                     const data = await res.json();
                     if (data.success) {
                         showToast('Updated successfully!');
                         setTimeout(() => location.reload(), 1000);
                     } else {
-                        showToast(data.error || 'Update failed');
+                        showToast(data.error || data.message || 'Update failed');
                     }
                 } catch (err) {
                     showToast('System error occurred');

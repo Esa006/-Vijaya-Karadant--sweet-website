@@ -15,7 +15,12 @@ require_once SERVICES_PATH . '/ProductService.php';
 $productService = new ProductService();
 
 // Header Meta overrides (optional)
-$pageTitle = "Heritage Collection - " . SITE_NAME;
+$seoContext = [
+    'title' => 'Heritage Karadant Collection | ' . SITE_NAME,
+    'description' => 'Explore our signature Gokak Karadant made with organic jaggery, pure ghee, and dry fruits. Experience the authentic taste of Karnataka heritage.',
+    'canonical' => BASE_URL . 'karadant.php',
+    'type' => 'website'
+];
 
 require_once 'includes/header.php';
 ?>

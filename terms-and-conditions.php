@@ -8,6 +8,13 @@
  */
 
 require_once 'config/config.php';
+
+$seoContext = [
+    'title'       => 'Terms and Conditions | ' . SITE_NAME,
+    'description' => 'Read the Terms and Conditions of ' . SITE_NAME . '. Understand your rights and responsibilities when using our website and purchasing our products.',
+    'canonical'   => BASE_URL . 'terms-and-conditions.php',
+];
+
 require_once 'includes/header.php';
 ?>
 

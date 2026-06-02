@@ -17,63 +17,47 @@ class EmailService {
      * @return bool True if successful, false otherwise
      */
     public static function send(string $to, string $subject, string $htmlBody, ?string $fromName = null): bool {
-        // Fallback for missing constant
-        if (!defined('RESEND_API_KEY') || empty(RESEND_API_KEY)) {
-            error_log("EmailService Error: RESEND_API_KEY is not configured.");
-            return false;
-        }
+        // Use PHPMailer since standard SMTP is configured in .env
+        $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
-        $apiKey = RESEND_API_KEY;
-        
-        // Sender address construction
-        $fromEmail = defined('SMTP_FROM_EMAIL') && !empty(SMTP_FROM_EMAIL) ? SMTP_FROM_EMAIL : 'onboarding@resend.dev';
-        $defaultFromName = defined('SMTP_FROM_NAME') && !empty(SMTP_FROM_NAME) ? SMTP_FROM_NAME : 'Sweets Website';
-        $senderName = $fromName ?: $defaultFromName;
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host       = defined('SMTP_HOST') ? SMTP_HOST : '';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = defined('SMTP_USERNAME') ? SMTP_USERNAME : '';
+            $mail->Password   = defined('SMTP_PASSWORD') ? SMTP_PASSWORD : '';
+            
+            $secureType = defined('SMTP_SECURE') ? strtolower(SMTP_SECURE) : 'tls';
+            if ($secureType === 'tls') {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            } elseif ($secureType === 'ssl') {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            } else {
+                $mail->SMTPSecure = '';
+                $mail->SMTPAutoTLS = false;
+            }
+            
+            $mail->Port = defined('SMTP_PORT') ? (int)SMTP_PORT : 587;
 
-        // If they haven't verified a domain on Resend, they must use onboarding@resend.dev as the 'from' address
-        // Assuming they have verified it, but if they face errors, they might need to change $fromEmail.
-        $fromString = "{$senderName} <{$fromEmail}>";
+            // Sender address construction
+            $fromEmail = defined('SMTP_FROM_EMAIL') && !empty(SMTP_FROM_EMAIL) ? SMTP_FROM_EMAIL : $mail->Username;
+            $defaultFromName = defined('SMTP_FROM_NAME') && !empty(SMTP_FROM_NAME) ? SMTP_FROM_NAME : 'Sweets Website';
+            $senderName = $fromName ?: $defaultFromName;
 
-        $url = 'https://api.resend.com/emails';
-        
-        $data = [
-            'from'    => $fromString,
-            'to'      => [$to],
-            'subject' => $subject,
-            'html'    => $htmlBody
-        ];
+            $mail->setFrom($fromEmail, $senderName);
+            $mail->addAddress($to);
 
-        $ch = curl_init($url);
-        
-        $payload = json_encode($data);
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body    = $htmlBody;
+            $mail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '</p>'], "\n", $htmlBody));
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' . $apiKey,
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($payload)
-        ]);
-        
-        // Optional: Disable SSL verification for local dev environments if needed, but keeping it secure by default
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
-        if(curl_errno($ch)){
-            error_log('EmailService cURL Error: ' . curl_error($ch));
-            curl_close($ch);
-            return false;
-        }
-
-        curl_close($ch);
-
-        if ($httpCode >= 200 && $httpCode < 300) {
+            $mail->send();
             return true;
-        } else {
-            error_log("EmailService Resend API Error (HTTP {$httpCode}): " . $response);
+        } catch (\Exception $e) {
+            error_log("EmailService Error: {$mail->ErrorInfo}");
             return false;
         }
     }

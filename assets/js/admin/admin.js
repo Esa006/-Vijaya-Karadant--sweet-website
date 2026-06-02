@@ -6,31 +6,191 @@
  * =============================================================
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Sidebar toggle for mobile
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebarClose = document.getElementById('sidebarClose');
-    const adminBody = document.body;
+/* ============================================================
+   MOBILE DRAWER CONTROLLER
+   Production-grade sidebar/drawer with:
+   ✔ GPU-accelerated transform (no layout reflow)
+   ✔ Dark overlay backdrop with fade
+   ✔ Body scroll lock (iOS-safe: saves/restores scrollY)
+   ✔ Close on overlay click
+   ✔ Close on Escape key
+   ✔ Close on nav-link tap (mobile)
+   ✔ Resize guard (prevents state drift between breakpoints)
+   ✔ ARIA accessibility (aria-expanded, aria-hidden)
+   ============================================================ */
+(function () {
+    'use strict';
 
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-            adminBody.classList.toggle('sidebar-active');
+    /* ── Constants ──────────────────────────────────────────── */
+    var MOBILE_BREAKPOINT = 992; // Must match CSS @media (max-width: 991px)
+    var scrollY = 0;             // Saved scroll position for iOS lock
+
+    /* ── Element references ─────────────────────────────────── */
+    var sidebar      = document.getElementById('adminSidebar');
+    var toggleBtn    = document.getElementById('sidebarToggle');
+    var closeBtn     = document.getElementById('sidebarClose');
+    var overlay      = null;    // Created dynamically below
+
+    /* ── Inject overlay backdrop into <body> ────────────────── */
+    function createOverlay() {
+        var el = document.createElement('div');
+        el.id = 'sidebarOverlay';
+        el.setAttribute('aria-hidden', 'true');
+        el.setAttribute('tabindex', '-1');
+        document.body.appendChild(el);
+        return el;
+    }
+
+    /* ── Is mobile viewport? ────────────────────────────────── */
+    function isMobile() {
+        return window.innerWidth < MOBILE_BREAKPOINT;
+    }
+
+    /* ── Open drawer ────────────────────────────────────────── */
+    function openDrawer() {
+        if (!sidebar) return;
+
+        /* 1. Save current scroll position (iOS scroll-lock technique) */
+        scrollY = window.scrollY || window.pageYOffset;
+
+        /* 2. Lock body scroll */
+        document.body.classList.add('sidebar-open');
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+
+        /* 3. Show sidebar (CSS class triggers transform: translateX(0)) */
+        document.body.classList.add('sidebar-open');
+
+        /* 4. Show overlay: make it block first, then fade in via RAF */
+        if (overlay) {
+            overlay.style.display = 'block';
+            /* Force a paint so transition triggers */
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    overlay.classList.add('overlay-visible');
+                });
+            });
+        }
+
+        /* 5. Update ARIA */
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+        if (sidebar)   sidebar.removeAttribute('aria-hidden');
+
+        /* 6. Trap focus: move focus into sidebar for accessibility */
+        var firstFocusable = sidebar.querySelector('a, button');
+        if (firstFocusable) firstFocusable.focus();
+    }
+
+    /* ── Close drawer ───────────────────────────────────────── */
+    function closeDrawer() {
+        if (!sidebar) return;
+
+        /* 1. Hide overlay (fade out, then hide after transition) */
+        if (overlay) {
+            overlay.classList.remove('overlay-visible');
+            /* After the 300ms CSS transition, set display:none */
+            setTimeout(function () {
+                if (!overlay.classList.contains('overlay-visible')) {
+                    overlay.style.display = 'none';
+                }
+            }, 320);
+        }
+
+        /* 2. Slide sidebar off-screen */
+        document.body.classList.remove('sidebar-open');
+
+        /* 3. Restore body scroll (iOS technique) */
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+
+        /* 4. Update ARIA */
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+        if (sidebar)   sidebar.setAttribute('aria-hidden', 'true');
+
+        /* 5. Return focus to toggle button */
+        if (toggleBtn) toggleBtn.focus();
+    }
+
+    /* ── Toggle drawer ──────────────────────────────────────── */
+    function toggleDrawer() {
+        if (document.body.classList.contains('sidebar-open')) {
+            closeDrawer();
+        } else {
+            openDrawer();
+        }
+    }
+
+    /* ── Bind events ────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+
+        /* Create and cache the overlay element */
+        overlay = createOverlay();
+
+        /* Hamburger / toggle button */
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.setAttribute('aria-controls', 'adminSidebar');
+            toggleBtn.setAttribute('aria-label', 'Open navigation menu');
+            toggleBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (isMobile()) toggleDrawer();
+            });
+        }
+
+        /* Close (X) button inside the sidebar */
+        if (closeBtn) {
+            closeBtn.setAttribute('aria-label', 'Close navigation menu');
+            closeBtn.addEventListener('click', closeDrawer);
+        }
+
+        /* Overlay click → close drawer */
+        overlay.addEventListener('click', closeDrawer);
+
+        /* Escape key → close drawer */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && document.body.classList.contains('sidebar-open')) {
+                closeDrawer();
+            }
         });
-    }
 
-    if (sidebarClose) {
-        sidebarClose.addEventListener('click', () => {
-            adminBody.classList.remove('sidebar-active');
-        });
-    }
+        /* Nav links: close drawer when tapped on mobile */
+        if (sidebar) {
+            sidebar.querySelectorAll('.nav-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    if (isMobile() && document.body.classList.contains('sidebar-open')) {
+                        closeDrawer();
+                    }
+                });
+            });
+        }
 
-    // Initialize Sales Chart if elements exist
-    const salesCtx = document.getElementById('salesChart');
-    if (salesCtx) {
-        initSalesChart(salesCtx);
-    }
-});
+        /* Resize guard: if user resizes to desktop, clean up mobile state */
+        window.addEventListener('resize', function () {
+            if (!isMobile() && document.body.classList.contains('sidebar-open')) {
+                /* Clean up without scroll restore (desktop doesn't need it) */
+                if (overlay) {
+                    overlay.classList.remove('overlay-visible');
+                    overlay.style.display = 'none';
+                }
+                document.body.classList.remove('sidebar-open');
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        }, { passive: true });
+
+        /* Initialize Sales Chart if element exists */
+        var salesCtx = document.getElementById('salesChart');
+        if (salesCtx) {
+            initSalesChart(salesCtx);
+        }
+    });
+
+}());
 
 // Centralized chart instances to prevent "Canvas in use" errors
 window.adminCharts = window.adminCharts || {};

@@ -57,14 +57,24 @@ if (empty($formData) && $user) {
     
     // Also try to pre-fill from default address if exists
     if (!empty($profileData['addresses'])) {
+        $selectedAddr = null;
         foreach ($profileData['addresses'] as $addr) {
             if ($addr['is_default']) {
-                $formData['address'] = $addr['address_line1'] . ($addr['address_line2'] ? ', ' . $addr['address_line2'] : '');
-                $formData['city'] = $addr['city'];
-                $formData['state'] = $addr['state'];
-                $formData['pin_code'] = $addr['zip_code'];
+                $selectedAddr = $addr;
                 break;
             }
+        }
+        
+        // Fallback: if no default address is found, pick the most recent one
+        if (!$selectedAddr) {
+            $selectedAddr = end($profileData['addresses']);
+        }
+        
+        if ($selectedAddr) {
+            $formData['address'] = $selectedAddr['address_line1'] . (!empty($selectedAddr['address_line2']) ? ', ' . $selectedAddr['address_line2'] : '');
+            $formData['city'] = $selectedAddr['city'];
+            $formData['state'] = $selectedAddr['state'];
+            $formData['pin_code'] = $selectedAddr['zip_code'];
         }
     }
 }
@@ -119,6 +129,12 @@ if (empty($cartItems)) {
     exit;
 }
 
+$seoContext = [
+    'title' => 'Secure Checkout | ' . SITE_NAME,
+    'description' => 'Complete your secure purchase at ' . SITE_NAME . '. Fast pan-India delivery for authentic traditional sweets.',
+    'canonical' => BASE_URL . 'checkout.php',
+    'type' => 'website'
+];
 require_once 'includes/header.php';
 ?>
 
@@ -127,6 +143,7 @@ require_once 'includes/header.php';
 
 <main class="c-checkout py-5 u-bg-warm">
     <div class="container py-lg-4">
+        <h1 class="visually-hidden">Secure Checkout</h1>
         <form method="POST" action="checkout.php" class="needs-validation" novalidate>
             <div class="row g-5">
                 

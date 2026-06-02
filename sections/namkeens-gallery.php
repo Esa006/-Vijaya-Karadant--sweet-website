@@ -85,7 +85,7 @@ $sectionTitle = $namkeensSectionTitle ?? 'Crispy & Authentic Namkeens';
                             </div>
 
                             <!-- Title -->
-                            <h3 class="c-product-card-v2__title--compact p-1">
+                            <h3 class="c-product-card-v2__title--compact px-1">
                                 <a
                                     href="<?php echo BASE_URL; ?>product-detail.php?slug=<?php echo htmlspecialchars($item['slug']); ?>">
                                     <?php echo htmlspecialchars($item['name']); ?>

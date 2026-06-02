@@ -154,7 +154,7 @@ $total       = $cartService->getTotal();
 
             <!-- Right: Checkout / Payment Methods -->
             <div class="col-lg-7">
-                <h2 class="cv2-checkout-title">Checkout</h2>
+                <h1 class="cv2-checkout-title">Checkout</h1>
 
                 <!-- Recommended Card (HDFC) -->
                 <div class="cv2-payment-row cv2-payment-row--recommended" data-method="card">

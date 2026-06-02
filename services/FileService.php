@@ -66,11 +66,73 @@ class FileService {
 
         // 4. Move File Securely
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            // 5. Compress Image (GD)
+            $this->compressImage($targetPath, $mimeType);
+            
             // Return relative path for DB
             return 'assets/images/' . $this->subDir . '/' . $filename;
         }
 
         return null;
+    }
+
+    /**
+     * Compress and resize image using PHP GD
+     */
+    private function compressImage(string $filePath, string $mimeType): void {
+        if (!extension_loaded('gd')) {
+            return; // GD not available, skip compression
+        }
+
+        $maxWidth = 1200;
+        $quality = 80; // For JPEG
+
+        list($width, $height) = getimagesize($filePath);
+        if (!$width || !$height) return;
+
+        // Calculate new dimensions if image is larger than maxWidth
+        if ($width > $maxWidth) {
+            $newWidth = $maxWidth;
+            $newHeight = (int)($height * ($maxWidth / $width));
+        } else {
+            // Keep original dimensions, just compress
+            $newWidth = $width;
+            $newHeight = $height;
+        }
+
+        $image = null;
+        switch ($mimeType) {
+            case 'image/jpeg':
+                $image = imagecreatefromjpeg($filePath);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($filePath);
+                // Convert transparent PNG to white background for JPEG
+                if ($image) {
+                    $bg = imagecreatetruecolor($newWidth, $newHeight);
+                    $white = imagecolorallocate($bg, 255, 255, 255);
+                    imagefill($bg, 0, 0, $white);
+                    imagecopyresampled($bg, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                    imagejpeg($bg, $filePath, $quality);
+                    imagedestroy($bg);
+                    imagedestroy($image);
+                    return; // Done
+                }
+                break;
+            case 'image/webp':
+                // For webp, we could just leave it or compress it further, but usually it's fine.
+                // Leaving webp as is for now.
+                return;
+        }
+
+        if ($image) {
+            $newImage = imagecreatetruecolor($newWidth, $newHeight);
+            imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            // Save as JPEG back to the same path (overwriting)
+            imagejpeg($newImage, $filePath, $quality);
+            imagedestroy($newImage);
+            imagedestroy($image);
+        }
     }
 
     /**

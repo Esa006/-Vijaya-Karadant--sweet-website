@@ -10,6 +10,14 @@
  */
 
 require_once 'config/config.php';
+// Build dynamic SEO context for Contact page
+$seoContext = [
+    'title' => 'Contact Us - Franchise & Support | ' . SITE_NAME,
+    'description' => 'Get in touch with Vijaya Karadant. For wholesale inquiries, franchise opportunities, or customer support, reach out to us today.',
+    'canonical' => BASE_URL . 'contact.php',
+    'type' => 'website'
+];
+
 require_once 'includes/header.php';
 
 if (empty($_SESSION['csrf_token'])) {

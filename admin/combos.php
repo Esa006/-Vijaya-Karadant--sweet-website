@@ -1,6 +1,6 @@
 <?php
 /**
- * Sweets Website - Admin Combo Offers Management
+ * Sweets Website - Admin Combo Offers Management (with Gallery)
  * File: admin/combos.php
  */
 $pageStyles  = ['assets/css/admin/products.css'];
@@ -230,8 +230,9 @@ $products = $productService->getAllProducts();
                     <textarea name="description" rows="3" class="form-control form-control-custom shadow-none" placeholder="Short combo description..."></textarea>
                 </div>
 
+                <!-- Primary Image Upload -->
                 <div class="mb-4">
-                    <label class="form-label form-label-custom d-block">Combo Image</label>
+                    <label class="form-label form-label-custom d-block">Primary Image</label>
                     <div class="file-overlay-wrapper input-group-file">
                         <div class="input-group-file-text">Choose image...</div>
                         <button type="button" class="input-group-file-btn">Browse</button>
@@ -322,13 +323,25 @@ $products = $productService->getAllProducts();
                     </div>
                 </div>
 
+                <!-- ── Gallery Manager ── -->
                 <div class="mb-4">
-                    <label class="form-label form-label-custom d-block">Update Image (leave blank to keep)</label>
-                    <div class="file-overlay-wrapper input-group-file">
-                        <div class="input-group-file-text">Choose new image...</div>
-                        <button type="button" class="input-group-file-btn">Browse</button>
-                        <input type="file" name="combo_image" class="file-overlay-input" accept="image/*" onchange="updateFileName(this)">
+                    <label class="form-label form-label-custom d-block fw-bold">
+                        <i class="bi bi-images me-1"></i> Image Gallery
+                    </label>
+
+                    <!-- Existing images grid -->
+                    <div id="edit_gallery_grid" class="combo-gallery-grid mb-3"></div>
+
+                    <!-- Upload new images -->
+                    <div class="combo-gallery-upload-zone" id="edit_gallery_drop_zone">
+                        <i class="bi bi-cloud-upload fs-3 text-muted d-block mb-2"></i>
+                        <div class="text-muted small mb-2">Drop images here or click to upload</div>
+                        <div class="text-muted" style="font-size:11px;">Supports JPG, PNG, WebP</div>
+                        <input type="file" id="edit_gallery_file_input" accept="image/*" multiple
+                               style="position:absolute;inset:0;opacity:0;cursor:pointer;">
                     </div>
+
+                    <div id="edit_gallery_upload_status" class="mt-2"></div>
                 </div>
 
                 <!-- Product Items Builder (Edit) -->
@@ -365,6 +378,94 @@ $products = $productService->getAllProducts();
 
 </div><!-- .main-content -->
 
+<!-- ── Gallery styles ── -->
+<style>
+.combo-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+    gap: 10px;
+}
+.combo-gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 2px solid #e5e7eb;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: border-color .2s;
+}
+.combo-gallery-item.is-primary {
+    border-color: #7A1E1E;
+    box-shadow: 0 0 0 2px #7A1E1E33;
+}
+.combo-gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.combo-gallery-item__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.38);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity .2s;
+}
+.combo-gallery-item:hover .combo-gallery-item__overlay { opacity: 1; }
+.combo-gallery-item__overlay button {
+    background: rgba(255,255,255,.92);
+    border: none;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform .15s;
+}
+.combo-gallery-item__overlay button:hover { transform: scale(1.12); }
+.combo-gallery-item__primary-badge {
+    position: absolute;
+    top: 4px; left: 4px;
+    background: #7A1E1E;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    letter-spacing: .5px;
+    pointer-events: none;
+}
+.combo-gallery-upload-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 10px;
+    padding: 20px 12px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+}
+.combo-gallery-upload-zone:hover,
+.combo-gallery-upload-zone.drag-over {
+    border-color: #7A1E1E;
+    background: #fff8f5;
+}
+.combo-gallery-spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid #d1d5db;
+    border-top-color: #7A1E1E;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
 <!-- Product catalog for JS (used in item picker) -->
 <script>
 const ALL_PRODUCTS = <?php echo json_encode(array_map(function($p) {
@@ -376,6 +477,8 @@ const ALL_PRODUCTS = <?php echo json_encode(array_map(function($p) {
         'image' => $p['image'] ?? 'assets/images/placeholder.png',
     ];
 }, $products)); ?>;
+
+let _editComboId = 0;   // track current combo being edited
 
 /* ────────────────────────────────────────────────
    Product Row Builder
@@ -428,7 +531,6 @@ function syncItems(listId, jsonId, summaryId, priceInputId) {
     const jsonInput = document.getElementById(jsonId);
     if (jsonInput) jsonInput.value = JSON.stringify(items);
 
-    // ── Dynamic Price Preview ──
     if (summaryId) {
         const summaryEl  = document.getElementById(summaryId);
         const mrpEl      = document.getElementById(summaryId.replace('_price_summary','_mrp_total'));
@@ -438,11 +540,9 @@ function syncItems(listId, jsonId, summaryId, priceInputId) {
         if (summaryEl) summaryEl.classList.toggle('d-none', items.length === 0);
         if (mrpEl)     mrpEl.textContent     = '₹' + total.toFixed(2);
 
-        // Suggest 10% discount by default
         const suggested = total > 0 ? Math.floor(total * 0.9) : 0;
         if (suggestEl) suggestEl.textContent = '₹' + suggested.toFixed(2);
 
-        // Auto-fill price input only if it's empty or 0
         if (priceInput && (priceInput.value === '' || parseFloat(priceInput.value) === 0)) {
             priceInput.value = suggested > 0 ? suggested.toFixed(2) : '';
         }
@@ -450,9 +550,139 @@ function syncItems(listId, jsonId, summaryId, priceInputId) {
 }
 
 /* ────────────────────────────────────────────────
+   Gallery Manager
+──────────────────────────────────────────────── */
+function renderGalleryGrid(images) {
+    const grid = document.getElementById('edit_gallery_grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    if (!images || images.length === 0) {
+        grid.innerHTML = '<p class="text-muted small mb-0">No images yet. Upload below.</p>';
+        return;
+    }
+
+    images.forEach(img => {
+        const isPrimary = parseInt(img.is_primary) === 1;
+        const item = document.createElement('div');
+        item.className = 'combo-gallery-item' + (isPrimary ? ' is-primary' : '');
+        item.dataset.imageId = img.id;
+        item.innerHTML = `
+            ${isPrimary ? '<span class="combo-gallery-item__primary-badge">PRIMARY</span>' : ''}
+            <img src="${window.BASE_URL + img.image_path}" alt="" loading="lazy"
+                 onerror="this.src='${window.BASE_URL}assets/images/placeholder.png'">
+            <div class="combo-gallery-item__overlay">
+                ${!isPrimary ? `<button type="button" title="Set as primary" onclick="gallerySetPrimary(${img.id})">
+                    <i class="bi bi-star-fill text-warning"></i>
+                </button>` : ''}
+                <button type="button" title="Delete image" onclick="galleryDeleteImage(${img.id}, this)">
+                    <i class="bi bi-trash text-danger"></i>
+                </button>
+            </div>`;
+        grid.appendChild(item);
+    });
+}
+
+function gallerySetPrimary(imageId) {
+    const fd = new FormData();
+    fd.append('action', 'set_primary_image');
+    fd.append('combo_id', _editComboId);
+    fd.append('image_id', imageId);
+    fd.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
+    fetch(window.BASE_URL + 'admin/api/v1/combos.php', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+            if (res.status === 'success') reloadGallery();
+            else alert('Error: ' + res.message);
+        });
+}
+
+function galleryDeleteImage(imageId, btn) {
+    if (!confirm('Delete this image?')) return;
+    btn.disabled = true;
+    const fd = new FormData();
+    fd.append('action', 'delete_image');
+    fd.append('image_id', imageId);
+    fd.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
+    fetch(window.BASE_URL + 'admin/api/v1/combos.php', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+            if (res.status === 'success') reloadGallery();
+            else { btn.disabled = false; alert('Error: ' + res.message); }
+        });
+}
+
+function reloadGallery() {
+    if (!_editComboId) return;
+    fetch(window.BASE_URL + `admin/api/v1/combos.php?action=get_images&combo_id=${_editComboId}`, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.status === 'success') renderGalleryGrid(res.images);
+    });
+}
+
+function galleryUploadFiles(files, comboId) {
+    const statusEl = document.getElementById('edit_gallery_upload_status');
+    const uploads  = Array.from(files);
+    if (uploads.length === 0) return;
+
+    statusEl.innerHTML = `<span class="combo-gallery-spinner"></span> Uploading ${uploads.length} image(s)...`;
+
+    const csrfToken = '<?php echo $_SESSION['csrf_token'] ?? ''; ?>';
+
+    Promise.all(uploads.map(file => {
+        const fd = new FormData();
+        fd.append('action', 'upload_image');
+        fd.append('combo_id', comboId);
+        fd.append('gallery_image', file);
+        fd.append('csrf_token', csrfToken);
+        return fetch(window.BASE_URL + 'admin/api/v1/combos.php', { method: 'POST', body: fd })
+            .then(r => r.json());
+    })).then(results => {
+        const failed = results.filter(r => r.status !== 'success');
+        if (failed.length > 0) {
+            statusEl.innerHTML = `<span class="text-danger small">⚠ ${failed.length} upload(s) failed.</span>`;
+        } else {
+            statusEl.innerHTML = `<span class="text-success small">✓ ${uploads.length} image(s) uploaded.</span>`;
+        }
+        setTimeout(() => statusEl.innerHTML = '', 3000);
+        reloadGallery();
+    });
+}
+
+// Wire drop zone
+document.addEventListener('DOMContentLoaded', function() {
+    const zone  = document.getElementById('edit_gallery_drop_zone');
+    const input = document.getElementById('edit_gallery_file_input');
+
+    if (zone && input) {
+        input.addEventListener('change', function() {
+            if (this.files.length && _editComboId) {
+                galleryUploadFiles(this.files, _editComboId);
+                this.value = ''; // reset
+            }
+        });
+
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            zone.classList.remove('drag-over');
+            if (_editComboId && e.dataTransfer.files.length) {
+                galleryUploadFiles(e.dataTransfer.files, _editComboId);
+            }
+        });
+    }
+});
+
+/* ────────────────────────────────────────────────
    Open Edit Offcanvas
 ──────────────────────────────────────────────── */
 function openEditCombo(data, comboId) {
+    _editComboId = comboId;
+
     document.getElementById('edit_combo_id').value         = data.id;
     document.getElementById('edit_combo_name').value       = data.name;
     document.getElementById('edit_combo_desc').value       = data.description;
@@ -462,21 +692,26 @@ function openEditCombo(data, comboId) {
     const catSel = document.getElementById('edit_combo_category');
     if (catSel) catSel.value = data.category;
 
-    // Load current items via fetch
+    // Clear product items
     const listEl = document.getElementById('edit_items_list');
     listEl.innerHTML = '';
     document.getElementById('edit_items_json').value = '[]';
 
+    // Clear gallery
+    document.getElementById('edit_gallery_grid').innerHTML = '<p class="text-muted small">Loading images...</p>';
+
+    // Load items + gallery
     fetch(window.BASE_URL + `admin/api/v1/combos.php?action=get_items&combo_id=${data.id}`, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
     })
     .then(r => r.json())
     .then(res => {
-        if (res.status === 'success' && res.items) {
-            res.items.forEach(item => addProductRow('edit_items_list', 'edit_items_json', item, 'edit_price_summary', 'edit_combo_price'));
-        }
+        if (res.items) res.items.forEach(item => addProductRow('edit_items_list', 'edit_items_json', item, 'edit_price_summary', 'edit_combo_price'));
+        renderGalleryGrid(res.gallery || []);
     })
-    .catch(() => {});
+    .catch(() => {
+        document.getElementById('edit_gallery_grid').innerHTML = '<p class="text-danger small">Failed to load images.</p>';
+    });
 
     const canvas = new bootstrap.Offcanvas(document.getElementById('editComboOffcanvas'));
     canvas.show();
@@ -523,36 +758,26 @@ function handleComboForm(formId) {
     if (!form) return;
     form.addEventListener('submit', async e => {
         e.preventDefault();
-        const btn = form.querySelector('button[type=submit]');
+        const btn  = form.querySelector('button[type=submit]');
         const orig = btn.innerHTML;
         btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Saving...';
         btn.disabled  = true;
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
-        const formData = new FormData(form);
-        
-        // Ensure CSRF token is in FormData if not already
-        if (csrfToken && !formData.has('csrf_token')) {
-            formData.append('csrf_token', csrfToken);
-        }
+        const formData  = new FormData(form);
+        if (csrfToken && !formData.has('csrf_token')) formData.append('csrf_token', csrfToken);
 
         try {
-            const res  = await fetch(form.getAttribute('action'), { 
-                method: 'POST', 
+            const res  = await fetch(form.getAttribute('action'), {
+                method: 'POST',
                 body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'X-Requested-With': 'XMLHttpRequest' }
             });
             const text = await res.text();
             let data;
             try { data = JSON.parse(text); }
-            catch(e) { 
-                console.error('Raw response:', text);
-                throw new Error('Server response: ' + text.substring(0, 200)); 
-            }
-            
+            catch(e) { throw new Error('Server response: ' + text.substring(0, 200)); }
+
             if (data.status === 'success') {
                 location.reload();
             } else {
@@ -561,7 +786,6 @@ function handleComboForm(formId) {
                 btn.disabled  = false;
             }
         } catch(err) {
-            console.error('Submit error:', err);
             alert(err.message || 'Network error. Please try again.');
             btn.innerHTML = orig;
             btn.disabled  = false;
@@ -570,25 +794,13 @@ function handleComboForm(formId) {
 }
 
 /* ────────────────────────────────────────────────
-   Dynamic Filtering for Stat Cards
-   ──────────────────────────────────────────────── */
+   Stat Card Filtering
+──────────────────────────────────────────────── */
 window.filterCombos = function(filter) {
-    const rows = document.querySelectorAll('.combo-row');
-    let count = 0;
-    
-    rows.forEach(row => {
+    document.querySelectorAll('.combo-row').forEach(row => {
         const isActive = row.dataset.active === '1';
-        
-        if (filter === 'all') {
-            row.style.display = '';
-            count++;
-        } else if (filter === 'active') {
-            row.style.display = isActive ? '' : 'none';
-            if (isActive) count++;
-        }
+        row.style.display = (filter === 'all' || (filter === 'active' && isActive)) ? '' : 'none';
     });
-    
-    // Smooth scroll to table
     document.querySelector('.products-table-wrapper').scrollIntoView({ behavior: 'smooth' });
 };
 

@@ -25,6 +25,41 @@ const ReportsEngine = {
                 this.load(this.currentRange);
             });
         });
+
+        document.querySelectorAll('.summary-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const currentCard = e.currentTarget;
+                
+                // Toggle active class on cards
+                document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
+                currentCard.classList.add('active');
+                
+                // Determine target chart ID based on card type
+                let targetChartId = '';
+                if (currentCard.classList.contains('revenue') || currentCard.classList.contains('orders')) {
+                    targetChartId = 'revenueChart';
+                } else if (currentCard.classList.contains('units')) {
+                    targetChartId = 'unitsChart';
+                } else if (currentCard.classList.contains('aov')) {
+                    targetChartId = 'aovChart';
+                }
+                
+                if (targetChartId) {
+                    const chartElement = document.getElementById(targetChartId);
+                    if (chartElement) {
+                        const chartCard = chartElement.closest('.chart-card');
+                        if (chartCard) {
+                            chartCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Apply animation highlight class
+                            chartCard.classList.remove('chart-card-highlight');
+                            void chartCard.offsetWidth; // trigger reflow
+                            chartCard.classList.add('chart-card-highlight');
+                        }
+                    }
+                }
+            });
+        });
     },
 
     load(range) {
@@ -54,10 +89,10 @@ const ReportsEngine = {
         set('kpi-units',   fmt(data.units));
         set('kpi-aov',     `₹ ${fmt(data.aov)}`);
 
-        this.setGrowth('trend-revenue', data.growth ?? 0);
-        this.setGrowth('trend-orders',  data.growth ?? 0);
-        this.setGrowth('trend-units',   data.growth ?? 0);
-        this.setGrowth('trend-aov',     data.growth ?? 0);
+        this.setGrowth('trend-revenue', data.revenue_growth ?? 0);
+        this.setGrowth('trend-orders',  data.orders_growth ?? 0);
+        this.setGrowth('trend-units',   data.units_growth ?? 0);
+        this.setGrowth('trend-aov',     data.aov_growth ?? 0);
     },
 
     setGrowth(id, pct) {
@@ -77,8 +112,9 @@ const ReportsEngine = {
 
             const dates   = result.data.map(r => r.date);
             const revenue = result.data.map(r => parseFloat(r.revenue));
+            const orders  = result.data.map(r => parseInt(r.orders ?? 0));
 
-            this.renderAreaChart('revenue', 'revenueChart', 'Revenue (₹)', dates, revenue, '#A02040');
+            this.renderRevenueOrdersChart(dates, revenue, orders);
         } catch(e) { console.error('Revenue chart failed:', e); }
     },
 
@@ -137,6 +173,101 @@ const ReportsEngine = {
             });
             this.charts.category.render();
         } catch(e) { console.error('Category chart failed:', e); }
+    },
+
+    renderRevenueOrdersChart(dates, revenue, orders) {
+        const key = 'revenue';
+        const elementId = 'revenueChart';
+        
+        if (this.charts[key]) {
+            this.charts[key].updateSeries([
+                { name: 'Revenue (₹)', data: revenue },
+                { name: 'Orders', data: orders }
+            ]);
+            this.charts[key].updateOptions({ xaxis: { categories: dates } });
+            return;
+        }
+
+        this.charts[key] = new ApexCharts(document.getElementById(elementId), {
+            series: [
+                {
+                    name: 'Revenue (₹)',
+                    type: 'area',
+                    data: revenue
+                },
+                {
+                    name: 'Orders',
+                    type: 'line',
+                    data: orders
+                }
+            ],
+            chart: {
+                height: 280,
+                type: 'line',
+                stacked: false,
+                toolbar: { show: false },
+                zoom: { enabled: false }
+            },
+            colors: ['#A02040', '#1565C0'],
+            stroke: {
+                width: [2, 3],
+                curve: 'smooth'
+            },
+            fill: {
+                type: ['gradient', 'solid'],
+                gradient: {
+                    type: 'vertical',
+                    opacityFrom: [0.35, 1],
+                    opacityTo: [0.05, 1],
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: dates,
+                labels: { style: { fontSize: '10px' } }
+            },
+            yaxis: [
+                {
+                    title: {
+                        text: 'Revenue (₹)',
+                        style: { color: '#A02040' }
+                    },
+                    labels: {
+                        style: { colors: '#A02040', fontSize: '10px' },
+                        formatter: val => '₹' + Number(val).toLocaleString('en-IN', { maximumFractionDigits: 0 })
+                    }
+                },
+                {
+                    opposite: true,
+                    title: {
+                        text: 'Orders',
+                        style: { color: '#1565C0' }
+                    },
+                    labels: {
+                        style: { colors: '#1565C0', fontSize: '10px' },
+                        formatter: val => Math.round(val)
+                    }
+                }
+            ],
+            grid: {
+                borderColor: '#f1f1f1'
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (y, { seriesIndex }) {
+                        if (typeof y !== "undefined") {
+                            return seriesIndex === 0 ? '₹' + y.toLocaleString('en-IN') : y + ' orders';
+                        }
+                        return y;
+                    }
+                }
+            }
+        });
+        this.charts[key].render();
     },
 
     // ── Generic Chart Helpers ────────────────────────────────

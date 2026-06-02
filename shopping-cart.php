@@ -151,6 +151,12 @@ $couponTitle    = $cartService->getCouponTitle();
 $discount       = ($subtotal > 1500 ? 100 : 0) + $couponDiscount;
 $total          = max(0, $cartService->getTotal() - ($subtotal > 1500 ? 100 : 0));
 
+$seoContext = [
+    'title' => 'Your Shopping Cart | ' . SITE_NAME,
+    'description' => 'Review your selected authentic traditional sweets and namkeens before secure checkout.',
+    'canonical' => BASE_URL . 'shopping-cart.php',
+    'type' => 'website'
+];
 require_once 'includes/header.php';
 ?>
 
@@ -167,9 +173,9 @@ require_once 'includes/header.php';
         </nav>
 
         <!-- ── Page Title ── -->
-        <h2 class="sc-page-title mb-4">
+        <h1 class="sc-page-title mb-4">
             Shopping Cart <span class="sc-page-title__count">(<?php echo count($cartItems); ?> items)</span>
-        </h2>
+        </h1>
 
         <div class="row g-4 align-items-start">
 
@@ -214,9 +220,15 @@ require_once 'includes/header.php';
 
                             <!-- Qty Controls -->
                             <div class="sc-item-card__qty">
-                                <a href="<?php echo BASE_URL; ?>shopping-cart.php?action=update&id=<?php echo urlencode($cartKey); ?>&qty=<?php echo $item['quantity'] - 1; ?>" class="sc-qty-btn">
-                                    <i class="bi bi-dash"></i>
-                                </a>
+                                <?php if ($item['quantity'] <= 1): ?>
+                                    <a href="<?php echo BASE_URL; ?>shopping-cart.php?action=update&id=<?php echo urlencode($cartKey); ?>&qty=0" class="sc-qty-btn sc-qty-btn--remove text-danger js-qty-remove-btn" title="Remove item">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?php echo BASE_URL; ?>shopping-cart.php?action=update&id=<?php echo urlencode($cartKey); ?>&qty=<?php echo $item['quantity'] - 1; ?>" class="sc-qty-btn">
+                                        <i class="bi bi-dash"></i>
+                                    </a>
+                                <?php endif; ?>
                                 <span class="sc-qty-val"><?php echo $item['quantity']; ?></span>
                                 <a href="<?php echo BASE_URL; ?>shopping-cart.php?action=update&id=<?php echo urlencode($cartKey); ?>&qty=<?php echo $item['quantity'] + 1; ?>" class="sc-qty-btn">
                                     <i class="bi bi-plus"></i>
@@ -358,6 +370,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.isConfirmed) { form.submit(); }
             });
         });
+    });
+
+    // ── Remove item via quantity minus button ────────────────
+    document.querySelectorAll('.js-qty-remove-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const url = this.getAttribute('href');
+            Swal.fire({
+                title: 'Remove item?',
+                text: 'Do you want to remove this item from your cart?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#7b1d1d',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'Cancel'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    document.body.style.opacity = '0.6';
+                    document.body.style.pointerEvents = 'none';
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+
+    // ── Prevent double clicks/rapid clicks on quantity buttons ────────────────
+    document.querySelectorAll('.sc-qty-btn').forEach(function (btn) {
+        if (!btn.classList.contains('js-qty-remove-btn')) {
+            btn.addEventListener('click', function (e) {
+                if (btn.classList.contains('is-loading')) {
+                    e.preventDefault();
+                    return;
+                }
+                btn.classList.add('is-loading');
+                const card = btn.closest('.sc-item-card');
+                if (card) {
+                    card.style.opacity = '0.5';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        }
     });
 
     // ── Apply Coupon ──────────────────────────────────────────

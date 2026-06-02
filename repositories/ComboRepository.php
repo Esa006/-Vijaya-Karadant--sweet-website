@@ -27,7 +27,7 @@ class ComboRepository extends BaseRepository {
                        pi.image_path as product_image
                 FROM combos c
                 LEFT JOIN combo_items ci ON c.id = ci.combo_id
-                LEFT JOIN products p ON ci.product_id = p.id
+                LEFT JOIN products p ON ci.product_id = p.id AND p.deleted_at IS NULL
                 LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_main = 1
                 $where
                 ORDER BY c.created_at DESC";
@@ -47,7 +47,7 @@ class ComboRepository extends BaseRepository {
                        pi.image_path as product_image
                 FROM combos c
                 LEFT JOIN combo_items ci ON c.id = ci.combo_id
-                LEFT JOIN products p ON ci.product_id = p.id
+                LEFT JOIN products p ON ci.product_id = p.id AND p.deleted_at IS NULL
                 LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_main = 1
                 WHERE c.is_active = 1 AND LOWER(c.category) = :category
                 ORDER BY c.created_at DESC";
@@ -67,7 +67,7 @@ class ComboRepository extends BaseRepository {
                        pi.image_path as product_image
                 FROM combos c
                 LEFT JOIN combo_items ci ON c.id = ci.combo_id
-                LEFT JOIN products p ON ci.product_id = p.id
+                LEFT JOIN products p ON ci.product_id = p.id AND p.deleted_at IS NULL
                 LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_main = 1
                 WHERE c.id = :id AND c.is_active = 1";
         
@@ -89,7 +89,7 @@ class ComboRepository extends BaseRepository {
                        pi.image_path as product_image
                 FROM combos c
                 LEFT JOIN combo_items ci ON c.id = ci.combo_id
-                LEFT JOIN products p ON ci.product_id = p.id
+                LEFT JOIN products p ON ci.product_id = p.id AND p.deleted_at IS NULL
                 LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_main = 1
                 WHERE c.slug = :slug AND c.is_active = 1";
         
@@ -122,7 +122,7 @@ class ComboRepository extends BaseRepository {
                     'items'       => []
                 ];
             }
-            if ($row['product_id']) {
+            if ($row['product_id'] && $row['product_name'] !== null) {
                 $combos[$comboId]['items'][] = [
                     'product_id' => $row['product_id'],
                     'quantity'   => $row['quantity'],
@@ -260,5 +260,112 @@ class ComboRepository extends BaseRepository {
      */
     public function getAllCombosAdmin(): array {
         return $this->getAllCombos(false);
+    }
+
+    // ── Gallery / Multi-Image Methods ────────────────────────────────────────
+
+    /**
+     * Fetch all gallery images for a combo, ordered by sort_order then id
+     */
+    public function getImagesForCombo(int $comboId): array {
+        $sql = "SELECT id, combo_id, image_path, is_primary, sort_order, created_at
+                FROM combo_images
+                WHERE combo_id = :combo_id
+                ORDER BY sort_order ASC, id ASC";
+        return $this->fetchAll($sql, [':combo_id' => $comboId]);
+    }
+
+    /**
+     * Insert a new gallery image; if is_primary, clear existing primary first
+     */
+    public function addImage(int $comboId, string $imagePath, bool $isPrimary = false, int $sortOrder = 0): int {
+        if ($isPrimary) {
+            $this->execute(
+                "UPDATE combo_images SET is_primary = 0 WHERE combo_id = :combo_id",
+                [':combo_id' => $comboId]
+            );
+        }
+        $this->execute(
+            "INSERT INTO combo_images (combo_id, image_path, is_primary, sort_order)
+             VALUES (:combo_id, :image_path, :is_primary, :sort_order)",
+            [
+                ':combo_id'   => $comboId,
+                ':image_path' => $imagePath,
+                ':is_primary' => $isPrimary ? 1 : 0,
+                ':sort_order' => $sortOrder,
+            ]
+        );
+        return (int)$this->db->lastInsertId();
+    }
+
+    /**
+     * Delete a single gallery image by its own id
+     */
+    public function deleteImage(int $imageId): bool {
+        $row = $this->fetchOne(
+            "SELECT combo_id, is_primary FROM combo_images WHERE id = :id",
+            [':id' => $imageId]
+        );
+        if (!$row) return false;
+
+        $this->execute("DELETE FROM combo_images WHERE id = :id", [':id' => $imageId]);
+
+        // If the deleted image was primary, promote the next image automatically
+        if ($row['is_primary']) {
+            $this->execute(
+                "UPDATE combo_images SET is_primary = 1
+                 WHERE combo_id = :combo_id
+                 ORDER BY sort_order ASC, id ASC
+                 LIMIT 1",
+                [':combo_id' => $row['combo_id']]
+            );
+            // Sync combos.image
+            $next = $this->fetchOne(
+                "SELECT image_path FROM combo_images WHERE combo_id = :combo_id AND is_primary = 1",
+                [':combo_id' => $row['combo_id']]
+            );
+            $this->execute(
+                "UPDATE combos SET image = :image WHERE id = :id",
+                [':image' => $next['image_path'] ?? null, ':id' => $row['combo_id']]
+            );
+        }
+        return true;
+    }
+
+    /**
+     * Set a specific gallery image as primary (clears others, syncs combos.image)
+     */
+    public function setPrimaryImage(int $comboId, int $imageId): bool {
+        $this->execute(
+            "UPDATE combo_images SET is_primary = 0 WHERE combo_id = :combo_id",
+            [':combo_id' => $comboId]
+        );
+        $this->execute(
+            "UPDATE combo_images SET is_primary = 1 WHERE id = :id AND combo_id = :combo_id",
+            [':id' => $imageId, ':combo_id' => $comboId]
+        );
+        // Keep combos.image in sync for backward compatibility
+        $row = $this->fetchOne(
+            "SELECT image_path FROM combo_images WHERE id = :id",
+            [':id' => $imageId]
+        );
+        if ($row) {
+            $this->execute(
+                "UPDATE combos SET image = :image WHERE id = :id",
+                [':image' => $row['image_path'], ':id' => $comboId]
+            );
+        }
+        return true;
+    }
+
+    /**
+     * Count images for a combo
+     */
+    public function countImages(int $comboId): int {
+        $row = $this->fetchOne(
+            "SELECT COUNT(*) AS cnt FROM combo_images WHERE combo_id = :combo_id",
+            [':combo_id' => $comboId]
+        );
+        return (int)($row['cnt'] ?? 0);
     }
 }

@@ -19,7 +19,44 @@ $isCheckoutPage = in_array($currentPage, ['checkout.php', 'checkout-v2.php'], tr
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token'] ?? ''; ?>">
-    <title><?php echo SITE_NAME; ?></title>
+    
+    <?php
+    // Dynamic SEO Framework
+    $seoTitle = $seoContext['title'] ?? $pageTitle ?? '';
+    if (empty($seoTitle) || $seoTitle === SITE_NAME) {
+        $filename = basename($_SERVER['PHP_SELF'], '.php');
+        if ($filename === 'index' || $filename === 'index_legacy') {
+            $seoTitle = SITE_NAME;
+        } else {
+            $prettyName = ucwords(str_replace(['-', '_'], ' ', $filename));
+            $seoTitle = $prettyName . ' | ' . SITE_NAME;
+        }
+    }
+    $seoDesc  = $seoContext['description'] ?? $metaDesc ?? SITE_TAGLINE;
+    if (empty(trim($seoDesc))) {
+        $seoDesc = 'Order authentic Gokak Karadant, traditional sweets, and premium namkeens online. Handcrafted with organic jaggery and pure cow ghee since 1952.';
+    }
+    $seoUrl   = $seoContext['canonical'] ?? (BASE_URL . ltrim($_SERVER['REQUEST_URI'], '/'));
+    $seoImage = $seoContext['og_image'] ?? (BASE_URL . SITE_LOGO);
+    ?>
+    <title><?php echo htmlspecialchars($seoTitle); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($seoDesc); ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($seoUrl); ?>">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="<?php echo htmlspecialchars($seoTitle); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($seoDesc); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($seoImage); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($seoUrl); ?>">
+    <meta property="og:type" content="<?php echo $seoContext['type'] ?? 'website'; ?>">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <?php if (!empty($seoContext['schema'])): ?>
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    <?php echo json_encode($seoContext['schema'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
+    </script>
+    <?php endif; ?>
     <link rel="icon" type="image/png" href="<?php echo BASE_URL . SITE_FAVICON; ?>">
     
     <!-- Bootstrap 5.3.0 CDN -->
@@ -61,6 +98,9 @@ $isCheckoutPage = in_array($currentPage, ['checkout.php', 'checkout-v2.php'], tr
     <!-- Main Stylesheet (Now Handles fewer shared sections) -->
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/main.css?v=<?php echo SITE_VERSION; ?>">
     
+    <script>
+        window.BASE_URL = "<?php echo BASE_URL; ?>";
+    </script>
     <script src="<?php echo BASE_URL; ?>assets/js/components/text-animations.js?v=<?php echo SITE_VERSION; ?>" defer></script>
 </head>
 <body class="u-bg-warm">

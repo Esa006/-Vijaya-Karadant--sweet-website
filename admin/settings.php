@@ -241,6 +241,25 @@ $settings = $settingService->getAllSettings();
                             </div>
                         </div>
 
+                        <!-- Order Limits -->
+                        <div class="settings-card-layout mb-4">
+                            <div class="field-group-header d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Order Limits</h5>
+                                    <p class="text-muted small mb-0">Set purchase restrictions per product/combo to protect stock and prevent abuse (similar to Amazon/Flipkart).</p>
+                                </div>
+                                <span class="badge-pill-maroon">Inventory control</span>
+                            </div>
+
+                            <div class="row g-4 mb-2">
+                                <div class="col-md-6">
+                                    <label class="form-label-maroon mb-2">Maximum Quantity per Product/Combo (per Order)</label>
+                                    <input type="number" min="1" class="form-control-maroon" id="store_max_qty_limit" value="<?php echo htmlspecialchars($settings['store_max_qty_limit'] ?? '10'); ?>">
+                                    <p class="text-muted extra-small mt-2">Customers cannot add more than this quantity of a single product variant or combo to their cart in one order.</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Final confirmation banner -->
                         <div class="save-confirmation-ready">
                             <div class="d-flex align-items-center gap-3">

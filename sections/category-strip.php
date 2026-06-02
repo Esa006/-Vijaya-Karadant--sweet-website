@@ -24,9 +24,16 @@ $stripCategories[] = [
 
 // 2. Dynamic DB Categories
 foreach ($dbCategories as $cat) {
+    $catSlug = strtolower(trim($cat['slug']));
+    $targetFile = ROOT_PATH . '/' . $catSlug . '.php';
+    if (file_exists($targetFile)) {
+        $url = BASE_URL . $catSlug . '.php';
+    } else {
+        $url = BASE_URL . 'category-products.php?slug=' . urlencode($catSlug);
+    }
     $stripCategories[] = [
         'name' => $cat['name'],
-        'url' => BASE_URL . htmlspecialchars($cat['slug']) . '.php',
+        'url' => $url,
         'image' => BASE_URL . ($cat['image_path'] ?? 'assets/images/placeholder.png'),
     ];
 }

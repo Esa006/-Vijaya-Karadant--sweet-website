@@ -217,7 +217,16 @@ $jsVariants = array_map(function($v) use ($currentProduct, $oldPrice) {
     ];
 }, $productVariants);
 ?>
-<?php require_once 'includes/header.php'; ?>
+<?php
+// Build dynamic SEO context for Cart page
+$seoContext = [
+    'title' => htmlspecialchars($currentProduct['name'] ?? 'Product') . ' - Buy Now | ' . SITE_NAME,
+    'description' => htmlspecialchars(strip_tags($currentProduct['short_description'] ?? '')),
+    'canonical' => BASE_URL . 'cart.php?slug=' . urlencode((string)($currentProduct['slug'] ?? '')),
+    'type' => 'product'
+];
+require_once 'includes/header.php'; 
+?>
 
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/pages/cart.css?v=<?php echo SITE_VERSION; ?>">
 
@@ -728,10 +737,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Phase 1: Variant State Model & Atomic Sync ---
     const variantData = <?php echo json_encode($jsVariants); ?>;
+    window.cartItems = <?php echo json_encode($cartService->getItems()); ?>;
     let selectedVariant = null;
+    let customQty = 1;
+    let isCartUpdating = false;
 
     function formatINR(amount) {
         return '₹' + Math.round(amount).toLocaleString('en-IN');
+    }
+
+    function getCartQtyForSelected() {
+        if (!window.cartItems) return 0;
+        const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+        const isCombo = <?php echo !empty($currentProduct['is_combo']) ? 'true' : 'false'; ?>;
+        
+        if (isCombo) {
+            const key = 'combo-' + slug;
+            return window.cartItems[key] ? window.cartItems[key].quantity : 0;
+        } else {
+            const weight = document.getElementById('form-weight').value;
+            const key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+            return window.cartItems[key] ? window.cartItems[key].quantity : 0;
+        }
+    }
+
+    function syncQtyDisplay() {
+        const cartQty = getCartQtyForSelected();
+        const qtyValueDisplay = document.getElementById('qtyValue');
+        const formQty = document.getElementById('form-qty');
+        const minusBtn = document.getElementById('minusBtn');
+        
+        customQty = cartQty > 0 ? cartQty : 1;
+        if (qtyValueDisplay) qtyValueDisplay.textContent = customQty;
+        if (formQty) formQty.value = customQty;
+
+        // Update "-" button icon: if cartQty is 1, show red trash icon
+        if (minusBtn) {
+            if (cartQty === 1) {
+                minusBtn.innerHTML = '<i class="bi bi-trash text-danger" style="font-size:1.1rem;display:inline-block;vertical-align:middle;"></i>';
+                minusBtn.setAttribute('title', 'Remove from cart');
+            } else {
+                minusBtn.innerHTML = '−';
+                minusBtn.removeAttribute('title');
+            }
+        }
+
+        // Update Add to Cart / Buy Now button text if in cart
+        const addBtn = document.querySelector('.ch-btn-primary');
+        if (addBtn) {
+            if (cartQty > 0) {
+                addBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+                        <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    In Cart`;
+                addBtn.classList.add('in-cart');
+            } else {
+                addBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.95c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.58 5H6.21L5.27 3H2v2h1.99l3.6 7.59-1.35 2.45A1.99 1.99 0 0 0 8 18h12v-2H8l1.17-2Z"/>
+                    </svg>
+                    Add to Cart`;
+                addBtn.classList.remove('in-cart');
+            }
+        }
     }
 
     function renderVariantState(variant) {
@@ -789,23 +858,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (recoveryCard) recoveryCard.style.display = isOut ? '' : 'none';
         if (purchaseForm) purchaseForm.style.display = isOut ? 'none' : '';
 
-        if (isOut) {
-            const recoveryTitle = document.getElementById('variantUnavailableTitle');
-            const recoveryDate = document.getElementById('variantRestockDate');
-            const preorderBtn = document.getElementById('preorderBtn');
-            if (recoveryTitle) recoveryTitle.textContent = `${variant.label} currently unavailable`;
-            if (recoveryDate) recoveryDate.textContent = variant.restock_eta || 'TBD';
-            if (preorderBtn) preorderBtn.style.display = variant.preorder_enabled ? '' : 'none';
-        } else {
-            // Update quantity constraints based on stock
-            const qtyValueDisplay = document.getElementById('qtyValue');
-            const formQty = document.getElementById('form-qty');
-            let currentQty = parseInt(qtyValueDisplay?.textContent || '1', 10);
-            if (currentQty > variant.stock) {
-                currentQty = variant.stock;
-                if (qtyValueDisplay) qtyValueDisplay.textContent = String(currentQty);
-                if (formQty) formQty.value = String(currentQty);
-            }
+        if (!isOut) {
+            // Sync displayed quantity with variant selection
+            syncQtyDisplay();
         }
 
         // 4. Update Button Visual States (active class)
@@ -813,8 +868,6 @@ document.addEventListener('DOMContentLoaded', function() {
         variantButtons.forEach(btn => {
             const btnWeight = btn.dataset.weight;
             btn.classList.toggle('active', btnWeight === String(variant.weight));
-            
-            // Phase 2 Hint: You could also update the stock chips here
         });
     }
 
@@ -832,20 +885,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialVariant = variantData.find(v => String(v.weight) === initialWeight) || variantData[0];
     renderVariantState(initialVariant);
 
-    let customQty = 1;
     const qtyValueDisplay = document.getElementById('qtyValue');
     const formQty = document.getElementById('form-qty');
-
     const maxAllowedLimit = 10; // Retail cap like Flipkart
     
     document.getElementById('minusBtn')?.addEventListener('click', () => {
-      customQty = Math.max(1, customQty - 1);
-      if (qtyValueDisplay) qtyValueDisplay.textContent = customQty;
-      if (formQty) formQty.value = customQty;
+        if (isCartUpdating) return;
+
+        const cartQty = getCartQtyForSelected();
+        if (cartQty === 1) {
+            Swal.fire({
+                title: 'Remove item?',
+                text: 'Do you want to remove this item from your cart?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#7b1d1d',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajaxCartAction('remove', 0);
+                }
+            });
+            return;
+        }
+
+        customQty = Math.max(1, customQty - 1);
+        if (qtyValueDisplay) qtyValueDisplay.textContent = customQty;
+        if (formQty) formQty.value = customQty;
+
+        if (cartQty > 0) {
+            ajaxCartAction('update', customQty);
+        }
     });
 
     document.getElementById('plusBtn')?.addEventListener('click', () => {
-        // Find the actual ceiling for this item
+        if (isCartUpdating) return;
+
+        const cartQty = getCartQtyForSelected();
         const variantStock = selectedVariant && selectedVariant.stock > 0 ? selectedVariant.stock : maxAllowedLimit;
         const actualLimit = Math.min(maxAllowedLimit, variantStock);
         
@@ -866,6 +944,185 @@ document.addEventListener('DOMContentLoaded', function() {
         customQty++;
         if (qtyValueDisplay) qtyValueDisplay.textContent = customQty;
         if (formQty) formQty.value = customQty;
+
+        if (cartQty > 0) {
+            ajaxCartAction('update', customQty);
+        }
+    });
+
+    function updateHeaderCartCount(count) {
+        let badge = document.querySelector('.js-cart-count');
+        const cartIconLink = document.querySelector('a[href*="shopping-cart.php"]');
+        
+        if (count > 0) {
+            if (!badge && cartIconLink) {
+                badge = document.createElement('span');
+                badge.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger js-cart-count';
+                badge.style.fontSize = '10px';
+                cartIconLink.classList.add('position-relative');
+                cartIconLink.appendChild(badge);
+            }
+            if (badge) {
+                badge.innerText = count;
+                badge.style.display = '';
+            }
+        } else {
+            if (badge) {
+                badge.remove();
+            }
+        }
+    }
+
+    function ajaxCartAction(action, qty) {
+        if (isCartUpdating) return;
+        isCartUpdating = true;
+
+        const qtyContainer = document.querySelector('.ch-qty');
+        if (qtyContainer) qtyContainer.style.opacity = '0.5';
+
+        const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+        const isCombo = <?php echo !empty($currentProduct['is_combo']) ? 'true' : 'false'; ?>;
+        let key = '';
+        if (isCombo) {
+            key = 'combo-' + slug;
+        } else {
+            const weight = document.getElementById('form-weight').value;
+            key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+        }
+
+        const formData = new FormData();
+        formData.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
+        
+        if (action === 'remove') {
+            formData.append('action', 'remove');
+            formData.append('id', key);
+        } else if (action === 'update') {
+            formData.append('action', 'update');
+            formData.append('id', key);
+            formData.append('qty', qty);
+        }
+
+        fetch('cart-ajax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+            isCartUpdating = false;
+            if (qtyContainer) qtyContainer.style.opacity = '1';
+
+            if (data.clamped) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Stock Limit Reached',
+                    text: data.message,
+                    confirmButtonColor: '#7b1d1d'
+                });
+                
+                if (!window.cartItems) window.cartItems = {};
+                window.cartItems[key] = { quantity: data.clampedQty };
+                updateHeaderCartCount(data.cartCount);
+                syncQtyDisplay();
+                return;
+            }
+
+            if (data.success) {
+                if (action === 'remove') {
+                    if (window.cartItems) delete window.cartItems[key];
+                } else {
+                    if (!window.cartItems) window.cartItems = {};
+                    window.cartItems[key] = { quantity: qty };
+                }
+                
+                updateHeaderCartCount(data.cartCount);
+                syncQtyDisplay();
+            } else {
+                alert(data.message || 'Failed to update cart.');
+                syncQtyDisplay();
+            }
+        })
+        .catch(() => {
+            isCartUpdating = false;
+            if (qtyContainer) qtyContainer.style.opacity = '1';
+            alert('Error communicating with the server.');
+            syncQtyDisplay();
+        });
+    }
+
+    // Intercept form submission
+    document.getElementById('add-to-cart-form')?.addEventListener('submit', function(e) {
+        const action = e.submitter ? e.submitter.value : '';
+        if (action === 'add_to_cart') {
+            e.preventDefault();
+            if (isCartUpdating) return;
+            isCartUpdating = true;
+
+            const addBtn = document.querySelector('.ch-btn-primary');
+            let originalBtnHtml = '';
+            if (addBtn) {
+                originalBtnHtml = addBtn.innerHTML;
+                addBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Adding...';
+                addBtn.disabled = true;
+            }
+
+            const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+            const qty = parseInt(document.getElementById('form-qty').value) || 1;
+            const weight = document.getElementById('form-weight').value;
+            const isCombo = <?php echo !empty($currentProduct['is_combo']) ? 'true' : 'false'; ?>;
+            let key = '';
+            if (isCombo) {
+                key = 'combo-' + slug;
+            } else {
+                key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'add');
+            formData.append('slug', slug);
+            formData.append('quantity', qty);
+            formData.append('weight', weight);
+            formData.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
+
+            fetch('cart-ajax.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => {
+                isCartUpdating = false;
+                if (addBtn) {
+                    addBtn.innerHTML = originalBtnHtml;
+                    addBtn.disabled = false;
+                }
+                return r.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    if (!window.cartItems) window.cartItems = {};
+                    window.cartItems[key] = { quantity: qty };
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to cart!',
+                        text: 'Product successfully added to your shopping cart.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    updateHeaderCartCount(data.cartCount);
+                    syncQtyDisplay();
+                } else {
+                    alert(data.message || 'Failed to add item to cart.');
+                }
+            })
+            .catch(() => {
+                isCartUpdating = false;
+                if (addBtn) {
+                    addBtn.innerHTML = originalBtnHtml;
+                    addBtn.disabled = false;
+                }
+                alert('Error communicating with the server.');
+            });
+        }
     });
 
     // --- Policy Popup Logic ---

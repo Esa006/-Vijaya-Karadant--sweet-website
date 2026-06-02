@@ -349,3 +349,47 @@
         gap: var(--space-lg);
     }
 }
+
+/* Interactivity styles for summary cards */
+.summary-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+    border: 2px solid transparent !important;
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.summary-card.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.summary-card.revenue.active {
+    border-color: var(--primary) !important;
+}
+
+.summary-card.orders.active {
+    border-color: var(--info) !important;
+}
+
+.summary-card.units.active {
+    border-color: var(--success) !important;
+}
+
+.summary-card.aov.active {
+    border-color: var(--warning) !important;
+}
+
+/* Flash animation to highlight charts when clicked */
+@keyframes chartHighlight {
+    0% { box-shadow: 0 0 0 0px rgba(139, 21, 56, 0); }
+    50% { box-shadow: 0 0 0 6px rgba(139, 21, 56, 0.25); }
+    100% { box-shadow: 0 0 0 0px rgba(139, 21, 56, 0); }
+}
+
+.chart-card-highlight {
+    animation: chartHighlight 1s ease;
+}

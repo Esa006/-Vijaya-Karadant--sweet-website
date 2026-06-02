@@ -321,9 +321,10 @@ class OrderService {
     }
 
     private function cancelOrder(int $orderId, string $currentStatus): void {
+        $items = $this->orderRepo->getItemsByOrderId($orderId);
+        
         if ($currentStatus === 'pending') {
             // Release reserved stock back to physical
-            $items = $this->orderRepo->getItemsByOrderId($orderId);
             foreach ($items as $item) {
                 if (isset($item['item_type']) && $item['item_type'] === 'combo' && !empty($item['combo_id'])) {
                     $db = Database::getInstance();
@@ -337,8 +338,22 @@ class OrderService {
                     $this->inventory->releaseStock((int)$item['product_id'], (int)$item['quantity']);
                 }
             }
+        } else if (in_array($currentStatus, ['paid', 'processing', 'shipped'])) {
+            // Order was already finalized. Stock was permanently deducted. Add it back to physical stock.
+            foreach ($items as $item) {
+                if (isset($item['item_type']) && $item['item_type'] === 'combo' && !empty($item['combo_id'])) {
+                    $db = Database::getInstance();
+                    $stmt = $db->prepare("SELECT product_id, quantity FROM combo_items WHERE combo_id = ?");
+                    $stmt->execute([$item['combo_id']]);
+                    $children = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($children as $child) {
+                        $this->inventory->increaseStock((int)$child['product_id'], (int)$child['quantity'] * (int)$item['quantity']);
+                    }
+                } else if (!empty($item['product_id'])) {
+                    $this->inventory->increaseStock((int)$item['product_id'], (int)$item['quantity']);
+                }
+            }
         }
-        // If PAID, handle refund placeholder
     }
 
     public function deleteOrder(int $orderId): bool {

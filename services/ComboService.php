@@ -3,7 +3,7 @@
  * Sweets Website
  * =============================================================
  * File: services/ComboService.php
- * Description: Business Logic and Pricing for Combos (with Admin CRUD)
+ * Description: Business Logic and Pricing for Combos (with Admin CRUD + Gallery)
  * =============================================================
  */
 
@@ -20,15 +20,15 @@ class ComboService {
     // ── Read Methods ─────────────────────────────────────────────────────────
 
     /**
-     * Get all active combos enriched with pricing logic (for frontend)
+     * Get all active combos enriched with pricing and gallery (for frontend)
      */
     public function getAllCombos(): array {
         $combos = $this->repo->getAllCombos();
-        return array_map([$this, 'calculatePricing'], $combos);
+        return array_map([$this, 'enrichWithGallery'], $combos);
     }
 
     /**
-     * Get all combos including inactive (for admin listing)
+     * Get all combos including inactive (for admin listing — no gallery for speed)
      */
     public function getAllCombosAdmin(): array {
         $combos = $this->repo->getAllCombos(false);
@@ -36,27 +36,27 @@ class ComboService {
     }
 
     /**
-     * Get combos by category
+     * Get combos by category (with gallery)
      */
     public function getCombosByCategory(string $category): array {
         $combos = $this->repo->getCombosByCategory($category);
-        return array_map([$this, 'calculatePricing'], $combos);
+        return array_map([$this, 'enrichWithGallery'], $combos);
     }
 
     /**
-     * Get a combo by ID (with pricing)
+     * Get a combo by ID (with pricing + gallery)
      */
     public function getComboById(int $id): ?array {
         $combo = $this->repo->getById($id);
-        return $combo ? $this->calculatePricing($combo) : null;
+        return $combo ? $this->enrichWithGallery($combo) : null;
     }
 
     /**
-     * Get a combo by Slug (with pricing)
+     * Get a combo by Slug (with pricing + gallery)
      */
     public function getComboBySlug(string $slug): ?array {
         $combo = $this->repo->getBySlug($slug);
-        return $combo ? $this->calculatePricing($combo) : null;
+        return $combo ? $this->enrichWithGallery($combo) : null;
     }
 
     /**
@@ -64,6 +64,15 @@ class ComboService {
      */
     public function getComboStats(): array {
         return $this->repo->getStats();
+    }
+
+    // ── Gallery Read ──────────────────────────────────────────────────────────
+
+    /**
+     * Get all gallery images for a combo
+     */
+    public function getComboImages(int $comboId): array {
+        return $this->repo->getImagesForCombo($comboId);
     }
 
     // ── Admin Write Methods ─────────────────────────────────────────────────
@@ -75,7 +84,7 @@ class ComboService {
         // 1. Image upload
         $imagePath = null;
         if ($imageFile && !empty($imageFile['tmp_name'])) {
-            $fs = new FileService('combos');
+            $fs        = new FileService('combos');
             $imagePath = $fs->upload($imageFile);
         }
 
@@ -100,6 +109,11 @@ class ComboService {
             $this->repo->syncItems($comboId, $data['items']);
         }
 
+        // 5. Seed combo_images with the uploaded primary image
+        if ($comboId > 0 && $imagePath) {
+            $this->repo->addImage($comboId, $imagePath, true, 0);
+        }
+
         return $comboId;
     }
 
@@ -117,10 +131,12 @@ class ComboService {
 
         // Update image only if a new file is uploaded
         if ($imageFile && !empty($imageFile['tmp_name'])) {
-            $fs = new FileService('combos');
+            $fs      = new FileService('combos');
             $newPath = $fs->upload($imageFile);
             if ($newPath) {
                 $updateRow['image'] = $newPath;
+                // Add to gallery as new primary
+                $this->repo->addImage($id, $newPath, true, 0);
             }
         }
 
@@ -135,6 +151,51 @@ class ComboService {
     }
 
     /**
+     * Upload a gallery image for a combo (AJAX call from admin)
+     */
+    public function uploadComboImage(int $comboId, array $file, bool $makePrimary = false): array {
+        if (empty($file['tmp_name'])) {
+            return ['success' => false, 'message' => 'No file received.'];
+        }
+
+        $fs   = new FileService('combos');
+        $path = $fs->upload($file);
+        if (!$path) {
+            return ['success' => false, 'message' => 'File upload failed.'];
+        }
+
+        // If this is the first image for the combo, force it primary
+        $isFirst = ($this->repo->countImages($comboId) === 0);
+        $imgId   = $this->repo->addImage($comboId, $path, $makePrimary || $isFirst, 0);
+
+        // Keep combos.image in sync if making primary
+        if ($makePrimary || $isFirst) {
+            $this->repo->update($comboId, ['image' => $path]);
+        }
+
+        return [
+            'success'    => true,
+            'id'         => $imgId,
+            'image_path' => $path,
+            'is_primary' => ($makePrimary || $isFirst) ? 1 : 0,
+        ];
+    }
+
+    /**
+     * Delete a gallery image
+     */
+    public function deleteComboImage(int $imageId): bool {
+        return $this->repo->deleteImage($imageId);
+    }
+
+    /**
+     * Set primary gallery image for a combo
+     */
+    public function setPrimaryComboImage(int $comboId, int $imageId): bool {
+        return $this->repo->setPrimaryImage($comboId, $imageId);
+    }
+
+    /**
      * Soft-delete a combo (set inactive)
      */
     public function deleteCombo(int $id): bool {
@@ -142,6 +203,15 @@ class ComboService {
     }
 
     // ── Private Helpers ─────────────────────────────────────────────────────
+
+    /**
+     * Enrich a combo with gallery images and pricing
+     */
+    private function enrichWithGallery(array $combo): array {
+        $combo            = $this->calculatePricing($combo);
+        $combo['gallery'] = $this->repo->getImagesForCombo((int)$combo['id']);
+        return $combo;
+    }
 
     /**
      * Apply dynamic pricing and calculate savings
@@ -186,9 +256,9 @@ class ComboService {
      * Generate a unique slug from a name
      */
     private function generateUniqueSlug(string $name): string {
-        $base  = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
-        $slug  = $base;
-        $i     = 1;
+        $base = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+        $slug = $base;
+        $i    = 1;
         while ($this->repo->slugExists($slug)) {
             $slug = $base . '-' . $i++;
         }

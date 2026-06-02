@@ -12,11 +12,7 @@ require_once ROOT_PATH . '/services/AdminNotificationService.php';
 
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'error' => 'Unauthorized']);
-    exit;
-}
+require_once dirname(__DIR__) . '/includes/auth.php';
 
 $input = json_decode(file_get_contents('php://input'), true) ?: [];
 $id    = isset($input['id'])     ? (int)$input['id']     : 0;

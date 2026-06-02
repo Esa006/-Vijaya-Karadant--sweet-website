@@ -59,11 +59,15 @@ if ($method === 'POST') {
         exit;
     }
 
-    $stmt = $db->prepare("INSERT INTO product_variants (product_id, weight, label, price, stock) VALUES (:pid, :w, :l, :p, :s)");
-    $stmt->execute([':pid' => $productId, ':w' => $weight, ':l' => $label, ':p' => $price, ':s' => $stock]);
-    $newId = $db->lastInsertId();
+    try {
+        $stmt = $db->prepare("INSERT INTO product_variants (product_id, weight, label, price, stock) VALUES (:pid, :w, :l, :p, :s)");
+        $stmt->execute([':pid' => $productId, ':w' => $weight, ':l' => $label, ':p' => $price, ':s' => $stock]);
+        $newId = $db->lastInsertId();
 
-    echo json_encode(['status' => 'success', 'message' => 'Variant added successfully.', 'id' => $newId]);
+        echo json_encode(['status' => 'success', 'message' => 'Variant added successfully.', 'id' => $newId]);
+    } catch (Exception $e) {
+        echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $e->getMessage()]);
+    }
     exit;
 }
 

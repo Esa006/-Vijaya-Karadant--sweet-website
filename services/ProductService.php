@@ -251,14 +251,16 @@ class ProductService {
                 if ($basePrice === 0) $basePrice = 500;
             }
 
+            // Always append standard weights if missing so UI can show them as crossed-out (Ajio style)
             foreach ($standardWeights as $weight) {
                 if (!in_array($weight, $existingWeights)) {
                     $multiplier = 1;
                     if ($weight === '250g') $multiplier = 0.55; 
                     if ($weight === '1kg') $multiplier = 1.95; 
                     
-                    $simulatedStock = 100;
-                    $simulatedStatus = 'published';
+                    // Set simulated stock to 0 so it gets crossed out in UI
+                    $simulatedStock = 0;
+                    $simulatedStatus = 'published'; // Must be 'published' to avoid being filtered out in product-detail.php
                     
                     $dbVariants[] = [
                         'id' => 0,
@@ -282,6 +284,8 @@ class ProductService {
                 $valB = $order[$b['weight'] ?? ''] ?? 99;
                 return $valA <=> $valB;
             });
+
+
 
             return $dbVariants;
         } catch (Exception $e) {

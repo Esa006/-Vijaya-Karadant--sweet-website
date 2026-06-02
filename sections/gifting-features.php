@@ -16,7 +16,7 @@
 
         <p class="mb-5 mx-auto text-white"
             style="max-width: 800px; font-size: 1.1rem; line-height: 1.6; opacity: 0.95;">
-            At MithaiLux, we believe that gifting is an expression of the heart. Our packaging is<br
+            At <?php echo SITE_NAME; ?>, we believe that gifting is an expression of the heart. Our packaging is<br
                 class="d-none d-md-block">
             designed to be as premium as our sweets, ensuring a truly royal experience from<br
                 class="d-none d-md-block">

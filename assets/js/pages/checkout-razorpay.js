@@ -86,14 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Handle UPI — open our custom QR modal
-            if (selectedMethod === 'upi') {
-                resetBtn();
-                const amount = window._upiAmount || 0;
-                UpiPayment.initiate(amount, 0, checkoutFormData);
-                return;
-            }
-
             // 1. Create Order on Server
             const orderRes = await fetch('api/razorpay/create-order.php', {
                 method: 'POST',
@@ -111,6 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!orderData.success) {
                 throw new Error(orderData.message || 'Failed to initialize payment');
+            }
+
+            // Handle UPI — open our custom QR modal
+            if (selectedMethod === 'upi') {
+                resetBtn();
+                const amount = window._upiAmount || 0;
+                UpiPayment.initiate(amount, orderData.db_order_id, checkoutFormData);
+                return;
             }
 
             // 2. Razorpay Options

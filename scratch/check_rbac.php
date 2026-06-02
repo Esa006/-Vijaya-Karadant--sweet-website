@@ -1,19 +1,8 @@
 <?php
-require_once 'config/config.php';
-use App\Core\Database;
+require_once __DIR__ . '/../config/config.php';
 
-try {
-    $tables = ['roles', 'permissions', 'role_permissions', 'user_roles', 'user_permissions'];
-    foreach ($tables as $table) {
-        $stmt = Database::query("SHOW TABLES LIKE ?", [$table]);
-        if ($stmt->fetch()) {
-            echo "Table '$table' exists.\n";
-            $count = Database::query("SELECT COUNT(*) FROM $table")->fetchColumn();
-            echo " - Row count: $count\n";
-        } else {
-            echo "Table '$table' DOES NOT exist.\n";
-        }
-    }
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage() . "\n";
-}
+$db = Database::getInstance();
+
+echo "\n=== USER ROLES ===\n";
+$stmt = $db->query("SELECT ur.*, u.full_name, u.email, r.slug as role_slug FROM user_roles ur JOIN users u ON ur.user_id = u.id JOIN roles r ON ur.role_id = r.id");
+print_r($stmt->fetchAll(PDO::FETCH_ASSOC));

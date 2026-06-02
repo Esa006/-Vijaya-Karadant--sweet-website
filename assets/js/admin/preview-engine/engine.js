@@ -64,8 +64,17 @@ export class PreviewEngine {
 
         if (result.status === 'success') {
             const normalizedData = this.normalizeProductData(result.data);
+            
+            // Auto-select first variant if none is selected
+            const currentState = this.stateManager.getState();
+            let selectedVariant = currentState.selectedVariant;
+            if (!selectedVariant && normalizedData.variants && normalizedData.variants.length > 0) {
+                selectedVariant = normalizedData.variants[0];
+            }
+
             this.stateManager.setState({ 
                 product: normalizedData, 
+                selectedVariant: selectedVariant,
                 loading: false, 
                 lastUpdated: Date.now() 
             });

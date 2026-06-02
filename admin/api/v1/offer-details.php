@@ -10,6 +10,7 @@
 
 header('Content-Type: application/json');
 require_once '../../../config/config.php';
+require_once '../../includes/auth.php';
 require_once ROOT_PATH . '/config/Database.php';
 require_once REPOS_PATH . '/CouponRepository.php';
 

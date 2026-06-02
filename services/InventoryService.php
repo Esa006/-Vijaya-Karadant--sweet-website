@@ -111,16 +111,19 @@ class InventoryService {
     }
 
     /**
-     * Get stock overview for a product
+     * Get stock overview for a product.
+     * Falls back to products.stock_quantity when no inventory table row exists.
      */
     public function getStockOverview(int $productId): array {
         $inv = $this->repo->getByProductId($productId);
         if (!$inv) {
             return ['stock' => 0, 'reserved' => 0];
         }
+        // getByProductId already handles the inventory → products fallback,
+        // but the 'reserved_stock' key may be absent in the fallback row.
         return [
-            'stock' => (int)$inv['stock'],
-            'reserved' => (int)$inv['reserved_stock'],
+            'stock'    => (int)($inv['stock'] ?? 0),
+            'reserved' => (int)($inv['reserved_stock'] ?? 0),
         ];
     }
 

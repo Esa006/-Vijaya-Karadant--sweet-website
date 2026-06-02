@@ -27,7 +27,7 @@ class CartService {
             $this->db = Database::getInstance();
         }
     }
-    private function getAvailableStockForItem(array $cartItem): ?int {
+    public function getAvailableStockForItem(array $cartItem): ?int {
         if (!$this->db) {
             return null;
         }

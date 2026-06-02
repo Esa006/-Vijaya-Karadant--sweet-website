@@ -9,16 +9,14 @@
  * =============================================================
  */
 
-require_once '../../config/config.php';
+require_once '../../../config/config.php';
+require_once '../../includes/auth.php';
 require_once SERVICES_PATH . '/ReportService.php';
 
 // 1. Headers & Security
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
-
-// Note: In production, wrap this in authentication middleware
-// require_once '../../admin/includes/auth_check.php';
 
 try {
     // 2. Initialize Service

@@ -15,7 +15,12 @@ $productService = new ProductService();
 $featuredProducts = $productService->getFeaturedProducts(8);
 
 // Header Meta overrides
-$pageTitle = "Global Shipping - Worldwide Delivery | " . SITE_NAME;
+$seoContext = [
+    'title' => 'Global Shipping - Worldwide Delivery | ' . SITE_NAME,
+    'description' => 'We ship our authentic Gokak Karadant and traditional sweets worldwide. Fast, secure, and fresh international delivery directly from India.',
+    'canonical' => BASE_URL . 'global-shipping.php',
+    'type' => 'website'
+];
 
 require_once 'includes/header.php';
 ?>
@@ -103,7 +108,7 @@ require_once 'includes/header.php';
                             </div>
 
                             <!-- Title -->
-                            <h3 class="c-product-card-v2__title--compact p-1">
+                            <h3 class="c-product-card-v2__title--compact px-1">
                                 <a href="<?php echo BASE_URL; ?>cart.php?slug=<?php echo htmlspecialchars($product['slug']); ?>">
                                     <?php echo htmlspecialchars($product['name']); ?>
                                 </a>

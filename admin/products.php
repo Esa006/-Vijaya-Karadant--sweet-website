@@ -562,6 +562,11 @@ $preSelectedCategory = $_GET['category'] ?? 'all';
                         rows="5" placeholder="Detailed technical and culinary notes"></textarea>
                 </div>
 
+                <!-- Info Note -->
+                <div class="alert alert-info py-2 small mb-4">
+                    <i class="bi bi-info-circle me-1"></i> <strong>Note:</strong> You can add specific weight variants (250g, 500g, 1kg) from the <strong>Edit Product</strong> page after creating this base product.
+                </div>
+
                 <!-- Footer Buttons -->
                 <div class="d-flex justify-content-end gap-3 mt-4">
                     <button type="button" class="btn fw-bold rounded-2 px-4 shadow-none products-cancel-btn"
@@ -943,67 +948,8 @@ require_once 'includes/modals/delete-confirm.php';
         const exportButtons = document.querySelectorAll('.products-export-btn');
         exportButtons.forEach(btn => {
             btn.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent any default button behavior
-                
-                try {
-                    const rows = document.querySelectorAll('.product-row');
-                    const visibleRows = Array.from(rows).filter(r => r.style.display !== 'none');
-                    
-                    if (visibleRows.length === 0) {
-                        alert('No products to export with current filters.');
-                        return;
-                    }
-
-                    // Header
-                    let csvLines = ["ID,Product Name,SKU,Category,Subcategory,Price (INR),Stock Quantity,Status"];
-
-                    visibleRows.forEach(row => {
-                        const id = row.getAttribute('data-product-id') || '';
-                        
-                        // Safely extract name
-                        const nameEl = row.querySelector('.products-product-name');
-                        const name = nameEl ? nameEl.textContent.trim().replace(/"/g, '""') : 'Unknown';
-                        
-                        const sku = (row.getAttribute('data-sku') || '').toUpperCase();
-                        const category = (row.getAttribute('data-category') || 'General').replace(/"/g, '""');
-                        const subcategory = (row.getAttribute('data-subcategory') || '').replace(/"/g, '""');
-                        
-                        // Extract numeric values safely
-                        const priceEl = row.querySelector('.td-price .products-cell-md');
-                        const priceText = priceEl ? priceEl.textContent : '0';
-                        const price = priceText.replace(/[^0-9.]/g, '').trim() || '0';
-                        
-                        const stockEl = row.querySelector('.td-stock .products-cell-md');
-                        const stockText = stockEl ? stockEl.textContent : '0';
-                        const stock = stockText.replace(/[^0-9]/g, '').trim() || '0';
-                        
-                        const status = row.getAttribute('data-status') || 'Unknown';
-
-                        csvLines.push(`${id},"${name}",${sku},"${category}","${subcategory}",${price},${stock},${status}`);
-                    });
-
-                    const csvString = csvLines.join("\n");
-                    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-                    
-                    // Create download link
-                    const link = document.createElement("a");
-                    if (link.download !== undefined) {
-                        const url = URL.createObjectURL(blob);
-                        link.setAttribute("href", url);
-                        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-                        link.setAttribute("download", `sweets_inventory_export_${timestamp}.csv`);
-                        link.style.visibility = 'hidden';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        URL.revokeObjectURL(url); // Clean up memory
-                    } else {
-                        alert('Your browser does not support HTML5 CSV downloads.');
-                    }
-                } catch (error) {
-                    console.error('[CSV Export Error]', error);
-                    alert('An error occurred while exporting CSV: ' + error.message);
-                }
+                e.preventDefault();
+                window.location.href = 'api/v1/products.php?action=export_csv';
             });
         });
     });

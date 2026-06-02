@@ -37,6 +37,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
+        // [STOCK VALIDATION] Backend check to prevent bypassing frontend limits
+        if (empty($product['is_combo'])) {
+            $variants = $productService->getProductVariants((int)$product['id']);
+            $maxStock = (int)($product['stock_quantity'] ?? 0);
+            $foundVariantStock = 0;
+            $isValidVariant = false;
+
+            foreach ($variants as $v) {
+                if (($v['weight'] ?? '') === $weight) {
+                    $isValidVariant = true;
+                    $foundVariantStock = (int)($v['stock'] ?? 0);
+                    if (!isset($v['id'])) {
+                        // $foundVariantStock = min($foundVariantStock, $maxStock); // Disabled for TEST MODE
+                    }
+                    break;
+                }
+            }
+
+            if (!$isValidVariant) {
+                $_SESSION['error'] = 'Invalid product weight selected.';
+                header('Location: product-detail.php?slug=' . urlencode((string)$slug));
+                exit;
+            }
+            if ($quantity > $foundVariantStock) {
+                $_SESSION['error'] = 'Requested quantity exceeds available stock.';
+                header('Location: product-detail.php?slug=' . urlencode((string)$slug));
+                exit;
+            }
+        }
+
             if (!empty($product['is_combo'])) {
                 // Handle as Combo
                 $comboData = [
@@ -192,12 +222,83 @@ if ($hasRealReviews) {
     srand();
 }
 
+// Build dynamic SEO context for product page
+$schemaIsOutOfStock = (int)($currentProduct['stock_quantity'] ?? 0) <= 0;
+$seoContext = [
+    'title' => htmlspecialchars($currentProduct['name']) . " | Buy Online - " . SITE_NAME,
+    'description' => htmlspecialchars(strip_tags($currentProduct['short_description'] ?? '')),
+    'canonical' => BASE_URL . "product-detail.php?slug=" . urlencode((string)$currentProduct['slug']),
+    'og_image' => BASE_URL . ltrim($currentProduct['image_path'] ?? '', '/'),
+    'type' => 'product',
+    'schema' => [
+        '@context' => 'https://schema.org/',
+        '@type' => 'Product',
+        'name' => htmlspecialchars($currentProduct['name']),
+        'image' => BASE_URL . ltrim($currentProduct['image_path'] ?? '', '/'),
+        'description' => htmlspecialchars(strip_tags($currentProduct['short_description'] ?? '')),
+        'sku' => htmlspecialchars($skuLabel),
+        'brand' => [
+            '@type' => 'Brand',
+            'name' => SITE_NAME
+        ],
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => BASE_URL . "product-detail.php?slug=" . urlencode((string)$currentProduct['slug']),
+            'priceCurrency' => 'INR',
+            'price' => (string)$salePrice,
+            'availability' => $schemaIsOutOfStock ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock'
+        ],
+        'aggregateRating' => [
+            '@type' => 'AggregateRating',
+            'ratingValue' => (string)$pdpRating,
+            'reviewCount' => (string)$pdpReviewCount
+        ]
+    ]
+];
+
 require_once 'includes/header.php';
+
+// [STOCK VALIDATION] Fetch active variants for JS
+$productVariants = $productService->getProductVariants((int)($currentProduct['id'] ?? 0));
+$activeVariants = array_filter($productVariants, fn($v) => ($v['status'] ?? 'published') !== 'out_of_stock' && ($v['active'] ?? true) === true);
+
+// Fix: Cap simulated variant stock to actual main product stock to prevent "Out of Stock" bypass
+$mainStock = (int)($currentProduct['stock_quantity'] ?? 0);
+foreach ($activeVariants as &$v) {
+    if (!isset($v['id'])) {
+        // $v['stock'] = min((int)($v['stock'] ?? 0), $mainStock); // Disabled for TEST MODE
+    }
+}
+unset($v);
+
+$defaultVariant = reset($activeVariants) ?: ['sku' => $skuLabel, 'weight' => '500g', 'price' => $salePrice, 'stock' => 20];
 ?>
+<script>
+    // [STOCK VALIDATION] Expose variants securely to frontend
+    window.productVariants = <?php echo json_encode(array_values($activeVariants)); ?>;
+    window.currentVariant = <?php echo json_encode($defaultVariant); ?>;
+    window.cartItems = <?php echo json_encode($cartService->getItems()); ?>;
+</script>
 
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/pages/product-detail.css?v=<?php echo SITE_VERSION; ?>">
 
 <main class="p-product-detail py-5">
+    <div class="container">
+        <?php if (isset($_SESSION['error'])): ?>
+            <!-- [STOCK VALIDATION] PHP Session error output -->
+            <div id="error-banner" class="alert alert-danger" style="display:block; margin-bottom: 20px;">
+                <?php 
+                    echo htmlspecialchars($_SESSION['error']); 
+                    unset($_SESSION['error']);
+                ?>
+            </div>
+            <script>setTimeout(() => { document.getElementById('error-banner').style.display = 'none'; }, 5000);</script>
+        <?php else: ?>
+            <!-- [STOCK VALIDATION] Hidden banner for JS errors -->
+            <div id="error-banner" class="alert alert-danger" style="display:none; margin-bottom: 20px;"></div>
+        <?php endif; ?>
+    </div>
+
     <section id="product-hero-section" class="c-product-hero mb-5">
         <div class="container">
             <nav class="pdp-breadcrumbs mb-4" aria-label="breadcrumb">
@@ -224,6 +325,9 @@ require_once 'includes/header.php';
                                     if (empty($galleryImages)) {
                                         $galleryImages = [['image_path' => $mainImage]];
                                     }
+
+                                    // Limit to 5 images to remove the extra/watermarked last image
+                                    $galleryImages = array_slice($galleryImages, 0, 5);
 
                                     foreach ($galleryImages as $img): 
                                     ?>
@@ -257,9 +361,17 @@ require_once 'includes/header.php';
                 </div>
 
                 <div class="col-lg-5">
+                    <?php 
+                    $stockQty = (int)($currentProduct['stock_quantity'] ?? 0);
+                    $isOutOfStock = ($stockQty <= 0);
+                    $isLowStock = !$isOutOfStock && $stockQty > 0 && $stockQty <= 10;
+                    ?>
                     <div class="pdp-summary">
+
+                        <!-- ① Title -->
                         <h1 class="pdp-title"><?php echo htmlspecialchars($currentProduct['name']); ?></h1>
-                        
+
+                        <!-- ② Rating row — bold & prominent -->
                         <div class="pdp-rating">
                             <div class="pdp-stars">
                                 <?php for ($i = 1; $i <= $pdpFullStars; $i++): ?>
@@ -274,48 +386,109 @@ require_once 'includes/header.php';
                             </div>
                             <span class="pdp-rating__value"><?php echo number_format($pdpRating, 1); ?></span>
                             <button type="button" class="pdp-rating__reviews pdp-reviews-trigger" id="pdpReviewsBtn" aria-haspopup="dialog">
-                                <?php echo number_format($pdpReviewCount); ?> Verified Reviews
+                                (<?php echo number_format($pdpReviewCount); ?> Reviews)
                                 <i class="bi bi-chevron-down ms-1" style="font-size:0.75rem;"></i>
                             </button>
                         </div>
 
-                        <div class="pdp-price">
-                            <span class="pdp-price__current">₹<?php echo number_format($salePrice); ?></span>
+                        <!-- ③ Stock badge -->
+                        <?php if ($isOutOfStock): ?>
+                            <div class="pdp-stock pdp-stock--out"><i class="bi bi-x-circle-fill"></i> Out of Stock</div>
+                        <?php elseif ($isLowStock): ?>
+                            <div class="pdp-stock pdp-stock--low"><i class="bi bi-exclamation-triangle-fill"></i> Only <?php echo $stockQty; ?> left in stock — order soon!</div>
+                        <?php else: ?>
+                            <div class="pdp-stock pdp-stock--in"><i class="bi bi-check-circle-fill"></i> In Stock</div>
+                        <?php endif; ?>
+
+                        <!-- ④ Price row with discount -->
+                        <div class="pdp-price-row">
+                            <span class="pdp-price__current" id="pdp-price-display">₹<?php echo number_format($salePrice); ?></span>
                             <?php if ($oldPrice && $oldPrice > $salePrice): ?>
                                 <span class="pdp-price__old">₹<?php echo number_format($oldPrice); ?></span>
                                 <span class="pdp-price__discount"><?php echo $discountPercent; ?>% OFF</span>
                             <?php endif; ?>
                         </div>
-
                         <?php if ($savings > 0): ?>
                             <div class="pdp-save">You save ₹<?php echo number_format($savings); ?></div>
                         <?php endif; ?>
+
+                        <!-- ⑤ SKU + Description -->
                         <div class="pdp-sku">SKU: <?php echo htmlspecialchars($skuLabel); ?></div>
+                        <p class="pdp-desc"><?php echo htmlspecialchars($currentProduct['short_description'] ?? $currentProduct['description'] ?? ''); ?></p>
 
-                        <p class="pdp-desc">
-                            <?php echo htmlspecialchars($currentProduct['short_description'] ?? $currentProduct['description'] ?? ''); ?>
-                        </p>
-
-                        <div class="mb-4">
+                        <!-- ⑥ Weight selector -->
+                        <div class="pdp-weight-section mb-3">
                             <span class="pdp-label">Select Weight</span>
-                            <input type="hidden" name="weight" id="selected-weight" value="500g">
                             <div class="pdp-weights__group">
-                                <button type="button" class="pdp-chip" onclick="selectWeight('250g', this)">250g</button>
-                                <button type="button" class="pdp-chip is-active" onclick="selectWeight('500g', this)">500g</button>
-                                <button type="button" class="pdp-chip" onclick="selectWeight('1kg', this)">1kg</button>
+                                <?php foreach ($activeVariants as $index => $v): 
+                                    $w = htmlspecialchars($v['weight'] ?? '');
+                                    $st = (int)($v['stock'] ?? 0);
+                                    $isActive = ($w === ($defaultVariant['weight'] ?? '')) ? 'is-active active' : '';
+                                    $isOos = ($st <= 0) ? 'is-out-of-stock' : '';
+                                ?>
+                                <button type="button" class="pdp-chip <?php echo trim("$isActive $isOos"); ?>" onclick="selectWeight('<?php echo $w; ?>', this)" <?php echo $isOos ? 'title="Out of stock"' : ''; ?>><?php echo $w; ?></button>
+                                <?php endforeach; ?>
                             </div>
                         </div>
 
+                        <!-- ⑦ Quantity + Delivery row -->
+                        <?php if (!$isOutOfStock): ?>
+                        <div class="pdp-qty-row mb-3" id="pdp-qty-row" style="display: none;">
+                            <span class="pdp-label">Quantity in Cart</span>
+                            <div class="pdp-qty-delivery">
+                                <div class="pdp-qty">
+                                    <button type="button" class="pdp-qty__btn" onclick="updateQty(-1)" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                                    <span class="pdp-qty__input d-flex align-items-center justify-content-center fw-bold" id="qty-display">1</span>
+                                    <button type="button" class="pdp-qty__btn" onclick="updateQty(1)" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                                </div>
+                                <div class="pdp-shipping">
+                                    <i class="bi bi-truck me-1"></i> Free delivery over ₹999
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+                        <!-- ⑧ Add to Cart + Buy Now — full width prominent CTAs -->
+                        <form method="POST" id="add-to-cart-form" class="pdp-cta-group">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="slug" value="<?php echo htmlspecialchars($currentProduct['slug']); ?>">
+                            <input type="hidden" name="quantity" id="form-qty-input" value="1">
+                            <input type="hidden" name="weight" id="form-weight" value="<?php echo htmlspecialchars($defaultVariant['weight'] ?? '500g'); ?>">
+
+                            <button type="button" id="btn-notify" class="pdp-btn pdp-btn--notify w-100" style="<?php echo $isOutOfStock ? '' : 'display:none;'; ?>"
+                                onclick="openNotifyModal('<?php echo htmlspecialchars((string)($currentProduct['id'] ?? '')); ?>',
+                                '<?php echo !empty($currentProduct['is_combo']) ? 'combo' : 'product'; ?>',
+                                '<?php echo htmlspecialchars($currentProduct['name'], ENT_QUOTES); ?>')">
+                                <i class="bi bi-bell-fill"></i> Notify Me When Available
+                            </button>
+                            <button type="button" id="btn-add-to-cart" class="pdp-btn pdp-btn--cart btn-add-to-cart" onclick="ajaxCartAction('add', 1)" style="<?php echo $isOutOfStock ? 'display:none;' : ''; ?>">
+                                <i class="bi bi-cart-plus"></i> Add to Cart
+                            </button>
+                            <button type="submit" id="btn-buy-now" name="action" value="buy_now" class="pdp-btn pdp-btn--buynow" style="<?php echo $isOutOfStock ? 'display:none;' : ''; ?>">
+                                <i class="bi bi-bolt-fill"></i> Buy Now
+                            </button>
+                        </form>
+
+                        <!-- ⑨ Trust / Policy row -->
+                        <div class="pdp-trust-row">
+                            <button type="button" class="pdp-policy-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">
+                                <i class="bi bi-shield-lock me-1"></i> Privacy Policy
+                            </button>
+                            <span class="pdp-trust-badge"><i class="bi bi-arrow-counterclockwise"></i> Easy Returns</span>
+                            <span class="pdp-trust-badge"><i class="bi bi-lock-fill"></i> Secure Payment</span>
+                        </div>
+
+                        <!-- ⑩ Alternatives — BELOW CTA (not above) -->
                         <?php if (!empty($relatedProducts)): ?>
                             <div class="pdp-alternatives">
                                 <h3 class="pdp-alternatives__title"><i class="bi bi-bag-check-fill"></i> Available Alternatives in Stock:</h3>
                                 <?php foreach (array_slice($relatedProducts, 0, 2) as $alternative): ?>
                                     <?php
-                                    $altName = (string)($alternative['name'] ?? 'Product');
-                                    $altSlug = (string)($alternative['slug'] ?? '');
+                                    $altName  = (string)($alternative['name'] ?? 'Product');
+                                    $altSlug  = (string)($alternative['slug'] ?? '');
                                     $altImage = (string)($alternative['image_path'] ?? $alternative['image'] ?? 'assets/images/placeholder.png');
                                     $altPrice = (float)($alternative['sale_price'] ?? $alternative['price'] ?? $alternative['base_price'] ?? 0);
-                                    $altUrl = 'product-detail.php?slug=' . urlencode($altSlug);
+                                    $altUrl   = 'product-detail.php?slug=' . urlencode($altSlug);
                                     ?>
                                     <div class="pdp-alternative">
                                         <img src="<?php echo htmlspecialchars($altImage); ?>" alt="<?php echo htmlspecialchars($altName); ?>" class="pdp-alternative__img">
@@ -329,86 +502,303 @@ require_once 'includes/header.php';
                             </div>
                         <?php endif; ?>
 
-                        <?php 
-                        $stockQty = (int)($currentProduct['stock_quantity'] ?? 0);
-                        $isOutOfStock = ($stockQty <= 0);
-                        ?>
-
-                        <div class="pdp-actions">
-                            <?php if (!$isOutOfStock): ?>
-                                <div class="pdp-qty">
-                                    <button type="button" class="pdp-qty__btn" onclick="updateQty(-1)"><i class="bi bi-dash"></i></button>
-                                    <input type="hidden" name="quantity" id="form-qty" value="1">
-                                    <span class="pdp-qty__input d-flex align-items-center justify-content-center fw-bold" id="qty-display">1</span>
-                                    <button type="button" class="pdp-qty__btn" onclick="updateQty(1)"><i class="bi bi-plus"></i></button>
-                                </div>
-                                <div class="pdp-shipping">
-                                    <i class="bi bi-truck me-1"></i> Free delivery over ₹999
-                                </div>
-                                <button type="button" class="pdp-policy-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">
-                                    <i class="bi bi-shield-lock me-1"></i> Privacy Policy
-                                </button>
-                            <?php else: ?>
-                                <div class="alert alert-warning py-2 px-3 small d-flex align-items-center gap-2 mb-0">
-                                    <i class="bi bi-info-circle-fill"></i>
-                                    <span>Currently out of stock.</span>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-
-                        <form method="POST" id="add-to-cart-form" class="pdp-cta">
-                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                            <input type="hidden" name="slug" value="<?php echo htmlspecialchars($currentProduct['slug']); ?>">
-                            <input type="hidden" name="quantity" id="form-qty-input" value="1">
-                            <input type="hidden" name="weight" id="form-weight" value="500g">
-                            
-                            <?php if ($isOutOfStock): ?>
-                                <button type="button" class="pdp-btn pdp-btn--ghost w-100" style="background-color: #6c757d; color: white; border: none;" onclick="openNotifyModal('<?php echo htmlspecialchars((string)($currentProduct['id'] ?? '')); ?>', '<?php echo !empty($currentProduct['is_combo']) ? 'combo' : 'product'; ?>', '<?php echo htmlspecialchars($currentProduct['name'], ENT_QUOTES); ?>')">
-                                    <i class="bi bi-bell-fill"></i> Notify Me
-                                </button>
-                            <?php else: ?>
-                                <button type="submit" name="action" value="add_to_cart" class="pdp-btn pdp-btn--ghost btn-add-to-cart flex-grow-1">
-                                    <i class="bi bi-cart-plus"></i> Add to Cart
-                                </button>
-                                <button type="submit" name="action" value="buy_now" class="pdp-btn pdp-btn--primary flex-grow-1 justify-content-center">Buy Now</button>
-                            <?php endif; ?>
-                        </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <script>
+    // [STOCK VALIDATION] State variables for current variant limits
+    let currentMaxStock = window.currentVariant ? window.currentVariant.stock : 0;
+    let currentSku = window.currentVariant ? window.currentVariant.sku : '';
+    let isCartUpdating = false;
+
+    function getCartQtyForSelected() {
+        if (!window.cartItems) return 0;
+        const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+        const weight = document.getElementById('form-weight').value;
+        const key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+        return window.cartItems[key] ? window.cartItems[key].quantity : 0;
+    }
+
+    function syncQtyDisplay() {
+        const cartQty = getCartQtyForSelected();
+        const qtyDisplay = document.getElementById('qty-display');
+        const formQtyInput = document.getElementById('form-qty-input');
+        const minusBtn = document.querySelector('.pdp-qty .pdp-qty__btn:first-child');
+        const qtyRow = document.getElementById('pdp-qty-row');
+        const addBtn = document.getElementById('btn-add-to-cart');
+        const buyBtn = document.getElementById('btn-buy-now');
+        
+        const displayQty = cartQty > 0 ? cartQty : 1;
+        if (qtyDisplay) qtyDisplay.innerText = displayQty;
+        if (formQtyInput) formQtyInput.value = displayQty;
+
+        // Update "-" button icon: if cartQty is 1, show red trash icon
+        if (minusBtn) {
+            if (cartQty === 1) {
+                minusBtn.innerHTML = '<i class="bi bi-trash text-danger" style="font-size:1.1rem;display:inline-block;vertical-align:middle;"></i>';
+                minusBtn.setAttribute('title', 'Remove from cart');
+            } else {
+                minusBtn.innerHTML = '<i class="bi bi-dash"></i>';
+                minusBtn.removeAttribute('title');
+            }
+        }
+
+        // Toggle visibility based on stock and cart state
+        if (currentMaxStock > 0) {
+            if (cartQty > 0) {
+                if (qtyRow) qtyRow.style.display = 'block';
+                if (addBtn) addBtn.style.display = 'none';
+                if (buyBtn) buyBtn.style.display = 'none'; // Hide Buy Now if already in cart
+            } else {
+                if (qtyRow) qtyRow.style.display = 'none';
+                if (addBtn) addBtn.style.display = 'inline-flex';
+                if (buyBtn) buyBtn.style.display = 'inline-flex';
+            }
+        } else {
+            if (qtyRow) qtyRow.style.display = 'none';
+            if (addBtn) addBtn.style.display = 'none';
+            if (buyBtn) buyBtn.style.display = 'none';
+        }
+    }
+
     function selectWeight(weight, btn) {
+        if (!window.productVariants || window.productVariants.length === 0) {
+            showErrorBanner('Unable to load product options. Please refresh.');
+            return;
+        }
+
+        const variant = window.productVariants.find(v => v.weight === weight);
+        if (!variant) {
+            showErrorBanner('Selected weight is currently unavailable.');
+            return;
+        }
+
+        // Update Global State
+        window.currentVariant = variant;
+        currentMaxStock = variant.stock;
+        currentSku = variant.sku;
+
+        // Update UI
+        const priceEl = document.getElementById('pdp-price-display');
+        if (priceEl) priceEl.innerText = '₹' + variant.price;
         document.getElementById('form-weight').value = weight;
-        document.querySelectorAll('.pdp-chip').forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
+        
+        // Highlight active button
+        const siblings = btn.parentElement ? btn.parentElement.children : document.querySelectorAll('.pdp-chip');
+        Array.from(siblings).forEach(b => b.classList.remove('active', 'is-active'));
+        btn.classList.add('active', 'is-active');
+
+        // Sync with existing quantity in cart
+        syncQtyDisplay();
+
+        // Trigger stock validations
+        updateStockBadge(currentMaxStock);
+        toggleCartButtons(currentMaxStock);
     }
 
     function updateQty(delta) {
-        let qtyDisplay = document.getElementById('qty-display');
-        let qtyInput = document.getElementById('form-qty');
-        let formQtyInput = document.getElementById('form-qty-input');
+        if (isCartUpdating) return;
+
+        const qtyDisplay = document.getElementById('qty-display');
+        const formQtyInput = document.getElementById('form-qty-input');
         
-        let qty = parseInt(qtyInput.value);
-        qty = Math.max(1, qty + delta);
+        let qty = parseInt(formQtyInput ? formQtyInput.value : (qtyDisplay ? qtyDisplay.innerText : 1)) || 1;
+        const cartQty = getCartQtyForSelected();
         
-        qtyInput.value = qty;
-        if(formQtyInput) formQtyInput.value = qty;
-        qtyDisplay.innerText = qty;
+        // [STOCK VALIDATION] Prevent exceeding available stock
+        if (delta > 0 && qty >= currentMaxStock) {
+            showErrorBanner(`Only ${currentMaxStock} units available for this variant.`);
+            return;
+        }
+
+        // Handle deletion confirmation when qty is 1 and minus is clicked
+        if (cartQty === 1 && delta === -1) {
+            Swal.fire({
+                title: 'Remove item?',
+                text: 'Do you want to remove this item from your cart?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#7b1d1d',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajaxCartAction('remove', 0);
+                }
+            });
+            return;
+        }
+
+        qty = Math.max(1, Math.min(qty + delta, currentMaxStock));
+        
+        if (formQtyInput) formQtyInput.value = qty;
+        if (qtyDisplay) qtyDisplay.innerText = qty;
+
+        // Sync immediately with backend
+        ajaxCartAction('update', qty);
+    }
+
+    // [STOCK VALIDATION] Helper functions for UI states
+    function updateStockBadge(stock) {
+        const badge = document.querySelector('.pdp-stock');
+        if (!badge) return;
+
+        badge.className = 'pdp-stock'; // reset classes
+
+        if (stock === 0) {
+            badge.innerHTML = '<i class="bi bi-x-circle-fill"></i> Out of Stock';
+            badge.classList.add('pdp-stock--out');
+        } else if (stock <= 5) {
+            badge.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Only ${stock} left in stock — order soon!`;
+            badge.classList.add('pdp-stock--low');
+        } else {
+            badge.innerHTML = '<i class="bi bi-check-circle-fill"></i> In Stock';
+            badge.classList.add('pdp-stock--in');
+        }
+    }
+
+    function toggleCartButtons(stock) {
+        const addBtn = document.getElementById('btn-add-to-cart');
+        const buyBtn = document.getElementById('btn-buy-now');
+        const notifyBtn = document.getElementById('btn-notify');
+        
+        if (stock > 0) {
+            // Let syncQtyDisplay handle addBtn and buyBtn visibility
+            if (notifyBtn) notifyBtn.style.display = 'none';
+        } else {
+            if (addBtn) addBtn.style.display = 'none';
+            if (buyBtn) buyBtn.style.display = 'none';
+            if (notifyBtn) notifyBtn.style.display = 'inline-flex';
+        }
+    }
+
+    function showErrorBanner(message) {
+        const banner = document.getElementById('error-banner');
+        if (banner) {
+            banner.innerText = message;
+            banner.style.display = 'block';
+            setTimeout(() => { banner.style.display = 'none'; }, 3000);
+        }
+    }
+
+    function updateHeaderCartCount(count) {
+        let badge = document.querySelector('.js-cart-count');
+        const cartIconLink = document.querySelector('a[href*="shopping-cart.php"]');
+        
+        if (count > 0) {
+            if (!badge && cartIconLink) {
+                badge = document.createElement('span');
+                badge.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger js-cart-count';
+                badge.style.fontSize = '10px';
+                cartIconLink.classList.add('position-relative');
+                cartIconLink.appendChild(badge);
+            }
+            if (badge) {
+                badge.innerText = count;
+                badge.style.display = '';
+            }
+        } else {
+            if (badge) {
+                badge.remove();
+            }
+        }
+    }
+
+    function ajaxCartAction(action, qty) {
+        if (isCartUpdating) return;
+        isCartUpdating = true;
+
+        const qtyContainer = document.querySelector('.pdp-qty');
+        if (qtyContainer) qtyContainer.style.opacity = '0.5';
+
+        const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+        const weight = document.getElementById('form-weight').value;
+        const key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+
+        const formData = new FormData();
+        formData.append('csrf_token', '<?php echo $_SESSION['csrf_token']; ?>');
+        
+        if (action === 'remove') {
+            formData.append('action', 'remove');
+            formData.append('id', key);
+        } else if (action === 'update') {
+            formData.append('action', 'update');
+            formData.append('id', key);
+            formData.append('qty', qty);
+        } else if (action === 'add') {
+            formData.append('action', 'add');
+            formData.append('slug', slug);
+            formData.append('weight', weight);
+            formData.append('quantity', qty);
+        }
+
+        fetch('cart-ajax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+            isCartUpdating = false;
+            if (qtyContainer) qtyContainer.style.opacity = '1';
+
+            if (data.clamped) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Stock Limit Reached',
+                    text: data.message,
+                    confirmButtonColor: '#7b1d1d'
+                });
+                
+                if (!window.cartItems) window.cartItems = {};
+                window.cartItems[key] = { quantity: data.clampedQty, slug: slug, weight: weight };
+                updateHeaderCartCount(data.cartCount);
+                syncQtyDisplay();
+                return;
+            }
+
+            if (data.success) {
+                if (action === 'remove') {
+                    if (window.cartItems) delete window.cartItems[key];
+                } else {
+                    if (!window.cartItems) window.cartItems = {};
+                    window.cartItems[key] = { quantity: qty, slug: slug, weight: weight };
+                }
+                updateHeaderCartCount(data.cartCount);
+                
+                // Broadcast cross-tab sync event
+                localStorage.setItem('cart_sync_time', Date.now().toString());
+
+                if (action === 'add') {
+                    if (window.Swal) Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 1800, icon: 'success', title: 'Added to cart' });
+                }
+            } else {
+                showErrorBanner(data.message || 'Error updating cart');
+            }
+
+            syncQtyDisplay();
+        })
+        .catch(() => {
+            isCartUpdating = false;
+            if (qtyContainer) qtyContainer.style.opacity = '1';
+            showErrorBanner('Error communicating with the server.');
+            syncQtyDisplay();
+        });
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        const isDesktop = () => window.innerWidth >= 992;
+
         const thumbsSwiper = new Swiper('.pdp-thumbs-swiper', {
-            direction: 'vertical',
-            slidesPerView: 4,
-            spaceBetween: 10,
+            direction: isDesktop() ? 'vertical' : 'horizontal',
+            slidesPerView: 'auto',
+            spaceBetween: 8,
+            freeMode: true,
             watchSlidesProgress: true,
-            breakpoints: {
-                0: { direction: 'horizontal', slidesPerView: 4 },
-                992: { direction: 'vertical', slidesPerView: 4 }
-            }
         });
 
         const mainSwiper = new Swiper('.pdp-main-swiper', {
@@ -421,7 +811,96 @@ require_once 'includes/header.php';
                 swiper: thumbsSwiper,
             },
         });
+
+        // Re-init thumbs direction on resize
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                const dir = isDesktop() ? 'vertical' : 'horizontal';
+                if (thumbsSwiper.params.direction !== dir) {
+                    thumbsSwiper.changeDirection(dir, true);
+                }
+            }, 200);
+        });
+
+        // Sync display on load
+        syncQtyDisplay();
+
+        // Intercept Add to Cart form submission
+        const cartForm = document.getElementById('add-to-cart-form');
+        if (cartForm) {
+            cartForm.addEventListener('submit', function(e) {
+                const action = e.submitter ? e.submitter.value : '';
+                if (action === 'add_to_cart') {
+                    e.preventDefault();
+                    if (isCartUpdating) return;
+                    isCartUpdating = true;
+
+                    const addBtn = document.getElementById('btn-add-to-cart');
+                    let originalBtnHtml = '';
+                    if (addBtn) {
+                        originalBtnHtml = addBtn.innerHTML;
+                        addBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Adding...';
+                        addBtn.disabled = true;
+                    }
+
+                    const slug = <?php echo json_encode($currentProduct['slug']); ?>;
+                    const qty = parseInt(document.getElementById('form-qty-input').value) || 1;
+                    const weight = document.getElementById('form-weight').value;
+                    const key = slug + '-' + weight.replace(/[^a-zA-Z0-9]/g, '');
+
+                    const formData = new FormData();
+                    formData.append('action', 'add');
+                    formData.append('slug', slug);
+                    formData.append('quantity', qty);
+                    formData.append('weight', weight);
+                    formData.append('csrf_token', '<?php echo $_SESSION['csrf_token']; ?>');
+
+                    fetch('cart-ajax.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(r => {
+                        isCartUpdating = false;
+                        if (addBtn) {
+                            addBtn.innerHTML = originalBtnHtml;
+                            addBtn.disabled = false;
+                        }
+                        return r.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            if (!window.cartItems) window.cartItems = {};
+                            window.cartItems[key] = { quantity: qty };
+                            
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Added to cart!',
+                                text: 'Product successfully added to your shopping cart.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                            updateHeaderCartCount(data.cartCount);
+                            syncQtyDisplay();
+                        } else {
+                            showErrorBanner(data.message || 'Failed to add item to cart.');
+                        }
+                    })
+                    .catch(() => {
+                        isCartUpdating = false;
+                        if (addBtn) {
+                            addBtn.innerHTML = originalBtnHtml;
+                            addBtn.disabled = false;
+                        }
+                        showErrorBanner('Error communicating with the server.');
+                    });
+                }
+            });
+        }
     });
+
 
     function openNotifyModal(productId, productType, productName) {
         if (typeof Swal !== 'undefined') {

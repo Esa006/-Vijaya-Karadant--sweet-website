@@ -29,7 +29,9 @@ try {
     switch ($method) {
         case 'GET':
             $id = (int)($_GET['id'] ?? 0);
-            if ($id > 0) {
+            if ($action === 'export_csv') {
+                handleExportCSV($productService);
+            } elseif ($id > 0) {
                 $product = $productService->getProductById($id);
                 if ($product) {
                     echo json_encode(['status' => 'success', 'data' => $product]);
@@ -54,6 +56,10 @@ try {
                 handleSetPrimaryImage($productService, $auditService, $adminId);
             } elseif ($action === 'toggle_status') {
                 handleToggleStatus($productService, $auditService, $adminId);
+            } elseif ($action === 'save_variants') {
+                handleSaveVariants($adminId);
+            } elseif ($action === 'delete_variant') {
+                handleDeleteVariant($adminId);
             } else {
                 throw new Exception('Invalid administrative action requested.', 400);
             }
@@ -187,4 +193,103 @@ function handleToggleStatus(ProductService $service, AuditService $audit, int $a
     } else {
         throw new Exception('Failed to toggle status.', 500);
     }
+}
+
+/**
+ * Handle Variant Save (upsert per variant row)
+ */
+function handleSaveVariants(int $adminId) {
+    $productId = (int)($_POST['product_id'] ?? 0);
+    if ($productId <= 0) throw new Exception('Missing product ID.', 400);
+
+    // variants[] array from form
+    $weights = $_POST['variant_weight'] ?? [];
+    $labels  = $_POST['variant_label']  ?? [];
+    $prices  = $_POST['variant_price']  ?? [];
+    $stocks  = $_POST['variant_stock']  ?? [];
+    $ids     = $_POST['variant_id']     ?? [];
+
+    if (empty($weights)) throw new Exception('No variants provided.', 400);
+
+    require_once REPOS_PATH . '/ProductRepository.php';
+    $repo = new ProductRepository();
+
+    $saved = 0;
+    foreach ($weights as $i => $weight) {
+        $weight = trim((string)$weight);
+        if ($weight === '') continue;
+
+        $variantData = [
+            'id'     => (int)($ids[$i] ?? 0),
+            'weight' => $weight,
+            'label'  => trim((string)($labels[$i] ?? '')),
+            'price'  => (float)($prices[$i] ?? 0),
+            'stock'  => (int)($stocks[$i] ?? 0),
+        ];
+
+        if ($repo->upsertVariant($productId, $variantData)) {
+            $saved++;
+        }
+    }
+
+    echo json_encode([
+        'status'  => 'success',
+        'message' => "{$saved} variant(s) saved successfully.",
+        'saved'   => $saved
+    ]);
+}
+
+/**
+ * Handle single variant deletion
+ */
+function handleDeleteVariant(int $adminId) {
+    $productId = (int)($_POST['product_id'] ?? 0);
+    $variantId = (int)($_POST['variant_id'] ?? 0);
+    if ($productId <= 0 || $variantId <= 0) throw new Exception('Invalid parameters.', 400);
+
+    require_once REPOS_PATH . '/ProductRepository.php';
+    $repo = new ProductRepository();
+
+    if ($repo->deleteVariant($productId, $variantId)) {
+        echo json_encode(['status' => 'success', 'message' => 'Variant deleted.']);
+    } else {
+        throw new Exception('Failed to delete variant.', 500);
+    }
+}
+
+/**
+ * Handle CSV Export
+ */
+function handleExportCSV(ProductService $service) {
+    require_once REPOS_PATH . '/ProductRepository.php';
+    $repo = new ProductRepository();
+    // Use an arbitrarily high limit to get all products for export
+    $products = $repo->getAllProducts(10000);
+
+    $filename = "sweets_inventory_export_" . date('Y-m-d_His') . ".csv";
+    
+    // Clear output buffer and set headers for download
+    if (ob_get_level()) {
+        ob_end_clean();
+    }
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    
+    $output = fopen('php://output', 'w');
+    fputcsv($output, ['ID', 'Product Name', 'SKU', 'Category', 'Subcategory', 'Price (INR)', 'Stock Quantity', 'Status']);
+    
+    foreach ($products as $p) {
+        $name = $p['name'] ?? 'Unknown';
+        $sku = strtoupper($p['sku'] ?? '');
+        $category = $p['category_name'] ?? 'General';
+        $subcategory = $p['subcategory_name'] ?? '';
+        $price = $p['base_price'] ?? 0;
+        $stock = $p['stock_quantity'] ?? 0;
+        $status = $p['status'] ?? 'Unknown';
+        
+        fputcsv($output, [$p['id'], $name, $sku, $category, $subcategory, $price, $stock, $status]);
+    }
+    
+    fclose($output);
+    exit;
 }

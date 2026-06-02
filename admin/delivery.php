@@ -31,7 +31,7 @@ require_once 'includes/sidebar.php';
 
         <div class="row g-3 mb-4" id="countCards">
             <div class="col-12 col-md-6 col-xl-3">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-sm h-100 filter-card active" data-filter="all" onclick="setFilter('all', this)">
                     <div class="card-body">
                         <p class="text-muted mb-1">Total Shipments</p>
                         <h3 class="mb-0" id="countTotal">0</h3>
@@ -39,7 +39,7 @@ require_once 'includes/sidebar.php';
                 </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-sm h-100 filter-card" data-filter="pending" onclick="setFilter('pending', this)">
                     <div class="card-body">
                         <p class="text-muted mb-1">Pending</p>
                         <h3 class="mb-0 text-warning" id="countPending">0</h3>
@@ -47,7 +47,7 @@ require_once 'includes/sidebar.php';
                 </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-sm h-100 filter-card" data-filter="in_transit" onclick="setFilter('in_transit', this)">
                     <div class="card-body">
                         <p class="text-muted mb-1">In Transit</p>
                         <h3 class="mb-0 text-primary" id="countTransit">0</h3>
@@ -55,7 +55,7 @@ require_once 'includes/sidebar.php';
                 </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-sm h-100 filter-card" data-filter="delivered" onclick="setFilter('delivered', this)">
                     <div class="card-body">
                         <p class="text-muted mb-1">Delivered</p>
                         <h3 class="mb-0 text-success" id="countDelivered">0</h3>
@@ -147,6 +147,19 @@ require_once 'includes/sidebar.php';
     .status-select:focus {
         box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);
     }
+    .filter-card {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 2px solid transparent !important;
+    }
+    .filter-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    }
+    .filter-card.active {
+        border-color: #7B1F1F !important;
+        background-color: #fdf5f2 !important;
+    }
 </style>
 
 <script>
@@ -158,6 +171,7 @@ require_once 'includes/sidebar.php';
 
     let shipments = [];
     let filteredShipments = [];
+    let currentStatusFilter = 'all';
 
     const tableBodyEl = document.getElementById('shipmentsTableBody');
     const loadingStateEl = document.getElementById('loadingState');
@@ -206,9 +220,7 @@ require_once 'includes/sidebar.php';
                 updated_at: item.updated_at || item.created_at || null
             }));
 
-            filteredShipments = [...shipments];
-            renderRows();
-            renderCounts(countsJson.data);
+            filterAndRenderRows();
         } catch (error) {
             showError(error.message || 'Unexpected error while loading dashboard');
             renderRows();
@@ -236,7 +248,7 @@ require_once 'includes/sidebar.php';
     function filterAndRenderRows() {
         const searchText = searchInputEl.value.trim().toLowerCase();
 
-        filteredShipments = shipments.filter((item) => {
+        const searchFilteredShipments = shipments.filter((item) => {
             if (!searchText) {
                 return true;
             }
@@ -246,7 +258,33 @@ require_once 'includes/sidebar.php';
             return orderReference.includes(searchText) || customer.includes(searchText);
         });
 
+        renderCountsFromRows(searchFilteredShipments);
+
+        filteredShipments = searchFilteredShipments.filter((item) => {
+            if (currentStatusFilter === 'all') return true;
+            return item.status === currentStatusFilter;
+        });
+
         renderRows();
+    }
+
+    function setFilter(status, el) {
+        if (currentStatusFilter === status && status !== 'all') {
+            currentStatusFilter = 'all';
+        } else {
+            currentStatusFilter = status;
+        }
+
+        document.querySelectorAll('.filter-card').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        const activeCard = document.querySelector(`.filter-card[data-filter="${currentStatusFilter}"]`);
+        if (activeCard) {
+            activeCard.classList.add('active');
+        }
+
+        filterAndRenderRows();
     }
 
     function renderRows() {
@@ -319,10 +357,11 @@ require_once 'includes/sidebar.php';
 
         shipment.status = nextStatus;
         shipment.updated_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        updateRowUI(orderId, nextStatus, shipment.updated_at);
-        renderCountsFromLocalRows();
+        filterAndRenderRows(); // Re-render everything to update counts and handle filtering
 
-        selectEl.disabled = true;
+        // Keep the select disabled while fetching
+        const currentSelectEl = document.getElementById(`select-${orderId}`);
+        if (currentSelectEl) currentSelectEl.disabled = true;
         showError('');
 
         try {
@@ -346,16 +385,15 @@ require_once 'includes/sidebar.php';
             }
 
             shipment.updated_at = json.data?.updated_at || shipment.updated_at;
-            updateRowUI(orderId, nextStatus, shipment.updated_at);
+            filterAndRenderRows();
         } catch (error) {
             shipment.status = previousStatus;
             shipment.updated_at = previousUpdatedAt;
-            updateRowUI(orderId, previousStatus, shipment.updated_at);
-            renderCountsFromLocalRows();
-            selectEl.value = previousStatus;
+            filterAndRenderRows();
             showError(error.message || 'Could not update status');
         } finally {
-            selectEl.disabled = false;
+            const currentSelectEl = document.getElementById(`select-${orderId}`);
+            if (currentSelectEl) currentSelectEl.disabled = false;
         }
     }
 
@@ -396,15 +434,15 @@ require_once 'includes/sidebar.php';
         document.getElementById('countDelivered').textContent = Number(counts.delivered || 0);
     }
 
-    function renderCountsFromLocalRows() {
+    function renderCountsFromRows(rows) {
         const counts = {
-            total: shipments.length,
+            total: rows.length,
             pending: 0,
             in_transit: 0,
             delivered: 0
         };
 
-        shipments.forEach((item) => {
+        rows.forEach((item) => {
             if (counts[item.status] !== undefined) {
                 counts[item.status] += 1;
             }

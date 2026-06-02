@@ -30,12 +30,14 @@ if (empty($slug) && !empty($catName)) {
 
 // Redirect gifting-related slugs to the specialized premium gifting page
 if ($slug === 'gift-box' || $slug === 'gifting') {
+    header("HTTP/1.1 301 Moved Permanently");
     header('Location: gifting.php');
     exit;
 }
 
 // Redirect combos-related slug to the specialized combos page
 if ($slug === 'combos') {
+    header("HTTP/1.1 301 Moved Permanently");
     header('Location: combos.php');
     exit;
 }
@@ -77,7 +79,29 @@ $sortLabels = [
     'name'       => 'Name (A-Z)',
 ];
 
-$pageTitle = htmlspecialchars($category['name']) . ' Products – ' . SITE_NAME;
+// Build dynamic SEO context for category page
+$itemListElements = [];
+$position = 1;
+foreach ($products as $prod) {
+    $itemListElements[] = [
+        '@type' => 'ListItem',
+        'position' => $position++,
+        'url' => BASE_URL . "product-detail.php?slug=" . urlencode((string)($prod['slug'] ?? ''))
+    ];
+}
+
+$seoContext = [
+    'title' => htmlspecialchars($category['name']) . ' Sweets & Snacks | ' . SITE_NAME,
+    'description' => htmlspecialchars(strip_tags(!empty($category['description']) ? $category['description'] : "Browse our authentic selection of {$category['name']} made with love and tradition.")),
+    'canonical' => BASE_URL . "category-products.php?slug=" . urlencode((string)$slug),
+    'og_image' => !empty($category['hero_image']) ? BASE_URL . ltrim($category['hero_image'], '/') : BASE_URL . SITE_LOGO,
+    'type' => 'website',
+    'schema' => [
+        '@context' => 'https://schema.org/',
+        '@type' => 'ItemList',
+        'itemListElement' => $itemListElements
+    ]
+];
 
 $searchQueryString = $currentSearch !== '' ? '&search=' . urlencode($currentSearch) : '';
 

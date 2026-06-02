@@ -287,6 +287,47 @@ require_once 'includes/sidebar.php';
                                 <input type="number" name="stock_quantity" class="form-control form-control-custom" value="<?php echo (int)$stockQuantity; ?>">
                             </div>
                         </section>
+
+                        <!-- ── Weight Variants ── -->
+                        <section class="section-card" id="variantsSection">
+                            <h5 class="right-section-title d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-layers me-1"></i> Weight Variants</span>
+                                <button type="button" class="btn btn-sm btn-outline-secondary shadow-none py-0" id="btnAddVariantRow"
+                                    style="font-size:12px; border-radius:6px;">
+                                    <i class="bi bi-plus"></i> Add Row
+                                </button>
+                            </h5>
+                            <p class="text-muted small mb-3">Define per-weight pricing and stock (250g / 500g / 1kg). These show as selector buttons on the product page.</p>
+
+                            <div id="variantsTableWrapper" style="overflow-x:auto;">
+                                <table class="table table-sm align-middle mb-2" id="variantsTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-muted" style="font-size:11px;font-weight:600;">Weight</th>
+                                            <th class="text-muted" style="font-size:11px;font-weight:600;">Label</th>
+                                            <th class="text-muted" style="font-size:11px;font-weight:600;">Price (₹)</th>
+                                            <th class="text-muted" style="font-size:11px;font-weight:600;">Stock</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="variantRows">
+                                        <tr id="variantLoadingRow">
+                                            <td colspan="5" class="text-muted small py-3 text-center">
+                                                <div class="spinner-border spinner-border-sm me-1"></div> Loading...
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-2">
+                                <button type="button" class="btn btn-sm shadow-none fw-bold px-3 py-1"
+                                    id="btnSaveVariants"
+                                    style="background:#8c3333; color:#fff; border-radius:8px; font-size:13px;">
+                                    <i class="bi bi-check2-circle me-1"></i> Save Variants
+                                </button>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -485,6 +526,179 @@ require_once 'includes/modals/product-preview.php';
                 submitBtns.forEach(btn => btn.disabled = false);
             }
         });
+
+        // ── Variants Management ──
+        const PRODUCT_ID    = <?php echo $productId; ?>;
+        const CSRF_TOKEN    = '<?php echo $_SESSION["csrf_token"] ?? ""; ?>';
+        const ALLOWED_WEIGHTS = ['250g', '500g', '1kg'];
+
+        function variantRowHTML(v) {
+            const id     = v.id    || 0;
+            const weight = v.weight || '';
+            const label  = v.label  || (weight + ' Pack');
+            const price  = v.price  || '';
+            const stock  = v.stock !== undefined ? v.stock : 0;
+            const isSaved = id > 0;
+
+            const weightOpts = ALLOWED_WEIGHTS.map(w =>
+                `<option value="${w}" ${w === weight ? 'selected' : ''}>${w}</option>`
+            ).join('');
+
+            return `
+            <tr data-variant-id="${id}">
+                <td style="min-width:80px;">
+                    ${isSaved
+                        ? `<span class="badge bg-secondary" style="font-size:12px;">${weight}</span>
+                           <input type="hidden" name="variant_id[]" value="${id}">
+                           <input type="hidden" name="variant_weight[]" value="${weight}">`
+                        : `<select name="variant_weight[]" class="form-select form-select-sm shadow-none" style="min-width:70px;">${weightOpts}</select>
+                           <input type="hidden" name="variant_id[]" value="0">`
+                    }
+                </td>
+                <td>
+                    <input type="text" name="variant_label[]" value="${label}"
+                        class="form-control form-control-sm shadow-none" placeholder="e.g. 500g Pack">
+                </td>
+                <td style="min-width:90px;">
+                    <input type="number" name="variant_price[]" value="${price}"
+                        class="form-control form-control-sm shadow-none" step="0.01" min="0" placeholder="₹">
+                </td>
+                <td style="min-width:75px;">
+                    <input type="number" name="variant_stock[]" value="${stock}"
+                        class="form-control form-control-sm shadow-none" min="0" placeholder="0">
+                </td>
+                <td>
+                    ${isSaved
+                        ? `<button type="button" class="btn btn-link text-danger p-0 btn-delete-variant"
+                               data-id="${id}" title="Delete Variant"><i class="bi bi-trash"></i></button>`
+                        : `<button type="button" class="btn btn-link text-danger p-0 btn-remove-row" title="Remove Row"><i class="bi bi-x-circle"></i></button>`
+                    }
+                </td>
+            </tr>`;
+        }
+
+        async function loadVariants() {
+            const variantRows = document.getElementById('variantRows');
+            try {
+                const res  = await fetch(`api/get_variants.php?product_id=${PRODUCT_ID}`);
+                const data = await res.json();
+                renderVariants(data.variants || []);
+            } catch(e) {
+                renderVariants([]);
+            }
+        }
+
+        function renderVariants(variants) {
+            const variantRows = document.getElementById('variantRows');
+            if (variants.length === 0) {
+                variantRows.innerHTML = `<tr><td colspan="5" class="text-muted small text-center py-3">No variants yet. Click "Add Row" to create one.</td></tr>`;
+                return;
+            }
+            variantRows.innerHTML = variants.map(variantRowHTML).join('');
+        }
+
+        loadVariants();
+
+        document.getElementById('btnAddVariantRow')?.addEventListener('click', () => {
+            const variantRows = document.getElementById('variantRows');
+            const usedWeights = [...variantRows.querySelectorAll('[name="variant_weight[]"]')].map(el => el.value);
+            const nextWeight = ALLOWED_WEIGHTS.find(w => !usedWeights.includes(w)) || '250g';
+            const dummy = document.createElement('tbody');
+            dummy.innerHTML = variantRowHTML({ id: 0, weight: nextWeight, label: '', price: '', stock: 0 });
+            variantRows.appendChild(dummy.querySelector('tr'));
+        });
+
+        document.getElementById('variantRows')?.addEventListener('click', function(e) {
+            const removeBtn = e.target.closest('.btn-remove-row');
+            if (removeBtn) { removeBtn.closest('tr').remove(); }
+        });
+
+        document.getElementById('variantRows')?.addEventListener('click', async function(e) {
+            const deleteBtn = e.target.closest('.btn-delete-variant');
+            if (!deleteBtn) return;
+            if (!confirm('Delete this variant? This cannot be undone.')) return;
+
+            const variantId = deleteBtn.dataset.id;
+            const formData  = new FormData();
+            formData.append('action', 'delete_variant');
+            formData.append('product_id', PRODUCT_ID);
+            formData.append('variant_id', variantId);
+            formData.append('csrf_token', CSRF_TOKEN);
+
+            deleteBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+            deleteBtn.disabled  = true;
+
+            try {
+                const res  = await fetch('api/v1/products.php', {
+                    method: 'POST',
+                    headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')},
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    deleteBtn.closest('tr').remove();
+                    const vr = document.getElementById('variantRows');
+                    if (vr && vr.querySelectorAll('tr[data-variant-id]').length === 0) renderVariants([]);
+                } else {
+                    alert(data.message || 'Failed to delete variant.');
+                    deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+                    deleteBtn.disabled  = false;
+                }
+            } catch {
+                alert('Network error while deleting.');
+                deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+                deleteBtn.disabled  = false;
+            }
+        });
+
+        document.getElementById('btnSaveVariants')?.addEventListener('click', async () => {
+            const btn         = document.getElementById('btnSaveVariants');
+            const variantRows = document.getElementById('variantRows');
+            const rows        = variantRows.querySelectorAll('tr[data-variant-id]');
+            if (rows.length === 0) { alert('Add at least one variant before saving.'); return; }
+
+            const formData = new FormData();
+            formData.append('action', 'save_variants');
+            formData.append('product_id', PRODUCT_ID);
+            formData.append('csrf_token', CSRF_TOKEN);
+
+            rows.forEach(row => {
+                formData.append('variant_weight[]', row.querySelector('[name="variant_weight[]"]')?.value || '');
+                formData.append('variant_label[]',  row.querySelector('[name="variant_label[]"]')?.value  || '');
+                formData.append('variant_price[]',  row.querySelector('[name="variant_price[]"]')?.value  || '0');
+                formData.append('variant_stock[]',  row.querySelector('[name="variant_stock[]"]')?.value  || '0');
+                formData.append('variant_id[]',     row.querySelector('[name="variant_id[]"]')?.value     || '0');
+            });
+
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Saving...';
+            btn.disabled  = true;
+
+            try {
+                const res  = await fetch('api/v1/products.php', {
+                    method: 'POST',
+                    headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')},
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Saved!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Save Variants';
+                        btn.disabled  = false;
+                        loadVariants();
+                    }, 1500);
+                } else {
+                    alert(data.message || 'Failed to save variants.');
+                    btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Save Variants';
+                    btn.disabled  = false;
+                }
+            } catch {
+                alert('Network error while saving variants.');
+                btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Save Variants';
+                btn.disabled  = false;
+            }
+        });
+
     });
 
     // --- UI Helpers ---

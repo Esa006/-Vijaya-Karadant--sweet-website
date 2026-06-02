@@ -84,7 +84,7 @@ class AnalyticsRepository {
     }
 
     public function getRevenueChartData(string $startDate, string $endDate): array {
-        $sql = "SELECT DATE(created_at) as date, SUM(total_amount) as revenue
+        $sql = "SELECT DATE(created_at) as date, SUM(total_amount) as revenue, COUNT(id) as orders
                 FROM orders 
                 WHERE status != 'cancelled' 
                 AND created_at BETWEEN :start AND :end

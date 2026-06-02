@@ -142,9 +142,8 @@ const UpiPayment = (() => {
         if (el) el.textContent = txnId || state.txnId;
         // Confetti burst
         if (window.confetti) window.confetti({ particleCount: 120, spread: 80, origin: { y: 0.55 } });
-        // Redirect after 4s
         setTimeout(() => {
-            const orderId = $('upi-modal')?.dataset?.orderId;
+            const orderId = $('upiPaymentModal')?.dataset?.orderId;
             if (orderId) window.location.href = `order-success.php?order_id=${encodeURIComponent(orderId)}`;
         }, 4000);
     }
@@ -180,7 +179,13 @@ const UpiPayment = (() => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: 'initiate', amount, order_id: orderId }),
             });
-            const data = await res.json();
+            let data;
+            try {
+                data = await res.json();
+            } catch (err) {
+                const text = await res.text();
+                throw new Error('Server returned invalid JSON. Raw response: ' + text.substring(0, 100));
+            }
             if (!data.success) throw new Error(data.message);
 
             state.txnId     = data.txn_id;

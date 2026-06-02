@@ -8,6 +8,13 @@
  */
 
 require_once 'config/config.php';
+
+$seoContext = [
+    'title'       => 'Return & Refund Policy | ' . SITE_NAME,
+    'description' => 'Read the Return and Refund Policy of ' . SITE_NAME . '. Learn about our cancellation, return window, and refund process for your orders.',
+    'canonical'   => BASE_URL . 'return-refund-policy.php',
+];
+
 require_once 'includes/header.php';
 ?>
 

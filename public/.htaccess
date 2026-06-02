@@ -1,8 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /sweet-website/public/
 
-    # Direct access to existing files/directories
+    # No RewriteBase needed. Works dynamically in local and live.
+
+    # Skip rewrite for real files and directories
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 

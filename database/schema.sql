@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 16, 2026 at 06:45 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: May 29, 2026 at 05:24 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -106,7 +106,50 @@ INSERT INTO `addresses` (`id`, `user_id`, `recipient_name`, `type`, `address_lin
 (28, 9014, 'nalej raja', 'shipping', 'wqdwqfwqfwq', NULL, 'Hyderabad', ' Andhra Pradesh', '858567', 'India', '9085858541', 0),
 (29, 9014, 'nalej raja', 'shipping', 'wqdwqfwqfwq', NULL, 'Hyderabad', ' Andhra Pradesh', '858567', 'India', '9085858541', 0),
 (30, 9015, 'nalej raja', 'shipping', 'wqdwqfwqfwq', NULL, 'Hyderabad', ' Andhra Pradesh', '589625', 'India', '8525654215', 0),
-(31, 9015, 'nalej raja', 'shipping', 'wqdwqfwqfwq', NULL, 'Hyderabad', ' Andhra Pradesh', '589625', 'India', '8525654215', 0);
+(31, 9015, 'nalej raja', 'shipping', 'wqdwqfwqfwq', NULL, 'Hyderabad', ' Andhra Pradesh', '589625', 'India', '8525654215', 0),
+(32, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '626123', 'India', '9047478856', 0),
+(33, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '626123', 'India', '9047478856', 0),
+(34, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '626123', 'India', '9047478856', 0),
+(35, 9007, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '626123', 'India', '9047478856', 0),
+(36, 9007, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(37, 9007, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(38, 9007, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(40, 9007, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(41, 9016, 'joe Raja', 'shipping', 'jtjtjrtjtj', NULL, 'cheenai', 'tjr', '123456', 'India', '9047478887', 0),
+(42, 9016, 'joe Raja', 'shipping', 'jtjtjrtjtj', NULL, 'cheenai', 'tjr', '123456', 'India', '9047478887', 0),
+(43, 9016, 'joe Raja', 'shipping', 'jtjtjrtjtj', NULL, 'cheenai', 'tjr', '123456', 'India', '9047478887', 0),
+(44, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(45, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(46, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(47, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(48, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(49, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(50, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0),
+(51, 9008, 'esakiraj raja', 'shipping', 'wqdwqfwqfwq', NULL, 'madurai', 'TAMIL NADU', '625001', 'India', '9047478886', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_invites`
+--
+
+CREATE TABLE `admin_invites` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `used_at` datetime DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_invites`
+--
+
+INSERT INTO `admin_invites` (`id`, `email`, `role_id`, `token`, `expires_at`, `used_at`, `created_by`, `created_at`) VALUES
+(1, 'isaacraja89@gmail.com', 2, 'b385dfe9e969b4e638864ee9b60faf7f2a1eb2c4bd9ffbdc67325f263b800a7e', '2026-05-20 13:52:54', NULL, 2, '2026-05-20 07:22:54');
 
 -- --------------------------------------------------------
 
@@ -156,11 +199,11 @@ CREATE TABLE `admin_notifications` (
 --
 
 INSERT INTO `admin_notifications` (`id`, `type`, `title`, `message`, `is_read`, `created_at`) VALUES
-(1, 'order', 'New order received', 'order #VK1042 was placed by aman rathore for ? 720 Includes premium sorted karadant.', 0, '2026-04-12 17:05:34'),
-(2, 'stock', 'Low stock Alert', 'Karadant (500g) is running low on stock. only 4 units remaining in inventory', 0, '2026-04-12 16:49:34'),
-(3, 'payment', 'Payment Successful', 'Payment of ? 3,400 received for order #VK141 via Razorpay', 0, '2026-04-12 16:07:34'),
-(4, 'shipment', 'Shipment delivered', 'Order #VK1082 has been successfully to the customer in bangalore', 0, '2026-04-11 17:07:34'),
-(5, 'order', 'order cancelled', 'order #VK1035 was cancelled by the user. reason change of mind refund has been initiated automatically', 0, '2026-04-11 17:07:34');
+(1, 'order', 'New order received', 'order #VK1042 was placed by aman rathore for ? 720 Includes premium sorted karadant.', 1, '2026-04-12 17:05:34'),
+(2, 'stock', 'Low stock Alert', 'Karadant (500g) is running low on stock. only 4 units remaining in inventory', 1, '2026-04-12 16:49:34'),
+(3, 'payment', 'Payment Successful', 'Payment of ? 3,400 received for order #VK141 via Razorpay', 1, '2026-04-12 16:07:34'),
+(4, 'shipment', 'Shipment delivered', 'Order #VK1082 has been successfully to the customer in bangalore', 1, '2026-04-11 17:07:34'),
+(5, 'order', 'order cancelled', 'order #VK1035 was cancelled by the user. reason change of mind refund has been initiated automatically', 1, '2026-04-11 17:07:34');
 
 -- --------------------------------------------------------
 
@@ -187,10 +230,13 @@ CREATE TABLE `audit_logs` (
   `id` int(11) NOT NULL,
   `entity_type` varchar(50) NOT NULL,
   `entity_id` int(11) NOT NULL,
+  `target_type` varchar(50) DEFAULT NULL,
+  `target_id` int(11) DEFAULT NULL,
   `action` varchar(100) NOT NULL,
   `performed_by` int(11) DEFAULT NULL,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`payload`)),
   `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -198,85 +244,191 @@ CREATE TABLE `audit_logs` (
 -- Dumping data for table `audit_logs`
 --
 
-INSERT INTO `audit_logs` (`id`, `entity_type`, `entity_id`, `action`, `performed_by`, `payload`, `ip_address`, `created_at`) VALUES
-(1, 'product', 1016, 'create', NULL, '{\"category_id\":1,\"name\":\"SyncTest Product 1775808853\",\"slug\":\"synctest-product-1775808853\",\"short_description\":\"\",\"description\":\"\",\"base_price\":100,\"sale_price\":null,\"tax_rate\":0,\"sku\":null,\"image_path\":\"assets\\/images\\/placeholders\\/product-placeholder.png\",\"status\":\"published\",\"stock_quantity\":50}', '0.0.0.0', '2026-04-10 08:14:13'),
-(2, 'product', 1016, 'delete', NULL, NULL, '0.0.0.0', '2026-04-10 08:14:13'),
-(3, 'product', 1, 'update', 2, '{\"category_id\":3,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"Vijaya Karadant stands out as one of the finest and most delicious sweets...\",\"description\":\"ffgsfgfhsfhsffsdsdh\",\"base_price\":\"350\",\"sale_price\":650,\"tax_rate\":\"0\",\"sku\":\"#j\",\"status\":\"published\"}', '::1', '2026-04-10 08:30:16'),
-(4, 'product', 1000, 'update', 2, '{\"category_id\":1,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"\",\"description\":\"super\",\"base_price\":\"720\",\"sale_price\":950,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\"}', '::1', '2026-04-10 08:42:18'),
-(5, 'product', 1000, 'update', 2, '{\"category_id\":1,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"\",\"description\":\"super\",\"base_price\":\"720\",\"sale_price\":950,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\"}', '::1', '2026-04-10 08:42:22'),
-(6, 'product', 1017, 'create', 2, '{\"category_id\":1,\"name\":\"laddu\",\"slug\":\"laddu\",\"short_description\":\"fhfdhfdh\",\"description\":\"fhdfhdhfdhh\",\"base_price\":2000,\"sale_price\":300,\"tax_rate\":12,\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_69d8d4cd945f74.99532167.png\",\"status\":\"published\",\"stock_quantity\":5}', '::1', '2026-04-10 10:45:33'),
-(7, 'product', 1017, 'delete', 2, NULL, '::1', '2026-04-11 08:57:48'),
-(8, 'product', 4, 'delete', 2, NULL, '::1', '2026-04-11 12:35:05'),
-(9, 'product', 1020, 'create', 2, '{\"category_id\":13,\"name\":\"demo\",\"slug\":\"demo\",\"short_description\":\"sdgsdgsdgsdgsd\",\"description\":\"gsdgsdgsdgsdgdsgsg\",\"base_price\":300,\"sale_price\":500,\"tax_rate\":16,\"sku\":\"#5\",\"image_path\":\"assets\\/images\\/products\\/sw_69da40a6797384.30012792.png\",\"status\":\"published\",\"stock_quantity\":5}', '::1', '2026-04-11 12:37:58'),
-(10, 'product', 2011, 'delete', 2, NULL, '::1', '2026-04-13 03:53:44'),
-(11, 'product', 2010, 'delete', 2, NULL, '::1', '2026-04-18 09:23:35'),
-(12, 'product', 2009, 'delete', 2, NULL, '::1', '2026-04-18 09:25:50'),
-(13, 'product', 2013, 'delete', 2, NULL, '::1', '2026-04-20 07:46:45'),
-(14, 'product', 1040, 'update', 2, '{\"status\":\"draft\"}', '::1', '2026-04-20 17:18:52'),
-(15, 'product', 1040, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', '2026-04-20 17:18:52'),
-(16, 'product', 1040, 'update', 2, '{\"status\":\"published\"}', '::1', '2026-04-20 17:18:54'),
-(17, 'product', 1040, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', '2026-04-20 17:18:54'),
-(18, 'product', 1040, 'update', 2, '{\"status\":\"draft\"}', '::1', '2026-04-21 12:23:38'),
-(19, 'product', 1040, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', '2026-04-21 12:23:38'),
-(20, 'product', 1040, 'update', 2, '{\"status\":\"published\"}', '::1', '2026-04-21 12:23:39'),
-(21, 'product', 1040, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', '2026-04-21 12:23:39'),
-(22, 'product', 2014, 'create', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"slug\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":500,\"sale_price\":300,\"tax_rate\":0,\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_69e79550404821.98400110.png\",\"status\":\"published\",\"stock_quantity\":55,\"featured\":0}', '::1', '2026-04-21 15:18:40'),
-(23, 'order', 90008, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-41CD9F-20260422\",\"total_amount\":2140,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"weight\":\"500g\",\"quantity\":3},\"rice-kodubale-500g\":{\"id\":2006,\"name\":\"Rice Kodubale\",\"slug\":\"rice-kodubale\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (7).png\",\"price\":\"290.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', '2026-04-22 08:00:52'),
-(24, 'order', 90009, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-F98BAE-20260422\",\"total_amount\":2939,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"weight\":\"500g\",\"quantity\":3,\"original_price\":650},\"rice-kodubale-500g\":{\"id\":2006,\"name\":\"Rice Kodubale\",\"slug\":\"rice-kodubale\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (7).png\",\"price\":\"290.00\",\"weight\":\"500g\",\"quantity\":1,\"original_price\":320},\"regal-anjeer-karadant-500g\":{\"id\":1004,\"name\":\"Regal Anjeer Karadant\",\"slug\":\"regal-anjeer-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (7).png\",\"price\":\"799.00\",\"weight\":\"500g\",\"quantity\":1,\"original_price\":880}}}', '::1', '2026-04-22 08:29:19'),
-(25, 'order', 90010, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-F93386-20260422\",\"total_amount\":700,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"original_price\":\"650.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', '2026-04-22 08:54:55'),
-(26, 'product', 1, 'delete', 2, NULL, '::1', '2026-04-27 10:21:59'),
-(27, 'product', 2, 'delete', 2, NULL, '::1', '2026-04-27 10:22:02'),
-(28, 'product', 3, 'delete', 2, NULL, '::1', '2026-04-27 10:22:05'),
-(29, 'product', 1010, 'update', 2, '{\"category_id\":2,\"subcategory_id\":4,\"name\":\"Ragi Laddu\",\"short_description\":\"Wholesome ragi laddus with a roasted nutty taste.\",\"description\":\"\",\"base_price\":\"450\",\"sale_price\":399,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"10\",\"featured\":1}', '::1', '2026-04-27 11:20:56'),
-(30, 'product', 1010, 'update', 2, '{\"status\":\"draft\"}', '::1', '2026-04-27 11:32:13'),
-(31, 'product', 1010, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', '2026-04-27 11:32:13'),
-(32, 'product', 2001, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', '2026-04-28 11:10:01'),
-(33, 'product', 2001, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', '2026-04-28 11:10:01'),
-(34, 'product', 2001, 'update', 2, '{\"status\":\"published\"}', '::1', '2026-04-28 11:10:05'),
-(35, 'product', 2001, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', '2026-04-28 11:10:05'),
-(36, 'product', 2001, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', '2026-04-28 11:10:06'),
-(37, 'product', 2001, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', '2026-04-28 11:10:06'),
-(38, 'product', 2001, 'update', 2, '{\"status\":\"published\"}', '::1', '2026-04-28 11:10:10'),
-(39, 'product', 2001, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', '2026-04-28 11:10:10'),
-(40, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":1}', '::1', '2026-04-28 11:10:18'),
-(41, 'product', 2014, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', '2026-04-28 11:10:41'),
-(42, 'product', 2014, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', '2026-04-28 11:10:42'),
-(43, 'order', 90034, 'cancelled_by_customer', 9008, '{\"from_status\":\"pending\",\"to_status\":\"cancelled\"}', '::1', '2026-04-29 09:12:51'),
-(44, 'order', 90060, 'create', NULL, '{\"user_id\":9008,\"order_number\":\"SW-ORD-8E2B61-20260504\",\"total_amount\":849,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":21,\"billing_address_id\":21,\"items\":{\"regal-anjeer-karadant-1kg\":{\"type\":\"product\",\"name\":\"Regal Anjeer Karadant\",\"slug\":\"regal-anjeer-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (7).png\",\"price\":\"799.00\",\"weight\":\"1kg\",\"quantity\":1,\"id\":1004,\"original_price\":880}}}', '::1', '2026-05-04 11:15:36'),
-(45, 'order', 90061, 'create', NULL, '{\"user_id\":9008,\"order_number\":\"SW-ORD-13680C-20260504\",\"total_amount\":340,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":22,\"billing_address_id\":22,\"items\":{\"butter-muruku-500g\":{\"type\":\"product\",\"id\":2005,\"variant_id\":0,\"name\":\"Butter Muruku\",\"slug\":\"butter-muruku\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (6).png\",\"price\":290,\"original_price\":\"320.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', '2026-05-04 11:16:49'),
-(46, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:42:05'),
-(47, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:44:15'),
-(48, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:44:57'),
-(49, 'product', 1014, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Premium Otts Laddu\",\"short_description\":\"Soft and flavorful laddus with a traditional finish.\",\"description\":\"\",\"base_price\":\"500\",\"sale_price\":450,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"0\",\"featured\":0}', '::1', '2026-05-06 07:50:33'),
-(50, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:53:09'),
-(51, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:53:50'),
-(52, 'product', 2001, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', '2026-05-06 07:55:11'),
-(53, 'product', 1014, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Premium Otts Laddu\",\"short_description\":\"Soft and flavorful laddus with a traditional finish.\",\"description\":\"\",\"base_price\":\"500\",\"sale_price\":450,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"0\",\"featured\":0}', '::1', '2026-05-06 07:56:57'),
-(54, 'product', 2017, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Garlic Ribbon\",\"slug\":\"garlic-ribbon\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#5\",\"image_path\":\"assets\\/images\\/products\\/sw_69faf5506704d3.45873060.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', '2026-05-06 08:01:20'),
-(55, 'product', 2018, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Nippattu\",\"slug\":\"nippattu\",\"short_description\":\"\",\"description\":\"\",\"base_price\":420,\"sale_price\":290,\"tax_rate\":0,\"sku\":\"#6\",\"image_path\":\"assets\\/images\\/products\\/sw_69faf5ca546564.22639439.png\",\"status\":\"published\",\"stock_quantity\":20,\"featured\":1}', '::1', '2026-05-06 08:03:22'),
-(56, 'product', 2018, 'update', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Onion Kodubale\",\"short_description\":\"Crisp nippattu with roasted spice notes.\",\"description\":\"\",\"base_price\":\"420\",\"sale_price\":290,\"tax_rate\":\"0\",\"sku\":\"#6\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-06 08:48:39'),
-(57, 'product', 2019, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Ribbon Pakoda\",\"slug\":\"ribbon-pakoda\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#4\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb0127618d01.15771343.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', '2026-05-06 08:51:51'),
-(58, 'product', 2021, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Garlic Ribbon\",\"slug\":\"garlic-ribbon-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#3\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb01ca2dab70.06238032.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', '2026-05-06 08:54:34'),
-(59, 'product', 2026, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Nippattu\",\"slug\":\"nippattu-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":410,\"sale_price\":280,\"tax_rate\":0,\"sku\":\"#7\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb02a5225ee9.55018342.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', '2026-05-06 08:58:13'),
-(60, 'product', 2027, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Bengaluru Mix\",\"slug\":\"bengaluru-mix\",\"short_description\":\"\",\"description\":\"\",\"base_price\":380,\"sale_price\":250,\"tax_rate\":0,\"sku\":\"#8\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb0302a68dd7.63996990.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', '2026-05-06 08:59:46'),
-(61, 'product', 2029, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Masala Peanuts\",\"slug\":\"masala-peanuts-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":380,\"sale_price\":250,\"tax_rate\":0,\"sku\":\"#9\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb04250fcf16.43916756.png\",\"status\":\"published\",\"stock_quantity\":11,\"featured\":1}', '::1', '2026-05-06 09:04:37'),
-(62, 'product', 2031, 'create', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"remium Karadant Pack\",\"slug\":\"remium-karadant-pack\",\"short_description\":\"\",\"description\":\"\",\"base_price\":950,\"sale_price\":820,\"tax_rate\":0,\"sku\":\"#10\",\"image_path\":\"assets\\/images\\/products\\/sw_69fc4066de52d5.18136141.png\",\"status\":\"published\",\"stock_quantity\":20,\"featured\":1}', '::1', '2026-05-07 07:33:58'),
-(63, 'product', 2031, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-07 07:34:32'),
-(64, 'product', 2031, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-07 07:34:57'),
-(65, 'product', 2031, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-07 07:36:29'),
-(66, 'product', 2031, 'update', NULL, '{\"name\":\"Test Product\"}', '0.0.0.0', '2026-05-07 10:13:30'),
-(67, 'product', 2031, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Test Product\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-07 10:25:08'),
-(68, 'product', 2031, 'set_primary_image', 2, '{\"image_id\":121}', '::1', '2026-05-07 10:25:23'),
-(69, 'product', 2031, 'set_primary_image', 2, '{\"image_id\":120}', '::1', '2026-05-07 10:25:30'),
-(70, 'product', 2031, 'delete_image', 2, '{\"image_id\":121}', '::1', '2026-05-07 10:25:39'),
-(71, 'product', 2031, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\" Karadant\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', '2026-05-07 10:25:59'),
-(72, 'product', 2031, 'delete', 2, NULL, '::1', '2026-05-09 10:47:29'),
-(73, 'product', 2014, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_6a007898d77f45.11993884.png\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', '2026-05-10 12:22:48'),
-(74, 'product', 1003, 'update', 2, '{\"category_id\":1,\"subcategory_id\":3,\"name\":\"Supreme Vijaya Karadant\",\"short_description\":\"Richer blend of nuts and jaggery for a premium bite.\",\"description\":\"\",\"base_price\":\"420\",\"sale_price\":380,\"tax_rate\":\"0\",\"sku\":null,\"image_path\":\"assets\\/images\\/products\\/sw_6a0078dfcbb266.26209842.png\",\"status\":\"published\",\"stock_quantity\":\"80\",\"featured\":1}', '::1', '2026-05-10 12:23:59'),
-(75, 'product', 1010, 'update', 2, '{\"status\":\"published\"}', '127.0.0.1', '2026-05-14 10:07:07'),
-(76, 'product', 1010, 'toggle_status', 2, '{\"new_status\":\"published\"}', '127.0.0.1', '2026-05-14 10:07:07'),
-(77, 'product', 1010, 'update', 2, '{\"status\":\"published\"}', '127.0.0.1', '2026-05-14 10:07:07'),
-(78, 'product', 1010, 'toggle_status', 2, '{\"new_status\":\"published\"}', '127.0.0.1', '2026-05-14 10:07:07');
+INSERT INTO `audit_logs` (`id`, `entity_type`, `entity_id`, `target_type`, `target_id`, `action`, `performed_by`, `payload`, `ip_address`, `user_agent`, `created_at`) VALUES
+(1, 'product', 1016, NULL, NULL, 'create', NULL, '{\"category_id\":1,\"name\":\"SyncTest Product 1775808853\",\"slug\":\"synctest-product-1775808853\",\"short_description\":\"\",\"description\":\"\",\"base_price\":100,\"sale_price\":null,\"tax_rate\":0,\"sku\":null,\"image_path\":\"assets\\/images\\/placeholders\\/product-placeholder.png\",\"status\":\"published\",\"stock_quantity\":50}', '0.0.0.0', NULL, '2026-04-10 08:14:13'),
+(2, 'product', 1016, NULL, NULL, 'delete', NULL, NULL, '0.0.0.0', NULL, '2026-04-10 08:14:13'),
+(3, 'product', 1, NULL, NULL, 'update', 2, '{\"category_id\":3,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"Vijaya Karadant stands out as one of the finest and most delicious sweets...\",\"description\":\"ffgsfgfhsfhsffsdsdh\",\"base_price\":\"350\",\"sale_price\":650,\"tax_rate\":\"0\",\"sku\":\"#j\",\"status\":\"published\"}', '::1', NULL, '2026-04-10 08:30:16'),
+(4, 'product', 1000, NULL, NULL, 'update', 2, '{\"category_id\":1,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"\",\"description\":\"super\",\"base_price\":\"720\",\"sale_price\":950,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\"}', '::1', NULL, '2026-04-10 08:42:18'),
+(5, 'product', 1000, NULL, NULL, 'update', 2, '{\"category_id\":1,\"name\":\"Premium Vijaya Karadant\",\"short_description\":\"\",\"description\":\"super\",\"base_price\":\"720\",\"sale_price\":950,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\"}', '::1', NULL, '2026-04-10 08:42:22'),
+(6, 'product', 1017, NULL, NULL, 'create', 2, '{\"category_id\":1,\"name\":\"laddu\",\"slug\":\"laddu\",\"short_description\":\"fhfdhfdh\",\"description\":\"fhdfhdhfdhh\",\"base_price\":2000,\"sale_price\":300,\"tax_rate\":12,\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_69d8d4cd945f74.99532167.png\",\"status\":\"published\",\"stock_quantity\":5}', '::1', NULL, '2026-04-10 10:45:33'),
+(7, 'product', 1017, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-11 08:57:48'),
+(8, 'product', 4, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-11 12:35:05'),
+(9, 'product', 1020, NULL, NULL, 'create', 2, '{\"category_id\":13,\"name\":\"demo\",\"slug\":\"demo\",\"short_description\":\"sdgsdgsdgsdgsd\",\"description\":\"gsdgsdgsdgsdgdsgsg\",\"base_price\":300,\"sale_price\":500,\"tax_rate\":16,\"sku\":\"#5\",\"image_path\":\"assets\\/images\\/products\\/sw_69da40a6797384.30012792.png\",\"status\":\"published\",\"stock_quantity\":5}', '::1', NULL, '2026-04-11 12:37:58'),
+(10, 'product', 2011, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-13 03:53:44'),
+(11, 'product', 2010, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-18 09:23:35'),
+(12, 'product', 2009, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-18 09:25:50'),
+(13, 'product', 2013, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-20 07:46:45'),
+(14, 'product', 1040, NULL, NULL, 'update', 2, '{\"status\":\"draft\"}', '::1', NULL, '2026-04-20 17:18:52'),
+(15, 'product', 1040, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', NULL, '2026-04-20 17:18:52'),
+(16, 'product', 1040, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-04-20 17:18:54'),
+(17, 'product', 1040, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-04-20 17:18:54'),
+(18, 'product', 1040, NULL, NULL, 'update', 2, '{\"status\":\"draft\"}', '::1', NULL, '2026-04-21 12:23:38'),
+(19, 'product', 1040, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', NULL, '2026-04-21 12:23:38'),
+(20, 'product', 1040, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-04-21 12:23:39'),
+(21, 'product', 1040, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-04-21 12:23:39'),
+(22, 'product', 2014, NULL, NULL, 'create', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"slug\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":500,\"sale_price\":300,\"tax_rate\":0,\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_69e79550404821.98400110.png\",\"status\":\"published\",\"stock_quantity\":55,\"featured\":0}', '::1', NULL, '2026-04-21 15:18:40'),
+(23, 'order', 90008, NULL, NULL, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-41CD9F-20260422\",\"total_amount\":2140,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"weight\":\"500g\",\"quantity\":3},\"rice-kodubale-500g\":{\"id\":2006,\"name\":\"Rice Kodubale\",\"slug\":\"rice-kodubale\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (7).png\",\"price\":\"290.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', NULL, '2026-04-22 08:00:52'),
+(24, 'order', 90009, NULL, NULL, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-F98BAE-20260422\",\"total_amount\":2939,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"weight\":\"500g\",\"quantity\":3,\"original_price\":650},\"rice-kodubale-500g\":{\"id\":2006,\"name\":\"Rice Kodubale\",\"slug\":\"rice-kodubale\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (7).png\",\"price\":\"290.00\",\"weight\":\"500g\",\"quantity\":1,\"original_price\":320},\"regal-anjeer-karadant-500g\":{\"id\":1004,\"name\":\"Regal Anjeer Karadant\",\"slug\":\"regal-anjeer-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (7).png\",\"price\":\"799.00\",\"weight\":\"500g\",\"quantity\":1,\"original_price\":880}}}', '::1', NULL, '2026-04-22 08:29:19'),
+(25, 'order', 90010, NULL, NULL, 'create', NULL, '{\"user_id\":9007,\"order_number\":\"SW-ORD-F93386-20260422\",\"total_amount\":700,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":null,\"items\":{\"dink-karadant-500g\":{\"id\":1005,\"name\":\"Dink Karadant\",\"slug\":\"dink-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (5).png\",\"price\":\"650.00\",\"original_price\":\"650.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', NULL, '2026-04-22 08:54:55'),
+(26, 'product', 1, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-27 10:21:59'),
+(27, 'product', 2, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-27 10:22:02'),
+(28, 'product', 3, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-04-27 10:22:05'),
+(29, 'product', 1010, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":4,\"name\":\"Ragi Laddu\",\"short_description\":\"Wholesome ragi laddus with a roasted nutty taste.\",\"description\":\"\",\"base_price\":\"450\",\"sale_price\":399,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"10\",\"featured\":1}', '::1', NULL, '2026-04-27 11:20:56'),
+(30, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"draft\"}', '::1', NULL, '2026-04-27 11:32:13'),
+(31, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"draft\"}', '::1', NULL, '2026-04-27 11:32:13'),
+(32, 'product', 2001, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-04-28 11:10:01'),
+(33, 'product', 2001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-04-28 11:10:01'),
+(34, 'product', 2001, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-04-28 11:10:05'),
+(35, 'product', 2001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-04-28 11:10:05'),
+(36, 'product', 2001, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-04-28 11:10:06'),
+(37, 'product', 2001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-04-28 11:10:06'),
+(38, 'product', 2001, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-04-28 11:10:10'),
+(39, 'product', 2001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-04-28 11:10:10'),
+(40, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":1}', '::1', NULL, '2026-04-28 11:10:18'),
+(41, 'product', 2014, NULL, NULL, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', NULL, '2026-04-28 11:10:41'),
+(42, 'product', 2014, NULL, NULL, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', NULL, '2026-04-28 11:10:42'),
+(43, 'order', 90034, NULL, NULL, 'cancelled_by_customer', 9008, '{\"from_status\":\"pending\",\"to_status\":\"cancelled\"}', '::1', NULL, '2026-04-29 09:12:51'),
+(44, 'order', 90060, NULL, NULL, 'create', NULL, '{\"user_id\":9008,\"order_number\":\"SW-ORD-8E2B61-20260504\",\"total_amount\":849,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":21,\"billing_address_id\":21,\"items\":{\"regal-anjeer-karadant-1kg\":{\"type\":\"product\",\"name\":\"Regal Anjeer Karadant\",\"slug\":\"regal-anjeer-karadant\",\"image\":\"assets\\/images\\/homepage\\/New folder\\/karant\\/bestseeler karadant (7).png\",\"price\":\"799.00\",\"weight\":\"1kg\",\"quantity\":1,\"id\":1004,\"original_price\":880}}}', '::1', NULL, '2026-05-04 11:15:36'),
+(45, 'order', 90061, NULL, NULL, 'create', NULL, '{\"user_id\":9008,\"order_number\":\"SW-ORD-13680C-20260504\",\"total_amount\":340,\"status\":\"pending\",\"payment_status\":\"paid\",\"shipping_address_id\":22,\"billing_address_id\":22,\"items\":{\"butter-muruku-500g\":{\"type\":\"product\",\"id\":2005,\"variant_id\":0,\"name\":\"Butter Muruku\",\"slug\":\"butter-muruku\",\"image\":\"assets\\/images\\/banners\\/namkeen-page\\/our signature  (6).png\",\"price\":290,\"original_price\":\"320.00\",\"weight\":\"500g\",\"quantity\":1}}}', '::1', NULL, '2026-05-04 11:16:49'),
+(46, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:42:05'),
+(47, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:44:15'),
+(48, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:44:57'),
+(49, 'product', 1014, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Premium Otts Laddu\",\"short_description\":\"Soft and flavorful laddus with a traditional finish.\",\"description\":\"\",\"base_price\":\"500\",\"sale_price\":450,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"0\",\"featured\":0}', '::1', NULL, '2026-05-06 07:50:33'),
+(50, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:53:09'),
+(51, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:53:50'),
+(52, 'product', 2001, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Spicy Mix Namkeen\",\"short_description\":\"A bold namkeen mix with signature house spices.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":280,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"200\",\"featured\":1}', '::1', NULL, '2026-05-06 07:55:11'),
+(53, 'product', 1014, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Premium Otts Laddu\",\"short_description\":\"Soft and flavorful laddus with a traditional finish.\",\"description\":\"\",\"base_price\":\"500\",\"sale_price\":450,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"0\",\"featured\":0}', '::1', NULL, '2026-05-06 07:56:57'),
+(54, 'product', 2017, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Garlic Ribbon\",\"slug\":\"garlic-ribbon\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#5\",\"image_path\":\"assets\\/images\\/products\\/sw_69faf5506704d3.45873060.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', NULL, '2026-05-06 08:01:20'),
+(55, 'product', 2018, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Nippattu\",\"slug\":\"nippattu\",\"short_description\":\"\",\"description\":\"\",\"base_price\":420,\"sale_price\":290,\"tax_rate\":0,\"sku\":\"#6\",\"image_path\":\"assets\\/images\\/products\\/sw_69faf5ca546564.22639439.png\",\"status\":\"published\",\"stock_quantity\":20,\"featured\":1}', '::1', NULL, '2026-05-06 08:03:22'),
+(56, 'product', 2018, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Onion Kodubale\",\"short_description\":\"Crisp nippattu with roasted spice notes.\",\"description\":\"\",\"base_price\":\"420\",\"sale_price\":290,\"tax_rate\":\"0\",\"sku\":\"#6\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-06 08:48:39'),
+(57, 'product', 2019, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Ribbon Pakoda\",\"slug\":\"ribbon-pakoda\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#4\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb0127618d01.15771343.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', NULL, '2026-05-06 08:51:51'),
+(58, 'product', 2021, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Garlic Ribbon\",\"slug\":\"garlic-ribbon-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":450,\"sale_price\":320,\"tax_rate\":0,\"sku\":\"#3\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb01ca2dab70.06238032.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', NULL, '2026-05-06 08:54:34'),
+(59, 'product', 2026, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Nippattu\",\"slug\":\"nippattu-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":410,\"sale_price\":280,\"tax_rate\":0,\"sku\":\"#7\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb02a5225ee9.55018342.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', NULL, '2026-05-06 08:58:13'),
+(60, 'product', 2027, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Bengaluru Mix\",\"slug\":\"bengaluru-mix\",\"short_description\":\"\",\"description\":\"\",\"base_price\":380,\"sale_price\":250,\"tax_rate\":0,\"sku\":\"#8\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb0302a68dd7.63996990.png\",\"status\":\"published\",\"stock_quantity\":10,\"featured\":1}', '::1', NULL, '2026-05-06 08:59:46'),
+(61, 'product', 2029, NULL, NULL, 'create', 2, '{\"category_id\":4,\"subcategory_id\":null,\"name\":\"Masala Peanuts\",\"slug\":\"masala-peanuts-1\",\"short_description\":\"\",\"description\":\"\",\"base_price\":380,\"sale_price\":250,\"tax_rate\":0,\"sku\":\"#9\",\"image_path\":\"assets\\/images\\/products\\/sw_69fb04250fcf16.43916756.png\",\"status\":\"published\",\"stock_quantity\":11,\"featured\":1}', '::1', NULL, '2026-05-06 09:04:37'),
+(62, 'product', 2031, NULL, NULL, 'create', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"remium Karadant Pack\",\"slug\":\"remium-karadant-pack\",\"short_description\":\"\",\"description\":\"\",\"base_price\":950,\"sale_price\":820,\"tax_rate\":0,\"sku\":\"#10\",\"image_path\":\"assets\\/images\\/products\\/sw_69fc4066de52d5.18136141.png\",\"status\":\"published\",\"stock_quantity\":20,\"featured\":1}', '::1', NULL, '2026-05-07 07:33:58'),
+(63, 'product', 2031, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-07 07:34:32'),
+(64, 'product', 2031, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-07 07:34:57'),
+(65, 'product', 2031, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Remium Karadant Pack\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-07 07:36:29'),
+(66, 'product', 2031, NULL, NULL, 'update', NULL, '{\"name\":\"Test Product\"}', '0.0.0.0', NULL, '2026-05-07 10:13:30'),
+(67, 'product', 2031, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\"Test Product\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-07 10:25:08'),
+(68, 'product', 2031, NULL, NULL, 'set_primary_image', 2, '{\"image_id\":121}', '::1', NULL, '2026-05-07 10:25:23'),
+(69, 'product', 2031, NULL, NULL, 'set_primary_image', 2, '{\"image_id\":120}', '::1', NULL, '2026-05-07 10:25:30'),
+(70, 'product', 2031, NULL, NULL, 'delete_image', 2, '{\"image_id\":121}', '::1', NULL, '2026-05-07 10:25:39'),
+(71, 'product', 2031, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":null,\"name\":\" Karadant\",\"short_description\":\"\",\"description\":\"Our signature Karadant made with premium nuts and jaggery\",\"base_price\":\"950\",\"sale_price\":820,\"tax_rate\":\"0\",\"sku\":\"#10\",\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-07 10:25:59'),
+(72, 'product', 2031, NULL, NULL, 'delete', 2, NULL, '::1', NULL, '2026-05-09 10:47:29'),
+(73, 'product', 2014, NULL, NULL, 'update', 2, '{\"category_id\":5,\"subcategory_id\":null,\"name\":\"demo\",\"short_description\":\"d23dd23ddfewfwefe\",\"description\":\"vdbdbzsdbd\",\"base_price\":\"500\",\"sale_price\":300,\"tax_rate\":\"0\",\"sku\":\"#2\",\"image_path\":\"assets\\/images\\/products\\/sw_6a007898d77f45.11993884.png\",\"status\":\"published\",\"stock_quantity\":\"5\",\"featured\":0}', '::1', NULL, '2026-05-10 12:22:48'),
+(74, 'product', 1003, NULL, NULL, 'update', 2, '{\"category_id\":1,\"subcategory_id\":3,\"name\":\"Supreme Vijaya Karadant\",\"short_description\":\"Richer blend of nuts and jaggery for a premium bite.\",\"description\":\"\",\"base_price\":\"420\",\"sale_price\":380,\"tax_rate\":\"0\",\"sku\":null,\"image_path\":\"assets\\/images\\/products\\/sw_6a0078dfcbb266.26209842.png\",\"status\":\"published\",\"stock_quantity\":\"80\",\"featured\":1}', '::1', NULL, '2026-05-10 12:23:59'),
+(75, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '127.0.0.1', NULL, '2026-05-14 10:07:07'),
+(76, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '127.0.0.1', NULL, '2026-05-14 10:07:07'),
+(77, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '127.0.0.1', NULL, '2026-05-14 10:07:07'),
+(78, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '127.0.0.1', NULL, '2026-05-14 10:07:07'),
+(79, 'product', 1017, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Gandahagiri Laddu\",\"short_description\":\"Heritage-style Gandahagiri laddu made in pure ghee.\",\"description\":\"\",\"base_price\":\"950\",\"sale_price\":890,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"10\",\"featured\":0}', '::1', NULL, '2026-05-18 04:56:59'),
+(80, 'product', 1015, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Peanut Laddu\",\"short_description\":\"Crunchy peanut laddus with classic jaggery notes.\",\"description\":\"\",\"base_price\":\"440\",\"sale_price\":390,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"9\",\"featured\":0}', '::1', NULL, '2026-05-18 13:16:12'),
+(81, 'user', 9016, NULL, NULL, 'admin_created', 2, '{\"email\":\"isaacraja89@gmail.com\",\"role_id\":2,\"invite_sent\":true}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '2026-05-20 07:22:54'),
+(82, 'admin_invite', 9016, NULL, NULL, 'invite_sent', 2, '{\"email\":\"isaacraja89@gmail.com\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '2026-05-20 07:22:54'),
+(83, 'user', 9016, NULL, NULL, 'admin_removed', 2, '{\"removed_by\":2}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '2026-05-20 08:22:38'),
+(84, 'product', 1014, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:29'),
+(85, 'product', 1014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:29'),
+(86, 'product', 1014, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:29'),
+(87, 'product', 1014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:29'),
+(88, 'product', 1017, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:31'),
+(89, 'product', 1017, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:31'),
+(90, 'product', 1017, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:31'),
+(91, 'product', 1017, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:31'),
+(92, 'product', 1015, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:32'),
+(93, 'product', 1015, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:32'),
+(94, 'product', 1015, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:32'),
+(95, 'product', 1015, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:32'),
+(96, 'product', 1012, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:35'),
+(97, 'product', 1012, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:35'),
+(98, 'product', 1012, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:35'),
+(99, 'product', 1012, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:35'),
+(100, 'product', 1011, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:37'),
+(101, 'product', 1011, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:37'),
+(102, 'product', 1011, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:37'),
+(103, 'product', 1011, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:37'),
+(104, 'product', 1013, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:38'),
+(105, 'product', 1013, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:38'),
+(106, 'product', 1013, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:38'),
+(107, 'product', 1013, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:38'),
+(108, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:40'),
+(109, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:40'),
+(110, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:40'),
+(111, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:40'),
+(112, 'product', 1001, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:47'),
+(113, 'product', 1001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:47'),
+(114, 'product', 1001, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:47'),
+(115, 'product', 1001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:47'),
+(116, 'product', 1003, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(117, 'product', 1003, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(118, 'product', 1003, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(119, 'product', 1003, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(120, 'product', 1002, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(121, 'product', 1002, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(122, 'product', 1002, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(123, 'product', 1002, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:49'),
+(124, 'product', 1005, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:51'),
+(125, 'product', 1005, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:51'),
+(126, 'product', 1005, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:51'),
+(127, 'product', 1005, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:42:51'),
+(128, 'product', 2014, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:43:01'),
+(129, 'product', 2014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:43:01'),
+(130, 'product', 2014, NULL, NULL, 'update', 2, '{\"status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:43:01'),
+(131, 'product', 2014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"out_of_stock\"}', '::1', NULL, '2026-05-27 04:43:01'),
+(132, 'product', 1014, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:21'),
+(133, 'product', 1014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:21'),
+(134, 'product', 1014, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:21'),
+(135, 'product', 1014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:21'),
+(136, 'product', 1015, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:22'),
+(137, 'product', 1015, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:22'),
+(138, 'product', 1015, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:22'),
+(139, 'product', 1015, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:22'),
+(140, 'product', 1017, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:23'),
+(141, 'product', 1017, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:23'),
+(142, 'product', 1017, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:23'),
+(143, 'product', 1017, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:23'),
+(144, 'product', 2014, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:25'),
+(145, 'product', 2014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:25'),
+(146, 'product', 2014, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:25'),
+(147, 'product', 2014, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:25'),
+(148, 'product', 1001, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:38'),
+(149, 'product', 1001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:38'),
+(150, 'product', 1001, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:38'),
+(151, 'product', 1001, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:38'),
+(152, 'product', 1002, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:41'),
+(153, 'product', 1002, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:41'),
+(154, 'product', 1002, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:41'),
+(155, 'product', 1002, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:41'),
+(156, 'product', 1003, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:42'),
+(157, 'product', 1003, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:42'),
+(158, 'product', 1003, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:42'),
+(159, 'product', 1003, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:42'),
+(160, 'product', 1005, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:43'),
+(161, 'product', 1005, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:43'),
+(162, 'product', 1005, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:43'),
+(163, 'product', 1005, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:43'),
+(164, 'product', 1011, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:48'),
+(165, 'product', 1011, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:48'),
+(166, 'product', 1011, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:48'),
+(167, 'product', 1011, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:48'),
+(168, 'product', 1012, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:49'),
+(169, 'product', 1012, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:49'),
+(170, 'product', 1012, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:49'),
+(171, 'product', 1012, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:49'),
+(172, 'product', 1013, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:50'),
+(173, 'product', 1013, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:50'),
+(174, 'product', 1013, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:50'),
+(175, 'product', 1013, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:43:50'),
+(176, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:44:05'),
+(177, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:44:05'),
+(178, 'product', 1010, NULL, NULL, 'update', 2, '{\"status\":\"published\"}', '::1', NULL, '2026-05-27 04:44:05'),
+(179, 'product', 1010, NULL, NULL, 'toggle_status', 2, '{\"new_status\":\"published\"}', '::1', NULL, '2026-05-27 04:44:05'),
+(180, 'product', 2005, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Butter Muruku\",\"short_description\":\"Traditional butter muruku with a crisp bite.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":290,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-27 04:44:20'),
+(181, 'product', 1014, NULL, NULL, 'update', 2, '{\"category_id\":2,\"subcategory_id\":null,\"name\":\"Premium Otts Laddu\",\"short_description\":\"Soft and flavorful laddus with a traditional finish.\",\"description\":\"\",\"base_price\":\"500\",\"sale_price\":450,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-27 04:44:42'),
+(182, 'product', 2006, NULL, NULL, 'update', 2, '{\"category_id\":4,\"subcategory_id\":5,\"name\":\"Rice Kodubale\",\"short_description\":\"Rice flour kodubale with classic spice blend.\",\"description\":\"\",\"base_price\":\"320\",\"sale_price\":290,\"tax_rate\":\"0.25\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-27 04:45:05'),
+(183, 'product', 1041, NULL, NULL, 'update', 2, '{\"category_id\":5,\"subcategory_id\":2,\"name\":\"Festive Special Box\",\"short_description\":\"Celebrate with our curated festive collection.\",\"description\":\"\",\"base_price\":\"1200\",\"sale_price\":null,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"20\",\"featured\":1}', '::1', NULL, '2026-05-27 04:45:45'),
+(184, 'product', 1040, NULL, NULL, 'update', 2, '{\"category_id\":5,\"subcategory_id\":2,\"name\":\"Premium Gift Box\",\"short_description\":\"A luxurious assortment of our finest Karadant varieties.\",\"description\":\"\",\"base_price\":\"950\",\"sale_price\":880,\"tax_rate\":\"0\",\"sku\":null,\"status\":\"published\",\"stock_quantity\":\"49\",\"featured\":1}', '::1', NULL, '2026-05-27 04:46:02');
 
 -- --------------------------------------------------------
 
@@ -336,7 +488,40 @@ INSERT INTO `carts` (`id`, `user_id`, `session_id`, `created_at`) VALUES
 (6, 9011, NULL, '2026-04-30 12:45:37'),
 (7, 9012, NULL, '2026-04-30 12:45:55'),
 (8, 9014, NULL, '2026-05-11 06:46:48'),
-(9, 9015, NULL, '2026-05-11 07:57:23');
+(9, 9015, NULL, '2026-05-11 07:57:23'),
+(10, 9016, NULL, '2026-05-18 09:27:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_gift_boxes`
+--
+
+CREATE TABLE `cart_gift_boxes` (
+  `id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `gift_box_id` int(11) NOT NULL,
+  `personal_message` text DEFAULT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `delivery_time_slot` varchar(100) DEFAULT NULL,
+  `delivery_type` enum('standard','express') NOT NULL DEFAULT 'standard',
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `total_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_gift_box_items`
+--
+
+CREATE TABLE `cart_gift_box_items` (
+  `id` int(11) NOT NULL,
+  `cart_gift_box_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -360,9 +545,6 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `item_type`, `product_id`, `combo_id`, `quantity`, `weight`, `price`) VALUES
-(1, 1, 'product', 1005, NULL, 3, '500g', 650.00),
-(2, 1, 'product', 2006, NULL, 1, '500g', 290.00),
-(3, 1, 'product', 1004, NULL, 4, '500g', 799.00),
 (4, 3, 'product', 2006, NULL, 1, '250g', 290.00),
 (11, 2, 'product', 1, NULL, 2, '500g', 100.00),
 (12, 2, 'combo', NULL, 1, 1, 'Bundle', 250.00),
@@ -370,10 +552,11 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `item_type`, `product_id`, `combo_id`
 (14, 5, 'product', 2006, NULL, 1, '500g', 290.00),
 (15, 5, 'product', 1005, NULL, 1, '500g', 650.00),
 (16, 5, 'combo', NULL, 13, 1, 'Bundle', 1299.00),
-(17, 1, 'product', 1040, NULL, 1, '250g', 880.00),
-(20, 1, 'product', 1003, NULL, 1, '500g', 420.00),
-(21, 1, 'product', 2003, NULL, 1, '500g', 250.00),
-(33, 9, 'combo', NULL, 14, 1, 'Bundle', 1999.00);
+(33, 9, 'combo', NULL, 14, 1, 'Bundle', 1999.00),
+(40, 1, 'product', 2026, NULL, 2, '500g', 280.00),
+(41, 1, 'product', 2021, NULL, 1, '500g', 320.00),
+(42, 10, 'product', 1041, NULL, 1, '500g', 1200.00),
+(56, 4, 'product', 1005, NULL, 96, '1kg', 650.00);
 
 -- --------------------------------------------------------
 
@@ -439,38 +622,320 @@ CREATE TABLE `combos` (
 --
 
 INSERT INTO `combos` (`id`, `name`, `slug`, `description`, `category`, `price`, `image`, `is_active`, `created_at`) VALUES
-(1, 'Mega Sweet Combo', 'mega-sweet-combo', 'A delightful mix of our premium Karadant and Laddu.', 'karadant', 1200.00, 'assets/images/combos/karadant-combo.png', 1, '2026-04-30 10:40:44'),
+(1, 'Mega Sweet Combo', 'mega-sweet-combo', 'A delightful mix of our premium Karadant and Laddu.', 'mixed', 1200.00, 'assets/images/combos/karadant-combo.png', 1, '2026-04-30 10:40:44'),
 (2, 'Festive Namkeen Mix', 'festive-namkeen-mix', 'Spicy and crunchy namkeen assortment.', 'namkeen', 450.00, 'assets/images/combos/namkeen-combo.png', 1, '2026-04-30 10:40:44'),
-(3, 'Premium Laddu Box', 'premium-laddu-box', 'The best selection of assorted laddus.', 'laddu', 800.00, 'assets/images/combos/laddu-combo.png', 1, '2026-04-30 10:40:44'),
+(3, 'Premium Laddu Box', 'premium-laddu-box', 'The best selection of assorted laddus.', 'laddu', 800.00, 'assets/images/combos/combo-3-3ca8f5b0.jpg', 1, '2026-04-30 10:40:44'),
 (4, 'Family Festival Pack', 'family-festival-pack', 'Something for everyone in the family.', 'karadant', 2500.00, 'assets/images/combos/family-combo.png', 1, '2026-04-30 10:40:44'),
 (5, 'Classic Karadant Pair', 'classic-karadant-pair', 'Two of our best selling Karadants.', 'karadant', 1100.00, 'assets/images/combos/classic-karadant.png', 1, '2026-04-30 10:40:44'),
-(6, 'Healthy Bites', 'healthy-bites', 'Nutritious Ragi Laddu and Dink Karadant.', 'karadant', 900.00, 'assets/images/combos/healthy-bites.png', 1, '2026-04-30 10:40:44'),
+(6, 'Healthy Bites', 'healthy-bites', 'Nutritious Ragi Laddu and Dink Karadant.', 'mixed', 900.00, 'assets/images/combos/healthy-bites.png', 1, '2026-04-30 10:40:44'),
 (7, 'Ultimate Gift Box', 'ultimate-gift-box', 'The perfect gift for any occasion.', 'gifting', 3000.00, 'assets/images/combos/gifting-combo.png', 1, '2026-04-30 10:40:44'),
-(8, 'Mini Snack Pack', 'mini-snack-pack', 'A small pack of joy.', 'namkeen', 300.00, 'assets/images/combos/mini-snack.png', 1, '2026-04-30 10:40:44'),
+(8, 'Mini Snack Pack', 'mini-snack-pack', 'A small pack of joy.', 'laddu', 300.00, 'assets/images/combos/mini-snack.png', 1, '2026-04-30 10:40:44'),
 (9, 'demo', 'demo', 'dagasagaASFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF', 'karadant', 500.00, 'assets/images/combos/sw_69f3408e6fa7a3.23596280.png', 1, '2026-04-30 11:44:14'),
-(10, 'laddu', 'laddu', 'bfnfgmfgznsfbksdbklshdblsdzkbskldbsldzfbdbsdbsdb', 'laddu', 800.00, 'assets/images/combos/sw_69f34e9c3f2a59.46823182.png', 1, '2026-04-30 12:44:12'),
-(11, 'Premium Traditional Combo 01', 'premium-traditional-combo-01', 'A curated selection of our finest traditional sweets.', 'laddu', 999.00, 'assets/images/combos/sw_6a0435c3150748.24359219.png', 1, '2026-05-02 10:46:54'),
-(12, 'Festive Family Pack 02', 'festive-family-pack-02', 'Perfect for sharing with the whole family during celebrations.', 'gifting', 1499.00, 'assets/images/combos/sw_6a043880709273.24809387.png', 1, '2026-05-02 10:46:54'),
+(10, 'laddu', 'laddu', 'bfnfgmfgznsfbksdbklshdblsdzkbskldbsldzfbdbsdbsdb', 'karadant', 800.00, 'assets/images/combos/sw_69f34e9c3f2a59.46823182.png', 1, '2026-04-30 12:44:12'),
+(11, 'Premium Traditional Combo 01', 'premium-traditional-combo-01', 'A curated selection of our finest traditional sweets.', 'mixed', 999.00, 'assets/images/combos/sw_6a0435c3150748.24359219.png', 1, '2026-05-02 10:46:54'),
+(12, 'Festive Family Pack 02', 'festive-family-pack-02', 'Perfect for sharing with the whole family during celebrations.', 'laddu', 1499.00, 'assets/images/combos/sw_6a043880709273.24809387.png', 1, '2026-05-02 10:46:54'),
 (13, 'Gourmet Sweet Assortment 03', 'gourmet-sweet-assortment-03', 'Indulge in a variety of gourmet sweet flavors.', 'karadant', 1299.00, 'assets/images/combos/sw_6a0441935ff286.76033428.png', 1, '2026-05-02 10:46:54'),
 (14, 'Luxury Celebration Box 04', 'luxury-celebration-box-04', 'Our most luxurious sweets in one elegant package.', 'gifting', 1999.00, 'assets/images/combos/sw_6a043cec1244b2.17589271.png', 1, '2026-05-02 10:46:54'),
 (15, 'Artisanal Karadant Selection 05', 'artisanal-karadant-selection-05', 'Traditional Karadant made with artisanal care.', 'karadant', 899.00, 'assets/images/combos/sw_6a044f8d699066.23944662.png', 1, '2026-05-02 10:46:54'),
 (16, 'Classic Sweet Duo 06', 'classic-sweet-duo-06', 'Two of our most loved sweet treats in one pack.', 'karadant', 599.00, 'assets/images/combos/sw_6a044269451d68.48297841.png', 1, '2026-05-02 10:46:54'),
 (17, 'Health-Conscious Sweet Mix 07', 'health-conscious-sweet-mix-07', 'Sweets made with healthy ingredients and minimal sugar.', 'laddu', 1099.00, 'assets/images/combos/sw_6a044f7000dba7.68701997.png', 1, '2026-05-02 10:46:54'),
-(18, 'Royal Sweet Platter 08', 'royal-sweet-platter-08', 'A platter fit for royalty, featuring assorted delicacies.', 'gifting', 2499.00, 'assets/images/combos/sw_6a044f43a19f82.77140929.png', 1, '2026-05-02 10:46:54'),
+(18, 'Royal Sweet Platter 08', 'royal-sweet-platter-08', 'A platter fit for royalty, featuring assorted delicacies.', 'mixed', 2499.00, 'assets/images/combos/sw_6a044f43a19f82.77140929.png', 1, '2026-05-02 10:46:54'),
 (19, 'Grand Festival Combo 09', 'grand-festival-combo-09', 'Celebrate in grand style with this massive combo pack.', 'gifting', 2999.00, 'assets/images/combos/sw_6a044f5f60ff46.08403489.png', 1, '2026-05-02 10:46:54'),
-(20, 'Signature Sweet Box 10', 'signature-sweet-box-10', 'Our signature sweets, hand-picked for perfection.', 'karadant', 1199.00, 'assets/images/combos/sw_6a044379e63c33.03061085.png', 1, '2026-05-02 10:46:54'),
-(21, 'Traditional Delights 11', 'traditional-delights-11', 'Delightful traditional sweets for every occasion.', 'karadant', 799.00, 'assets/images/combos/sw_6a04443bdcb602.77812311.png', 1, '2026-05-02 10:46:54'),
+(20, 'Signature Sweet Box 10', 'signature-sweet-box-10', 'Our signature sweets, hand-picked for perfection.', 'mixed', 1199.00, 'assets/images/combos/sw_6a044379e63c33.03061085.png', 1, '2026-05-02 10:46:54'),
+(21, 'Traditional Delights 11', 'traditional-delights-11', 'Delightful traditional sweets for every occasion.', 'mixed', 799.00, 'assets/images/combos/sw_6a04443bdcb602.77812311.png', 1, '2026-05-02 10:46:54'),
 (22, 'Sweet Heritage Pack 12', 'sweet-heritage-pack-12', 'Experience the rich heritage of our traditional recipes.', 'karadant', 1399.00, 'assets/images/combos/sw_6a044e2b2ea5a9.72406374.png', 1, '2026-05-02 10:46:54'),
 (23, 'Premium Laddu Mix 13', 'premium-laddu-mix-13', 'An assortment of our premium laddus.', 'laddu', 849.00, 'assets/images/combos/sw_6a043d4779a525.55305471.png', 1, '2026-05-02 10:46:54'),
 (24, 'Crunchy Namkeen Combo 14', 'crunchy-namkeen-combo-14', 'A mix of our best selling namkeen and snacks.', 'namkeen', 649.00, 'assets/images/combos/sw_6a044c869a76c4.82484652.png', 1, '2026-05-02 10:46:54'),
 (25, 'Sweet & Spicy Pair 15', 'sweet-and-spicy-pair-15', 'The perfect balance of sweet treats and spicy snacks.', 'gifting', 899.00, 'assets/images/combos/sw_6a044b7d1dfeb8.94421208.png', 1, '2026-05-02 10:46:54'),
 (26, 'Corporate Gifting Pack 16', 'corporate-gifting-pack-16', 'Elegant packaging and premium taste, ideal for gifting.', 'gifting', 1599.00, 'assets/images/combos/sw_6a044f31b36c45.17590021.png', 1, '2026-05-02 10:46:54'),
-(27, 'Homecoming Special 17', 'homecoming-special-17', 'A warm welcome with our most nostalgic sweets.', 'karadant', 1249.00, 'assets/images/combos/sw_6a043f9176edb3.45289424.png', 1, '2026-05-02 10:46:54'),
+(27, 'Homecoming Special 17', 'homecoming-special-17', 'A warm welcome with our most nostalgic sweets.', 'gifting', 1249.00, 'assets/images/combos/sw_6a043f9176edb3.45289424.png', 1, '2026-05-02 10:46:54'),
 (28, 'Evening Snack Mix 18', 'evening-snack-mix-18', 'Perfect accompaniments for your evening tea.', 'namkeen', 549.00, 'assets/images/combos/sw_6a044e648ee603.49780960.png', 1, '2026-05-02 10:46:54'),
 (29, 'Bestseller Combo 19', 'bestseller-combo-19', 'A collection of our top 5 best selling items.', 'karadant', 1799.00, 'assets/images/combos/sw_6a044d0fdf21e5.08973332.png', 1, '2026-05-02 10:46:54'),
-(30, 'Chef Special Selection 20', 'chef-special-selection-20', 'Hand-crafted selection by our master chefs.', 'karadant', 2199.00, 'assets/images/combos/sw_6a043e34adbff1.18129825.png', 1, '2026-05-02 10:46:54'),
+(30, 'Chef Special Selection 20', 'chef-special-selection-20', 'Hand-crafted selection by our master chefs.', 'mixed', 2199.00, 'assets/images/combos/sw_6a043e34adbff1.18129825.png', 1, '2026-05-02 10:46:54'),
 (31, 'karkant', 'karkant', 'WEGEGWEGWEGWEGWEWE', 'laddu', 500.00, 'assets/images/combos/sw_69f5fde39d97c2.91285080.png', 1, '2026-05-02 13:36:35'),
-(32, 'demo updated', 'demo-1', 'jjtgfjetjerdjher', 'karadant', 2000.00, 'assets/images/combos/sw_6a0164e2c43407.85131041.png', 1, '2026-05-11 05:10:58');
+(32, 'demo updated', 'demo-1', 'jjtgfjetjerdjher', 'gifting', 2000.00, 'assets/images/combos/sw_6a0164e2c43407.85131041.png', 1, '2026-05-11 05:10:58'),
+(33, 'Dink & Regal Anjeer Combo', 'dink-regal-anjeer', 'Nutty Dink Karadant paired with premium Regal Anjeer Karadant.', 'karadant', 1349.00, 'assets/images/combos/dink-regal-anjeer.jpg', 1, '2026-05-29 06:26:26'),
+(34, 'Dink & Gandhagiri Heritage Buckets', 'dink-gandhagiri-buckets', 'A massive bulk heritage combination of Dink and Gandhagiri buckets.', 'gifting', 2799.00, 'assets/images/combos/dink-gandhagiri-buckets.jpg', 1, '2026-05-29 06:26:26'),
+(35, 'Dink Laddu Bucket & Premium Karadant', 'dink-laddu-bucket-premium', 'A healthy bucket of Dink Laddus paired with our flagship Premium Karadant.', 'mixed', 1499.00, 'assets/images/combos/dink-laddu-bucket-premium.jpg', 1, '2026-05-29 06:26:26'),
+(36, 'Dink Laddu Premium Duo', 'dink-laddu-premium-combo', 'Traditional Dink Laddus alongside our signature Premium Karadant.', 'mixed', 1049.00, 'assets/images/combos/combo-36-cda5f778.jpg', 1, '2026-05-29 06:26:26'),
+(37, 'Dink Laddu Supreme Combo', 'dink-laddu-supreme', 'Healthy Dink Laddus paired with Supreme Vijaya Karadant.', 'mixed', 799.00, 'assets/images/combos/dink-laddu-supreme.jpg', 1, '2026-05-29 06:26:26'),
+(38, 'Dink Supreme Gandhagiri Trio', 'dink-supreme-gandhagiri', 'The golden sweet combination: Dink, Supreme Karadant, and Gandhagiri Laddu.', 'karadant', 1749.00, 'assets/images/combos/combo-38-29bfb18f.jpg', 1, '2026-05-29 06:26:26'),
+(39, 'Gandh Supreme Marvel Dink Quartet', 'gandh-supreme-marvel-dink', 'An opulent assortment: Gandahagiri, Supreme, Marvel Karadant, and Dink.', 'karadant', 2399.00, 'assets/images/combos/combo-39-add18c1c.jpg', 1, '2026-05-29 06:26:26'),
+(40, 'Gandhagiri Bucket & Premium Karadant', 'gandhagiri-bucket-premium', 'A large bucket of Gandhagiri Laddus paired with Premium Karadant.', 'gifting', 2249.00, 'assets/images/combos/gandhagiri-bucket-premium.jpg', 1, '2026-05-29 06:26:26'),
+(41, 'Grand Buckets & Tubs Feast', 'gandhagiri-dink-buckets-supreme-anjeer-tubs', 'The ultimate feast: Two full-sized buckets and two premium tubs of our best products.', 'gifting', 3799.00, 'assets/images/combos/gandhagiri-dink-buckets-supreme-anjeer-tubs.jpg', 1, '2026-05-29 06:26:26'),
+(42, 'Gandhagiri Supreme Duo', 'gandhagiri-supreme', 'Ghee-rich Gandhagiri Laddus paired with Supreme Karadant.', 'karadant', 1199.00, 'assets/images/combos/gandhagiri-supreme.jpg', 1, '2026-05-29 06:26:26'),
+(43, 'Lagdi Pak & Ladagi Laddu Premium', 'lagdipak-lagdi-laddu-premium', 'A combination of traditional Lagdi Pak and Premium Ladagi Laddus.', 'mixed', 1099.00, 'assets/images/combos/lagdipak-lagdi-laddu-premium.jpg', 1, '2026-05-29 06:26:26'),
+(44, 'Assorted Laddu Box', 'moong-peanut-til-besan-laddu', 'Assortment of Moong Dal, Peanut, Til, and Besan Laddus.', 'laddu', 1299.00, 'assets/images/combos/moong-peanut-til-besan-laddu.jpg', 1, '2026-05-29 06:26:26'),
+(45, 'Marvel Oats Ragi Healthy Mix', 'marvel-oats-raagi', 'A modern wellness sweet mix: Marvel Karadant, Oats Laddu, and Ragi Laddu.', 'mixed', 1499.00, 'assets/images/combos/marvel-oats-raagi.jpg', 1, '2026-05-29 06:26:26'),
+(46, 'Premium Lagdi Pak & Marvel Trio', 'premium-lagdipak-marvel', 'Rich Premium Karadant, Lagdi Pak fudge, and Marvel Karadant.', 'karadant', 1899.00, 'assets/images/combos/premium-lagdipak-marvel.jpg', 1, '2026-05-29 06:26:26'),
+(47, 'Ultimate Heritage Grand Collection', 'ragi-dink-marvel-suprem-oats-gandhagiri', 'The grandest heritage sampler: 6 distinct premium sweets for the whole family.', 'gifting', 3199.00, 'assets/images/combos/ragi-dink-marvel-suprem-oats-gandhagiri.jpg', 1, '2026-05-29 06:26:26'),
+(48, 'Regal Anjeer Supreme Pair', 'regal-anjeer-supreme', 'Regal Anjeer Karadant combined with Supreme Vijaya Karadant.', 'karadant', 1149.00, 'assets/images/combos/regal-anjeer-supreme.jpg', 1, '2026-05-29 06:26:26'),
+(49, 'Regal Anjeer Tub & Dink Laddu Bucket', 'regal-anjeer-tub-dink-laddu-bucket', 'A tub of premium fig sweets paired with a bucket of energy-boosting Dink Laddus.', 'gifting', 1599.00, 'assets/images/combos/regal-anjeer-tub-dink-laddu-bucket.jpg', 1, '2026-05-29 06:26:26'),
+(50, 'Anjeer & Gandhagiri Festive Trio', 'regal-anjeer-tub-gandhgir-bucket-supreme-tub', 'An elegant combination of fig tubs, ghee-rich laddu buckets, and supreme Karadant.', 'gifting', 2749.00, 'assets/images/combos/regal-anjeer-tub-gandhgir-bucket-supreme-tub.jpg', 1, '2026-05-29 06:26:26'),
+(51, 'Traditional Laddu Trio', 'til-besan-moong-laddu', 'Traditional trio of Til, Besan, and Moong Dal Laddus.', 'laddu', 949.00, 'assets/images/combos/til-besan-moong-laddu.jpg', 1, '2026-05-29 06:26:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `combo_images`
+--
+
+CREATE TABLE `combo_images` (
+  `id` int(11) NOT NULL,
+  `combo_id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `is_primary` tinyint(1) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `combo_images`
+--
+
+INSERT INTO `combo_images` (`id`, `combo_id`, `image_path`, `is_primary`, `sort_order`, `created_at`) VALUES
+(1, 1, 'assets/images/combos/karadant-combo.png', 1, 0, '2026-05-29 06:55:21'),
+(2, 2, 'assets/images/combos/namkeen-combo.png', 1, 0, '2026-05-29 06:55:21'),
+(3, 3, 'assets/images/combos/laddu-combo.png', 0, 1, '2026-05-29 06:55:21'),
+(4, 4, 'assets/images/combos/family-combo.png', 1, 0, '2026-05-29 06:55:21'),
+(5, 5, 'assets/images/combos/classic-karadant.png', 1, 0, '2026-05-29 06:55:21'),
+(6, 6, 'assets/images/combos/healthy-bites.png', 1, 0, '2026-05-29 06:55:21'),
+(7, 7, 'assets/images/combos/gifting-combo.png', 1, 0, '2026-05-29 06:55:21'),
+(8, 8, 'assets/images/combos/mini-snack.png', 1, 0, '2026-05-29 06:55:21'),
+(9, 9, 'assets/images/combos/sw_69f3408e6fa7a3.23596280.png', 1, 0, '2026-05-29 06:55:21'),
+(10, 10, 'assets/images/combos/sw_69f34e9c3f2a59.46823182.png', 1, 0, '2026-05-29 06:55:21'),
+(11, 11, 'assets/images/combos/sw_6a0435c3150748.24359219.png', 1, 0, '2026-05-29 06:55:21'),
+(12, 12, 'assets/images/combos/sw_6a043880709273.24809387.png', 1, 0, '2026-05-29 06:55:21'),
+(13, 13, 'assets/images/combos/sw_6a0441935ff286.76033428.png', 1, 0, '2026-05-29 06:55:21'),
+(14, 14, 'assets/images/combos/sw_6a043cec1244b2.17589271.png', 1, 0, '2026-05-29 06:55:21'),
+(15, 15, 'assets/images/combos/sw_6a044f8d699066.23944662.png', 1, 0, '2026-05-29 06:55:21'),
+(16, 16, 'assets/images/combos/sw_6a044269451d68.48297841.png', 1, 0, '2026-05-29 06:55:21'),
+(17, 17, 'assets/images/combos/sw_6a044f7000dba7.68701997.png', 1, 0, '2026-05-29 06:55:21'),
+(18, 18, 'assets/images/combos/sw_6a044f43a19f82.77140929.png', 1, 0, '2026-05-29 06:55:21'),
+(19, 19, 'assets/images/combos/sw_6a044f5f60ff46.08403489.png', 1, 0, '2026-05-29 06:55:21'),
+(20, 20, 'assets/images/combos/sw_6a044379e63c33.03061085.png', 1, 0, '2026-05-29 06:55:21'),
+(21, 21, 'assets/images/combos/sw_6a04443bdcb602.77812311.png', 1, 0, '2026-05-29 06:55:21'),
+(22, 22, 'assets/images/combos/sw_6a044e2b2ea5a9.72406374.png', 1, 0, '2026-05-29 06:55:21'),
+(23, 23, 'assets/images/combos/sw_6a043d4779a525.55305471.png', 1, 0, '2026-05-29 06:55:21'),
+(24, 24, 'assets/images/combos/sw_6a044c869a76c4.82484652.png', 1, 0, '2026-05-29 06:55:21'),
+(25, 25, 'assets/images/combos/sw_6a044b7d1dfeb8.94421208.png', 1, 0, '2026-05-29 06:55:21'),
+(26, 26, 'assets/images/combos/sw_6a044f31b36c45.17590021.png', 1, 0, '2026-05-29 06:55:21'),
+(27, 27, 'assets/images/combos/sw_6a043f9176edb3.45289424.png', 1, 0, '2026-05-29 06:55:21'),
+(28, 28, 'assets/images/combos/sw_6a044e648ee603.49780960.png', 1, 0, '2026-05-29 06:55:21'),
+(29, 29, 'assets/images/combos/sw_6a044d0fdf21e5.08973332.png', 1, 0, '2026-05-29 06:55:21'),
+(30, 30, 'assets/images/combos/sw_6a043e34adbff1.18129825.png', 1, 0, '2026-05-29 06:55:21'),
+(31, 31, 'assets/images/combos/sw_69f5fde39d97c2.91285080.png', 1, 0, '2026-05-29 06:55:21'),
+(32, 32, 'assets/images/combos/sw_6a0164e2c43407.85131041.png', 1, 0, '2026-05-29 06:55:21'),
+(33, 33, 'assets/images/combos/dink-regal-anjeer.jpg', 1, 0, '2026-05-29 06:55:21'),
+(34, 34, 'assets/images/combos/dink-gandhagiri-buckets.jpg', 1, 0, '2026-05-29 06:55:21'),
+(35, 35, 'assets/images/combos/dink-laddu-bucket-premium.jpg', 1, 0, '2026-05-29 06:55:21'),
+(37, 37, 'assets/images/combos/dink-laddu-supreme.jpg', 1, 0, '2026-05-29 06:55:21'),
+(38, 38, 'assets/images/combos/dink-supreme-gandhagiri.jpg', 0, 1, '2026-05-29 06:55:21'),
+(39, 39, 'assets/images/combos/gandh-supreme-marvel-dink.jpg', 0, 1, '2026-05-29 06:55:21'),
+(40, 40, 'assets/images/combos/gandhagiri-bucket-premium.jpg', 1, 0, '2026-05-29 06:55:22'),
+(41, 41, 'assets/images/combos/gandhagiri-dink-buckets-supreme-anjeer-tubs.jpg', 1, 0, '2026-05-29 06:55:22'),
+(42, 42, 'assets/images/combos/gandhagiri-supreme.jpg', 1, 0, '2026-05-29 06:55:22'),
+(43, 43, 'assets/images/combos/lagdipak-lagdi-laddu-premium.jpg', 1, 0, '2026-05-29 06:55:22'),
+(44, 44, 'assets/images/combos/moong-peanut-til-besan-laddu.jpg', 1, 0, '2026-05-29 06:55:22'),
+(45, 45, 'assets/images/combos/marvel-oats-raagi.jpg', 1, 0, '2026-05-29 06:55:22'),
+(46, 46, 'assets/images/combos/premium-lagdipak-marvel.jpg', 1, 0, '2026-05-29 06:55:22'),
+(47, 47, 'assets/images/combos/ragi-dink-marvel-suprem-oats-gandhagiri.jpg', 1, 0, '2026-05-29 06:55:22'),
+(48, 48, 'assets/images/combos/regal-anjeer-supreme.jpg', 1, 0, '2026-05-29 06:55:22'),
+(49, 49, 'assets/images/combos/regal-anjeer-tub-dink-laddu-bucket.jpg', 1, 0, '2026-05-29 06:55:22'),
+(50, 50, 'assets/images/combos/regal-anjeer-tub-gandhgir-bucket-supreme-tub.jpg', 1, 0, '2026-05-29 06:55:22'),
+(51, 51, 'assets/images/combos/til-besan-moong-laddu.jpg', 1, 0, '2026-05-29 06:55:22'),
+(53, 33, 'assets/images/combos/combo-33-7b72c813.jpg', 0, 1, '2026-05-29 07:03:08'),
+(54, 33, 'assets/images/combos/combo-33-74599cbb.jpg', 0, 2, '2026-05-29 07:03:08'),
+(55, 33, 'assets/images/combos/combo-33-4fd5568a.jpg', 0, 3, '2026-05-29 07:03:08'),
+(56, 33, 'assets/images/combos/combo-33-a565a483.jpg', 0, 4, '2026-05-29 07:03:08'),
+(57, 35, 'assets/images/combos/combo-35-f78daa9f.jpg', 0, 1, '2026-05-29 07:03:08'),
+(58, 35, 'assets/images/combos/combo-35-c5028857.jpg', 0, 2, '2026-05-29 07:03:08'),
+(59, 35, 'assets/images/combos/combo-35-1d5ba10b.jpg', 0, 3, '2026-05-29 07:03:08'),
+(60, 35, 'assets/images/combos/combo-35-2b61134a.jpg', 0, 4, '2026-05-29 07:03:08'),
+(61, 35, 'assets/images/combos/combo-35-7cefa78e.jpg', 0, 5, '2026-05-29 07:03:08'),
+(62, 35, 'assets/images/combos/combo-35-4db3ff33.jpg', 0, 6, '2026-05-29 07:03:08'),
+(63, 35, 'assets/images/combos/combo-35-2c0ebbe6.jpg', 0, 7, '2026-05-29 07:03:08'),
+(64, 35, 'assets/images/combos/combo-35-56e57da2.jpg', 0, 8, '2026-05-29 07:03:08'),
+(65, 35, 'assets/images/combos/combo-35-bbdef1d5.jpg', 0, 9, '2026-05-29 07:03:08'),
+(66, 35, 'assets/images/combos/combo-35-ff8a6118.jpg', 0, 10, '2026-05-29 07:03:08'),
+(67, 35, 'assets/images/combos/combo-35-f66b3959.jpg', 0, 11, '2026-05-29 07:03:08'),
+(68, 35, 'assets/images/combos/combo-35-459ce6f2.jpg', 0, 12, '2026-05-29 07:03:08'),
+(69, 35, 'assets/images/combos/combo-35-fee3ad90.jpg', 0, 13, '2026-05-29 07:03:08'),
+(71, 35, 'assets/images/combos/combo-35-4692d43e.jpg', 0, 14, '2026-05-29 07:03:08'),
+(72, 35, 'assets/images/combos/combo-35-2c3f2d9d.jpg', 0, 15, '2026-05-29 07:03:08'),
+(73, 35, 'assets/images/combos/combo-35-b6b31ec4.jpg', 0, 16, '2026-05-29 07:03:08'),
+(74, 35, 'assets/images/combos/combo-35-78980351.jpg', 0, 17, '2026-05-29 07:03:08'),
+(75, 35, 'assets/images/combos/combo-35-fbd54c89.jpg', 0, 18, '2026-05-29 07:03:08'),
+(76, 35, 'assets/images/combos/combo-35-595b9194.jpg', 0, 19, '2026-05-29 07:03:08'),
+(77, 35, 'assets/images/combos/combo-35-dee9179a.jpg', 0, 20, '2026-05-29 07:03:08'),
+(78, 35, 'assets/images/combos/combo-35-0d325243.jpg', 0, 21, '2026-05-29 07:03:08'),
+(79, 36, 'assets/images/combos/combo-36-cda5f778.jpg', 1, 0, '2026-05-29 07:03:08'),
+(80, 36, 'assets/images/combos/combo-36-809d93d4.jpg', 0, 1, '2026-05-29 07:03:08'),
+(81, 36, 'assets/images/combos/combo-36-5211a7d8.jpg', 0, 2, '2026-05-29 07:03:08'),
+(82, 36, 'assets/images/combos/combo-36-cfc06cbd.jpg', 0, 3, '2026-05-29 07:03:08'),
+(83, 36, 'assets/images/combos/combo-36-1dc60f52.jpg', 0, 4, '2026-05-29 07:03:08'),
+(85, 37, 'assets/images/combos/combo-37-438b1d76.jpg', 0, 1, '2026-05-29 07:03:08'),
+(86, 37, 'assets/images/combos/combo-37-d1893870.jpg', 0, 2, '2026-05-29 07:03:08'),
+(87, 37, 'assets/images/combos/combo-37-fc204dc9.jpg', 0, 3, '2026-05-29 07:03:08'),
+(89, 38, 'assets/images/combos/combo-38-f46ba117.jpg', 0, 2, '2026-05-29 07:03:08'),
+(90, 38, 'assets/images/combos/combo-38-eaf9fd14.jpg', 0, 3, '2026-05-29 07:03:08'),
+(91, 38, 'assets/images/combos/combo-38-e9217215.jpg', 0, 4, '2026-05-29 07:03:08'),
+(92, 38, 'assets/images/combos/combo-38-bb6d3e6f.jpg', 0, 5, '2026-05-29 07:03:08'),
+(93, 38, 'assets/images/combos/combo-38-58e7054d.jpg', 0, 6, '2026-05-29 07:03:08'),
+(94, 38, 'assets/images/combos/combo-38-3f35b8b0.jpg', 0, 7, '2026-05-29 07:03:08'),
+(95, 38, 'assets/images/combos/combo-38-084f7a31.jpg', 0, 8, '2026-05-29 07:03:08'),
+(96, 38, 'assets/images/combos/combo-38-0e8a16b3.jpg', 0, 9, '2026-05-29 07:03:08'),
+(97, 38, 'assets/images/combos/combo-38-42e10f5f.jpg', 0, 10, '2026-05-29 07:03:08'),
+(98, 38, 'assets/images/combos/combo-38-7c01573a.jpg', 0, 11, '2026-05-29 07:03:08'),
+(99, 38, 'assets/images/combos/combo-38-c28a917d.jpg', 0, 12, '2026-05-29 07:03:08'),
+(101, 39, 'assets/images/combos/combo-39-a663e545.jpg', 0, 2, '2026-05-29 07:03:08'),
+(102, 39, 'assets/images/combos/combo-39-9270c592.jpg', 0, 3, '2026-05-29 07:03:08'),
+(103, 39, 'assets/images/combos/combo-39-d03d2940.jpg', 0, 4, '2026-05-29 07:03:08'),
+(104, 39, 'assets/images/combos/combo-39-43ebab0e.jpg', 0, 5, '2026-05-29 07:03:08'),
+(105, 39, 'assets/images/combos/combo-39-1a1648ce.jpg', 0, 6, '2026-05-29 07:03:08'),
+(106, 39, 'assets/images/combos/combo-39-ae33d03d.jpg', 0, 7, '2026-05-29 07:03:08'),
+(107, 39, 'assets/images/combos/combo-39-f0df035b.jpg', 0, 8, '2026-05-29 07:03:08'),
+(108, 39, 'assets/images/combos/combo-39-762651e7.jpg', 0, 9, '2026-05-29 07:03:08'),
+(109, 39, 'assets/images/combos/combo-39-043fcc5c.jpg', 0, 10, '2026-05-29 07:03:08'),
+(111, 41, 'assets/images/combos/combo-41-1530ba50.jpg', 0, 1, '2026-05-29 07:03:08'),
+(112, 41, 'assets/images/combos/combo-41-ca8c88af.jpg', 0, 2, '2026-05-29 07:03:08'),
+(113, 41, 'assets/images/combos/combo-41-c1d290e1.jpg', 0, 3, '2026-05-29 07:03:08'),
+(114, 41, 'assets/images/combos/combo-41-90d5228c.jpg', 0, 4, '2026-05-29 07:03:08'),
+(115, 41, 'assets/images/combos/combo-41-0963c1fc.jpg', 0, 5, '2026-05-29 07:03:08'),
+(116, 41, 'assets/images/combos/combo-41-a1791b54.jpg', 0, 6, '2026-05-29 07:03:08'),
+(118, 42, 'assets/images/combos/combo-42-61a8a077.jpg', 0, 1, '2026-05-29 07:03:08'),
+(119, 42, 'assets/images/combos/combo-42-54adfa0c.jpg', 0, 2, '2026-05-29 07:03:08'),
+(120, 42, 'assets/images/combos/combo-42-49954b59.jpg', 0, 3, '2026-05-29 07:03:08'),
+(121, 42, 'assets/images/combos/combo-42-2c547f1b.jpg', 0, 4, '2026-05-29 07:03:08'),
+(122, 42, 'assets/images/combos/combo-42-236d0241.jpg', 0, 5, '2026-05-29 07:03:08'),
+(123, 42, 'assets/images/combos/combo-42-5a18364e.jpg', 0, 6, '2026-05-29 07:03:08'),
+(124, 42, 'assets/images/combos/combo-42-63a808b1.jpg', 0, 7, '2026-05-29 07:03:08'),
+(126, 43, 'assets/images/combos/combo-43-52e93c3f.jpg', 0, 1, '2026-05-29 07:03:08'),
+(127, 43, 'assets/images/combos/combo-43-83b0e9e2.jpg', 0, 2, '2026-05-29 07:03:08'),
+(128, 43, 'assets/images/combos/combo-43-7867f566.jpg', 0, 3, '2026-05-29 07:03:08'),
+(129, 43, 'assets/images/combos/combo-43-61fd62ac.jpg', 0, 4, '2026-05-29 07:03:08'),
+(130, 43, 'assets/images/combos/combo-43-e0c9afce.jpg', 0, 5, '2026-05-29 07:03:08'),
+(131, 43, 'assets/images/combos/combo-43-6037d6bb.jpg', 0, 6, '2026-05-29 07:03:08'),
+(132, 43, 'assets/images/combos/combo-43-481fd35c.jpg', 0, 7, '2026-05-29 07:03:08'),
+(133, 43, 'assets/images/combos/combo-43-0e9ed11c.jpg', 0, 8, '2026-05-29 07:03:08'),
+(134, 43, 'assets/images/combos/combo-43-ca8b873d.jpg', 0, 9, '2026-05-29 07:03:08'),
+(136, 44, 'assets/images/combos/combo-44-72ca8002.jpg', 0, 1, '2026-05-29 07:03:08'),
+(137, 44, 'assets/images/combos/combo-44-823ff32b.jpg', 0, 2, '2026-05-29 07:03:08'),
+(138, 44, 'assets/images/combos/combo-44-c67eba36.jpg', 0, 3, '2026-05-29 07:03:08'),
+(139, 44, 'assets/images/combos/combo-44-05d88ceb.jpg', 0, 4, '2026-05-29 07:03:08'),
+(140, 44, 'assets/images/combos/combo-44-4230ea0a.jpg', 0, 5, '2026-05-29 07:03:08'),
+(141, 44, 'assets/images/combos/combo-44-803ba161.jpg', 0, 6, '2026-05-29 07:03:08'),
+(142, 44, 'assets/images/combos/combo-44-125da973.jpg', 0, 7, '2026-05-29 07:03:08'),
+(143, 44, 'assets/images/combos/combo-44-1f2a065c.jpg', 0, 8, '2026-05-29 07:03:08'),
+(145, 45, 'assets/images/combos/combo-45-57dab13b.jpg', 0, 1, '2026-05-29 07:03:08'),
+(146, 45, 'assets/images/combos/combo-45-2d663fc0.jpg', 0, 2, '2026-05-29 07:03:08'),
+(147, 45, 'assets/images/combos/combo-45-2d266265.jpg', 0, 3, '2026-05-29 07:03:08'),
+(148, 45, 'assets/images/combos/combo-45-3ba56a85.jpg', 0, 4, '2026-05-29 07:03:08'),
+(149, 45, 'assets/images/combos/combo-45-162b8fb1.jpg', 0, 5, '2026-05-29 07:03:08'),
+(150, 45, 'assets/images/combos/combo-45-f54a6e81.jpg', 0, 6, '2026-05-29 07:03:08'),
+(151, 45, 'assets/images/combos/combo-45-d27da5eb.jpg', 0, 7, '2026-05-29 07:03:08'),
+(153, 46, 'assets/images/combos/combo-46-4363023e.jpg', 0, 1, '2026-05-29 07:03:08'),
+(154, 46, 'assets/images/combos/combo-46-42291367.jpg', 0, 2, '2026-05-29 07:03:08'),
+(155, 46, 'assets/images/combos/combo-46-3e3296a2.jpg', 0, 3, '2026-05-29 07:03:08'),
+(156, 46, 'assets/images/combos/combo-46-52122d7b.jpg', 0, 4, '2026-05-29 07:03:08'),
+(157, 46, 'assets/images/combos/combo-46-4c08a78d.jpg', 0, 5, '2026-05-29 07:03:08'),
+(158, 46, 'assets/images/combos/combo-46-30268da2.jpg', 0, 6, '2026-05-29 07:03:08'),
+(159, 46, 'assets/images/combos/combo-46-79c12dfd.jpg', 0, 7, '2026-05-29 07:03:08'),
+(161, 50, 'assets/images/combos/combo-50-b2625460.jpg', 0, 1, '2026-05-29 07:03:08'),
+(162, 50, 'assets/images/combos/combo-50-2c7715d8.jpg', 0, 2, '2026-05-29 07:03:08'),
+(163, 50, 'assets/images/combos/combo-50-994120b2.jpg', 0, 3, '2026-05-29 07:03:08'),
+(164, 50, 'assets/images/combos/combo-50-6233a850.jpg', 0, 4, '2026-05-29 07:03:08'),
+(165, 50, 'assets/images/combos/combo-50-fbf86065.jpg', 0, 5, '2026-05-29 07:03:08'),
+(166, 50, 'assets/images/combos/combo-50-00a6e53f.jpg', 0, 6, '2026-05-29 07:03:08'),
+(168, 49, 'assets/images/combos/combo-49-95569f7f.jpg', 0, 1, '2026-05-29 07:03:08'),
+(169, 49, 'assets/images/combos/combo-49-4bf48e7f.jpg', 0, 2, '2026-05-29 07:03:08'),
+(170, 49, 'assets/images/combos/combo-49-cced4db8.jpg', 0, 3, '2026-05-29 07:03:08'),
+(171, 49, 'assets/images/combos/combo-49-98ba9db4.jpg', 0, 4, '2026-05-29 07:03:08'),
+(172, 49, 'assets/images/combos/combo-49-adff15aa.jpg', 0, 5, '2026-05-29 07:03:08'),
+(173, 49, 'assets/images/combos/combo-49-dc44b0e6.jpg', 0, 6, '2026-05-29 07:03:08'),
+(174, 39, 'assets/images/combos/combo-39-add18c1c.jpg', 1, 0, '2026-05-29 07:03:08'),
+(175, 39, 'assets/images/combos/combo-39-36411164.jpg', 0, 11, '2026-05-29 07:03:08'),
+(176, 39, 'assets/images/combos/combo-39-4a093e95.jpg', 0, 12, '2026-05-29 07:03:08'),
+(177, 39, 'assets/images/combos/combo-39-b1d26c81.jpg', 0, 13, '2026-05-29 07:03:08'),
+(178, 39, 'assets/images/combos/combo-39-a4b5426f.jpg', 0, 14, '2026-05-29 07:03:08'),
+(179, 39, 'assets/images/combos/combo-39-129db83a.jpg', 0, 15, '2026-05-29 07:03:08'),
+(180, 39, 'assets/images/combos/combo-39-8c87dcc9.jpg', 0, 16, '2026-05-29 07:03:08'),
+(181, 39, 'assets/images/combos/combo-39-8236402f.jpg', 0, 17, '2026-05-29 07:03:08'),
+(182, 39, 'assets/images/combos/combo-39-d85cc469.jpg', 0, 18, '2026-05-29 07:03:08'),
+(183, 38, 'assets/images/combos/combo-38-29bfb18f.jpg', 1, 0, '2026-05-29 07:03:08'),
+(184, 38, 'assets/images/combos/combo-38-5980494d.jpg', 0, 13, '2026-05-29 07:03:08'),
+(185, 38, 'assets/images/combos/combo-38-a6247c81.jpg', 0, 14, '2026-05-29 07:03:08'),
+(186, 38, 'assets/images/combos/combo-38-be84c481.jpg', 0, 15, '2026-05-29 07:03:08'),
+(187, 38, 'assets/images/combos/combo-38-d9762d55.jpg', 0, 16, '2026-05-29 07:03:08'),
+(188, 38, 'assets/images/combos/combo-38-bc25d08a.jpg', 0, 17, '2026-05-29 07:03:08'),
+(189, 38, 'assets/images/combos/combo-38-b2b1a42b.jpg', 0, 18, '2026-05-29 07:03:08'),
+(191, 51, 'assets/images/combos/combo-51-0cada04b.jpg', 0, 1, '2026-05-29 07:03:08'),
+(192, 51, 'assets/images/combos/combo-51-ed5906aa.jpg', 0, 2, '2026-05-29 07:03:08'),
+(193, 51, 'assets/images/combos/combo-51-0f51d8d5.jpg', 0, 3, '2026-05-29 07:03:08'),
+(194, 51, 'assets/images/combos/combo-51-94d8aeff.jpg', 0, 4, '2026-05-29 07:03:08'),
+(195, 51, 'assets/images/combos/combo-51-5621b009.jpg', 0, 5, '2026-05-29 07:03:08'),
+(196, 51, 'assets/images/combos/combo-51-c1fa460e.jpg', 0, 6, '2026-05-29 07:03:08'),
+(197, 51, 'assets/images/combos/combo-51-bd5640fa.jpg', 0, 7, '2026-05-29 07:03:08'),
+(199, 40, 'assets/images/combos/combo-40-b3d88c5d.jpg', 0, 1, '2026-05-29 07:03:08'),
+(200, 40, 'assets/images/combos/combo-40-f8953866.jpg', 0, 2, '2026-05-29 07:03:08'),
+(201, 40, 'assets/images/combos/combo-40-838b50d7.jpg', 0, 3, '2026-05-29 07:03:08'),
+(202, 40, 'assets/images/combos/combo-40-d0e78205.jpg', 0, 4, '2026-05-29 07:03:08'),
+(203, 40, 'assets/images/combos/combo-40-27350982.jpg', 0, 5, '2026-05-29 07:03:08'),
+(204, 3, 'assets/images/combos/combo-3-3ca8f5b0.jpg', 1, 0, '2026-05-29 07:03:08'),
+(205, 3, 'assets/images/combos/combo-3-5a45acb7.jpg', 0, 2, '2026-05-29 07:03:08'),
+(206, 3, 'assets/images/combos/combo-3-0af4b3fd.jpg', 0, 3, '2026-05-29 07:03:08'),
+(207, 3, 'assets/images/combos/combo-3-01f3b37b.jpg', 0, 4, '2026-05-29 07:03:08'),
+(209, 47, 'assets/images/combos/combo-47-d5e6d44c.jpg', 0, 1, '2026-05-29 07:03:08'),
+(210, 47, 'assets/images/combos/combo-47-37556c4c.jpg', 0, 2, '2026-05-29 07:03:08'),
+(211, 47, 'assets/images/combos/combo-47-1a382ba3.jpg', 0, 3, '2026-05-29 07:03:08'),
+(212, 47, 'assets/images/combos/combo-47-dd6684f0.jpg', 0, 4, '2026-05-29 07:03:08'),
+(213, 47, 'assets/images/combos/combo-47-08b2eae4.jpg', 0, 5, '2026-05-29 07:03:08'),
+(214, 47, 'assets/images/combos/combo-47-9fd9bc20.jpg', 0, 6, '2026-05-29 07:03:08'),
+(215, 47, 'assets/images/combos/combo-47-87acc3c4.jpg', 0, 7, '2026-05-29 07:03:08'),
+(216, 47, 'assets/images/combos/combo-47-5d8e0437.jpg', 0, 8, '2026-05-29 07:03:08'),
+(217, 47, 'assets/images/combos/combo-47-18d44f21.jpg', 0, 9, '2026-05-29 07:03:08'),
+(218, 47, 'assets/images/combos/combo-47-001c1bb2.jpg', 0, 10, '2026-05-29 07:03:08'),
+(219, 47, 'assets/images/combos/combo-47-6f9ac853.jpg', 0, 11, '2026-05-29 07:03:08'),
+(220, 47, 'assets/images/combos/combo-47-9ed13c5b.jpg', 0, 12, '2026-05-29 07:03:08'),
+(221, 47, 'assets/images/combos/combo-47-ca9357bc.jpg', 0, 13, '2026-05-29 07:03:08'),
+(223, 48, 'assets/images/combos/combo-48-2b7d971b.jpg', 0, 1, '2026-05-29 07:03:08'),
+(224, 48, 'assets/images/combos/combo-48-e321e203.jpg', 0, 2, '2026-05-29 07:03:08'),
+(225, 48, 'assets/images/combos/combo-48-6233a99d.jpg', 0, 3, '2026-05-29 07:03:08'),
+(226, 48, 'assets/images/combos/combo-48-91a40702.jpg', 0, 4, '2026-05-29 07:03:08'),
+(227, 48, 'assets/images/combos/combo-48-e7a6b9e0.jpg', 0, 5, '2026-05-29 07:03:08'),
+(228, 48, 'assets/images/combos/combo-48-65cf8902.jpg', 0, 6, '2026-05-29 07:03:08'),
+(235, 34, 'assets/images/combos/combo-34-166e2b6252.jpg', 0, 1, '2026-05-29 07:11:20'),
+(236, 34, 'assets/images/combos/combo-34-effd4d7634.jpg', 0, 2, '2026-05-29 07:11:20'),
+(237, 34, 'assets/images/combos/combo-34-d26b999d4e.jpg', 0, 3, '2026-05-29 07:11:20'),
+(238, 34, 'assets/images/combos/combo-34-4edb71db4b.jpg', 0, 4, '2026-05-29 07:11:20'),
+(239, 34, 'assets/images/combos/combo-34-73e596a1d8.jpg', 0, 5, '2026-05-29 07:11:20'),
+(240, 34, 'assets/images/combos/combo-34-71fc758f3f.jpg', 0, 6, '2026-05-29 07:11:20'),
+(241, 34, 'assets/images/combos/combo-34-b5de0ba668.jpg', 0, 7, '2026-05-29 07:11:20'),
+(242, 34, 'assets/images/combos/combo-34-237b4c83ae.jpg', 0, 8, '2026-05-29 07:11:20'),
+(243, 34, 'assets/images/combos/combo-34-a2e317f760.jpg', 0, 9, '2026-05-29 07:11:20'),
+(244, 34, 'assets/images/combos/combo-34-3e657eac85.jpg', 0, 10, '2026-05-29 07:11:20'),
+(245, 34, 'assets/images/combos/combo-34-54dba7cdd5.jpg', 0, 11, '2026-05-29 07:11:20'),
+(246, 34, 'assets/images/combos/combo-34-c2c6d5b502.jpg', 0, 12, '2026-05-29 07:11:20'),
+(386, 43, 'assets/images/combos/combo-43-7e9ad2f0f5.jpg', 0, 10, '2026-05-29 07:11:21'),
+(387, 43, 'assets/images/combos/combo-43-bd50b912e2.jpg', 0, 11, '2026-05-29 07:11:21'),
+(388, 43, 'assets/images/combos/combo-43-4cb994ea67.jpg', 0, 12, '2026-05-29 07:11:21'),
+(389, 43, 'assets/images/combos/combo-43-5d0dad16ee.jpg', 0, 13, '2026-05-29 07:11:21'),
+(390, 38, 'assets/images/combos/combo-38-6184f34566.jpg', 0, 19, '2026-05-29 07:11:21'),
+(391, 38, 'assets/images/combos/combo-38-2fbb9e4100.jpg', 0, 20, '2026-05-29 07:11:21'),
+(392, 38, 'assets/images/combos/combo-38-a68791b8ac.jpg', 0, 21, '2026-05-29 07:11:21'),
+(393, 38, 'assets/images/combos/combo-38-3ad5175bce.jpg', 0, 22, '2026-05-29 07:11:21'),
+(394, 38, 'assets/images/combos/combo-38-51214b21db.jpg', 0, 23, '2026-05-29 07:11:21'),
+(395, 38, 'assets/images/combos/combo-38-1687ace69e.jpg', 0, 24, '2026-05-29 07:11:21'),
+(396, 38, 'assets/images/combos/combo-38-2a62bb4fd3.jpg', 0, 25, '2026-05-29 07:11:21'),
+(397, 38, 'assets/images/combos/combo-38-0f397ee336.jpg', 0, 26, '2026-05-29 07:11:21'),
+(398, 38, 'assets/images/combos/combo-38-ead7af4d9c.jpg', 0, 27, '2026-05-29 07:11:21'),
+(399, 42, 'assets/images/combos/combo-42-d96956cb8a.jpg', 0, 8, '2026-05-29 07:11:21'),
+(400, 42, 'assets/images/combos/combo-42-f69a9279e9.jpg', 0, 9, '2026-05-29 07:11:21'),
+(401, 42, 'assets/images/combos/combo-42-1e04fa76e9.jpg', 0, 10, '2026-05-29 07:11:21'),
+(402, 42, 'assets/images/combos/combo-42-00e0ab5315.jpg', 0, 11, '2026-05-29 07:11:21'),
+(403, 42, 'assets/images/combos/combo-42-78508dbd23.jpg', 0, 12, '2026-05-29 07:11:21'),
+(404, 42, 'assets/images/combos/combo-42-406e55ce78.jpg', 0, 13, '2026-05-29 07:11:21'),
+(405, 42, 'assets/images/combos/combo-42-82217ed4d9.jpg', 0, 14, '2026-05-29 07:11:21');
 
 -- --------------------------------------------------------
 
@@ -496,13 +961,8 @@ INSERT INTO `combo_items` (`id`, `combo_id`, `product_id`, `quantity`) VALUES
 (21, 10, 1001, 1),
 (39, 1, 1001, 2),
 (40, 1, 1009, 1),
-(41, 2, 2, 1),
-(42, 2, 1010, 2),
-(43, 3, 3, 2),
 (44, 3, 1009, 2),
 (45, 4, 1001, 3),
-(46, 4, 3, 2),
-(47, 4, 2, 1),
 (48, 5, 1001, 1),
 (49, 5, 1002, 1),
 (50, 6, 1010, 2),
@@ -510,14 +970,11 @@ INSERT INTO `combo_items` (`id`, `combo_id`, `product_id`, `quantity`) VALUES
 (52, 7, 1003, 2),
 (53, 7, 1004, 2),
 (54, 8, 1009, 1),
-(55, 8, 2, 1),
 (66, 31, 1014, 1),
 (73, 32, 1041, 1),
 (79, 12, 1009, 1),
 (80, 14, 1003, 1),
 (81, 14, 1004, 1),
-(82, 23, 2026, 1),
-(83, 23, 2017, 1),
 (84, 27, 2019, 1),
 (85, 27, 1040, 1),
 (86, 13, 1001, 1),
@@ -536,7 +993,83 @@ INSERT INTO `combo_items` (`id`, `combo_id`, `product_id`, `quantity`) VALUES
 (99, 21, 1003, 1),
 (100, 22, 2006, 1),
 (101, 22, 1001, 1),
-(102, 22, 1005, 1);
+(102, 22, 1005, 1),
+(103, 33, 1005, 1),
+(104, 33, 1004, 1),
+(105, 34, 2034, 1),
+(106, 34, 2035, 1),
+(107, 35, 2038, 1),
+(108, 35, 1001, 1),
+(109, 36, 1009, 1),
+(110, 36, 1001, 1),
+(111, 37, 1009, 1),
+(112, 37, 1003, 1),
+(113, 38, 1005, 1),
+(114, 38, 1003, 1),
+(115, 38, 1017, 1),
+(116, 39, 1017, 1),
+(117, 39, 1003, 1),
+(118, 39, 2032, 1),
+(119, 39, 1005, 1),
+(120, 40, 2035, 1),
+(121, 40, 1001, 1),
+(122, 41, 2035, 1),
+(123, 41, 2034, 1),
+(124, 41, 1003, 1),
+(125, 41, 1004, 1),
+(126, 42, 1017, 1),
+(127, 42, 1003, 1),
+(128, 43, 2033, 1),
+(129, 43, 1012, 1),
+(131, 44, 1015, 1),
+(132, 44, 1013, 1),
+(133, 44, 1011, 1),
+(134, 45, 2032, 1),
+(135, 45, 1014, 1),
+(136, 45, 1010, 1),
+(137, 46, 1001, 1),
+(138, 46, 2033, 1),
+(139, 46, 2032, 1),
+(140, 47, 1010, 1),
+(141, 47, 1005, 1),
+(142, 47, 2032, 1),
+(143, 47, 1003, 1),
+(144, 47, 1014, 1),
+(145, 47, 1017, 1),
+(146, 48, 1004, 1),
+(147, 48, 1003, 1),
+(148, 49, 1004, 1),
+(149, 49, 2038, 1),
+(150, 50, 1004, 1),
+(151, 50, 2035, 1),
+(152, 50, 1003, 1),
+(153, 51, 1013, 1),
+(154, 51, 1011, 1),
+(156, 2, 2001, 1),
+(157, 2, 2002, 1),
+(158, 23, 1011, 1),
+(159, 23, 1013, 1),
+(160, 23, 1015, 1),
+(161, 17, 1010, 1),
+(162, 17, 1014, 1),
+(163, 3, 1011, 1),
+(164, 12, 1010, 1),
+(165, 44, 1010, 1),
+(166, 51, 1009, 1),
+(167, 15, 1001, 1),
+(168, 15, 1005, 1),
+(169, 16, 1002, 1),
+(170, 16, 1005, 1),
+(171, 24, 2001, 1),
+(172, 24, 2002, 1),
+(173, 25, 1001, 1),
+(174, 25, 2001, 1),
+(175, 26, 1040, 1),
+(176, 26, 1042, 1),
+(177, 28, 2005, 1),
+(178, 28, 2003, 1),
+(179, 29, 1001, 1),
+(180, 29, 1003, 1);
 
 -- --------------------------------------------------------
 
@@ -807,7 +1340,9 @@ INSERT INTO `customers` (`id`, `user_id`, `name`, `phone`, `dob`, `status`, `cre
 (154, 9012, 'isaac', '8221633689', NULL, 'active', '2026-04-30 12:45:55'),
 (157, 9013, 'raj', '9047478888', NULL, 'active', '2026-05-04 10:29:14'),
 (160, 9014, 'nalej', '9047478887', NULL, 'active', '2026-05-11 06:46:48'),
-(161, 9015, 'nalej', '885241255', NULL, 'active', '2026-05-11 07:57:23');
+(161, 9015, 'nalej', '885241255', NULL, 'active', '2026-05-11 07:57:23'),
+(162, 9016, 'joe', '9047478887', NULL, 'active', '2026-05-16 10:38:58'),
+(163, 9017, 'doe', '9047478888', NULL, 'active', '2026-05-16 11:34:26');
 
 -- --------------------------------------------------------
 
@@ -1119,7 +1654,44 @@ INSERT INTO `delivery_tracking` (`id`, `order_id`, `status`, `description`, `loc
 (27, 86, 'SHIPPED', 'Shipment is out for transit.', 'Sorting Center', '2026-04-26 05:12:27'),
 (28, 85, 'PLACED', 'Order has been placed successfully.', 'Warehouse', '2026-04-25 17:12:27'),
 (29, 85, 'SHIPPED', 'Shipment is out for transit.', 'Sorting Center', '2026-04-25 22:12:27'),
-(30, 85, 'DELIVERED', 'Order has been delivered to the customer.', 'New Delhi, Delhi', '2026-04-26 03:12:27');
+(30, 85, 'DELIVERED', 'Order has been delivered to the customer.', 'New Delhi, Delhi', '2026-04-26 03:12:27'),
+(31, 28, 'PACKED', 'Items are packed and ready.', 'Mumbai Warehouse', '2026-05-20 07:30:16'),
+(32, 28, 'SHIPPED', 'Handed over to Delhivery. Tracking #DEL-9928371', 'Warehouse', '2026-05-20 07:30:16'),
+(33, 28, 'PACKED', 'Items are packed and ready.', 'Mumbai Warehouse', '2026-05-20 07:30:29'),
+(34, 28, 'SHIPPED', 'Handed over to Delhivery. Tracking #DEL-9928371', 'Warehouse', '2026-05-20 07:30:29'),
+(37, 1001, 'SHIPPED', 'test desc', 'test location', '2026-05-28 05:05:54'),
+(38, 1001, 'SHIPPED', 'test desc', 'test loc', '2026-05-28 05:08:57'),
+(39, 90061, 'SHIPPED', '', '', '2026-05-28 05:21:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `demo_transactions`
+--
+
+CREATE TABLE `demo_transactions` (
+  `id` int(11) NOT NULL,
+  `transaction_id` varchar(30) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_email` varchar(100) NOT NULL,
+  `customer_phone` varchar(15) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `upi_id` varchar(100) NOT NULL,
+  `merchant_name` varchar(100) NOT NULL,
+  `status` enum('pending','success','failed','expired','cancelled') DEFAULT 'pending',
+  `failure_reason` varchar(255) DEFAULT NULL,
+  `qr_payload` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `demo_transactions`
+--
+
+INSERT INTO `demo_transactions` (`id`, `transaction_id`, `customer_name`, `customer_email`, `customer_phone`, `amount`, `upi_id`, `merchant_name`, `status`, `failure_reason`, `qr_payload`, `created_at`, `updated_at`) VALUES
+(1, 'UPI2026D8A44D', 'Ravi Kumar', 'ravi@demo.com', '9876543210', 1299.00, 'demo@upi', 'Vijaya Karadant', 'pending', NULL, 'upi://pay?pa=demo@upi&pn=Vijaya+Karadant&am=1299&cu=INR&tn=DemoOrder', '2026-05-18 08:13:24', '2026-05-18 08:13:24'),
+(2, 'UPI2026CFF21F', 'Ravi Kumar', 'ravi@demo.com', '9876543210', 1299.00, 'demo@upi', 'Vijaya Karadant', 'pending', NULL, 'upi://pay?pa=demo@upi&pn=Vijaya+Karadant&am=1299&cu=INR&tn=DemoOrder', '2026-05-18 08:14:20', '2026-05-18 08:14:20');
 
 -- --------------------------------------------------------
 
@@ -1134,6 +1706,83 @@ CREATE TABLE `failed_orders` (
   `error_message` text NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gift_boxes`
+--
+
+CREATE TABLE `gift_boxes` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` enum('pre_curated','custom') NOT NULL DEFAULT 'custom',
+  `base_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `max_capacity` int(11) NOT NULL DEFAULT 6,
+  `image_url` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gift_boxes`
+--
+
+INSERT INTO `gift_boxes` (`id`, `name`, `type`, `base_price`, `max_capacity`, `image_url`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Royal Assorted Sweet Box', 'pre_curated', 0.00, 6, 'royal-assorted-box.jpg', 1, '2026-05-21 09:39:42', '2026-05-21 09:39:42'),
+(2, 'Dry Fruit Special Box', 'pre_curated', 0.00, 6, 'dry-fruit-box.jpg', 1, '2026-05-21 09:39:42', '2026-05-21 09:39:42'),
+(3, 'Premium Festive Sweet Box', 'pre_curated', 0.00, 6, 'festive-box.jpg', 1, '2026-05-21 09:39:42', '2026-05-21 09:39:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gift_box_defaults`
+--
+
+CREATE TABLE `gift_box_defaults` (
+  `id` int(11) NOT NULL,
+  `gift_box_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `default_quantity` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hero_slides`
+--
+
+CREATE TABLE `hero_slides` (
+  `id` int(11) NOT NULL,
+  `title_line1` varchar(255) NOT NULL DEFAULT '',
+  `title_accent` varchar(255) NOT NULL DEFAULT '',
+  `tagline` varchar(255) NOT NULL DEFAULT '',
+  `button_text` varchar(100) NOT NULL DEFAULT 'Shop Now',
+  `button_url` varchar(500) NOT NULL DEFAULT '#bestsellers',
+  `desktop_image` varchar(500) NOT NULL DEFAULT '',
+  `mobile_image` varchar(500) NOT NULL DEFAULT '',
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hero_slides`
+--
+
+INSERT INTO `hero_slides` (`id`, `title_line1`, `title_accent`, `tagline`, `button_text`, `button_url`, `desktop_image`, `mobile_image`, `sort_order`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Celebrate Every Occasion', 'Timeless Sweetness', 'ARTISANAL & TRADITIONAL', 'Explore Karadant', '#bestsellers', 'assets/images/banners/home-banner  (5).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228075 (2).png', 1, 1, '2026-05-22 11:19:12', '2026-05-22 11:54:31'),
+(2, 'Experience the Taste of', 'Traditional Laddus', 'ARTISANAL & TRADITIONAL', 'Explore Laddu', '#bestsellers', 'assets/images/banners/home-banner  (2).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228127 (1).png', 2, 1, '2026-05-22 11:19:12', '2026-05-22 11:19:12'),
+(3, 'Made with Pure Ghee', 'Handcrafted with Love', '100% NATURAL & PURE', 'Shop Now', '#bestsellers', 'assets/images/banners/home-banner  (3).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228128.png', 3, 1, '2026-05-22 11:19:12', '2026-05-22 11:19:12'),
+(4, 'Savor the Crunch of', 'Delicious Namkeens', 'ARTISANAL & TRADITIONAL', 'Explore Namkeen', '#bestsellers', 'assets/images/banners/home-banner  (4).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228075 (2).png', 4, 1, '2026-05-22 11:19:12', '2026-05-22 11:19:12'),
+(5, 'Pure and Natural', 'Traditional Karadant', '100% PURE & NATURAL', 'Browse Collection', '#bestsellers', 'assets/images/banners/home-banner  (1).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228127 (1).png', 5, 1, '2026-05-22 11:19:12', '2026-05-22 11:19:12'),
+(6, 'Celebrate Every Occasion', 'Timeless Sweetness', 'ARTISANAL & TRADITIONAL', 'Explore Karadant', '#bestsellers', 'assets/images/banners/home-banner  (5).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228075 (2).png', 1, 1, '2026-05-28 06:40:48', '2026-05-28 06:40:48'),
+(7, 'Experience the Taste of', 'Traditional Laddus', 'ARTISANAL & TRADITIONAL', 'Explore Laddu', '#bestsellers', 'assets/images/banners/home-banner  (2).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228127 (1).png', 2, 1, '2026-05-28 06:40:48', '2026-05-28 06:40:48'),
+(8, 'Made with Pure Ghee', 'Handcrafted with Love', '100% NATURAL & PURE', 'Shop Now', '#bestsellers', 'assets/images/banners/home-banner  (3).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228128.png', 3, 1, '2026-05-28 06:40:48', '2026-05-28 06:40:48'),
+(9, 'Savor the Crunch of', 'Delicious Namkeens', 'ARTISANAL & TRADITIONAL', 'Explore Namkeen', '#bestsellers', 'assets/images/banners/home-banner  (4).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228075 (2).png', 4, 1, '2026-05-28 06:40:48', '2026-05-28 06:40:48'),
+(10, 'Pure and Natural', 'Traditional Karadant', '100% PURE & NATURAL', 'Browse Collection', '#bestsellers', 'assets/images/banners/home-banner  (1).png', 'assets/images/banners/demo-phone-screen-img/Property 1=Frame 2147228127 (1).png', 5, 0, '2026-05-28 06:40:48', '2026-05-28 06:42:40');
 
 -- --------------------------------------------------------
 
@@ -1161,7 +1810,11 @@ INSERT INTO `inventory` (`product_id`, `stock`, `reserved_stock`, `last_update`)
 (2026, 10, 0, '2026-05-06 08:58:13'),
 (2027, 10, 0, '2026-05-06 08:59:46'),
 (2029, 11, 0, '2026-05-06 09:04:37'),
-(2031, 22, 0, '2026-05-07 11:05:27');
+(2031, 22, 0, '2026-05-07 11:05:27'),
+(2036, 100, 0, '2026-05-29 07:29:10'),
+(2038, 100, 0, '2026-05-29 08:53:09'),
+(2039, 100, 0, '2026-05-29 10:06:13'),
+(2040, 100, 0, '2026-05-29 10:06:13');
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1866,10 @@ INSERT INTO `invoices` (`id`, `invoice_number`, `order_id`, `invoice_date`, `sta
 (8, 'INV-2026-0008', 90056, '2026-05-04', 'sent', NULL, '2026-05-04 07:38:07'),
 (9, 'INV-2026-0009', 90073, '2026-05-06', 'sent', NULL, '2026-05-06 07:33:44'),
 (10, 'INV-2026-0010', 90071, '2026-05-06', 'sent', NULL, '2026-05-06 07:35:33'),
-(11, 'INV-2026-0011', 90076, '2026-05-13', 'sent', NULL, '2026-05-13 06:33:19');
+(11, 'INV-2026-0011', 90076, '2026-05-13', 'sent', NULL, '2026-05-13 06:33:19'),
+(12, 'INV-2026-0012', 90085, '2026-05-19', 'sent', NULL, '2026-05-19 10:20:15'),
+(13, 'INV-2026-0013', 90079, '2026-05-25', 'sent', NULL, '2026-05-25 12:30:37'),
+(14, 'INV-2026-0014', 90089, '2026-05-28', 'sent', NULL, '2026-05-28 06:34:52');
 
 -- --------------------------------------------------------
 
@@ -1292,74 +1948,74 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `order_number`, `idempotency_key`, `order_reference`, `customer_name`, `total_amount`, `payment_id`, `subtotal`, `discount_amount`, `shipping_charges`, `tax_rate`, `tax_amount`, `status`, `payment_status`, `payment_method`, `shipping_address_id`, `billing_address_id`, `notes`, `tracking_id`, `delivery_partner`, `estimated_delivery_date`, `admin_notes`, `created_at`, `updated_at`) VALUES
-(28, 10, 'VKR001', NULL, 'VKR001', 'Rajiv Sharma', 18000.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-15 04:30:00', '2026-04-27 10:37:09'),
-(29, 10, 'VKR002', NULL, 'VKR002', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-14 04:30:00', '2026-04-27 10:37:09'),
-(30, 10, 'VKR003', NULL, 'VKR003', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-12 04:30:00', '2026-04-27 10:37:09'),
-(31, 10, 'VKR004', NULL, 'VKR004', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-11 04:30:00', '2026-04-27 10:37:09'),
-(32, 10, 'VKR005', NULL, 'VKR005', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 04:30:00', '2026-04-27 10:37:09'),
-(33, 10, 'VKR006', NULL, 'VKR006', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-09 04:30:00', '2026-04-27 10:37:09'),
-(34, 10, 'VKR007', NULL, 'VKR007', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-08 04:30:00', '2026-04-27 10:37:09'),
-(35, 10, 'VKR008', NULL, 'VKR008', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-07 04:30:00', '2026-04-27 10:37:09'),
-(36, 10, 'VKR009', NULL, 'VKR009', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-06 04:30:00', '2026-04-27 10:37:09'),
-(37, 10, 'VKR010', NULL, 'VKR010', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-05 04:30:00', '2026-04-27 10:37:09'),
-(38, 10, 'VKR011', NULL, 'VKR011', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-04 04:30:00', '2026-04-27 10:37:09'),
-(39, 10, 'VKR012', NULL, 'VKR012', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-03 04:30:00', '2026-04-27 10:37:09'),
-(40, 10, 'VKR013', NULL, 'VKR013', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-02 04:30:00', '2026-04-27 10:37:09'),
-(41, 10, 'VKR014', NULL, 'VKR014', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-01 04:30:00', '2026-04-27 10:37:09'),
-(42, 10, 'VKR015', NULL, 'VKR015', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-31 04:30:00', '2026-04-27 10:37:09'),
-(43, 10, 'VKR016', NULL, 'VKR016', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-30 04:30:00', '2026-04-27 10:37:09'),
-(44, 10, 'VKR017', NULL, 'VKR017', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-29 04:30:00', '2026-04-27 10:37:09'),
-(45, 10, 'VKR018', NULL, 'VKR018', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-28 04:30:00', '2026-04-27 10:37:09'),
-(46, 10, 'VKR019', NULL, 'VKR019', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-27 04:30:00', '2026-04-27 10:37:09'),
-(47, 10, 'VKR020', NULL, 'VKR020', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 04:30:00', '2026-04-27 10:37:09'),
-(48, 10, 'VKR021', NULL, 'VKR021', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-25 04:30:00', '2026-04-27 10:37:09'),
-(49, 10, 'VKR022', NULL, 'VKR022', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-24 04:30:00', '2026-04-27 10:37:09'),
-(50, 10, 'VKR023', NULL, 'VKR023', 'Rajiv Sharma', 210.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-23 04:30:00', '2026-04-27 10:37:09'),
-(51, 10, 'VKR024', NULL, 'VKR024', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-22 04:30:00', '2026-04-27 10:37:09'),
-(52, 11, 'VKN001', NULL, 'VKN001', 'Neha Patel', 5130.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-21 04:30:00', '2026-04-27 10:37:09'),
-(53, 11, 'VKN002', NULL, 'VKN002', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-20 04:30:00', '2026-04-27 10:37:09'),
-(54, 11, 'VKN003', NULL, 'VKN003', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-19 04:30:00', '2026-04-27 10:37:09'),
-(55, 11, 'VKN004', NULL, 'VKN004', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-18 04:30:00', '2026-04-27 10:37:09'),
-(56, 11, 'VKN005', NULL, 'VKN005', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-17 04:30:00', '2026-04-27 10:37:09'),
-(57, 11, 'VKN006', NULL, 'VKN006', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-16 04:30:00', '2026-04-27 10:37:09'),
-(58, 11, 'VKN007', NULL, 'VKN007', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-15 04:30:00', '2026-04-27 10:37:09'),
-(59, 11, 'VKN008', NULL, 'VKN008', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-14 04:30:00', '2026-04-27 10:37:09'),
-(60, 12, 'VKA001', NULL, 'VKA001', 'Amit Verma', 450.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-12 04:30:00', '2026-04-27 10:37:09'),
-(61, 13, 'VKP001', NULL, 'VKP001', 'Priya Desai', 9670.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-11 04:30:00', '2026-04-27 10:37:09'),
-(62, 13, 'VKP002', NULL, 'VKP002', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 04:30:00', '2026-04-27 10:37:09'),
-(63, 13, 'VKP003', NULL, 'VKP003', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-09 04:30:00', '2026-04-27 10:37:09'),
-(64, 13, 'VKP004', NULL, 'VKP004', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-08 04:30:00', '2026-04-27 10:37:09'),
-(65, 13, 'VKP005', NULL, 'VKP005', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-07 04:30:00', '2026-04-27 10:37:09'),
-(66, 13, 'VKP006', NULL, 'VKP006', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-06 04:30:00', '2026-04-27 10:37:09'),
-(67, 13, 'VKP007', NULL, 'VKP007', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-05 04:30:00', '2026-04-27 10:37:09'),
-(68, 13, 'VKP008', NULL, 'VKP008', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-04 04:30:00', '2026-04-27 10:37:09'),
-(69, 13, 'VKP009', NULL, 'VKP009', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-03 04:30:00', '2026-04-27 10:37:09'),
-(70, 13, 'VKP010', NULL, 'VKP010', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-02 04:30:00', '2026-04-27 10:37:09'),
-(71, 13, 'VKP011', NULL, 'VKP011', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-01 04:30:00', '2026-04-27 10:37:09'),
-(72, 13, 'VKP012', NULL, 'VKP012', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-31 04:30:00', '2026-04-27 10:37:09'),
-(73, 13, 'VKP013', NULL, 'VKP013', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-30 04:30:00', '2026-04-27 10:37:09'),
-(74, 13, 'VKP014', NULL, 'VKP014', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-29 04:30:00', '2026-04-27 10:37:09'),
-(75, 14, 'VKSJ001', NULL, 'VKSJ001', 'Sanjay Kumar', 1230.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-28 04:30:00', '2026-04-27 10:37:09'),
-(76, 14, 'VKSJ002', NULL, 'VKSJ002', 'Sanjay Kumar', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-27 04:30:00', '2026-04-27 10:37:09'),
-(77, 14, 'VKSJ003', NULL, 'VKSJ003', 'Sanjay Kumar', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 04:30:00', '2026-04-27 10:37:09'),
-(78, 15, 'VKRS001', NULL, 'VKRS001', 'Rakesh Singh', 880.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-25 04:30:00', '2026-04-27 10:37:09'),
-(79, 15, 'VKRS002', NULL, 'VKRS002', 'Rakesh Singh', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-24 04:30:00', '2026-04-27 10:37:09'),
-(84, 116, 'ORD-2024-001', NULL, 'ORD-2024-001', '', 1250.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 11:21:57', '2026-04-27 10:37:09'),
-(85, 116, 'ORD-2024-002', NULL, 'ORD-2024-002', '', 3400.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 11:21:57', '2026-04-27 10:37:09'),
-(86, 117, 'ORD-2024-003', NULL, 'ORD-2024-003', '', 850.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-15 11:21:57', '2026-04-27 10:37:09'),
-(88, 125, 'ORD-2024-010', NULL, 'ORD-2024-010', 'Sunita Gupta', 5600.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-06 11:30:27', '2026-04-27 10:37:09'),
-(89, 125, 'ORD-2024-015', NULL, 'ORD-2024-015', 'Sunita Gupta', 2100.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-15 11:30:27', '2026-04-27 10:37:09'),
-(90, 127, 'ORD-2024-020', NULL, 'ORD-2024-020', 'Ananya Rao', 450.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'refunded', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-18 11:30:27', '2026-04-27 10:37:09'),
-(91, 128, 'ORD-2024-025', NULL, 'ORD-2024-025', 'Karan Mehra', 1800.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-19 11:30:27', '2026-04-27 10:37:09'),
-(1001, 1, 'ORD-2026-001', NULL, 'ORD-2026-001', 'Kevin Rajput', 850.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'processing', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-20 07:22:46', '2026-04-27 10:37:09'),
+(28, 10, 'VKR001', NULL, 'VKR001', 'Rajiv Sharma', 18000.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'paid', 'online', NULL, NULL, NULL, 'DEL-9928371', 'Delhivery', '2026-05-25', NULL, '2026-03-15 04:30:00', '2026-05-20 07:30:29'),
+(29, 10, 'VKR002', NULL, 'VKR002', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-14 04:30:00', '2026-05-25 12:57:50'),
+(30, 10, 'VKR003', NULL, 'VKR003', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-12 04:30:00', '2026-05-25 12:57:50'),
+(31, 10, 'VKR004', NULL, 'VKR004', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-11 04:30:00', '2026-05-25 12:57:50'),
+(32, 10, 'VKR005', NULL, 'VKR005', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 04:30:00', '2026-05-25 12:57:50'),
+(33, 10, 'VKR006', NULL, 'VKR006', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-09 04:30:00', '2026-05-25 12:57:50'),
+(34, 10, 'VKR007', NULL, 'VKR007', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-08 04:30:00', '2026-05-25 12:57:50'),
+(35, 10, 'VKR008', NULL, 'VKR008', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-07 04:30:00', '2026-05-25 12:57:50'),
+(36, 10, 'VKR009', NULL, 'VKR009', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-06 04:30:00', '2026-05-25 12:57:50'),
+(37, 10, 'VKR010', NULL, 'VKR010', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-05 04:30:00', '2026-05-25 12:57:50'),
+(38, 10, 'VKR011', NULL, 'VKR011', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-04 04:30:00', '2026-05-25 12:57:50'),
+(39, 10, 'VKR012', NULL, 'VKR012', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-03 04:30:00', '2026-05-25 12:57:50'),
+(40, 10, 'VKR013', NULL, 'VKR013', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-02 04:30:00', '2026-05-25 12:57:50'),
+(41, 10, 'VKR014', NULL, 'VKR014', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-01 04:30:00', '2026-05-25 12:57:50'),
+(42, 10, 'VKR015', NULL, 'VKR015', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-31 04:30:00', '2026-05-25 12:57:50'),
+(43, 10, 'VKR016', NULL, 'VKR016', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-30 04:30:00', '2026-05-25 12:57:50'),
+(44, 10, 'VKR017', NULL, 'VKR017', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-29 04:30:00', '2026-05-25 12:57:50'),
+(45, 10, 'VKR018', NULL, 'VKR018', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-28 04:30:00', '2026-05-25 12:57:50'),
+(46, 10, 'VKR019', NULL, 'VKR019', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-27 04:30:00', '2026-05-25 12:57:50'),
+(47, 10, 'VKR020', NULL, 'VKR020', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 04:30:00', '2026-05-25 12:57:50'),
+(48, 10, 'VKR021', NULL, 'VKR021', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-25 04:30:00', '2026-05-25 12:57:50'),
+(49, 10, 'VKR022', NULL, 'VKR022', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-24 04:30:00', '2026-05-25 12:57:50'),
+(50, 10, 'VKR023', NULL, 'VKR023', 'Rajiv Sharma', 210.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-23 04:30:00', '2026-05-25 12:57:50'),
+(51, 10, 'VKR024', NULL, 'VKR024', 'Rajiv Sharma', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-22 04:30:00', '2026-05-25 12:57:50'),
+(52, 11, 'VKN001', NULL, 'VKN001', 'Neha Patel', 5130.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-21 04:30:00', '2026-05-25 12:57:50'),
+(53, 11, 'VKN002', NULL, 'VKN002', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-20 04:30:00', '2026-05-25 12:57:50'),
+(54, 11, 'VKN003', NULL, 'VKN003', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-19 04:30:00', '2026-05-25 12:57:50'),
+(55, 11, 'VKN004', NULL, 'VKN004', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-18 04:30:00', '2026-05-25 12:57:50'),
+(56, 11, 'VKN005', NULL, 'VKN005', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-17 04:30:00', '2026-05-25 12:57:50'),
+(57, 11, 'VKN006', NULL, 'VKN006', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-16 04:30:00', '2026-05-25 12:57:50'),
+(58, 11, 'VKN007', NULL, 'VKN007', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-15 04:30:00', '2026-05-25 12:57:50'),
+(59, 11, 'VKN008', NULL, 'VKN008', 'Neha Patel', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-14 04:30:00', '2026-05-25 12:57:50'),
+(60, 12, 'VKA001', NULL, 'VKA001', 'Amit Verma', 450.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-12 04:30:00', '2026-05-25 12:57:50'),
+(61, 13, 'VKP001', NULL, 'VKP001', 'Priya Desai', 9670.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-11 04:30:00', '2026-05-25 12:57:50'),
+(62, 13, 'VKP002', NULL, 'VKP002', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 04:30:00', '2026-05-25 12:57:50'),
+(63, 13, 'VKP003', NULL, 'VKP003', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-09 04:30:00', '2026-05-25 12:57:50'),
+(64, 13, 'VKP004', NULL, 'VKP004', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-08 04:30:00', '2026-05-25 12:57:50'),
+(65, 13, 'VKP005', NULL, 'VKP005', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-07 04:30:00', '2026-05-25 12:57:50'),
+(66, 13, 'VKP006', NULL, 'VKP006', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-06 04:30:00', '2026-05-25 12:57:50'),
+(67, 13, 'VKP007', NULL, 'VKP007', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-05 04:30:00', '2026-05-25 12:57:50'),
+(68, 13, 'VKP008', NULL, 'VKP008', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-04 04:30:00', '2026-05-25 12:57:50'),
+(69, 13, 'VKP009', NULL, 'VKP009', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-03 04:30:00', '2026-05-25 12:57:50'),
+(70, 13, 'VKP010', NULL, 'VKP010', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-02 04:30:00', '2026-05-25 12:57:50'),
+(71, 13, 'VKP011', NULL, 'VKP011', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-01 04:30:00', '2026-05-25 12:57:50'),
+(72, 13, 'VKP012', NULL, 'VKP012', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-31 04:30:00', '2026-05-25 12:57:50'),
+(73, 13, 'VKP013', NULL, 'VKP013', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-30 04:30:00', '2026-05-25 12:57:50'),
+(74, 13, 'VKP014', NULL, 'VKP014', 'Priya Desai', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-29 04:30:00', '2026-05-25 12:57:50'),
+(75, 14, 'VKSJ001', NULL, 'VKSJ001', 'Sanjay Kumar', 1230.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-28 04:30:00', '2026-05-25 12:57:50'),
+(76, 14, 'VKSJ002', NULL, 'VKSJ002', 'Sanjay Kumar', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-27 04:30:00', '2026-05-25 12:57:50'),
+(77, 14, 'VKSJ003', NULL, 'VKSJ003', 'Sanjay Kumar', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 04:30:00', '2026-05-25 12:57:50'),
+(78, 15, 'VKRS001', NULL, 'VKRS001', 'Rakesh Singh', 880.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-25 04:30:00', '2026-05-25 12:57:50'),
+(79, 15, 'VKRS002', NULL, 'VKRS002', 'Rakesh Singh', 10.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-24 04:30:00', '2026-05-25 12:57:50'),
+(84, 116, 'ORD-2024-001', NULL, 'ORD-2024-001', '', 1250.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-10 11:21:57', '2026-05-25 12:57:50'),
+(85, 116, 'ORD-2024-002', NULL, 'ORD-2024-002', '', 3400.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-26 11:21:57', '2026-05-25 12:57:50'),
+(86, 117, 'ORD-2024-003', NULL, 'ORD-2024-003', '', 850.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-15 11:21:57', '2026-05-25 12:57:50'),
+(88, 125, 'ORD-2024-010', NULL, 'ORD-2024-010', 'Sunita Gupta', 5600.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-06 11:30:27', '2026-05-25 12:57:50'),
+(89, 125, 'ORD-2024-015', NULL, 'ORD-2024-015', 'Sunita Gupta', 2100.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-15 11:30:27', '2026-05-25 12:57:50'),
+(90, 127, 'ORD-2024-020', NULL, 'ORD-2024-020', 'Ananya Rao', 450.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'refunded', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-18 11:30:27', '2026-05-25 12:57:50'),
+(91, 128, 'ORD-2024-025', NULL, 'ORD-2024-025', 'Karan Mehra', 1800.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'paid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-19 11:30:27', '2026-05-25 12:57:50'),
+(1001, 1, 'ORD-2026-001', NULL, 'ORD-2026-001', 'Kevin Rajput', 850.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-20 07:22:46', '2026-05-28 05:05:54'),
 (1002, 1, 'ORD-2026-002', NULL, 'ORD-2026-002', 'Kevin Rajput', 1250.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-17 07:22:46', '2026-04-27 10:37:09'),
 (1003, 1, 'ORD-2026-003', NULL, 'ORD-2026-003', 'Kevin Rajput', 450.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'delivered', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-12 07:22:46', '2026-04-27 10:37:09'),
 (1004, 1, 'ORD-2026-004', NULL, 'ORD-2026-004', 'Kevin Rajput', 2100.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'delivered', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-07 07:22:46', '2026-04-27 10:37:09'),
 (1005, 1, 'ORD-2026-005', NULL, 'ORD-2026-005', 'Kevin Rajput', 950.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'cancelled', 'unpaid', 'online', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-02 07:22:46', '2026-04-27 10:37:09'),
-(90001, 9001, '', NULL, '', 'Mira Chawla', 520.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-11 04:35:50', '2026-04-27 10:41:04'),
+(90001, 9001, '', NULL, '', 'Mira Chawla', 520.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-11 04:35:50', '2026-05-25 12:57:50'),
 (90008, 9007, 'SW-ORD-41CD9F-20260422', NULL, 'SW-ORD-41CD9F-20260422', 'esakiraj', 2140.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'delivered', 'paid', 'online', NULL, NULL, NULL, '', '', '0000-00-00', '', '2026-04-22 08:00:52', '2026-04-27 10:37:09'),
-(90009, 9007, 'SW-ORD-F98BAE-20260422', NULL, 'SW-ORD-F98BAE-20260422', 'esakiraj', 2939.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-22 08:29:19', '2026-04-27 10:37:09'),
-(90010, 9007, 'SW-ORD-F93386-20260422', NULL, 'SW-ORD-F93386-20260422', 'esakiraj', 700.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-22 08:54:55', '2026-04-27 10:37:09'),
+(90009, 9007, 'SW-ORD-F98BAE-20260422', NULL, 'SW-ORD-F98BAE-20260422', 'esakiraj', 2939.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-22 08:29:19', '2026-05-25 12:57:50'),
+(90010, 9007, 'SW-ORD-F93386-20260422', NULL, 'SW-ORD-F93386-20260422', 'esakiraj', 700.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-22 08:54:55', '2026-05-25 12:57:50'),
 (90034, 9008, 'SW-3AC805E2-20260427', NULL, NULL, NULL, 2550.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'cancelled', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-27 14:30:08', '2026-04-29 09:12:50'),
 (90035, 9008, 'SW-3DEBDBCA-20260427', NULL, NULL, NULL, 3430.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'paid', 'online', NULL, NULL, NULL, '', '', '0000-00-00', '', '2026-04-27 14:32:07', '2026-04-27 14:34:20'),
 (90036, 9008, 'SW-1AA42CFB-20260428', NULL, NULL, NULL, 3850.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'cancelled', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-28 08:58:36', '2026-04-29 08:36:01'),
@@ -1369,7 +2025,7 @@ INSERT INTO `orders` (`id`, `user_id`, `order_number`, `idempotency_key`, `order
 (90040, 9008, 'SW-46D1927A-20260429', NULL, 'pay_SjHCkLWi1Xxj7k', NULL, 700.00, NULL, 650.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 11, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-29 10:32:13', '2026-04-29 10:32:13'),
 (90041, 9008, 'SW-46FE132A-20260430', NULL, 'pay_SjZoXZQdgEcK8y', NULL, 700.00, NULL, 650.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 12, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 04:44:34', '2026-04-30 04:44:34'),
 (90042, 9008, 'SW-B612E64B-20260430', NULL, 'pay_SjaCIz2eVxqUKB', NULL, 365.00, NULL, 315.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 13, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 05:07:01', '2026-04-30 05:07:01'),
-(90043, 9012, 'SW-3135DD65-20260430', NULL, NULL, NULL, 2100.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 12:53:57', '2026-04-30 12:53:57'),
+(90043, 9012, 'SW-3135DD65-20260430', NULL, NULL, NULL, 2100.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 12:53:57', '2026-05-25 12:57:50'),
 (90044, 9012, 'SW-00F6096C-20260430', NULL, NULL, NULL, 2100.00, 'pay_SjiELS77gUuboi', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 12:58:30', '2026-04-30 12:58:30'),
 (90045, 9012, 'SW-448422CC-20260430', NULL, NULL, NULL, 450.00, 'pay_SjiFd7fzNHJr8m', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-04-30 12:59:46', '2026-04-30 12:59:46'),
 (90047, 9010, 'SW-D5EBB993-20260502', NULL, NULL, NULL, 1440.00, 'pay_SkOmebS5aWJdik', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-02 06:36:07', '2026-05-02 06:36:07'),
@@ -1385,23 +2041,69 @@ INSERT INTO `orders` (`id`, `user_id`, `order_number`, `idempotency_key`, `order
 (90057, 9008, 'SW-8B283FEB-20260504', NULL, NULL, 'esakiraj raja', 3680.00, 'pay_SlDet2BXHsjEul', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 18, 18, NULL, NULL, NULL, NULL, NULL, '2026-05-04 08:22:19', '2026-05-04 08:22:19'),
 (90058, 9013, 'SW-58034B92-20260504', NULL, NULL, 'raj', 650.00, 'pay_SlFwH2C250Xm32', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 19, 19, NULL, NULL, NULL, NULL, NULL, '2026-05-04 10:36:01', '2026-05-04 10:36:01'),
 (90059, 9013, 'SW-C5E4156E-20260504', NULL, NULL, 'raj', 870.00, 'pay_SlG4wMFjYhrnS1', 0.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 20, 20, NULL, NULL, NULL, NULL, NULL, '2026-05-04 10:44:12', '2026-05-04 10:44:12'),
-(90060, 9008, 'SW-ORD-8E2B61-20260504', NULL, NULL, NULL, 849.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', 21, 21, NULL, NULL, NULL, NULL, NULL, '2026-05-04 11:15:36', '2026-05-04 11:15:36'),
-(90061, 9008, 'SW-ORD-13680C-20260504', NULL, NULL, NULL, 340.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', 22, 22, NULL, NULL, NULL, NULL, NULL, '2026-05-04 11:16:49', '2026-05-04 11:16:49'),
+(90060, 9008, 'SW-ORD-8E2B61-20260504', NULL, NULL, NULL, 849.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', 21, 21, NULL, NULL, NULL, NULL, NULL, '2026-05-04 11:15:36', '2026-05-25 12:57:50'),
+(90061, 9008, 'SW-ORD-13680C-20260504', NULL, NULL, NULL, 340.00, NULL, 0.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'unpaid', 'online', 22, 22, NULL, NULL, NULL, NULL, NULL, '2026-05-04 11:16:49', '2026-05-28 05:21:25'),
 (90062, 9008, 'SW-06EA52EC-20260504', NULL, NULL, 'esakiraj raja', 799.00, 'pay_SlGpp3sVAyRYw5', 0.00, 0.00, 0.00, 5.00, 0.00, 'delivered', 'paid', 'razorpay', 23, 23, NULL, '', '', '0000-00-00', '', '2026-05-04 11:28:50', '2026-05-05 16:27:33'),
 (90063, 9008, 'SW-79FD5BC5-20260504', NULL, NULL, 'esakiraj raja', 270.00, 'pay_SlH8n59PH6s3we', 220.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 24, 24, NULL, NULL, NULL, NULL, NULL, '2026-05-04 11:46:31', '2026-05-04 11:46:31'),
 (90064, 9008, 'SW-2EBD3E3D-20260504', NULL, NULL, 'esakiraj', 849.00, 'pay_SlHh3V9MRJvFQu', 799.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 25, 25, NULL, NULL, NULL, NULL, NULL, '2026-05-04 12:19:02', '2026-05-04 12:19:02'),
-(90065, 9007, 'SW-9B7EE23C-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:33', '2026-05-05 06:33:33'),
-(90066, 9007, 'SW-BD5587B1-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:48', '2026-05-05 06:33:48'),
-(90067, 9007, 'SW-0B5D8239-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:51', '2026-05-05 06:33:51'),
-(90068, 9007, 'SW-82421FC3-20260505', 'order_SlahPLn72NZ0OE', NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:54:14', '2026-05-05 06:54:14'),
-(90069, 9007, 'SW-DEC33CE6-20260505', 'order_SlaiepiG6hV5vt', NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:55:25', '2026-05-05 06:55:25'),
-(90070, 9007, 'SW-370E6AEA-20260505', 'order_SledkdIcxw3oP9', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 10:45:30', '2026-05-05 10:45:30'),
-(90071, 9007, 'SW-B9EEB49B-20260505', 'order_SletgZx1uZmPKv', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 11:00:35', '2026-05-05 11:00:35'),
-(90072, 9007, 'SW-CC7C1B69-20260505', 'order_SleuKMew8KXz42', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 11:01:12', '2026-05-05 11:01:12'),
-(90073, 2, 'SW-80AF5492-20260505', 'order_Slk1Xe0n6xWtuE', NULL, 'esakiraj raja', 50.00, NULL, 0.00, 0.00, 50.00, 5.00, 0.00, 'pending', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 16:01:30', '2026-05-05 16:01:30'),
+(90065, 9007, 'SW-9B7EE23C-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:33', '2026-05-25 12:57:50'),
+(90066, 9007, 'SW-BD5587B1-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:48', '2026-05-25 12:57:50'),
+(90067, 9007, 'SW-0B5D8239-20260505', NULL, NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:33:51', '2026-05-25 12:57:50'),
+(90068, 9007, 'SW-82421FC3-20260505', 'order_SlahPLn72NZ0OE', NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:54:14', '2026-05-25 12:57:50'),
+(90069, 9007, 'SW-DEC33CE6-20260505', 'order_SlaiepiG6hV5vt', NULL, 'esakiraj raja', 1950.00, NULL, 1950.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 06:55:25', '2026-05-25 12:57:50'),
+(90070, 9007, 'SW-370E6AEA-20260505', 'order_SledkdIcxw3oP9', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 10:45:30', '2026-05-25 12:57:50'),
+(90071, 9007, 'SW-B9EEB49B-20260505', 'order_SletgZx1uZmPKv', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 11:00:35', '2026-05-25 12:57:50'),
+(90072, 9007, 'SW-CC7C1B69-20260505', 'order_SleuKMew8KXz42', NULL, 'esakiraj raja', 7160.00, NULL, 7160.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 11:01:12', '2026-05-25 12:57:50'),
+(90073, 2, 'SW-80AF5492-20260505', 'order_Slk1Xe0n6xWtuE', NULL, 'esakiraj raja', 50.00, NULL, 0.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-05 16:01:30', '2026-05-25 12:57:50'),
 (90074, 9008, 'SW-1FF1200B-20260510', 'order_SnjO6qTxnhvImC', NULL, 'esakiraj raja', 3000.00, 'pay_SnjOJ9mABc2bXi', 3000.00, 0.00, 0.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-10 16:42:22', '2026-05-10 16:42:55'),
 (90075, 9014, 'SW-F0F393BE-20260511', 'order_Sny2KHllgZ9i4W', NULL, 'nalej raja', 300.00, 'pay_Sny2jWJRbDO4nY', 250.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 28, 28, NULL, NULL, NULL, NULL, NULL, '2026-05-11 07:02:10', '2026-05-11 07:02:48'),
-(90076, 9015, 'SW-68F5D9C8-20260511', 'order_SnyzfofYdMQ08c', NULL, 'nalej raja', 700.00, 'pay_SnyzpWnzZT7MN1', 650.00, 0.00, 50.00, 5.00, 0.00, 'shipped', 'paid', 'razorpay', 30, 30, NULL, '', '', '0000-00-00', '', '2026-05-11 07:58:21', '2026-05-11 08:17:59');
+(90076, 9015, 'SW-68F5D9C8-20260511', 'order_SnyzfofYdMQ08c', NULL, 'nalej raja', 700.00, 'pay_SnyzpWnzZT7MN1', 650.00, 0.00, 50.00, 5.00, 0.00, 'shipped', 'paid', 'razorpay', 30, 30, NULL, '', '', '0000-00-00', '', '2026-05-11 07:58:21', '2026-05-11 08:17:59'),
+(90077, 9007, 'SW-3698D492-20260518', NULL, NULL, 'esakiraj raja', 680.00, NULL, 630.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', 35, 35, NULL, NULL, NULL, NULL, NULL, '2026-05-18 07:51:40', '2026-05-25 12:57:50'),
+(90078, 9007, 'SW-E362B136-20260518', 'order_SqkvtSHBLgUHby', NULL, 'esakiraj raja', 330.00, NULL, 280.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', 36, 36, NULL, NULL, NULL, NULL, NULL, '2026-05-18 08:10:07', '2026-05-25 12:57:50'),
+(90079, 9007, 'SW-6D439557-20260518', 'order_SqkyMpq7JvuvJR', NULL, 'esakiraj raja', 330.00, NULL, 280.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', 37, 37, NULL, NULL, NULL, NULL, NULL, '2026-05-18 08:12:28', '2026-05-25 12:57:50'),
+(90080, 9007, 'SW-04D45566-20260518', 'order_Sqm2RJY1hgJIU7', NULL, 'esakiraj raja', 930.00, NULL, 880.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', 38, 38, NULL, NULL, NULL, NULL, NULL, '2026-05-18 09:14:44', '2026-05-25 12:57:50'),
+(90081, 9007, 'SW-1ECBAB3F-20260518', 'order_SqmDLHZHcz4kP9', NULL, 'esakiraj raja', 930.00, NULL, 880.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-05-18 09:25:04', '2026-05-25 12:57:50'),
+(90082, 9007, 'SW-26C9253F-20260518', 'order_SqmDTtFhJJNL5o', NULL, 'esakiraj raja', 930.00, NULL, 880.00, 0.00, 50.00, 5.00, 0.00, '', 'unpaid', 'online', 40, 40, NULL, NULL, NULL, NULL, NULL, '2026-05-18 09:25:12', '2026-05-25 12:57:50'),
+(90083, 9016, 'SW-EF5BCF12-20260518', 'order_SqnAgubbX7JEiD', NULL, 'joe Raja', 1200.00, NULL, 1200.00, 0.00, 0.00, 5.00, 0.00, '', 'unpaid', 'online', 41, 41, NULL, NULL, NULL, NULL, NULL, '2026-05-18 10:21:15', '2026-05-25 12:57:50'),
+(90085, 9016, 'SW-192EF375-20260518', 'order_SqnBCb52THd4WL', NULL, 'joe Raja', 1200.00, NULL, 1200.00, 0.00, 0.00, 5.00, 0.00, 'shipped', 'unpaid', 'online', 43, 43, NULL, '', '', '0000-00-00', '', '2026-05-18 10:21:44', '2026-05-29 04:24:08'),
+(90086, 9008, 'SW-7B5942B2-20260519', 'order_SrBl8Tn34sGdhc', NULL, 'esakiraj raja', 810.00, 'pay_SrBlJoVd5jrIgU', 760.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 46, 46, NULL, NULL, NULL, NULL, NULL, '2026-05-19 10:24:24', '2026-05-19 10:24:51'),
+(90087, 9008, 'SW-55AA32B7-20260527', 'order_SuHQhL2Gcs1O6x', NULL, 'esakiraj raja', 330.00, NULL, 280.00, 0.00, 50.00, 5.00, 0.00, 'pending', 'unpaid', 'online', 48, 48, NULL, NULL, NULL, NULL, NULL, '2026-05-27 05:54:18', '2026-05-27 05:54:18'),
+(90088, 9008, 'SW-C688B025-20260527', NULL, NULL, 'esakiraj raja', 610.00, NULL, 560.00, 0.00, 50.00, 5.00, 0.00, 'pending', 'unpaid', 'online', 49, 49, NULL, NULL, NULL, NULL, NULL, '2026-05-27 06:08:15', '2026-05-27 06:08:15'),
+(90089, 9008, 'SW-0497CEE1-20260527', 'order_SuICIfVP5wqMJm', NULL, 'esakiraj raja', 370.00, 'pay_SuICVi3sbRw8vC', 320.00, 0.00, 50.00, 5.00, 0.00, 'paid', 'paid', 'razorpay', 50, 50, NULL, NULL, NULL, NULL, NULL, '2026-05-27 06:39:21', '2026-05-27 06:39:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_gift_boxes`
+--
+
+CREATE TABLE `order_gift_boxes` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `gift_box_id` int(11) NOT NULL,
+  `personal_message` text DEFAULT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `delivery_time_slot` varchar(100) DEFAULT NULL,
+  `delivery_type` enum('standard','express') NOT NULL DEFAULT 'standard',
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `box_base_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `total_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_gift_box_items`
+--
+
+CREATE TABLE `order_gift_box_items` (
+  `id` int(11) NOT NULL,
+  `order_gift_box_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `price_per_unit` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1521,7 +2223,23 @@ INSERT INTO `order_items` (`id`, `order_id`, `item_type`, `product_id`, `combo_i
 (2094, 90072, 'product', 1003, NULL, 6, 1, 420.00, 420.00),
 (2095, 90074, 'combo', NULL, 7, 0, 1, 3000.00, 3000.00),
 (2096, 90075, 'product', 2029, NULL, 26, 1, 250.00, 250.00),
-(2097, 90076, 'product', 1005, NULL, 8, 1, 650.00, 650.00);
+(2097, 90076, 'product', 1005, NULL, 8, 1, 650.00, 650.00),
+(2098, 90077, 'product', 1003, NULL, 6, 1, 380.00, 380.00),
+(2099, 90077, 'product', 2003, NULL, 20, 1, 250.00, 250.00),
+(2100, 90078, 'product', 2026, NULL, 0, 1, 280.00, 280.00),
+(2101, 90079, 'product', 2026, NULL, 0, 1, 280.00, 280.00),
+(2102, 90080, 'product', 2026, NULL, 0, 2, 280.00, 280.00),
+(2103, 90080, 'product', 2021, NULL, 0, 1, 320.00, 320.00),
+(2104, 90081, 'product', 2026, NULL, 0, 2, 280.00, 280.00),
+(2105, 90081, 'product', 2021, NULL, 0, 1, 320.00, 320.00),
+(2106, 90082, 'product', 2026, NULL, 0, 2, 280.00, 280.00),
+(2107, 90082, 'product', 2021, NULL, 0, 1, 320.00, 320.00),
+(2108, 90083, 'product', 1041, NULL, 15, 1, 1200.00, 1200.00),
+(2110, 90085, 'product', 1041, NULL, 15, 1, 1200.00, 1200.00),
+(2111, 90086, 'product', 1003, NULL, 6, 2, 380.00, 380.00),
+(2112, 90087, 'product', 2026, NULL, 0, 1, 280.00, 280.00),
+(2113, 90088, 'product', 2026, NULL, 0, 2, 280.00, 280.00),
+(2114, 90089, 'product', 2021, NULL, 0, 1, 320.00, 320.00);
 
 -- --------------------------------------------------------
 
@@ -1553,7 +2271,9 @@ INSERT INTO `password_resets` (`id`, `email`, `token_hash`, `otp`, `expires_at`,
 (23, 'john@gmail.com', '8beecc12b5c60a6d5c393906497bde603cae9cde37c31a9f65ad1960e878a0e5', '323694', '2026-05-02 11:50:39', '2026-05-02 11:36:00', '2026-05-02 06:05:39'),
 (24, 'esakiraj006@gmail.com', '6c0ab362a30611215e18d7b6073c620fb4da5347e2203e6859804f3cd61d35ef', '205756', '2026-05-04 13:44:35', '2026-05-04 13:30:11', '2026-05-04 07:59:35'),
 (25, 'esakiraj006@gmail.com', '7b5841164cf32aae73cc6b27957f1b8660367a8176dd6fcb420d2afee3503727', '551844', '2026-05-04 18:01:43', '2026-05-04 17:46:59', '2026-05-04 12:16:43'),
-(26, 'esakiraj006@gmail.com', 'deaa0255d303b5b8a6f1d34c4a265562b8f375e40a001ac79ce87aedaf53c152', '900493', '2026-05-11 13:41:25', NULL, '2026-05-11 07:56:25');
+(29, 'esakiraj006@gmail.com', '82d7ef00d6facafce9529291570e2b1e5c34c5b65e79ac64a6df6fa251e529d1', '221253', '2026-05-16 16:19:42', '2026-05-16 16:05:13', '2026-05-16 10:34:42'),
+(33, 'magoho5832@itquoted.com', '380a96016df646c5a6a325e6d68a2c57bc6cf46c8d0523be135bd51656b5fcbf', '285838', '2026-05-16 17:19:37', NULL, '2026-05-16 11:34:37'),
+(34, 'isaacraja89@gmail.com', 'a2d9dedfb84323b475e071fc773f5bc34cc41961b9b81110ff94db80099436f0', '496631', '2026-05-20 13:12:34', '2026-05-20 12:57:56', '2026-05-20 07:27:34');
 
 -- --------------------------------------------------------
 
@@ -1566,40 +2286,50 @@ CREATE TABLE `payments` (
   `order_id` int(11) NOT NULL,
   `gateway` varchar(50) NOT NULL,
   `transaction_id` varchar(100) NOT NULL,
+  `upi_ref` varchar(100) DEFAULT NULL,
   `amount` decimal(10,2) NOT NULL,
   `currency` varchar(10) DEFAULT 'INR',
-  `status` enum('initiated','success','failed','refunded') NOT NULL,
+  `status` enum('initiated','pending','success','failed','expired','refunded') NOT NULL DEFAULT 'initiated',
   `raw_response` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failure_reason` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `order_id`, `gateway`, `transaction_id`, `amount`, `currency`, `status`, `raw_response`, `created_at`) VALUES
-(1, 90044, 'razorpay', 'pay_SjiELS77gUuboi', 2000.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SjiELS77gUuboi\",\"razorpay_order_id\":\"order_SjiEC2jXr9nBaC\",\"razorpay_signature\":\"79afe7b5d2a3a51c192af2c8829ca9e93ec7004b188d4212b6b0c8fc58f48d8f\"}', '2026-04-30 12:58:30'),
-(2, 90045, 'razorpay', 'pay_SjiFd7fzNHJr8m', 500.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SjiFd7fzNHJr8m\",\"razorpay_order_id\":\"order_SjiFS99rFM1OVj\",\"razorpay_signature\":\"47d456d2e0d948317dc75d864ebcde1153d3a7966f75554288a0dfbcac0ec07f\"}', '2026-04-30 12:59:46'),
-(3, 90046, 'razorpay', 'pay_SkOQwjKScDhQiH', 840.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOQwjKScDhQiH\",\"razorpay_order_id\":\"order_SkOQohMB1BxzAi\",\"razorpay_signature\":\"eaaafe2f61b3061d0095de9ec322111dbbe3fb402425e4eb764bd4d2a8718689\"}', '2026-05-02 06:15:32'),
-(4, 90047, 'razorpay', 'pay_SkOmebS5aWJdik', 1440.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOmebS5aWJdik\",\"razorpay_order_id\":\"order_SkOmaCQ7RhYVVk\",\"razorpay_signature\":\"431adad4bb119932709e1e82f87a266c9b713c429c2993980c0bca88256bfa8c\"}', '2026-05-02 06:36:07'),
-(5, 90048, 'razorpay', 'pay_SkOuUpFivzp5je', 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOuUpFivzp5je\",\"razorpay_order_id\":\"order_SkOuNsvebgLU5X\",\"razorpay_signature\":\"e179b482f3444d3dba88e2ed17dffd6aaeedbb67f1aebcabaeb9b91b21fc5d8b\"}', '2026-05-02 06:43:57'),
-(6, 90049, 'razorpay', 'pay_SkPGITSFB13rMU', 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPGITSFB13rMU\",\"razorpay_order_id\":\"order_SkPGCvtfBnDzJG\",\"razorpay_signature\":\"d83b60cb2d3c5b6a7e9c3ec0146eadf2966ed02dffa61097181826efc3c813b3\"}', '2026-05-02 07:04:09'),
-(7, 90050, 'razorpay', 'pay_SkPHS0LQ92SdD9', 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPHS0LQ92SdD9\",\"razorpay_order_id\":\"order_SkPHMjOvvFLWXc\",\"razorpay_signature\":\"fac54b9925558f54f1651c2465d593a357f32d8ede8210f8097919b57e342eef\"}', '2026-05-02 07:05:17'),
-(8, 90051, 'razorpay', 'pay_SkPcu7Rj14QJuN', 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPcu7Rj14QJuN\",\"razorpay_order_id\":\"order_SkPOo39AV5atDy\",\"razorpay_signature\":\"03b24416a533b19175e040f4e94adff2b0571e4fd70494b22fd234ac55a86664\"}', '2026-05-02 07:25:33'),
-(9, 90052, 'razorpay', 'pay_SkPkxRo4GTP4V2', 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPkxRo4GTP4V2\",\"razorpay_order_id\":\"order_SkPkrEHPjMt00n\",\"razorpay_signature\":\"b9f6865cc65b9357377317030ed349e3e50db349a3d233fa6da612931c32bbdf\"}', '2026-05-02 07:33:10'),
-(10, 90053, 'razorpay', 'pay_SkPtbC0elfZ6F8', 365.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPtbC0elfZ6F8\",\"razorpay_order_id\":\"order_SkPtUdBaSn14Zl\",\"razorpay_signature\":\"8b3a27724ad28201a4d39818239772e3c6561fe8ea1aff99da5255a51af48e68\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658623\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-02 07:41:20'),
-(11, 90054, 'razorpay', 'pay_SkVfd2LtubeAf3', 2639.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkVfd2LtubeAf3\",\"razorpay_order_id\":\"order_SkVfMgGbblHZw8\",\"razorpay_signature\":\"5ae890ea69dcf163dc3b6549f39ca993d2f7e706c198deb536c3093f372ef538\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"weegewgegweg\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658622\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-02 13:20:18'),
-(12, 90055, 'razorpay', 'pay_SkVpKK5QDTCTGK', 1049.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkVpKK5QDTCTGK\",\"razorpay_order_id\":\"order_SkVpG1tcR0KM4X\",\"razorpay_signature\":\"9626809801664ad16c03bfca79d2471fcd858870ad20486dcf7aa54b76d03004\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658623\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-02 13:29:28'),
-(13, 90056, 'razorpay', 'pay_Sl9YiloUJlj7kv', 4537.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_Sl9YiloUJlj7kv\",\"razorpay_order_id\":\"order_Sl9YY39VloM5R0\",\"razorpay_signature\":\"df4570bfc29ae748e729b239424a238b5db056ca5bdf4bd522a90457cb7d4bf7\",\"checkout_data\":{\"email\":\"demo@gmail.com\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-04 04:21:45'),
-(14, 90057, 'razorpay', 'pay_SlDet2BXHsjEul', 3580.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlDet2BXHsjEul\",\"razorpay_order_id\":\"order_SlDeN4yBQ54fSX\",\"razorpay_signature\":\"2c1aa3effed734d890e5d09fc0e455e5e12de410c055d99c6cd80316c120bb60\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"scscscs\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"netbanking\"}}', '2026-05-04 08:22:19'),
-(15, 90058, 'razorpay', 'pay_SlFwH2C250Xm32', 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlFwH2C250Xm32\",\"razorpay_order_id\":\"order_SlFw34dOSFSbaX\",\"razorpay_signature\":\"5cda7fe18d96e0761273cfd29dc6ebd60e1f5c21ef9d179202f34c266e405aa4\",\"checkout_data\":{\"email\":\"raj@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"raj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478888\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"\"}}', '2026-05-04 10:36:01'),
-(16, 90059, 'razorpay', 'pay_SlG4wMFjYhrnS1', 920.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlG4wMFjYhrnS1\",\"razorpay_order_id\":\"order_SlG4qtAL2cxxe6\",\"razorpay_signature\":\"89256390e0a50b6190564d68bea52a5e72f5f3d366e82c70f11e0dff160f6f62\",\"checkout_data\":{\"email\":\"raj@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"raj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478888\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-04 10:44:12'),
-(17, 90062, 'razorpay', 'pay_SlGpp3sVAyRYw5', 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlGpp3sVAyRYw5\",\"razorpay_order_id\":\"order_SlGpgppc7f44jy\",\"razorpay_signature\":\"0248cd4789d7d6d750bc7c84c93a65d6a27f640ed3c4e51ad91e6685786b15a2\",\"checkout_data\":{\"email\":\"\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"hhhtjrtsjjrtjtjj\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9685741122\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-04 11:28:50'),
-(18, 90063, 'razorpay', 'pay_SlH8n59PH6s3we', 270.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlH8n59PH6s3we\",\"razorpay_order_id\":\"order_SlH8d8xhgOjLBm\",\"razorpay_signature\":\"1753b4ab4ff5492a6c143b95bc3cdc071e695a3232a90003e78a487bae4cda85\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"phone\":\"9047478886\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"country\":\"India\"}}', '2026-05-04 11:46:31'),
-(19, 90064, 'razorpay', 'pay_SlHh3V9MRJvFQu', 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlHh3V9MRJvFQu\",\"razorpay_order_id\":\"order_SlHgrk5YV84Rrm\",\"razorpay_signature\":\"6e4128fd361008ec176bac966575b7b8df7a231c51f35227a3d60a5e4a00b677\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-04 12:19:02'),
-(20, 90074, 'razorpay', 'pay_SnjOJ9mABc2bXi', 3000.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SnjOJ9mABc2bXi\",\"razorpay_order_id\":\"order_SnjO6qTxnhvImC\",\"razorpay_signature\":\"8a695179779529a7dda16082732b64d12f86a0f1b89444a6e0061ee33f139977\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"254125\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-10 16:42:55'),
-(21, 90075, 'razorpay', 'pay_Sny2jWJRbDO4nY', 300.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_Sny2jWJRbDO4nY\",\"razorpay_order_id\":\"order_Sny2KHllgZ9i4W\",\"razorpay_signature\":\"671878e8be6dabefbce1c00054430db188adbc28ba616ae5738efd841a3494d3\",\"checkout_data\":{\"email\":\"nalej602nalej60273@imashr.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"nalej\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"Hyderabad\",\"state\":\" Andhra Pradesh\",\"pin_code\":\"858567\",\"phone\":\"9085858541\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-11 07:02:48'),
-(22, 90076, 'razorpay', 'pay_SnyzpWnzZT7MN1', 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SnyzpWnzZT7MN1\",\"razorpay_order_id\":\"order_SnyzfofYdMQ08c\",\"razorpay_signature\":\"c1d1a62b35ca7defe585c0fcd0dd6fb8df4a31f40a04ef44e7bfde6d8ba7b2cb\",\"checkout_data\":{\"email\":\"nalej60273@imashr.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"nalej\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"Hyderabad\",\"state\":\" Andhra Pradesh\",\"pin_code\":\"589625\",\"phone\":\"8525654215\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', '2026-05-11 07:58:47');
+INSERT INTO `payments` (`id`, `order_id`, `gateway`, `transaction_id`, `upi_ref`, `amount`, `currency`, `status`, `raw_response`, `failure_reason`, `created_at`, `updated_at`) VALUES
+(1, 90044, 'razorpay', 'pay_SjiELS77gUuboi', NULL, 2000.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SjiELS77gUuboi\",\"razorpay_order_id\":\"order_SjiEC2jXr9nBaC\",\"razorpay_signature\":\"79afe7b5d2a3a51c192af2c8829ca9e93ec7004b188d4212b6b0c8fc58f48d8f\"}', NULL, '2026-04-30 12:58:30', '2026-05-18 08:18:23'),
+(2, 90045, 'razorpay', 'pay_SjiFd7fzNHJr8m', NULL, 500.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SjiFd7fzNHJr8m\",\"razorpay_order_id\":\"order_SjiFS99rFM1OVj\",\"razorpay_signature\":\"47d456d2e0d948317dc75d864ebcde1153d3a7966f75554288a0dfbcac0ec07f\"}', NULL, '2026-04-30 12:59:46', '2026-05-18 08:18:23'),
+(3, 90046, 'razorpay', 'pay_SkOQwjKScDhQiH', NULL, 840.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOQwjKScDhQiH\",\"razorpay_order_id\":\"order_SkOQohMB1BxzAi\",\"razorpay_signature\":\"eaaafe2f61b3061d0095de9ec322111dbbe3fb402425e4eb764bd4d2a8718689\"}', NULL, '2026-05-02 06:15:32', '2026-05-18 08:18:23'),
+(4, 90047, 'razorpay', 'pay_SkOmebS5aWJdik', NULL, 1440.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOmebS5aWJdik\",\"razorpay_order_id\":\"order_SkOmaCQ7RhYVVk\",\"razorpay_signature\":\"431adad4bb119932709e1e82f87a266c9b713c429c2993980c0bca88256bfa8c\"}', NULL, '2026-05-02 06:36:07', '2026-05-18 08:18:23'),
+(5, 90048, 'razorpay', 'pay_SkOuUpFivzp5je', NULL, 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkOuUpFivzp5je\",\"razorpay_order_id\":\"order_SkOuNsvebgLU5X\",\"razorpay_signature\":\"e179b482f3444d3dba88e2ed17dffd6aaeedbb67f1aebcabaeb9b91b21fc5d8b\"}', NULL, '2026-05-02 06:43:57', '2026-05-18 08:18:23'),
+(6, 90049, 'razorpay', 'pay_SkPGITSFB13rMU', NULL, 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPGITSFB13rMU\",\"razorpay_order_id\":\"order_SkPGCvtfBnDzJG\",\"razorpay_signature\":\"d83b60cb2d3c5b6a7e9c3ec0146eadf2966ed02dffa61097181826efc3c813b3\"}', NULL, '2026-05-02 07:04:09', '2026-05-18 08:18:23'),
+(7, 90050, 'razorpay', 'pay_SkPHS0LQ92SdD9', NULL, 340.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPHS0LQ92SdD9\",\"razorpay_order_id\":\"order_SkPHMjOvvFLWXc\",\"razorpay_signature\":\"fac54b9925558f54f1651c2465d593a357f32d8ede8210f8097919b57e342eef\"}', NULL, '2026-05-02 07:05:17', '2026-05-18 08:18:23'),
+(8, 90051, 'razorpay', 'pay_SkPcu7Rj14QJuN', NULL, 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPcu7Rj14QJuN\",\"razorpay_order_id\":\"order_SkPOo39AV5atDy\",\"razorpay_signature\":\"03b24416a533b19175e040f4e94adff2b0571e4fd70494b22fd234ac55a86664\"}', NULL, '2026-05-02 07:25:33', '2026-05-18 08:18:23'),
+(9, 90052, 'razorpay', 'pay_SkPkxRo4GTP4V2', NULL, 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPkxRo4GTP4V2\",\"razorpay_order_id\":\"order_SkPkrEHPjMt00n\",\"razorpay_signature\":\"b9f6865cc65b9357377317030ed349e3e50db349a3d233fa6da612931c32bbdf\"}', NULL, '2026-05-02 07:33:10', '2026-05-18 08:18:23'),
+(10, 90053, 'razorpay', 'pay_SkPtbC0elfZ6F8', NULL, 365.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkPtbC0elfZ6F8\",\"razorpay_order_id\":\"order_SkPtUdBaSn14Zl\",\"razorpay_signature\":\"8b3a27724ad28201a4d39818239772e3c6561fe8ea1aff99da5255a51af48e68\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658623\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-02 07:41:20', '2026-05-18 08:18:23'),
+(11, 90054, 'razorpay', 'pay_SkVfd2LtubeAf3', NULL, 2639.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkVfd2LtubeAf3\",\"razorpay_order_id\":\"order_SkVfMgGbblHZw8\",\"razorpay_signature\":\"5ae890ea69dcf163dc3b6549f39ca993d2f7e706c198deb536c3093f372ef538\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"weegewgegweg\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658622\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-02 13:20:18', '2026-05-18 08:18:23'),
+(12, 90055, 'razorpay', 'pay_SkVpKK5QDTCTGK', NULL, 1049.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SkVpKK5QDTCTGK\",\"razorpay_order_id\":\"order_SkVpG1tcR0KM4X\",\"razorpay_signature\":\"9626809801664ad16c03bfca79d2471fcd858870ad20486dcf7aa54b76d03004\",\"checkout_data\":{\"email\":\"john@gmail.com\",\"country\":\"India\",\"first_name\":\"john\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"658623\",\"phone\":\"8221633689\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-02 13:29:28', '2026-05-18 08:18:23'),
+(13, 90056, 'razorpay', 'pay_Sl9YiloUJlj7kv', NULL, 4537.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_Sl9YiloUJlj7kv\",\"razorpay_order_id\":\"order_Sl9YY39VloM5R0\",\"razorpay_signature\":\"df4570bfc29ae748e729b239424a238b5db056ca5bdf4bd522a90457cb7d4bf7\",\"checkout_data\":{\"email\":\"demo@gmail.com\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-04 04:21:45', '2026-05-18 08:18:23'),
+(14, 90057, 'razorpay', 'pay_SlDet2BXHsjEul', NULL, 3580.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlDet2BXHsjEul\",\"razorpay_order_id\":\"order_SlDeN4yBQ54fSX\",\"razorpay_signature\":\"2c1aa3effed734d890e5d09fc0e455e5e12de410c055d99c6cd80316c120bb60\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"scscscs\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"netbanking\"}}', NULL, '2026-05-04 08:22:19', '2026-05-18 08:18:23'),
+(15, 90058, 'razorpay', 'pay_SlFwH2C250Xm32', NULL, 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlFwH2C250Xm32\",\"razorpay_order_id\":\"order_SlFw34dOSFSbaX\",\"razorpay_signature\":\"5cda7fe18d96e0761273cfd29dc6ebd60e1f5c21ef9d179202f34c266e405aa4\",\"checkout_data\":{\"email\":\"raj@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"raj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478888\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"\"}}', NULL, '2026-05-04 10:36:01', '2026-05-18 08:18:23'),
+(16, 90059, 'razorpay', 'pay_SlG4wMFjYhrnS1', NULL, 920.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlG4wMFjYhrnS1\",\"razorpay_order_id\":\"order_SlG4qtAL2cxxe6\",\"razorpay_signature\":\"89256390e0a50b6190564d68bea52a5e72f5f3d366e82c70f11e0dff160f6f62\",\"checkout_data\":{\"email\":\"raj@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"raj\",\"last_name\":\"\",\"address\":\"eededwdw\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478888\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-04 10:44:12', '2026-05-18 08:18:23'),
+(17, 90062, 'razorpay', 'pay_SlGpp3sVAyRYw5', NULL, 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlGpp3sVAyRYw5\",\"razorpay_order_id\":\"order_SlGpgppc7f44jy\",\"razorpay_signature\":\"0248cd4789d7d6d750bc7c84c93a65d6a27f640ed3c4e51ad91e6685786b15a2\",\"checkout_data\":{\"email\":\"\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"hhhtjrtsjjrtjtjj\",\"city\":\"sivakasi\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9685741122\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-04 11:28:50', '2026-05-18 08:18:23'),
+(18, 90063, 'razorpay', 'pay_SlH8n59PH6s3we', NULL, 270.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlH8n59PH6s3we\",\"razorpay_order_id\":\"order_SlH8d8xhgOjLBm\",\"razorpay_signature\":\"1753b4ab4ff5492a6c143b95bc3cdc071e695a3232a90003e78a487bae4cda85\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"phone\":\"9047478886\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"country\":\"India\"}}', NULL, '2026-05-04 11:46:31', '2026-05-18 08:18:23'),
+(19, 90064, 'razorpay', 'pay_SlHh3V9MRJvFQu', NULL, 849.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SlHh3V9MRJvFQu\",\"razorpay_order_id\":\"order_SlHgrk5YV84Rrm\",\"razorpay_signature\":\"6e4128fd361008ec176bac966575b7b8df7a231c51f35227a3d60a5e4a00b677\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\" 625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"marketing_opt_in\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-04 12:19:02', '2026-05-18 08:18:23'),
+(20, 90074, 'razorpay', 'pay_SnjOJ9mABc2bXi', NULL, 3000.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SnjOJ9mABc2bXi\",\"razorpay_order_id\":\"order_SnjO6qTxnhvImC\",\"razorpay_signature\":\"8a695179779529a7dda16082732b64d12f86a0f1b89444a6e0061ee33f139977\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"254125\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-10 16:42:55', '2026-05-18 08:18:23'),
+(21, 90075, 'razorpay', 'pay_Sny2jWJRbDO4nY', NULL, 300.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_Sny2jWJRbDO4nY\",\"razorpay_order_id\":\"order_Sny2KHllgZ9i4W\",\"razorpay_signature\":\"671878e8be6dabefbce1c00054430db188adbc28ba616ae5738efd841a3494d3\",\"checkout_data\":{\"email\":\"nalej602nalej60273@imashr.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"nalej\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"Hyderabad\",\"state\":\" Andhra Pradesh\",\"pin_code\":\"858567\",\"phone\":\"9085858541\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-11 07:02:48', '2026-05-18 08:18:23'),
+(22, 90076, 'razorpay', 'pay_SnyzpWnzZT7MN1', NULL, 700.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SnyzpWnzZT7MN1\",\"razorpay_order_id\":\"order_SnyzfofYdMQ08c\",\"razorpay_signature\":\"c1d1a62b35ca7defe585c0fcd0dd6fb8df4a31f40a04ef44e7bfde6d8ba7b2cb\",\"checkout_data\":{\"email\":\"nalej60273@imashr.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"nalej\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"Hyderabad\",\"state\":\" Andhra Pradesh\",\"pin_code\":\"589625\",\"phone\":\"8525654215\",\"save_info\":\"1\",\"payment_method\":\"upi\"}}', NULL, '2026-05-11 07:58:47', '2026-05-18 08:18:23'),
+(23, 90086, 'razorpay', 'pay_SrBlJoVd5jrIgU', NULL, 810.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SrBlJoVd5jrIgU\",\"razorpay_order_id\":\"order_SrBl8Tn34sGdhc\",\"razorpay_signature\":\"b0733a85d07fcf1bcec6cc7062994dad867900c7c14a2f1ea7b5be87395315b3\",\"checkout_data\":{\"email\":\"demo@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"card\"}}', NULL, '2026-05-19 10:24:51', '2026-05-19 10:24:51'),
+(24, 0, 'upi', 'UPI8E8F2311A2', NULL, 330.00, 'INR', 'success', '{\"method\":\"upi\",\"forced\":true}', NULL, '2026-05-27 06:33:42', '2026-05-27 06:33:42'),
+(25, 0, 'upi', 'UPI8E8F2311A2', NULL, 330.00, 'INR', 'failed', '{\"method\":\"upi\",\"forced\":true,\"reason\":\"Insufficient balance\"}', NULL, '2026-05-27 06:33:42', '2026-05-27 06:33:42'),
+(26, 0, 'upi', 'UPI2DB1E80316', NULL, 330.00, 'INR', 'success', '{\"method\":\"upi\",\"simulation\":true}', NULL, '2026-05-27 06:33:57', '2026-05-27 06:33:57'),
+(27, 0, 'upi', 'UPIB467CC593A', NULL, 300.00, 'INR', 'failed', '{\"method\":\"upi\",\"reason\":\"Transaction declined by your bank\"}', NULL, '2026-05-27 06:38:45', '2026-05-27 06:38:45'),
+(28, 0, 'upi', 'UPIC8F928EFAB', NULL, 300.00, 'INR', 'success', '{\"method\":\"upi\",\"simulation\":true}', NULL, '2026-05-27 06:38:58', '2026-05-27 06:38:58'),
+(29, 90089, 'razorpay', 'pay_SuICVi3sbRw8vC', NULL, 370.00, 'INR', 'success', '{\"razorpay_payment_id\":\"pay_SuICVi3sbRw8vC\",\"razorpay_order_id\":\"order_SuICIfVP5wqMJm\",\"razorpay_signature\":\"e1de40a5aeca0d89f794cebb5da9da6aec376549fc8b10842c9048db596f839c\",\"checkout_data\":{\"email\":\"esakiraj006@gmail.com\",\"email_subscribe\":\"1\",\"country\":\"India\",\"first_name\":\"esakiraj\",\"last_name\":\"raja\",\"address\":\"wqdwqfwqfwq\",\"city\":\"madurai\",\"state\":\"TAMIL NADU\",\"pin_code\":\"625001\",\"phone\":\"9047478886\",\"save_info\":\"1\",\"payment_method\":\"card\"}}', NULL, '2026-05-27 06:39:49', '2026-05-27 06:39:49');
 
 -- --------------------------------------------------------
 
@@ -1718,39 +2448,47 @@ INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `name`, `slug`, `
 (1, NULL, NULL, 'Premium Vijaya Karadant', 'premium-karadant', NULL, NULL, 850.00, NULL, 0.00, 0.00, 50, 0, 0, 10, 'KARD-001', 'published', NULL, 0, '2026-04-22 07:22:46', '2026-04-27 10:21:59'),
 (2, NULL, NULL, 'Festive Sweet Box', 'festive-box', NULL, NULL, 625.00, NULL, 0.00, 0.00, 50, 0, 0, 10, 'BOX-001', 'published', NULL, 0, '2026-04-22 07:22:46', '2026-04-27 10:22:02'),
 (3, 2, NULL, 'Dry Fruit Laddu', 'dry-fruit-laddu', NULL, NULL, 450.00, NULL, 0.00, 0.00, 50, 0, 0, 10, 'LAD-001', 'published', NULL, 0, '2026-04-22 07:22:46', '2026-04-27 10:22:05'),
-(1001, 1, 3, 'Premium Vijaya Karadant', 'premium-vijaya-karadant', 'Our signature Karadant made with premium nuts and jaggery.', NULL, 720.00, NULL, 432.00, 0.00, 100, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(1001, 1, 3, 'Premium Vijaya Karadant', 'premium-vijaya-karadant', 'Our signature Karadant made with premium nuts and jaggery.', NULL, 720.00, NULL, 432.00, 0.00, 103, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1002, 1, 3, 'Classic Vijaya Karadant', 'classic-vijaya-karadant', 'Traditional Vijaya Karadant with authentic taste and texture.', NULL, 600.00, NULL, 360.00, 0.00, 50, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1003, 1, 3, 'Supreme Vijaya Karadant', 'supreme-vijaya-karadant', 'Richer blend of nuts and jaggery for a premium bite.', '', 420.00, 380.00, 252.00, 0.00, 80, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(1004, 1, 3, 'Regal Anjeer Karadant', 'regal-anjeer-karadant', 'Anjeer-infused Karadant with a naturally rich sweetness.', NULL, 880.00, NULL, 528.00, 0.00, 89, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(1005, 1, 3, 'Dink Karadant', 'dink-karadant', 'Nutritious Karadant with edible gum for extra energy.', NULL, 650.00, NULL, 390.00, 0.00, 70, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(1004, 1, 3, 'Regal Anjeer Karadant', 'regal-anjeer-karadant', 'Anjeer-infused Karadant with a naturally rich sweetness.', NULL, 880.00, NULL, 528.00, 0.00, 91, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(1005, 1, 3, 'Dink Karadant', 'dink-karadant', 'Nutritious Karadant with edible gum for extra energy.', NULL, 650.00, NULL, 390.00, 0.00, 74, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1009, 2, 4, 'Dink Laddu', 'dink-laddu', 'Traditional dink laddu for daily nourishment.', NULL, 480.00, NULL, 288.00, 0.00, 120, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1010, 2, 4, 'Ragi Laddu', 'ragi-laddu', 'Wholesome ragi laddus with a roasted nutty taste.', '', 450.00, 399.00, 270.00, 0.00, 130, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1011, 2, 4, 'Besan Laddu', 'besan-laddu', 'Classic besan laddu made with pure ghee and gram flour.', NULL, 420.00, NULL, 252.00, 0.00, 110, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1012, 2, 4, 'Premium Ladagi Laddu', 'premium-ladagi-laddu', 'Premium laddu assortment with rich dry fruits.', NULL, 550.00, NULL, 330.00, 0.00, 100, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1013, 2, 4, 'Til Laddu', 'til-laddu', 'Sesame laddus with a warm jaggery sweetness.', NULL, 400.00, NULL, 240.00, 0.00, 80, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(1014, 2, NULL, 'Premium Otts Laddu', 'otts-laddu', 'Soft and flavorful laddus with a traditional finish.', '', 500.00, 450.00, 0.00, 0.00, 0, 0, 0, 10, NULL, 'published', NULL, 0, '2026-04-30 04:57:15', NULL),
-(1015, 2, NULL, 'Peanut Laddu', 'peanut-laddu', NULL, NULL, 440.00, 390.00, 0.00, 0.00, 0, 0, 0, 10, NULL, 'published', NULL, 0, '2026-04-30 04:57:15', NULL),
-(1017, 2, NULL, 'Gandahagiri Laddu', 'gandhagiri-laddu', NULL, NULL, 950.00, 890.00, 0.00, 0.00, 0, 0, 0, 10, NULL, 'published', NULL, 0, '2026-04-30 04:57:15', NULL),
-(1040, 5, 2, 'Premium Gift Box', 'premium-gift-box', 'A luxurious assortment of our finest Karadant varieties.', NULL, 950.00, NULL, 570.00, 0.00, 50, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(1041, 5, 2, 'Festive Special Box', 'festive-special-box', 'Celebrate with our curated festive collection.', NULL, 1200.00, NULL, 720.00, 0.00, 40, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(1014, 2, NULL, 'Premium Otts Laddu', 'otts-laddu', 'Soft and flavorful laddus with a traditional finish.', '', 500.00, 450.00, 0.00, 0.00, 11, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-30 04:57:15', NULL),
+(1015, 2, NULL, 'Peanut Laddu', 'peanut-laddu', 'Crunchy peanut laddus with classic jaggery notes.', '', 440.00, 390.00, 0.00, 0.00, 1, 0, 0, 10, NULL, 'published', NULL, 0, '2026-04-30 04:57:15', NULL),
+(1017, 2, NULL, 'Gandahagiri Laddu', 'gandhagiri-laddu', 'Heritage-style Gandahagiri laddu made in pure ghee.', '', 950.00, 890.00, 0.00, 0.00, 2, 0, 0, 10, NULL, 'published', NULL, 0, '2026-04-30 04:57:15', NULL),
+(1040, 5, 2, 'Premium Gift Box', 'premium-gift-box', 'A luxurious assortment of our finest Karadant varieties.', '', 950.00, 880.00, 570.00, 0.00, 50, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(1041, 5, 2, 'Festive Special Box', 'festive-special-box', 'Celebrate with our curated festive collection.', '', 1200.00, NULL, 720.00, 0.00, 40, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1042, 5, 2, 'Tilkut Gift Box', 'tilkut-gift-box', 'Traditional Tilkut sweets in a premium festive box.', NULL, 950.00, NULL, 570.00, 0.00, 50, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (1043, 5, 2, 'Anjeer Gift Box', 'anjeer-gift-box', 'Exotic Anjeer sweets beautifully packed for special occasions.', NULL, 950.00, NULL, 570.00, 0.00, 50, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (2001, 4, 5, 'Spicy Mix Namkeen', 'spicy-mix-namkeen', 'A bold namkeen mix with signature house spices.', '', 320.00, 280.00, 192.00, 0.00, 200, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (2002, 4, 5, 'Golden Sev', 'golden-sev', 'Crispy golden sev, light and perfectly seasoned.', NULL, 280.00, NULL, 168.00, 0.00, 210, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (2003, 4, 5, 'Masala Peanuts', 'masala-peanuts', 'Crunchy masala-coated peanuts with balanced heat.', NULL, 250.00, NULL, 150.00, 0.00, 220, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
 (2004, 4, 5, 'Premium Mixture', 'premium-mixture', 'Premium crunchy mixture perfect for tea-time snacking.', NULL, 350.00, NULL, 210.00, 0.00, 180, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(2005, 4, 5, 'Butter Muruku', 'butter-muruku', 'Traditional butter muruku with a crisp bite.', NULL, 320.00, NULL, 192.00, 0.00, 159, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(2006, 4, 5, 'Rice Kodubale', 'rice-kodubale', 'Rice flour kodubale with classic spice blend.', NULL, 320.00, NULL, 192.00, 0.00, 150, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
-(2013, 2, 4, 'Moong Dal Laddu', 'moong-dal-laddu', 'Traditional Moong Dal Laddu crafted with pure ghee.', NULL, 280.00, NULL, 168.00, 0.00, 150, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:50:00', '2026-04-20 07:46:45'),
-(2014, 5, NULL, 'demo', 'demo', 'd23dd23ddfewfwefe', 'vdbdbzsdbd', 500.00, 300.00, 300.00, 0.00, 0, 0, 0, 10, '#2', 'published', NULL, 0, '2026-04-21 15:18:40', NULL),
-(2017, 4, NULL, 'Garlic Ribbon', 'garlic-ribbon', '', '', 450.00, 320.00, 0.00, 0.00, 0, 0, 0, 10, '#5', 'published', NULL, 1, '2026-05-06 08:01:20', NULL),
+(2005, 4, 5, 'Butter Muruku', 'butter-muruku', 'Traditional butter muruku with a crisp bite.', '', 320.00, 290.00, 192.00, 0.00, 160, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(2006, 4, 5, 'Rice Kodubale', 'rice-kodubale', 'Rice flour kodubale with classic spice blend.', '', 320.00, 290.00, 192.00, 0.25, 151, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:49:09', NULL),
+(2013, 2, 4, 'Moong Dal Laddu', 'moong-dal-laddu', 'Traditional Moong Dal Laddu crafted with pure ghee.', NULL, 280.00, NULL, 168.00, 0.00, 150, 0, 0, 10, NULL, 'published', NULL, 1, '2026-04-18 10:50:00', NULL),
+(2014, 5, NULL, 'demo', 'demo', 'd23dd23ddfewfwefe', 'vdbdbzsdbd', 500.00, 300.00, 300.00, 0.00, 0, 0, 0, 10, '#2', 'draft', NULL, 0, '2026-04-21 15:18:40', NULL),
+(2017, 4, NULL, 'Garlic Ribbon', 'garlic-ribbon', '', '', 450.00, 320.00, 0.00, 0.00, 100, 0, 0, 10, '#5', 'published', NULL, 1, '2026-05-06 08:01:20', NULL),
 (2018, 4, NULL, 'Onion Kodubale', 'nippattu', 'Crisp nippattu with roasted spice notes.', '', 420.00, 290.00, 0.00, 0.00, 0, 0, 0, 10, '#6', 'published', NULL, 1, '2026-05-06 08:03:22', NULL),
 (2019, 4, NULL, 'Ribbon Pakoda', 'ribbon-pakoda', '', '', 450.00, 320.00, 0.00, 0.00, 0, 0, 0, 10, '#4', 'published', NULL, 1, '2026-05-06 08:51:51', NULL),
-(2021, 4, NULL, 'Garlic Ribbon', 'garlic-ribbon-1', '', '', 450.00, 320.00, 0.00, 0.00, 0, 0, 0, 10, '#3', 'published', NULL, 1, '2026-05-06 08:54:34', NULL),
-(2026, 4, NULL, 'Nippattu', 'nippattu-1', '', '', 410.00, 280.00, 0.00, 0.00, 0, 0, 0, 10, '#7', 'published', NULL, 1, '2026-05-06 08:58:13', NULL),
+(2021, 4, NULL, 'Garlic Ribbon', 'garlic-ribbon-1', '', '', 450.00, 320.00, 0.00, 0.00, 99, 0, 0, 10, '#3', 'published', NULL, 1, '2026-05-06 08:54:34', NULL),
+(2026, 4, NULL, 'Nippattu', 'nippattu-1', '', '', 410.00, 280.00, 0.00, 0.00, 97, 0, 0, 10, '#7', 'published', NULL, 1, '2026-05-06 08:58:13', NULL),
 (2027, 4, NULL, 'Bengaluru Mix', 'bengaluru-mix', '', '', 380.00, 250.00, 0.00, 0.00, 0, 0, 0, 10, '#8', 'published', NULL, 1, '2026-05-06 08:59:46', NULL),
 (2029, 4, NULL, 'Masala Peanuts', 'masala-peanuts-1', '', '', 380.00, 250.00, 0.00, 0.00, 0, 0, 0, 10, '#9', 'published', NULL, 1, '2026-05-06 09:04:37', NULL),
-(2031, 1, NULL, ' Karadant', 'remium-karadant-pack', '', 'Our signature Karadant made with premium nuts and jaggery', 950.00, 820.00, 0.00, 0.00, 0, 0, 0, 10, '#10', 'published', NULL, 1, '2026-05-07 07:33:58', '2026-05-09 10:47:29');
+(2031, 1, NULL, ' Karadant', 'remium-karadant-pack', '', 'Our signature Karadant made with premium nuts and jaggery', 950.00, 820.00, 0.00, 0.00, 0, 0, 0, 10, '#10', 'published', NULL, 1, '2026-05-07 07:33:58', '2026-05-09 10:47:29'),
+(2032, 1, NULL, 'Marvel Karadant', 'marvel-karadant', 'Ultra-premium Karadant with organic honey and dry fruits.', 'Loaded with organic dry fruits, custom honey glaze, and edible gold flakes.', 800.00, NULL, 0.00, 0.00, 50, 0, 0, 10, '#MV500', 'published', NULL, 1, '2026-05-29 06:26:26', NULL),
+(2033, 1, NULL, 'Traditional Lagdi Pak', 'traditional-lagdi-pak', 'Classic dense, ghee-rich fudge block sweet.', 'Gokak specialization prepared with traditional recipes and thick pure ghee.', 700.00, NULL, 0.00, 0.00, 50, 0, 0, 10, '#LP500', 'published', NULL, 1, '2026-05-29 06:26:26', NULL),
+(2034, 1, NULL, 'Dink Karadant', 'dink-karadant-bucket', 'Dink Karadant in a heritage tin bucket.', 'Premium edible gum Karadant packed in an airtight, reusable heritage tin bucket.', 1300.00, NULL, 0.00, 0.00, 30, 0, 0, 10, '#DKB1K', 'published', NULL, 1, '2026-05-29 06:26:26', NULL),
+(2035, 2, NULL, 'Gandahagiri Laddu', 'gandhagiri-laddu-bucket', 'Royal Gandahagiri Laddus in a heritage bucket.', 'Pure ghee hand-rolled Gandahagiri Laddus packed in a reusable gold-lacquered tin bucket.', 1900.00, NULL, 0.00, 0.00, 30, 0, 0, 10, '#GGLB1', 'published', NULL, 1, '2026-05-29 06:26:26', NULL),
+(2036, 5, NULL, 'Small Gift Box 01', 'small-gift-01', 'A beautiful small gift box containing our traditional sweets.', 'Our Small Gift Box 01 is perfect for small gatherings and return gifts. Contains an assortment of our classic sweets, made with love.', 450.00, NULL, 0.00, 0.00, 0, 0, 0, 10, 'GIFT-01', 'published', NULL, 1, '2026-05-29 07:29:10', NULL),
+(2038, 2, NULL, 'Dink Laddu', 'dink-laddu-bucket', 'Classic Dink Laddus in a heritage tin bucket.', 'Handcrafted Dink Laddus made with organic jaggery, pure ghee, and dry fruits, packed in a premium heritage bucket.', 960.00, NULL, 0.00, 5.00, 100, 0, 0, 10, 'DL-BUCKET-1KG', 'published', NULL, 0, '2026-05-29 08:53:09', NULL),
+(2039, 2, NULL, 'Dry Fruit Honey', 'dry-fruit-honey', 'Premium dry fruits soaked in organic honey.', 'Premium dry fruits soaked in organic honey for a healthy, delicious treat.', 450.00, NULL, 0.00, 5.00, 100, 0, 0, 10, 'DF-HONEY-500G', 'published', NULL, 0, '2026-05-29 10:06:13', NULL),
+(2040, 2, NULL, 'Marvel Dates', 'marvel-dates', 'Exotic dry fruit stuffed dates.', 'Exotic premium dates stuffed with a rich assortment of dry fruits and nuts.', 480.00, NULL, 0.00, 5.00, 100, 0, 0, 10, 'MARVEL-DATES', 'published', NULL, 0, '2026-05-29 10:06:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -1770,20 +2508,8 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_path`, `is_main`) VALUES
-(81, 1001, 'assets/images/homepage/New folder/karant/bestseeler karadant (1).png', 1),
-(82, 1002, 'assets/images/homepage/New folder/karant/bestseeler karadant (2).png', 1),
-(83, 1003, 'assets/images/homepage/The Karadant Range (1).png', 0),
-(84, 1004, 'assets/images/homepage/New folder/karant/bestseeler karadant (7).png', 1),
 (85, 1005, 'assets/images/homepage/New folder/karant/bestseeler karadant (5).png', 1),
-(86, 1009, 'assets/images/homepage/New folder/bestseller-laddu 1.png', 1),
-(87, 1010, 'assets/images/homepage/New folder/bestseller-laddu 2.png', 1),
-(88, 1011, 'assets/images/homepage/New folder/bestseller-laddu 3.png', 1),
 (89, 1012, 'assets/images/homepage/New folder/bestseller-laddu 4.png', 1),
-(90, 1013, 'assets/images/homepage/New folder/bestseller-laddu6.png', 1),
-(91, 1040, 'assets/images/banners/gifing/Featured Gifting Specials (1).png', 1),
-(92, 1041, 'assets/images/banners/gifing/Featured Gifting Specials (2).png', 1),
-(93, 1042, 'assets/images/banners/gifing/Featured Gifting Specials (3).png', 1),
-(94, 1043, 'assets/images/banners/gifing/Featured Gifting Specials (4).png', 1),
 (95, 2001, 'assets/images/homepage/Best Sellers (1).png', 1),
 (96, 2002, 'assets/images/homepage/Best Sellers (2).png', 1),
 (97, 2003, 'assets/images/homepage/Best Sellers (5).png', 1),
@@ -1791,17 +2517,12 @@ INSERT INTO `product_images` (`id`, `product_id`, `image_path`, `is_main`) VALUE
 (99, 2005, 'assets/images/banners/namkeen-page/our signature  (6).png', 1),
 (100, 2006, 'assets/images/banners/namkeen-page/our signature  (7).png', 1),
 (101, 2014, 'assets/images/products/sw_69e79550404821.98400110.png', 0),
-(102, 1014, 'assets/images/homepage/New folder/bestseller-laddu 5.png', 1),
-(103, 1015, 'assets/images/homepage/New folder/bestseller-laddu  7.png', 1),
-(104, 1017, 'assets/images/homepage/New folder/bestseller-laddu 8.png', 1),
 (105, 2001, 'assets/images/products/sw_69faf0cd204339.94164159.png', 0),
 (106, 2001, 'assets/images/products/sw_69faf14fafee05.44224767.png', 0),
 (107, 2001, 'assets/images/products/sw_69faf179c2eaa9.29590047.png', 0),
-(108, 1014, 'assets/images/products/sw_69faf2c908ac70.49420140.png', 0),
 (109, 2001, 'assets/images/products/sw_69faf365c6e222.51251315.png', 0),
 (110, 2001, 'assets/images/products/sw_69faf38e6fb618.56725398.png', 0),
 (111, 2001, 'assets/images/products/sw_69faf3df817f15.24812106.png', 0),
-(112, 1014, 'assets/images/products/sw_69faf449ab0134.55560760.png', 0),
 (113, 2017, 'assets/images/products/sw_69faf5506704d3.45873060.png', 1),
 (114, 2018, 'assets/images/products/sw_69faf5ca546564.22639439.png', 1),
 (115, 2019, 'assets/images/products/sw_69fb0127618d01.15771343.png', 1),
@@ -1811,7 +2532,278 @@ INSERT INTO `product_images` (`id`, `product_id`, `image_path`, `is_main`) VALUE
 (119, 2029, 'assets/images/products/sw_69fb04250fcf16.43916756.png', 1),
 (120, 2031, 'assets/images/products/sw_69fc4066de52d5.18136141.png', 1),
 (122, 2014, 'assets/images/products/sw_6a007898d77f45.11993884.png', 1),
-(123, 1003, 'assets/images/products/sw_6a0078dfcbb266.26209842.png', 1);
+(124, 1040, 'assets/images/products/product-1040-4621597ef0.jpg', 1),
+(125, 1040, 'assets/images/products/product-1040-508897f161.jpg', 0),
+(126, 1040, 'assets/images/products/product-1040-9e783cefff.jpg', 0),
+(127, 1040, 'assets/images/products/product-1040-8579ef09c5.jpg', 0),
+(128, 1040, 'assets/images/products/product-1040-55b6a48d72.jpg', 0),
+(129, 1040, 'assets/images/products/product-1040-7abb06f582.jpg', 0),
+(130, 1040, 'assets/images/products/product-1040-3973062263.jpg', 0),
+(131, 1040, 'assets/images/products/product-1040-cea3d313ee.jpg', 0),
+(132, 1041, 'assets/images/products/product-1041-0ebc85b97e.jpg', 1),
+(133, 1041, 'assets/images/products/product-1041-d31e917160.jpg', 0),
+(134, 1041, 'assets/images/products/product-1041-f32fb8a7d7.jpg', 0),
+(135, 1041, 'assets/images/products/product-1041-e4d4769c56.jpg', 0),
+(136, 1041, 'assets/images/products/product-1041-b61b4b64c0.jpg', 0),
+(137, 1041, 'assets/images/products/product-1041-5719b80e62.jpg', 0),
+(138, 1041, 'assets/images/products/product-1041-0f44f2b67f.jpg', 0),
+(139, 1041, 'assets/images/products/product-1041-f61afc917d.jpg', 0),
+(140, 1041, 'assets/images/products/product-1041-eb9ffe7890.jpg', 0),
+(141, 1041, 'assets/images/products/product-1041-042af15079.jpg', 0),
+(142, 1042, 'assets/images/products/product-1042-370b99a6f7.jpg', 1),
+(143, 1042, 'assets/images/products/product-1042-6a7f340552.jpg', 0),
+(144, 1042, 'assets/images/products/product-1042-69179beae4.jpg', 0),
+(145, 1042, 'assets/images/products/product-1042-b7e5a18cf5.jpg', 0),
+(146, 1042, 'assets/images/products/product-1042-a603bcf03f.jpg', 0),
+(147, 1042, 'assets/images/products/product-1042-b65886164b.jpg', 0),
+(148, 1042, 'assets/images/products/product-1042-59edf7685b.jpg', 0),
+(149, 1042, 'assets/images/products/product-1042-5eea713adf.jpg', 0),
+(150, 1042, 'assets/images/products/product-1042-c393b07dc9.jpg', 0),
+(151, 1042, 'assets/images/products/product-1042-d54e407bb0.jpg', 0),
+(152, 1042, 'assets/images/products/product-1042-1fa5b0e42b.jpg', 0),
+(153, 1042, 'assets/images/products/product-1042-3e1f1d18eb.jpg', 0),
+(154, 1043, 'assets/images/products/product-1043-376347e6c7.jpg', 1),
+(155, 1043, 'assets/images/products/product-1043-901d101b9d.jpg', 0),
+(156, 1043, 'assets/images/products/product-1043-7001d4048b.jpg', 0),
+(157, 1043, 'assets/images/products/product-1043-110ce51fd6.jpg', 0),
+(158, 1043, 'assets/images/products/product-1043-f8bc2c0bb1.jpg', 0),
+(159, 1043, 'assets/images/products/product-1043-cd9b7fe69a.jpg', 0),
+(160, 2036, 'assets/images/products/product-2036-fbe93487a7.jpeg', 1),
+(161, 2036, 'assets/images/products/product-2036-1047dcc36a.jpeg', 0),
+(162, 2036, 'assets/images/products/product-2036-f6d91bcf1e.jpeg', 0),
+(163, 2036, 'assets/images/products/product-2036-55d3283e73.jpeg', 0),
+(164, 2036, 'assets/images/products/product-2036-6f84404a06.jpeg', 0),
+(165, 2036, 'assets/images/products/product-2036-9ec7f2e879.jpeg', 0),
+(166, 2036, 'assets/images/products/product-2036-6613908947.jpeg', 0),
+(167, 1011, 'assets/images/products/product-1011-ca1fcc36a0.jpg', 1),
+(168, 1011, 'assets/images/products/product-1011-8edb276be5.jpg', 0),
+(169, 1011, 'assets/images/products/product-1011-2c4dd4fc2b.jpg', 0),
+(170, 1011, 'assets/images/products/product-1011-27625f19b1.jpg', 0),
+(171, 1011, 'assets/images/products/product-1011-a1c4899c4e.jpg', 0),
+(172, 1011, 'assets/images/products/product-1011-420c842683.jpg', 0),
+(173, 1002, 'assets/images/products/product-1002-cc06f6be24.jpg', 1),
+(174, 1002, 'assets/images/products/product-1002-2b9911feb2.jpg', 0),
+(175, 1002, 'assets/images/products/product-1002-98b17158e3.jpg', 0),
+(176, 1002, 'assets/images/products/product-1002-9e0abf1a13.jpg', 0),
+(177, 1002, 'assets/images/products/product-1002-fed47b6762.jpg', 0),
+(178, 1002, 'assets/images/products/product-1002-a70d07382a.jpg', 0),
+(179, 1002, 'assets/images/products/product-1002-63dbc96342.jpg', 0),
+(180, 1002, 'assets/images/products/product-1002-73ad7f08aa.jpg', 0),
+(181, 1002, 'assets/images/products/product-1002-7cd5151ebb.jpg', 0),
+(182, 1009, 'assets/images/products/product-1009-03c5b80d94.jpg', 1),
+(183, 1009, 'assets/images/products/product-1009-cbee02f6e0.jpg', 0),
+(184, 1009, 'assets/images/products/product-1009-b15d4d2bcb.jpg', 0),
+(185, 1009, 'assets/images/products/product-1009-869af24caf.jpg', 0),
+(186, 1009, 'assets/images/products/product-1009-e91d315095.jpg', 0),
+(187, 1009, 'assets/images/products/product-1009-822fe4780a.jpg', 0),
+(188, 1009, 'assets/images/products/product-1009-3259b11475.jpg', 0),
+(189, 2038, 'assets/images/products/product-2038-d3602ac6cb.jpg', 1),
+(190, 2038, 'assets/images/products/product-2038-d9bc2e8a06.jpg', 0),
+(191, 2038, 'assets/images/products/product-2038-6760fe7260.jpg', 0),
+(192, 2038, 'assets/images/products/product-2038-b17a1fb712.jpg', 0),
+(193, 2038, 'assets/images/products/product-2038-17573ea204.jpg', 0),
+(194, 2038, 'assets/images/products/product-2038-77432710b6.jpg', 0),
+(195, 2038, 'assets/images/products/product-2038-1f0aa0e18f.jpg', 0),
+(196, 1001, 'assets/images/products/product-1001-3d77d43cee.jpg', 1),
+(197, 1001, 'assets/images/products/product-1001-9974842f16.jpg', 0),
+(198, 1001, 'assets/images/products/product-1001-bc9cb645e5.jpg', 0),
+(199, 1001, 'assets/images/products/product-1001-b5b7cbf6af.jpg', 0),
+(200, 1001, 'assets/images/products/product-1001-332ec1d7a0.jpg', 0),
+(201, 1001, 'assets/images/products/product-1001-9208336dc5.jpg', 0),
+(202, 1001, 'assets/images/products/product-1001-31dd81dec4.jpg', 0),
+(203, 1001, 'assets/images/products/product-1001-aaa2c2ded1.jpg', 0),
+(204, 1001, 'assets/images/products/product-1001-be7d1be62d.jpg', 0),
+(205, 1001, 'assets/images/products/product-1001-2795050518.jpg', 0),
+(206, 1001, 'assets/images/products/product-1001-240663705e.jpg', 0),
+(207, 1001, 'assets/images/products/product-1001-0ff0ddc432.jpg', 0),
+(208, 1001, 'assets/images/products/product-1001-2b667fca0a.jpg', 0),
+(209, 1001, 'assets/images/products/product-1001-24adb3463e.jpg', 0),
+(210, 1003, 'assets/images/products/product-1003-0597dfb8de.jpg', 1),
+(211, 1003, 'assets/images/products/product-1003-647be7e78e.jpg', 0),
+(212, 1003, 'assets/images/products/product-1003-6db2432127.jpg', 0),
+(213, 1003, 'assets/images/products/product-1003-3a96917d96.jpg', 0),
+(214, 1003, 'assets/images/products/product-1003-2632a51ceb.jpg', 0),
+(215, 1003, 'assets/images/products/product-1003-b7c365f372.jpg', 0),
+(216, 1003, 'assets/images/products/product-1003-98e5fd7ac2.jpg', 0),
+(217, 1003, 'assets/images/products/product-1003-8cbe973cf2.jpg', 0),
+(218, 1003, 'assets/images/products/product-1003-2f38fda4cd.jpg', 0),
+(219, 1003, 'assets/images/products/product-1003-1f66b0f8ea.jpg', 0),
+(220, 1003, 'assets/images/products/product-1003-69e5a4ce7e.jpg', 0),
+(221, 1003, 'assets/images/products/product-1003-a35ab2d6a0.jpg', 0),
+(222, 1003, 'assets/images/products/product-1003-5f914c121b.jpg', 0),
+(223, 1003, 'assets/images/products/product-1003-33a29e0985.jpg', 0),
+(224, 1003, 'assets/images/products/product-1003-1dc0baa937.jpg', 0),
+(225, 1003, 'assets/images/products/product-1003-bc6a8aafac.jpg', 0),
+(226, 1003, 'assets/images/products/product-1003-08fc25c2c5.jpg', 0),
+(227, 1003, 'assets/images/products/product-1003-f1ce0e75e9.jpg', 0),
+(228, 1003, 'assets/images/products/product-1003-7ce7617143.jpg', 0),
+(229, 1003, 'assets/images/products/product-1003-5643712c07.jpg', 0),
+(230, 1003, 'assets/images/products/product-1003-c2c220442f.jpg', 0),
+(231, 1003, 'assets/images/products/product-1003-c8341436a2.jpg', 0),
+(232, 1003, 'assets/images/products/product-1003-b8173f8a2b.jpg', 0),
+(233, 1003, 'assets/images/products/product-1003-054cf6991d.jpg', 0),
+(234, 1003, 'assets/images/products/product-1003-104531bba2.jpg', 0),
+(235, 1003, 'assets/images/products/product-1003-2033f60f37.jpg', 0),
+(236, 1003, 'assets/images/products/product-1003-537d67889e.jpg', 0),
+(237, 1003, 'assets/images/products/product-1003-e660a1afc5.jpg', 0),
+(238, 1003, 'assets/images/products/product-1003-601df4d6ef.jpg', 0),
+(239, 1003, 'assets/images/products/product-1003-10f3917069.jpg', 0),
+(240, 1003, 'assets/images/products/product-1003-035a8cca3f.jpg', 0),
+(241, 1004, 'assets/images/products/product-1004-4efbe28fc2.jpg', 1),
+(242, 1004, 'assets/images/products/product-1004-d79b800970.jpg', 0),
+(243, 1004, 'assets/images/products/product-1004-08794cf78c.jpg', 0),
+(244, 1004, 'assets/images/products/product-1004-6f09fb5318.jpg', 0),
+(245, 1004, 'assets/images/products/product-1004-561a4f98d8.jpg', 0),
+(246, 1004, 'assets/images/products/product-1004-f933da9d22.jpg', 0),
+(247, 1004, 'assets/images/products/product-1004-ae1ee04cfc.jpg', 0),
+(248, 1004, 'assets/images/products/product-1004-d7e380dec1.jpg', 0),
+(249, 1004, 'assets/images/products/product-1004-7e36cb6b9f.jpg', 0),
+(250, 1004, 'assets/images/products/product-1004-0c23765d78.jpg', 0),
+(251, 1004, 'assets/images/products/product-1004-964f02f3e0.jpg', 0),
+(252, 1004, 'assets/images/products/product-1004-b469a2b748.jpg', 0),
+(253, 1004, 'assets/images/products/product-1004-aab4a59c2e.jpg', 0),
+(254, 1004, 'assets/images/products/product-1004-d14a697052.jpg', 0),
+(255, 1004, 'assets/images/products/product-1004-945b919cc1.jpg', 0),
+(256, 1004, 'assets/images/products/product-1004-9d3d6d7541.jpg', 0),
+(257, 1004, 'assets/images/products/product-1004-2cce13884f.jpg', 0),
+(258, 1004, 'assets/images/products/product-1004-7afeba75ad.jpg', 0),
+(259, 1004, 'assets/images/products/product-1004-7ea3848772.jpg', 0),
+(260, 1004, 'assets/images/products/product-1004-98b72957dd.jpg', 0),
+(261, 1004, 'assets/images/products/product-1004-65c9c4cd45.jpg', 0),
+(262, 1004, 'assets/images/products/product-1004-334a80b912.jpg', 0),
+(263, 1004, 'assets/images/products/product-1004-f54a48ade2.jpg', 0),
+(264, 1004, 'assets/images/products/product-1004-10214324a3.jpg', 0),
+(265, 1004, 'assets/images/products/product-1004-7bd6217c11.jpg', 0),
+(266, 1004, 'assets/images/products/product-1004-7dba88a581.jpg', 0),
+(267, 1010, 'assets/images/products/product-1010-962d3c5f89.jpg', 1),
+(268, 1010, 'assets/images/products/product-1010-96505d0e6d.jpg', 0),
+(269, 1010, 'assets/images/products/product-1010-57c3ca3304.jpg', 0),
+(270, 1010, 'assets/images/products/product-1010-1a9d215959.jpg', 0),
+(271, 1010, 'assets/images/products/product-1010-ff9c016205.jpg', 0),
+(272, 1010, 'assets/images/products/product-1010-ebdd24d117.jpg', 0),
+(273, 1010, 'assets/images/products/product-1010-92557b04fb.jpg', 0),
+(274, 1013, 'assets/images/products/product-1013-55e643ba49.jpg', 1),
+(275, 1013, 'assets/images/products/product-1013-0aed232e8b.jpg', 0),
+(276, 1013, 'assets/images/products/product-1013-f6d255dc81.jpg', 0),
+(277, 1013, 'assets/images/products/product-1013-915de03544.jpg', 0),
+(278, 1013, 'assets/images/products/product-1013-63212a2d55.jpg', 0),
+(279, 1013, 'assets/images/products/product-1013-9218067776.jpg', 0),
+(280, 1013, 'assets/images/products/product-1013-daa7698c22.jpg', 0),
+(281, 1013, 'assets/images/products/product-1013-40a5e9591e.jpg', 0),
+(282, 1013, 'assets/images/products/product-1013-8b1f11bf2e.jpg', 0),
+(283, 1014, 'assets/images/products/product-1014-d3d39aa9ce.jpg', 1),
+(284, 1014, 'assets/images/products/product-1014-f7a86c9429.jpg', 0),
+(285, 1014, 'assets/images/products/product-1014-c4491c1d90.jpg', 0),
+(286, 1014, 'assets/images/products/product-1014-6763a32f4d.jpg', 0),
+(287, 1014, 'assets/images/products/product-1014-22e0e964ff.jpg', 0),
+(288, 1014, 'assets/images/products/product-1014-855f6e6d34.jpg', 0),
+(289, 1014, 'assets/images/products/product-1014-a45ef764c0.jpg', 0),
+(290, 1014, 'assets/images/products/product-1014-7dfae0746e.jpg', 0),
+(291, 1014, 'assets/images/products/product-1014-b7cb5a967c.jpg', 0),
+(292, 1014, 'assets/images/products/product-1014-53306611c9.jpg', 0),
+(293, 1014, 'assets/images/products/product-1014-f9c32ff2c9.jpg', 0),
+(294, 1015, 'assets/images/products/product-1015-be31022daf.jpg', 1),
+(295, 1015, 'assets/images/products/product-1015-49e13d9ee6.jpg', 0),
+(296, 1015, 'assets/images/products/product-1015-a269a755e4.jpg', 0),
+(297, 1015, 'assets/images/products/product-1015-0fe97e96b2.jpg', 0),
+(298, 1015, 'assets/images/products/product-1015-8d709422cf.jpg', 0),
+(299, 1015, 'assets/images/products/product-1015-3f2d02be3a.jpg', 0),
+(300, 1017, 'assets/images/products/product-1017-ae953c35fd.jpg', 1),
+(301, 1017, 'assets/images/products/product-1017-f33f5f31a8.jpg', 0),
+(302, 1017, 'assets/images/products/product-1017-aec2b94e9c.jpg', 0),
+(303, 1017, 'assets/images/products/product-1017-806291f472.jpg', 0),
+(304, 1017, 'assets/images/products/product-1017-9d200a976c.jpg', 0),
+(305, 1017, 'assets/images/products/product-1017-d23ad71d3b.jpg', 0),
+(306, 1017, 'assets/images/products/product-1017-15de248d29.jpg', 0),
+(307, 1017, 'assets/images/products/product-1017-16a6324da1.jpg', 0),
+(308, 1017, 'assets/images/products/product-1017-5fbfd51c8d.jpg', 0),
+(309, 1017, 'assets/images/products/product-1017-ca5bdeef1e.jpg', 0),
+(310, 1017, 'assets/images/products/product-1017-ae93c2c55a.jpg', 0),
+(311, 1017, 'assets/images/products/product-1017-1dbb3d991a.jpg', 0),
+(312, 1017, 'assets/images/products/product-1017-1afd75bd04.jpg', 0),
+(313, 1017, 'assets/images/products/product-1017-42dbc56db6.jpg', 0),
+(314, 1017, 'assets/images/products/product-1017-58d29e1983.jpg', 0),
+(315, 2035, 'assets/images/products/product-2035-698512d051.jpg', 1),
+(316, 2035, 'assets/images/products/product-2035-f0af490923.jpg', 0),
+(317, 2035, 'assets/images/products/product-2035-da0d829fd0.jpg', 0),
+(318, 2035, 'assets/images/products/product-2035-a9bab4e24c.jpg', 0),
+(319, 2035, 'assets/images/products/product-2035-7144becf65.jpg', 0),
+(320, 2035, 'assets/images/products/product-2035-1b5757faa0.jpg', 0),
+(321, 2035, 'assets/images/products/product-2035-0deb1d1b8c.jpg', 0),
+(322, 2035, 'assets/images/products/product-2035-d663a4f1b8.jpg', 0),
+(323, 2033, 'assets/images/products/product-2033-43dd1dde27.jpg', 0),
+(324, 2033, 'assets/images/products/product-2033-56c3ad051c.jpg', 0),
+(325, 2033, 'assets/images/products/product-2033-bd719179f0.jpg', 0),
+(326, 2033, 'assets/images/products/product-2033-379d9cdf18.jpg', 0),
+(327, 2033, 'assets/images/products/product-2033-14744eaaf0.jpg', 1),
+(328, 2033, 'assets/images/products/product-2033-53d00da030.jpg', 0),
+(329, 2033, 'assets/images/products/product-2033-c5f235236c.jpg', 0),
+(330, 2033, 'assets/images/products/product-2033-57dc2bf9dc.jpg', 0),
+(331, 2033, 'assets/images/products/product-2033-108e6cd67f.jpg', 0),
+(332, 2033, 'assets/images/products/product-2033-f725f3eeb3.jpg', 0),
+(333, 2033, 'assets/images/products/product-2033-ab3e665558.jpg', 0),
+(334, 2033, 'assets/images/products/product-2033-b4ec4fed57.jpg', 0),
+(335, 2033, 'assets/images/products/product-2033-f6e875c596.jpg', 0),
+(336, 2033, 'assets/images/products/product-2033-fb8cc1aec7.jpg', 0),
+(337, 2033, 'assets/images/products/product-2033-b645bfd7c2.jpg', 0),
+(338, 2033, 'assets/images/products/product-2033-08e2f8bf13.jpg', 0),
+(339, 2033, 'assets/images/products/product-2033-cf8a4c01b6.jpg', 0),
+(340, 2033, 'assets/images/products/product-2033-941038f567.jpg', 0),
+(341, 2033, 'assets/images/products/product-2033-d35673e3af.jpg', 0),
+(342, 2013, 'assets/images/products/product-2013-25cafbe42e.jpg', 1),
+(343, 2013, 'assets/images/products/product-2013-a98af5cc18.jpg', 0),
+(344, 2013, 'assets/images/products/product-2013-87e957a9ae.jpg', 0),
+(345, 2013, 'assets/images/products/product-2013-9096985401.jpg', 0),
+(346, 2013, 'assets/images/products/product-2013-9acada5ea9.jpg', 0),
+(347, 2013, 'assets/images/products/product-2013-897e2b9e64.jpg', 0),
+(348, 2039, 'assets/images/products/product-2039-899c272729.jpg', 1),
+(349, 2039, 'assets/images/products/product-2039-69a6224158.jpg', 0),
+(350, 2039, 'assets/images/products/product-2039-e48488e85f.jpg', 0),
+(351, 2039, 'assets/images/products/product-2039-bb5eb3b75c.jpg', 0),
+(352, 2039, 'assets/images/products/product-2039-6b0a79fed7.jpg', 0),
+(353, 2039, 'assets/images/products/product-2039-731c62c10c.jpg', 0),
+(354, 2040, 'assets/images/products/product-2040-ce9ae6a9bf.jpg', 1),
+(355, 2040, 'assets/images/products/product-2040-60d237a98c.jpg', 0),
+(356, 2040, 'assets/images/products/product-2040-23171b91b1.jpg', 0),
+(357, 2040, 'assets/images/products/product-2040-8a359d777f.jpg', 0),
+(358, 2040, 'assets/images/products/product-2040-53eb853b2e.jpg', 0),
+(359, 2040, 'assets/images/products/product-2040-f28ef508d1.jpg', 0),
+(360, 2040, 'assets/images/products/product-2040-3c6d3b2f35.jpg', 0),
+(361, 2040, 'assets/images/products/product-2040-f1adea4c8e.jpg', 0),
+(362, 2034, 'assets/images/products/product-2034-166e2b6252.jpg', 1),
+(363, 2034, 'assets/images/products/product-2034-effd4d7634.jpg', 0),
+(364, 2034, 'assets/images/products/product-2034-d26b999d4e.jpg', 0),
+(365, 2034, 'assets/images/products/product-2034-73e596a1d8.jpg', 0),
+(366, 2034, 'assets/images/products/product-2034-71fc758f3f.jpg', 0),
+(367, 2034, 'assets/images/products/product-2034-b5de0ba668.jpg', 0),
+(368, 2032, 'assets/images/products/product-2032-a0228962ed.jpg', 1),
+(369, 2032, 'assets/images/products/product-2032-d98903d989.jpg', 0),
+(370, 2032, 'assets/images/products/product-2032-6f603831ab.jpg', 0),
+(371, 2032, 'assets/images/products/product-2032-462dd9ea49.jpg', 0),
+(372, 2032, 'assets/images/products/product-2032-3cd93fc782.jpg', 0),
+(373, 2032, 'assets/images/products/product-2032-2d6bdc3f34.jpg', 0),
+(374, 2032, 'assets/images/products/product-2032-eee6afa5ab.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews`
+--
+
+CREATE TABLE `product_reviews` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'NULL for combo reviews',
+  `combo_id` int(10) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL COMMENT 'Links to orders ÔÇô only delivered orders allowed',
+  `rating` tinyint(3) UNSIGNED NOT NULL CHECK (`rating` between 1 and 5),
+  `title` varchar(120) NOT NULL DEFAULT '',
+  `body` text NOT NULL,
+  `status` enum('pending','approved','rejected') NOT NULL DEFAULT 'approved',
+  `helpful_count` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1841,15 +2833,15 @@ INSERT INTO `product_variants` (`id`, `product_id`, `weight`, `label`, `price`, 
 (3, 3, '500g', '500g Standard Pack', 450.00, 99, 0, 0, 10),
 (4, 1001, '500g', '500g Standard Pack', 720.00, 95, 0, 0, 10),
 (5, 1002, '500g', '500g Standard Pack', 600.00, 92, 0, 0, 10),
-(6, 1003, '500g', '500g Standard Pack', 420.00, 85, 0, 0, 10),
-(7, 1004, '500g', '500g Standard Pack', 880.00, 78, 0, 0, 10),
-(8, 1005, '500g', '500g Standard Pack', 650.00, 47, 0, 0, 10),
+(6, 1003, '500g', '500g Standard Pack', 420.00, 86, 0, 0, 10),
+(7, 1004, '500g', '500g Standard Pack', 880.00, 90, 0, 0, 10),
+(8, 1005, '500g', '500g Standard Pack', 650.00, 71, 0, 0, 10),
 (9, 1009, '500g', '500g Standard Pack', 480.00, 100, 0, 0, 10),
 (10, 1010, '500g', '500g Standard Pack', 450.00, 98, 0, 0, 10),
 (11, 1011, '500g', '500g Standard Pack', 420.00, 100, 0, 0, 10),
 (12, 1012, '500g', '500g Standard Pack', 550.00, 100, 0, 0, 10),
 (13, 1013, '500g', '500g Standard Pack', 400.00, 100, 0, 0, 10),
-(14, 1040, '500g', '500g Standard Pack', 950.00, 97, 0, 0, 10),
+(14, 1040, '500g', '500g Standard Pack', 950.00, 100, 0, 0, 10),
 (15, 1041, '500g', '500g Standard Pack', 1200.00, 100, 0, 0, 10),
 (16, 1042, '500g', '500g Standard Pack', 950.00, 100, 0, 0, 10),
 (17, 1043, '500g', '500g Standard Pack', 950.00, 100, 0, 0, 10),
@@ -1858,10 +2850,17 @@ INSERT INTO `product_variants` (`id`, `product_id`, `weight`, `label`, `price`, 
 (20, 2003, '500g', '500g Standard Pack', 250.00, 99, 0, 0, 10),
 (21, 2004, '500g', '500g Standard Pack', 350.00, 98, 0, 0, 10),
 (22, 2005, '500g', '500g Standard Pack', 320.00, 94, 0, 0, 10),
-(23, 2006, '500g', '500g Standard Pack', 320.00, 91, 0, 0, 10),
+(23, 2006, '500g', '500g Standard Pack', 320.00, 94, 0, 0, 10),
 (24, 2013, '500g', '500g Standard Pack', 280.00, 100, 0, 0, 10),
 (25, 2014, '500g', '500g Standard Pack', 500.00, 100, 0, 0, 10),
-(26, 2029, '1kg', '1kg Pack', 800.00, 17, 0, 0, 10);
+(26, 2029, '1kg', '1kg Pack', 800.00, 17, 0, 0, 10),
+(27, 1017, '500g', '500g Pack', 500.00, 20, 0, 0, 10),
+(28, 1015, '500g', '500g Pack', 500.00, 20, 0, 0, 10),
+(29, 1015, '1kg', '1kg Pack', 800.00, 20, 0, 0, 10),
+(30, 2036, '500g', '500g Standard Pack', 450.00, 100, 0, 0, 10),
+(31, 2038, '1kg', '1kg Bucket Pack', 960.00, 100, 0, 0, 10),
+(32, 2039, '500g', '500g Jar Pack', 450.00, 100, 0, 0, 10),
+(33, 2040, '500g', '500g Box Pack', 480.00, 100, 0, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -2046,7 +3045,8 @@ INSERT INTO `shipments` (`id`, `order_id`, `destination`, `courier_name`, `track
 (14, 86, 'Pune, Maharashtra', NULL, NULL, NULL, NULL, 'Standard', 0.00, '2026-04-27 10:42:27', 'in_transit', '2026-04-26 05:12:27'),
 (15, 85, 'New Delhi, Delhi', NULL, NULL, NULL, NULL, 'Standard', 0.00, '2026-04-27 10:42:27', 'delivered', '2026-04-26 03:12:27'),
 (16, 90060, '', NULL, NULL, NULL, NULL, 'Standard', 0.00, '2026-05-04 11:15:36', 'pending', '2026-05-04 11:15:36'),
-(17, 90061, '', NULL, NULL, NULL, NULL, 'Standard', 0.00, '2026-05-04 11:16:49', 'pending', '2026-05-07 10:34:00');
+(17, 90061, '', NULL, NULL, NULL, NULL, 'Standard', 0.00, '2026-05-04 11:16:49', 'pending', '2026-05-20 04:46:14'),
+(18, 28, NULL, 'Delhivery', 'DEL-9928371', '2026-05-20 13:00:29', '2026-05-25', 'Standard', 0.00, '2026-05-20 07:30:16', 'in_transit', '2026-05-28 06:45:18');
 
 -- --------------------------------------------------------
 
@@ -2083,12 +3083,18 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`, `group_name`, `upda
 ('payMethodNet', '1', 'general', '2026-04-22 11:27:27'),
 ('phone', '+91 98860 24567', 'store', '2026-04-10 09:27:04'),
 ('shipping_enable_national', '1', 'shipping', '2026-05-05 04:45:27'),
+('shop_qr', 'assets/images/settings/sw_6a0ae96809bdb7.22152885.png', 'general', '2026-05-18 10:26:48'),
 ('store_logo', 'assets/images/settings/sw_69fa1cf8c342d2.52755647.png', 'store', '2026-05-05 16:38:16'),
+('store_max_qty_limit', '10', 'store', '2026-05-29 11:49:10'),
 ('store_name', 'Vijaya Karadant', 'store', '2026-04-10 09:27:04'),
 ('tagline', 'Authentic Karnataka sweets, crafted with heritage.', 'store', '2026-04-10 09:27:04'),
 ('ui_favicon_path', 'assets/images/settings/favicon_premium.png', 'appearance', '2026-05-04 07:24:54'),
 ('ui_logo_path', 'assets/images/settings/logo_premium.png', 'appearance', '2026-05-04 07:24:54'),
-('ui_primary_font', 'Poppins', 'appearance', '2026-05-04 07:17:38');
+('ui_primary_color', '#8f1919', 'appearance', '2026-05-21 07:57:24'),
+('ui_primary_color_text', '#8F1919', 'appearance', '2026-05-21 07:57:24'),
+('ui_primary_font', 'Poppins', 'appearance', '2026-05-04 07:17:38'),
+('upiDisplayName', 'Vijaya Karadant Sweets', 'general', '2026-05-18 09:26:36'),
+('upiId', 'vijayakaradant@cnrb', 'general', '2026-05-18 09:26:36');
 
 -- --------------------------------------------------------
 
@@ -2126,7 +3132,23 @@ INSERT INTO `stock_activity` (`id`, `product_id`, `action_type`, `quantity_chang
 (8, 2029, 'reduced', -1, 22, 21, 'Admin', NULL, 'Quick update from inventory list [Variant: 1kg Pack]', NULL, NULL, '2026-05-11 04:45:22'),
 (9, 2029, 'reduced', -1, 21, 20, 'Admin', NULL, 'Quick update from inventory list [Variant: 1kg Pack]', NULL, NULL, '2026-05-11 04:45:22'),
 (10, 2029, 'reduced', -1, 20, 19, 'Admin', NULL, 'Quick update from inventory list [Variant: 1kg Pack]', NULL, NULL, '2026-05-11 04:45:23'),
-(11, 2029, 'reduced', -1, 19, 18, 'Admin', NULL, 'Quick update from inventory list [Variant: 1kg Pack]', NULL, NULL, '2026-05-11 04:45:23');
+(11, 2029, 'reduced', -1, 19, 18, 'Admin', NULL, 'Quick update from inventory list [Variant: 1kg Pack]', NULL, NULL, '2026-05-11 04:45:23'),
+(12, 1014, 'added', 1, 0, 1, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 04:52:37'),
+(13, 1014, 'added', 1, 1, 2, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 04:52:38'),
+(14, 1017, 'added', 1, 0, 1, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 04:52:51'),
+(15, 1017, 'added', 1, 1, 2, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 04:52:52'),
+(16, 1015, 'added', 1, 0, 1, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 13:17:08'),
+(17, 1015, 'reduced', -1, 1, 0, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 13:20:18'),
+(18, 1015, 'added', 1, 0, 1, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-18 13:21:13'),
+(19, 1014, 'added', 1, 2, 3, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:19:15'),
+(20, 1014, 'added', 1, 3, 4, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:19:16'),
+(21, 1014, 'added', 1, 4, 5, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:19:16'),
+(22, 1014, 'added', 1, 5, 6, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:37'),
+(23, 1014, 'added', 1, 6, 7, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:39'),
+(24, 1014, 'added', 1, 7, 8, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:39'),
+(25, 1014, 'added', 1, 8, 9, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:40'),
+(26, 1014, 'added', 1, 9, 10, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:40'),
+(27, 1014, 'added', 1, 10, 11, 'Admin', NULL, 'Quick update from inventory list', NULL, NULL, '2026-05-27 05:36:40');
 
 -- --------------------------------------------------------
 
@@ -2151,7 +3173,11 @@ CREATE TABLE `stock_notifications` (
 --
 
 INSERT INTO `stock_notifications` (`id`, `product_id`, `product_type`, `variant_id`, `email`, `phone`, `status`, `created_at`, `notified_at`) VALUES
-(1, 1, 'product', NULL, 'test@example.com', '1234567890', 'notified', '2026-05-07 10:54:29', '2026-05-07 10:54:29');
+(1, 1, 'product', NULL, 'test@example.com', '1234567890', 'notified', '2026-05-07 10:54:29', '2026-05-18 13:17:43'),
+(2, 1017, 'product', NULL, 'isaacraja89@gmail.com', NULL, 'notified', '2026-05-18 04:50:12', '2026-05-18 05:05:54'),
+(3, 1015, 'product', NULL, 'isaacraja89@gmail.com', NULL, 'notified', '2026-05-18 06:17:19', '2026-05-18 06:17:33'),
+(4, 1015, 'product', NULL, 'esakiraj006@gmail.com', NULL, 'notified', '2026-05-18 13:15:17', '2026-05-18 13:17:13'),
+(5, 1015, 'product', NULL, 'esakiraj006@gmail.com', NULL, 'notified', '2026-05-18 13:20:55', '2026-05-18 13:21:17');
 
 -- --------------------------------------------------------
 
@@ -2194,7 +3220,7 @@ CREATE TABLE `users` (
   `phone` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('customer','admin') DEFAULT 'customer',
-  `status` enum('Active','Inactive','Blocked') DEFAULT 'Active',
+  `status` enum('Active','Inactive','Blocked','suspended','pending_invite') DEFAULT 'Active',
   `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -2331,14 +3357,17 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `phone`, `password`, `role`, `s
 (9005, 'Vikram Singh', 'vikram.demo@example.com', '9876543214', '$2y$10$dummy', 'customer', 'Inactive', NULL, '2025-10-03 04:35:50', '2026-04-21 04:35:50', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9006, 'test', 'test@test.com', '', '$2y$10$SIbQZkxzJ8Ih7oDJyk0jEOc1CuKxU57eDRSVBAsrqyK8PO6L87wsS', 'customer', 'Active', NULL, '2026-04-21 10:38:36', '2026-04-21 10:38:36', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9007, 'esakiraj', 'demo@gmail.com', '9047478886', '$2y$10$ux9/tDsTwPrBtuJ9phkpZOoPanx/yjwXoNNYS526tOrd5NY.YytTe', 'customer', 'Active', NULL, '2026-04-21 10:42:05', '2026-04-27 10:46:28', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
-(9008, 'esakiraj', 'esakiraj006@gmail.com', '9047478886', '$2y$10$XX646u1E6pytfojYOIEp5es73ds9sNRb9ClYCmUmvc1l03E5D1J5S', 'customer', 'Active', NULL, '2026-04-21 10:53:51', '2026-05-04 12:16:59', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
+(9008, 'esakiraj', 'esakiraj006@gmail.com', '9047478886', '$2y$10$52l/.ejcNRhN9PcFANnXMexsCQRFbjhVcmYGOYUcYImxI1LW5GgYG', 'customer', 'Active', NULL, '2026-04-21 10:53:51', '2026-05-16 10:35:13', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9009, 'Test User', 'test@example.com', '1234567890', '$2y$10$7z/GNk7AQbpMkq91uTKEbeQNdVL2iSAfsAAeEx3E9TTAKcNAURife', 'customer', 'Active', NULL, '2026-04-22 11:00:10', '2026-04-22 11:00:10', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9010, 'john', 'john@gmail.com', '8221633689', '$2y$10$srySC6VnO9DP9gjKe.CSoeVCFxav9Ys4fnjG1ZdiCZ0Jbn8RotDy2', 'customer', 'Active', NULL, '2026-04-30 12:45:27', '2026-05-02 06:06:00', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9011, 'john', 'johns@gmail.com', '8221633689', '$2y$10$re2tmwIV23eoiuMnC.d4oOL6cxO9y02D3.QygWpva93xZ6mLqsNSq', 'customer', 'Active', NULL, '2026-04-30 12:45:37', '2026-04-30 12:45:37', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9012, 'isaac', 'isaac@gmail.com', '8221633689', '$2y$10$wUIchWjN8DiNS5SYaXGap.8u6mu3NUd.9Ym.BiK/lHnq.uH2YJNgG', 'customer', 'Active', NULL, '2026-04-30 12:45:55', '2026-04-30 12:45:55', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9013, 'raj', 'raj@gmail.com', '9047478888', '$2y$10$QsNZ8M2OVYTzA4lDceO.ROLhXOXUg66ERpGg3P1SnlCA.XRGyr6Sy', 'customer', 'Active', NULL, '2026-05-04 10:29:14', '2026-05-04 10:29:14', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
 (9014, 'nalej', 'nalej602nalej60273@imashr.com', '9047478887', '$2y$10$ERfj1t8cr1VUYdleMajtzeux1AVlhaau4paR5a8tRGs1t344jGWd2', 'customer', 'Active', NULL, '2026-05-11 06:46:47', '2026-05-11 06:46:47', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
-(9015, 'nalej', 'nalej60273@imashr.com', '885241255', '$2y$10$pNm/wqZlcXjETszYa89omeNx.YBW5AlgsdltnIEF8wUVkqWV/pBQu', 'customer', 'Active', NULL, '2026-05-11 07:57:23', '2026-05-11 07:57:23', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata');
+(9015, 'nalej', 'nalej60273@imashr.com', '885241255', '$2y$10$pNm/wqZlcXjETszYa89omeNx.YBW5AlgsdltnIEF8wUVkqWV/pBQu', 'customer', 'Active', NULL, '2026-05-11 07:57:23', '2026-05-11 07:57:23', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
+(9016, 'isaac', 'isaacraja89@gmail.com', '9047478887', '$2y$10$S53Qf7e/cfcQaAFBlfJae.sAEecf35q5mXtZ6COd5z3uSlCT2TA.q', 'customer', 'Blocked', NULL, '2026-05-16 10:38:58', '2026-05-20 08:22:38', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
+(9017, 'doe', 'magoho5832@itquoted.com', '9047478888', '$2y$10$sHx6ezq1XmdWc3kvmVXk3.cv1hYjn7fvapRCEomn6BP2cVnbmlve.', 'customer', 'Active', NULL, '2026-05-16 11:34:26', '2026-05-16 11:34:26', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata'),
+(9018, 'Test', 'test88@gmail.com', NULL, '$2y$10$U8KqYyoArRw2O5T1.fefaeIBchBGy4UbfPS8gWo3YGawbM7K5RPM.', 'admin', 'suspended', NULL, '2026-05-18 07:08:57', '2026-05-18 15:19:49', NULL, 0, 'English (US)', '(UTC+05:30) Asia/Kolkata');
 
 -- --------------------------------------------------------
 
@@ -2394,7 +3423,8 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
-(2, 1);
+(2, 1),
+(9018, 3);
 
 -- --------------------------------------------------------
 
@@ -2454,6 +3484,13 @@ ALTER TABLE `addresses`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `admin_invites`
+--
+ALTER TABLE `admin_invites`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`);
+
+--
 -- Indexes for table `admin_login_activity`
 --
 ALTER TABLE `admin_login_activity`
@@ -2504,12 +3541,29 @@ ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cart_gift_boxes`
+--
+ALTER TABLE `cart_gift_boxes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_id` (`cart_id`),
+  ADD KEY `gift_box_id` (`gift_box_id`);
+
+--
+-- Indexes for table `cart_gift_box_items`
+--
+ALTER TABLE `cart_gift_box_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_gift_box_id` (`cart_gift_box_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `cart_items`
 --
 ALTER TABLE `cart_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cart_id` (`cart_id`),
-  ADD KEY `fk_cart_items_combo` (`combo_id`);
+  ADD KEY `fk_cart_items_combo` (`combo_id`),
+  ADD KEY `idx_cart` (`cart_id`);
 
 --
 -- Indexes for table `categories`
@@ -2518,7 +3572,10 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `slug` (`slug`),
   ADD KEY `parent_id` (`parent_id`),
-  ADD KEY `idx_parent_id` (`parent_id`);
+  ADD KEY `idx_parent_id` (`parent_id`),
+  ADD KEY `idx_parent` (`parent_id`),
+  ADD KEY `idx_slug` (`slug`);
+ALTER TABLE `categories` ADD FULLTEXT KEY `ft_cat` (`name`,`slug`);
 
 --
 -- Indexes for table `combos`
@@ -2526,6 +3583,14 @@ ALTER TABLE `categories`
 ALTER TABLE `combos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexes for table `combo_images`
+--
+ALTER TABLE `combo_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_combo_images_combo_id` (`combo_id`),
+  ADD KEY `idx_combo_images_primary` (`combo_id`,`is_primary`);
 
 --
 -- Indexes for table `combo_items`
@@ -2620,6 +3685,15 @@ ALTER TABLE `delivery_tracking`
   ADD KEY `order_id` (`order_id`);
 
 --
+-- Indexes for table `demo_transactions`
+--
+ALTER TABLE `demo_transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `transaction_id` (`transaction_id`),
+  ADD KEY `idx_status` (`status`),
+  ADD KEY `idx_created` (`created_at`);
+
+--
 -- Indexes for table `failed_orders`
 --
 ALTER TABLE `failed_orders`
@@ -2627,10 +3701,31 @@ ALTER TABLE `failed_orders`
   ADD UNIQUE KEY `order_number` (`order_number`);
 
 --
+-- Indexes for table `gift_boxes`
+--
+ALTER TABLE `gift_boxes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gift_box_defaults`
+--
+ALTER TABLE `gift_box_defaults`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `gift_box_id` (`gift_box_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `hero_slides`
+--
+ALTER TABLE `hero_slides`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`product_id`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `idx_product` (`product_id`);
 
 --
 -- Indexes for table `inventory_logs`
@@ -2672,7 +3767,25 @@ ALTER TABLE `orders`
   ADD KEY `shipping_address_id` (`shipping_address_id`),
   ADD KEY `billing_address_id` (`billing_address_id`),
   ADD KEY `idx_payment_method` (`payment_method`),
-  ADD KEY `idx_idempotency` (`idempotency_key`);
+  ADD KEY `idx_idempotency` (`idempotency_key`),
+  ADD KEY `idx_user_status` (`user_id`,`status`),
+  ADD KEY `idx_created` (`created_at`);
+
+--
+-- Indexes for table `order_gift_boxes`
+--
+ALTER TABLE `order_gift_boxes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `gift_box_id` (`gift_box_id`);
+
+--
+-- Indexes for table `order_gift_box_items`
+--
+ALTER TABLE `order_gift_box_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_gift_box_id` (`order_gift_box_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `order_items`
@@ -2723,7 +3836,11 @@ ALTER TABLE `products`
   ADD KEY `category_id` (`category_id`),
   ADD KEY `slug_2` (`slug`),
   ADD KEY `status` (`status`),
-  ADD KEY `fk_product_subcategory` (`subcategory_id`);
+  ADD KEY `fk_product_subcategory` (`subcategory_id`),
+  ADD KEY `idx_status_created` (`status`,`created_at`),
+  ADD KEY `idx_category_status` (`category_id`,`status`),
+  ADD KEY `idx_slug` (`slug`);
+ALTER TABLE `products` ADD FULLTEXT KEY `ft_search` (`name`,`slug`,`short_description`);
 
 --
 -- Indexes for table `product_images`
@@ -2731,6 +3848,17 @@ ALTER TABLE `products`
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_user_product` (`user_id`,`product_id`),
+  ADD UNIQUE KEY `uq_user_combo` (`user_id`,`combo_id`),
+  ADD KEY `idx_product_status` (`product_id`,`status`),
+  ADD KEY `idx_combo_status` (`combo_id`,`status`),
+  ADD KEY `idx_order` (`order_id`);
 
 --
 -- Indexes for table `product_variants`
@@ -2869,7 +3997,13 @@ ALTER TABLE `activity_logs`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `admin_invites`
+--
+ALTER TABLE `admin_invites`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admin_login_activity`
@@ -2893,7 +4027,7 @@ ALTER TABLE `analytics_events`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `audit_logs_v2`
@@ -2911,13 +4045,25 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `cart_gift_boxes`
+--
+ALTER TABLE `cart_gift_boxes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_gift_box_items`
+--
+ALTER TABLE `cart_gift_box_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2929,13 +4075,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `combos`
 --
 ALTER TABLE `combos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `combo_images`
+--
+ALTER TABLE `combo_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=406;
 
 --
 -- AUTO_INCREMENT for table `combo_items`
 --
 ALTER TABLE `combo_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT for table `company_info`
@@ -2965,7 +4117,7 @@ ALTER TABLE `coupon_usages`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `customer_activity`
@@ -2995,13 +4147,37 @@ ALTER TABLE `customer_tags`
 -- AUTO_INCREMENT for table `delivery_tracking`
 --
 ALTER TABLE `delivery_tracking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `demo_transactions`
+--
+ALTER TABLE `demo_transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_orders`
 --
 ALTER TABLE `failed_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `gift_boxes`
+--
+ALTER TABLE `gift_boxes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `gift_box_defaults`
+--
+ALTER TABLE `gift_box_defaults`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hero_slides`
+--
+ALTER TABLE `hero_slides`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `inventory_logs`
@@ -3013,7 +4189,7 @@ ALTER TABLE `inventory_logs`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `newsletter_subscribers`
@@ -3031,25 +4207,37 @@ ALTER TABLE `news_updates`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90077;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90090;
+
+--
+-- AUTO_INCREMENT for table `order_gift_boxes`
+--
+ALTER TABLE `order_gift_boxes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_gift_box_items`
+--
+ALTER TABLE `order_gift_box_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2098;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2115;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -3061,19 +4249,25 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2032;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2041;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
+
+--
+-- AUTO_INCREMENT for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `promotions`
@@ -3103,19 +4297,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shipments`
 --
 ALTER TABLE `shipments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `stock_activity`
 --
 ALTER TABLE `stock_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `stock_notifications`
 --
 ALTER TABLE `stock_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -3127,7 +4321,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9016;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9019;
 
 --
 -- AUTO_INCREMENT for table `user_payment_methods`
@@ -3171,6 +4365,20 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `cart_gift_boxes`
+--
+ALTER TABLE `cart_gift_boxes`
+  ADD CONSTRAINT `cart_gift_boxes_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_gift_boxes_ibfk_2` FOREIGN KEY (`gift_box_id`) REFERENCES `gift_boxes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_gift_box_items`
+--
+ALTER TABLE `cart_gift_box_items`
+  ADD CONSTRAINT `cart_gift_box_items_ibfk_1` FOREIGN KEY (`cart_gift_box_id`) REFERENCES `cart_gift_boxes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_gift_box_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `cart_items`
 --
 ALTER TABLE `cart_items`
@@ -3182,6 +4390,12 @@ ALTER TABLE `cart_items`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `combo_images`
+--
+ALTER TABLE `combo_images`
+  ADD CONSTRAINT `fk_combo_images_combo` FOREIGN KEY (`combo_id`) REFERENCES `combos` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `combo_items`
@@ -3223,6 +4437,13 @@ ALTER TABLE `delivery_tracking`
   ADD CONSTRAINT `delivery_tracking_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `gift_box_defaults`
+--
+ALTER TABLE `gift_box_defaults`
+  ADD CONSTRAINT `gift_box_defaults_ibfk_1` FOREIGN KEY (`gift_box_id`) REFERENCES `gift_boxes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `gift_box_defaults_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -3241,6 +4462,20 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `order_gift_boxes`
+--
+ALTER TABLE `order_gift_boxes`
+  ADD CONSTRAINT `order_gift_boxes_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_gift_boxes_ibfk_2` FOREIGN KEY (`gift_box_id`) REFERENCES `gift_boxes` (`id`);
+
+--
+-- Constraints for table `order_gift_box_items`
+--
+ALTER TABLE `order_gift_box_items`
+  ADD CONSTRAINT `order_gift_box_items_ibfk_1` FOREIGN KEY (`order_gift_box_id`) REFERENCES `order_gift_boxes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_gift_box_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `order_items`

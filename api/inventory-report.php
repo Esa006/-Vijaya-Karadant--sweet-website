@@ -22,14 +22,20 @@ try {
         $status = '';
     }
 
-    $rows = $repo->getInventoryReport($search, $status);
+    $allRows = $repo->getInventoryReport($search, '');
     $movement = $repo->getWeeklyMovement();
 
-    // Build summary counts
-    $total     = count($rows);
-    $healthy   = count(array_filter($rows, fn($r) => $r['status_key'] === 'healthy'));
-    $low       = count(array_filter($rows, fn($r) => $r['status_key'] === 'low'));
-    $outOfStock = count(array_filter($rows, fn($r) => $r['status_key'] === 'out_of_stock'));
+    // Build summary counts based on ALL rows (filtered by search but NOT status)
+    $total     = count($allRows);
+    $healthy   = count(array_filter($allRows, fn($r) => $r['status_key'] === 'healthy'));
+    $low       = count(array_filter($allRows, fn($r) => $r['status_key'] === 'low'));
+    $outOfStock = count(array_filter($allRows, fn($r) => $r['status_key'] === 'out_of_stock'));
+
+    // Apply the status filter for the table data
+    $rows = $allRows;
+    if ($status !== '') {
+        $rows = array_values(array_filter($allRows, fn($r) => $r['status_key'] === $status));
+    }
 
     echo json_encode([
         'status' => 'success',

@@ -159,7 +159,7 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="c-product-card-v2__title--compact p-2">
+                            <h3 class="c-product-card-v2__title--compact px-2">
                                 <a href="<?php echo BASE_URL; ?>product-detail.php?slug=<?php echo $slug; ?>">
                                     <?php echo $name; ?>
                                 </a>

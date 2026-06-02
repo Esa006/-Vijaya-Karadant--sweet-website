@@ -38,28 +38,28 @@ require_once 'includes/sidebar.php';
         <!-- KPI Summary Cards (populated dynamically) -->
         <div class="row g-3 mb-4" id="summaryCards">
             <div class="col-6 col-md-3">
-                <div class="kpi-card">
+                <div class="kpi-card active" data-filter="">
                     <div class="kpi-label">Total SKUs</div>
                     <div class="kpi-value" id="kpi-total">—</div>
                     <div class="kpi-sub">across all categories</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="kpi-card">
+                <div class="kpi-card" data-filter="healthy">
                     <div class="kpi-label">Healthy Stock</div>
                     <div class="kpi-value text-success" id="kpi-healthy">—</div>
                     <div class="kpi-sub">of catalog</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="kpi-card">
+                <div class="kpi-card" data-filter="low">
                     <div class="kpi-label">Low / Critical</div>
                     <div class="kpi-value text-warning" id="kpi-low">—</div>
                     <div class="kpi-sub">need reordering</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="kpi-card">
+                <div class="kpi-card" data-filter="out_of_stock">
                     <div class="kpi-label">Out of Stock</div>
                     <div class="kpi-value text-danger" id="kpi-out">—</div>
                     <div class="kpi-sub">lost sales risk</div>
@@ -150,6 +150,17 @@ require_once 'includes/sidebar.php';
         border-radius: 12px;
         padding: 16px 20px;
         box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    .kpi-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .kpi-card.active {
+        border-color: var(--brand-brown, #8B3A3A);
+        background-color: #fdf5f2;
     }
     .kpi-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: .5px; }
     .kpi-value { font-size: 28px; font-weight: 700; color: #222; margin: 4px 0; }
@@ -342,7 +353,32 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(loadInventory, 350);
     });
-    document.getElementById('statusFilter').addEventListener('change', loadInventory);
+    
+    const statusSelect = document.getElementById('statusFilter');
+    statusSelect.addEventListener('change', (e) => {
+        document.querySelectorAll('.kpi-card').forEach(card => {
+            card.classList.remove('active');
+            if (card.getAttribute('data-filter') === e.target.value) {
+                card.classList.add('active');
+            }
+        });
+        loadInventory();
+    });
+
+    // ── KPI Card Clicks ─────────────────────────────────────────
+    document.querySelectorAll('.kpi-card').forEach(card => {
+        card.addEventListener('click', () => {
+            let filterValue = card.getAttribute('data-filter');
+            
+            // Toggle logic: if clicking the currently active filter, reset to 'Total SKUs' (which is '')
+            if (statusSelect.value === filterValue && filterValue !== '') {
+                filterValue = '';
+            }
+            
+            statusSelect.value = filterValue;
+            statusSelect.dispatchEvent(new Event('change'));
+        });
+    });
 
     // Initial Load
     loadInventory();

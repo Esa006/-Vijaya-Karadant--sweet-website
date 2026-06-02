@@ -63,12 +63,12 @@ $redirectUrl = $_GET['redirect'] ?? 'index.php';
         @media (max-width: 320px) {
             .mobile-banner { height: 351px; }
         }
-        @media (max-width: 580px) {
+        @media (max-width: 850px) {
             .left-panel { display: none; }
             .right-panel { width: 100%; align-items: stretch; justify-content: flex-start; }
             .mobile-banner { display: block; position: relative;  }
             .form-container { 
-                margin-top: -30px; 
+                margin: -30px auto 0 auto; 
                 background: #ffffff; 
                 border-radius: 30px 30px 0 0; 
                 padding: 40px 20px; 

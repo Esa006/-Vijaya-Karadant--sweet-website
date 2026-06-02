@@ -30,6 +30,21 @@ $karadants = $productService->getProductsByCategory('karadant');
 $laddus = $productService->getProductsByCategory('laddu');
 $combos = $comboService->getAllCombos();
 
+// Build dynamic SEO context for Home page
+$seoContext = [
+    'title' => 'Authentic Karnataka Sweets & Namkeens | ' . SITE_NAME,
+    'description' => 'Order authentic Gokak Karadant, traditional sweets, and premium namkeens online. Handcrafted with organic jaggery and pure cow ghee since 1952.',
+    'canonical' => BASE_URL,
+    'type' => 'website',
+    'schema' => [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => SITE_NAME,
+        'url' => BASE_URL,
+        'logo' => BASE_URL . SITE_LOGO
+    ]
+];
+
 require_once 'includes/header.php';
 
 // Category Navigation Strip (Amazon/Flipkart style)

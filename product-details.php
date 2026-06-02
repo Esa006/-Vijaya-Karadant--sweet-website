@@ -18,15 +18,18 @@ $slug = trim((string)($_GET['slug'] ?? ''));
 if ($id > 0) {
     $product = $productService->getProductById($id);
     if ($product && !empty($product['slug'])) {
+        header('HTTP/1.1 301 Moved Permanently');
         header('Location: product-detail.php?slug=' . urlencode((string)$product['slug']));
         exit;
     }
 }
 
 if ($slug !== '') {
+    header('HTTP/1.1 301 Moved Permanently');
     header('Location: product-detail.php?slug=' . urlencode($slug));
     exit;
 }
 
+header('HTTP/1.1 301 Moved Permanently');
 header('Location: product-detail.php');
 exit;

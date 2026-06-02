@@ -10,6 +10,14 @@
  */
 
 require_once 'config/config.php';
+// Build dynamic SEO context for About page
+$seoContext = [
+    'title' => 'About Us - Our Heritage & Legacy | ' . SITE_NAME,
+    'description' => 'Discover the story behind our authentic Gokak Karadant. Since 1952, we have been crafting traditional sweets with pure ingredients and generations of love.',
+    'canonical' => BASE_URL . 'about.php',
+    'type' => 'website'
+];
+
 require_once 'includes/header.php';
 ?>
 

@@ -19,11 +19,12 @@ abstract class BaseController {
     }
 
     /**
-     * Enforce Admin Authentication
+     * Enforce Admin Authentication — accepts admin and super_admin roles.
      */
     protected function enforceAuth(): void {
         $role = $_SESSION['user_role'] ?? $_SESSION['role'] ?? '';
-        if (!isset($_SESSION['user_id']) || $role !== 'admin') {
+        $allowedRoles = ['admin', 'super_admin'];
+        if (!isset($_SESSION['user_id']) || !in_array($role, $allowedRoles, true)) {
             $this->error('unauthorized', 'Admin authentication required.', 401);
         }
     }

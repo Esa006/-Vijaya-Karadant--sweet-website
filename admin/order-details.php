@@ -24,7 +24,30 @@ $service = new OrderService();
 $order   = $service->getOrderDetails($orderId);
 
 if (!$order) {
-    echo "<div class='main-content p-5 text-center'><h3>Order Not Found</h3><a href='orders.php' class='btn btn-primary'>Back to Orders</a></div>";
+    ?>
+    <style>
+        .error-wrapper { min-height: calc(100vh - 70px); display: flex; align-items: center; justify-content: center; background-color: #f4f1ec; }
+        .error-card { background: #fff; border-radius: 16px; padding: 40px; text-align: center; max-width: 420px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #f0ebe5; margin: 0 auto; }
+        .error-icon { font-size: 56px; color: #b5572e; margin-bottom: 16px; line-height: 1; }
+        .error-title { font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .error-desc { font-size: 14.5px; color: #6b7280; margin-bottom: 24px; line-height: 1.5; }
+        .btn-accent { padding: 10px 24px; border: 1.5px solid #b5572e; border-radius: 8px; background: #b5572e; color: #fff; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; text-decoration: none; }
+        .btn-accent:hover { background: #9a4a25; border-color: #9a4a25; color: #fff; }
+    </style>
+    <div class="main-content p-0" style="background-color: #f4f1ec; min-height: 100vh;">
+        <?php require_once 'includes/topbar.php'; ?>
+        <div class="error-wrapper p-4">
+            <div class="error-card">
+                <div class="error-icon"><i class="bi bi-search"></i></div>
+                <div class="error-title">Order Not Found</div>
+                <div class="error-desc">We couldn't find the order you're looking for. It may have been deleted or the ID is incorrect.</div>
+                <a href="orders.php" class="btn-accent">
+                    <i class="bi bi-arrow-left"></i> Back to Orders
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php
     require_once 'includes/footer.php';
     exit;
 }

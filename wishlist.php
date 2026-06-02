@@ -8,6 +8,13 @@
  */
 
 require_once 'config/config.php';
+
+$seoContext = [
+    'title'       => 'My Wishlist | ' . SITE_NAME,
+    'description' => 'View your saved products on ' . SITE_NAME . '. Add your favourite Karadant, sweets, and namkeens to your wishlist and order them whenever you are ready.',
+    'canonical'   => BASE_URL . 'wishlist.php',
+];
+
 require_once 'includes/header.php';
 ?>
 

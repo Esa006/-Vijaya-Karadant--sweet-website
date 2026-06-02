@@ -10,6 +10,7 @@
  */
 
 require_once '../../../config/config.php';
+require_once '../../includes/auth.php';
 require_once REPOS_PATH . '/OrderRepository.php';
 
 header('Content-Type: application/json');

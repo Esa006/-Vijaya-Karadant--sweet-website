@@ -15,7 +15,12 @@ $productService = new ProductService();
 $namkeens = $productService->getProductsByCategory('namkeen');
 
 // Header Meta overrides (optional)
-$pageTitle = "Namkeen Collection - " . SITE_NAME;
+$seoContext = [
+    'title' => 'Crispy & Authentic Namkeens | ' . SITE_NAME,
+    'description' => 'Savor our premium traditional namkeens. Crispy, spicy, and perfectly crafted using heritage recipes for the ultimate crunch.',
+    'canonical' => BASE_URL . 'namkeen.php',
+    'type' => 'website'
+];
 
 require_once 'includes/header.php';
 ?>

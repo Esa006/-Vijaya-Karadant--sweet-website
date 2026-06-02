@@ -1,12 +1,13 @@
-# Environment Variables
+# Environment Variables — NEVER commit these
 .env
 .env.*
+.env.local
+.env.*.local
 
-# Secrets & Configs
-config/config.php
-
-# Logs
+# Runtime directories (no need in git)
 logs/
+sessions/
+tmp/
 *.log
 
 # Dependencies

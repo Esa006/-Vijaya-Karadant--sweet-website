@@ -25,7 +25,12 @@ $flashSuccess = $_SESSION['cart_success'] ?? null;
 $flashError   = $_SESSION['cart_error']   ?? null;
 unset($_SESSION['cart_success'], $_SESSION['cart_error']);
 
-$pageTitle = "Special Combo Offers | Sweets Website";
+$seoContext = [
+    'title' => 'Special Combo Offers | ' . SITE_NAME,
+    'description' => 'Save big with our exclusive traditional sweets and namkeen combos. Handpicked and packed for maximum value.',
+    'canonical' => BASE_URL . 'combos.php',
+    'type' => 'website'
+];
 require_once 'includes/header.php';
 require_once 'sections/category-strip.php';
 ?>
@@ -88,6 +93,7 @@ require_once 'sections/category-strip.php';
                 'namkeen'  => 'Namkeen Combos',
                 'laddu'    => 'Laddu Combos',
                 'gifting'  => 'Gift Boxes',
+                'mixed'    => 'Mixed Combos',
             ];
             foreach ($filterCats as $slug => $label):
                 $active = ($category === $slug) ? 'p-combo-filter-btn--active' : '';
@@ -123,16 +129,19 @@ require_once 'sections/category-strip.php';
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
             <?php foreach ($combos as $combo):
                 $img        = $combo['image'] ?? 'assets/images/placeholder.png';
+                $gallery    = $combo['gallery'] ?? [];
                 $savings    = (float)$combo['savings_amount'];
                 $finalPrice = (float)$combo['final_price'];
                 $origPrice  = (float)$combo['original_price'];
                 $savingsPct = ($origPrice > 0) ? round(($savings / $origPrice) * 100) : 0;
                 $cardId     = 'combo-' . (int)$combo['id'];
+                $hasGallery = count($gallery) > 1;
+                $swiperId   = 'cswiper-' . (int)$combo['id'];
             ?>
             <div class="col">
                 <article class="p-combo-card" id="<?php echo $cardId; ?>">
 
-                    <!-- ── Image ── -->
+                    <!-- ── Image / Gallery ── -->
                     <div class="p-combo-card__img-wrap">
                         <?php if ($combo['stock_status'] === 'out_of_stock'): ?>
                         <div class="p-combo-card__oos-overlay">Out of Stock</div>
@@ -140,11 +149,30 @@ require_once 'sections/category-strip.php';
                         <?php elseif ($savingsPct > 0): ?>
                         <span class="p-combo-card__badge"><?php echo $savingsPct; ?>% OFF</span>
                         <?php endif; ?>
+
+                        <?php if ($hasGallery): ?>
+                        <!-- Swiper gallery -->
+                        <div class="swiper combo-card-swiper" id="<?php echo $swiperId; ?>">
+                            <div class="swiper-wrapper">
+                                <?php foreach ($gallery as $gi): ?>
+                                <div class="swiper-slide">
+                                    <img src="<?php echo BASE_URL . htmlspecialchars($gi['image_path']); ?>"
+                                         alt="<?php echo htmlspecialchars($combo['name']); ?>"
+                                         class="p-combo-card__img"
+                                         loading="lazy"
+                                         onerror="this.onerror=null;this.src='<?php echo BASE_URL; ?>assets/images/placeholder.png';">
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="swiper-pagination combo-card-pagination"></div>
+                        </div>
+                        <?php else: ?>
                         <img src="<?php echo BASE_URL . htmlspecialchars($img); ?>"
                              alt="<?php echo htmlspecialchars($combo['name']); ?>"
                              class="p-combo-card__img"
                              loading="lazy"
                              onerror="this.onerror=null;this.src='<?php echo BASE_URL; ?>assets/images/placeholder.png';">
+                        <?php endif; ?>
                     </div>
 
                     <!-- ── Body ── -->
@@ -255,9 +283,38 @@ require_once 'sections/category-strip.php';
 
 <?php require_once 'includes/footer.php'; ?>
 
+<style>
+/* Combo card gallery swiper */
+.combo-card-swiper { width: 100%; height: 100%; }
+.combo-card-swiper .swiper-slide { overflow: hidden; }
+.combo-card-pagination {
+    position: absolute;
+    bottom: 6px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+.combo-card-pagination .swiper-pagination-bullet {
+    width: 5px; height: 5px;
+    background: rgba(255,255,255,.6);
+    border-radius: 50%;
+    opacity: 1;
+    transition: background .2s, transform .2s;
+    pointer-events: all;
+    cursor: pointer;
+}
+.combo-card-pagination .swiper-pagination-bullet-active {
+    background: #fff;
+    transform: scale(1.35);
+}
+</style>
+
 <script>
-// Auto-dismiss flash toasts after 4s
 document.addEventListener('DOMContentLoaded', function() {
+    // ── Flash toast auto-dismiss ──
     var t = document.getElementById('flashToast');
     if (t) {
         setTimeout(function() {
@@ -267,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 4000);
     }
 
-    // Rotate chevron on accordion toggle
+    // ── Accordion chevron rotation ──
     document.querySelectorAll('.p-combo-accordion-toggle').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var chev = this.querySelector('.p-combo-chevron');
@@ -275,6 +332,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 var expanded = this.getAttribute('aria-expanded') === 'true';
                 chev.style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
             }
+        });
+    });
+
+    // ── Init Swiper on every combo-card-swiper ──
+    document.querySelectorAll('.combo-card-swiper').forEach(function(el) {
+        new Swiper(el, {
+            loop: true,
+            autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+            speed: 600,
+            pagination: {
+                el: el.querySelector('.combo-card-pagination'),
+                clickable: true,
+            },
         });
     });
 });

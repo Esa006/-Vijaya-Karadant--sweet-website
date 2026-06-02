@@ -108,7 +108,7 @@ $slides      = $heroService->getAllSlides();
     padding-top: 12px; border-top: 1px solid var(--border);
 }
 .btn-hs-edit {
-    flex: 1;
+    /* flex: 1; */
     background: var(--brand);
     color: #fff;
     border: none;

@@ -400,7 +400,8 @@ $allCategories = $categoryService->getCategoriesTree(); // Or getAllFlat
                         ? `Showing 1-${total} of ${total} items`
                         : `Showing ${visibleCount} of ${total} items (filtered)`;
                 }
-        }
+            }); // ← close rows.forEach
+        } // ← close filterInventory()
 
         if (searchInput) searchInput.addEventListener('input', filterInventory);
         if (statusFilter) statusFilter.addEventListener('change', filterInventory);

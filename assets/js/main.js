@@ -650,6 +650,7 @@ const initSweetsWebsite = () => {
                     const data = await response.json();
                     if (data.success) {
                         updateCartBadge(Number(data.itemCount) || 0);
+                        localStorage.setItem('cart_sync_time', Date.now().toString());
                         if (window.Swal) Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 1800, icon: 'success', title: 'Added to cart' });
                         return true;
                     }
@@ -683,6 +684,51 @@ const initSweetsWebsite = () => {
                 window.location.href = `cart.php?action=${action}&slug=${slug}&weight=${weight}`;
             });
         } catch (e) { console.error('Quick Cart Actions Init Failed:', e); }
+    };
+
+    // ── Cross-Tab Cart Synchronization ───────────────────
+    const initCartSync = () => {
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'cart_sync_time') {
+                fetch('api/v1/cart-sync.php')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update global state if on PDP
+                            if (typeof window.cartItems !== 'undefined') {
+                                // Rebuild cartItems dictionary based on cart contents
+                                window.cartItems = {};
+                                if (data.cartItems) {
+                                    Object.entries(data.cartItems).forEach(([key, item]) => {
+                                        window.cartItems[key] = { quantity: item.quantity, slug: item.slug, weight: item.weight };
+                                    });
+                                }
+                                // Re-render PDP UI
+                                if (typeof syncQtyDisplay === 'function') syncQtyDisplay();
+                            }
+                            
+                            // Update Header Badge everywhere
+                            const cartLink = document.querySelector('.c-header-actions__item a[href*="shopping-cart.php"]');
+                            if (cartLink) {
+                                let badge = cartLink.querySelector('.badge');
+                                if (data.cartCount > 0) {
+                                    if (!badge) {
+                                        badge = document.createElement('span');
+                                        badge.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger js-cart-count';
+                                        badge.style.fontSize = '10px';
+                                        cartLink.classList.add('position-relative');
+                                        cartLink.appendChild(badge);
+                                    }
+                                    badge.textContent = String(data.cartCount);
+                                } else if (badge) {
+                                    badge.remove();
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => console.warn('Cart sync failed:', err));
+            }
+        });
     };
 
     // ── Best Sellers Filtering (Robust) ──────────────────
@@ -742,19 +788,6 @@ const initSweetsWebsite = () => {
                             }
                         });
                         
-                        // Hide dangling products if they form an incomplete row (< 4 items) on wide screens (6 col grid)
-                        if (window.innerWidth >= 1200) {
-                            const remainder = visibleItems.length % 6;
-                            if (remainder > 0 && remainder < 4) {
-                                for (let i = visibleItems.length - remainder; i < visibleItems.length; i++) {
-                                    visibleItems[i].classList.add('d-none');
-                                    visibleItems[i].style.display = 'none';
-                                    visibleItems[i].style.opacity = '0';
-                                }
-                                visibleItems = visibleItems.slice(0, visibleItems.length - remainder);
-                            }
-                        }
-                        
                         console.log(`[Bestsellers] Filter complete. Matches showing: ${visibleItems.length}`);
                         if (grid) grid.style.opacity = '1';
                         
@@ -781,6 +814,7 @@ const initSweetsWebsite = () => {
     initBestsellerFilter();
     initWeightSelection();
     initQuickCartActions();
+    initCartSync();
     initCatalogInteraction();
     initMobileMenu();
     initHeaderSearch();
