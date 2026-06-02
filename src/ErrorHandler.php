@@ -259,13 +259,23 @@ HTML;
     // ── Map PHP errno to LogService level ────────────────────────
     private static function phpErrnoToLevel(int $errno): string
     {
-        return match ($errno) {
-            E_ERROR, E_PARSE, E_CORE_ERROR,
-            E_COMPILE_ERROR, E_USER_ERROR    => LogService::CRITICAL,
-            E_WARNING, E_USER_WARNING,
-            E_CORE_WARNING, E_COMPILE_WARNING => LogService::WARNING,
-            E_DEPRECATED, E_USER_DEPRECATED   => LogService::NOTICE,
-            default                           => LogService::INFO,
-        };
+        switch ($errno) {
+            case E_ERROR:
+            case E_PARSE:
+            case E_CORE_ERROR:
+            case E_COMPILE_ERROR:
+            case E_USER_ERROR:
+                return LogService::CRITICAL;
+            case E_WARNING:
+            case E_USER_WARNING:
+            case E_CORE_WARNING:
+            case E_COMPILE_WARNING:
+                return LogService::WARNING;
+            case E_DEPRECATED:
+            case E_USER_DEPRECATED:
+                return LogService::NOTICE;
+            default:
+                return LogService::INFO;
+        }
     }
 }
