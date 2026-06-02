@@ -434,7 +434,8 @@
     color: #7b1d1d;
 }
 
-.pdp-chip.is-active, .pdp-chip.active {
+.pdp-chip.is-active,
+.pdp-chip.active {
     background: var(--clr-secondary);
     color: #fff;
     border-color: var(--clr-secondary);
@@ -504,7 +505,7 @@
 
 .pdp-btn {
     border-radius: 12px;
-    padding: 0.65rem 1.6rem;
+    padding: -0.35rem 1.6rem;
     font-weight: 600;
     border: 1px solid transparent;
     display: inline-flex;
