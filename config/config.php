@@ -21,15 +21,23 @@ define('REPOS_PATH', ROOT_PATH . '/repositories');
 // Load Autoloader & .env
 require_once ROOT_PATH . '/src/Autoloader.php';
 
+// Helper to reliably get env vars even if putenv is disabled
+function get_env_var($key, $default = null) {
+    if (isset($_ENV[$key])) return $_ENV[$key];
+    if (isset($_SERVER[$key])) return $_SERVER[$key];
+    $val = getenv($key);
+    return $val !== false ? $val : $default;
+}
+
 // 2. Database Credentials (Loaded via .env)
-define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
-define('DB_NAME', getenv('DB_NAME') ?: 'sweets_db');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_HOST', get_env_var('DB_HOST', '127.0.0.1'));
+define('DB_NAME', get_env_var('DB_NAME', 'sweets_db'));
+define('DB_USER', get_env_var('DB_USER', 'root'));
+define('DB_PASS', get_env_var('DB_PASS', ''));
 
 // Application Mode
-define('APP_ENV', getenv('APP_ENV') ?: 'production');
-define('APP_DEBUG', (getenv('APP_DEBUG') === 'true'));
+define('APP_ENV', get_env_var('APP_ENV', 'production'));
+define('APP_DEBUG', (get_env_var('APP_DEBUG') === 'true'));
 
 // 3. Dynamic Settings
 $globalSiteSettings = [];
@@ -52,16 +60,16 @@ define('SITE_ADDRESS', $globalSiteSettings['store_address'] ?? '145, Market Road
 define('MAX_QTY_LIMIT', (int)($globalSiteSettings['store_max_qty_limit'] ?? 10));
 
 // SMTP Email Settings
-define('SMTP_HOST', getenv('SMTP_HOST') ?: '');
-define('SMTP_PORT', (int)(getenv('SMTP_PORT') ?: 587));
-define('SMTP_USERNAME', getenv('SMTP_USERNAME') ?: '');
-define('SMTP_PASSWORD', getenv('SMTP_PASSWORD') ?: '');
-define('SMTP_FROM_EMAIL', getenv('SMTP_FROM_EMAIL') ?: SITE_EMAIL);
-define('SMTP_FROM_NAME', getenv('SMTP_FROM_NAME') ?: SITE_NAME);
-define('SMTP_SECURE', strtolower((string)(getenv('SMTP_SECURE') ?: 'tls')));
+define('SMTP_HOST', get_env_var('SMTP_HOST', ''));
+define('SMTP_PORT', (int)(get_env_var('SMTP_PORT', 587)));
+define('SMTP_USERNAME', get_env_var('SMTP_USERNAME', ''));
+define('SMTP_PASSWORD', get_env_var('SMTP_PASSWORD', ''));
+define('SMTP_FROM_EMAIL', get_env_var('SMTP_FROM_EMAIL', SITE_EMAIL));
+define('SMTP_FROM_NAME', get_env_var('SMTP_FROM_NAME', SITE_NAME));
+define('SMTP_SECURE', strtolower((string)(get_env_var('SMTP_SECURE', 'tls'))));
 
 // Resend API Configuration
-define('RESEND_API_KEY', getenv('RESEND_API_KEY') ?: '');
+define('RESEND_API_KEY', get_env_var('RESEND_API_KEY', ''));
 
 // Set default timezone
 date_default_timezone_set('Asia/Kolkata');
@@ -69,19 +77,19 @@ date_default_timezone_set('Asia/Kolkata');
 // Versioning for cache busting
 define('SITE_VERSION', '1.0.8');
 define('SHIPPING_RATES', [
-    'standard'       => (float)(getenv('SHIPPING_STANDARD') ?: 50.00),
-    'express'        => (float)(getenv('SHIPPING_EXPRESS') ?: 150.00),
-    'free_threshold' => (float)(getenv('SHIPPING_FREE_THRESHOLD') ?: 1000.00)
+    'standard'       => (float)(get_env_var('SHIPPING_STANDARD', 50.00)),
+    'express'        => (float)(get_env_var('SHIPPING_EXPRESS', 150.00)),
+    'free_threshold' => (float)(get_env_var('SHIPPING_FREE_THRESHOLD', 1000.00))
 ]);
 
 // UPI Payment Settings — DB (admin settings) takes priority over .env
-define('UPI_ID',       $globalSiteSettings['upiId']          ?? getenv('UPI_ID')       ?: 'vijayakaradant@upi');
-define('UPI_MERCHANT', $globalSiteSettings['upiDisplayName']  ?? getenv('UPI_MERCHANT') ?: 'Vijaya Karadant Sweets');
+define('UPI_ID',       $globalSiteSettings['upiId']          ?? get_env_var('UPI_ID', 'vijayakaradant@upi'));
+define('UPI_MERCHANT', $globalSiteSettings['upiDisplayName']  ?? get_env_var('UPI_MERCHANT', 'Vijaya Karadant Sweets'));
 define('UPI_QR_IMAGE', $globalSiteSettings['shop_qr']         ?? '');
 
 // Razorpay Payment Settings
-define('RAZORPAY_KEY',     getenv('RAZORPAY_KEY') ?: '');
-define('RAZORPAY_SECRET',  getenv('RAZORPAY_SECRET') ?: '');
+define('RAZORPAY_KEY',     get_env_var('RAZORPAY_KEY', ''));
+define('RAZORPAY_SECRET',  get_env_var('RAZORPAY_SECRET', ''));
 
 
 // 3. Site URL Detection (Robust Base URL calculation)
@@ -154,7 +162,7 @@ if (!APP_DEBUG) {
 $isSecure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
             (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
-$redisUrl = getenv('REDIS_URL');
+$redisUrl = get_env_var('REDIS_URL');
 if (extension_loaded('redis') && $redisUrl) {
     ini_set('session.save_handler', 'redis');
     ini_set('session.save_path', $redisUrl);
