@@ -93,7 +93,7 @@ try {
     echo json_encode($response);
 
 
-} catch (Exception $e) {
+} catch (\Throwable $e) {
     error_log("[ForgotPassword] Error: " . $e->getMessage());
     echo json_encode(['success' => false, 'message' => 'System error. Please try again later.']);
 }
