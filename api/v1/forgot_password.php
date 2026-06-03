@@ -83,6 +83,11 @@ try {
     $emailSvc = new \App\Service\EmailService();
     $mailSent = $emailSvc->sendPasswordResetOTP($email, $otp, $resetLink);
 
+    if (!$mailSent) {
+        echo json_encode(['success' => false, 'message' => 'Failed to send email. Please check your API key and server logs.']);
+        exit;
+    }
+
     // 2. Local fallback: return OTP in JSON for developer convenience
     if ($isLocal) {
         $response['otp'] = $otp;
