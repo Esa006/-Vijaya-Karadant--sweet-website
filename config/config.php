@@ -68,7 +68,8 @@ define('SMTP_FROM_EMAIL', get_env_var('SMTP_FROM_EMAIL', SITE_EMAIL));
 define('SMTP_FROM_NAME', get_env_var('SMTP_FROM_NAME', SITE_NAME));
 define('SMTP_SECURE', strtolower((string)(get_env_var('SMTP_SECURE', 'tls'))));
 
-// Resend API Configuration
+// Email API Configuration
+define('ELASTIC_EMAIL_API_KEY', get_env_var('ELASTIC_EMAIL_API_KEY', ''));
 define('RESEND_API_KEY', get_env_var('RESEND_API_KEY', ''));
 
 // Set default timezone

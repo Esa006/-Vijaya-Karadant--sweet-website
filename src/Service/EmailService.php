@@ -109,6 +109,11 @@ class EmailService {
      * Internal helper for sending HTML emails (Made public for general use)
      */
     public function sendHtmlEmail(string $to, string $subject, string $htmlContent): bool {
+        // Use Elastic Email API if configured
+        if (defined('ELASTIC_EMAIL_API_KEY') && !empty(ELASTIC_EMAIL_API_KEY)) {
+            return $this->sendViaElasticEmail($to, $subject, $htmlContent);
+        }
+
         // Use Resend API if API key is configured
         if (defined('RESEND_API_KEY') && !empty(RESEND_API_KEY)) {
             return $this->sendViaResend($to, $subject, $htmlContent);
@@ -168,6 +173,47 @@ class EmailService {
             return true;
         } else {
             error_log("[EmailService] Resend API Error (HTTP {$httpCode}): " . $response);
+            return false;
+        }
+    }
+
+    /**
+     * Send email using Elastic Email HTTP API
+     */
+    private function sendViaElasticEmail(string $to, string $subject, string $htmlContent): bool {
+        $apiKey = ELASTIC_EMAIL_API_KEY;
+        $url = 'https://api.elasticemail.com/v2/email/send';
+        
+        $data = [
+            'apikey' => $apiKey,
+            'subject' => $subject,
+            'from' => $this->fromEmail,
+            'fromName' => $this->siteName,
+            'to' => $to,
+            'bodyHtml' => $htmlContent,
+            'isTransactional' => 'true'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        if (curl_errno($ch)) {
+            error_log('[EmailService] ElasticEmail cURL Error: ' . curl_error($ch));
+            curl_close($ch);
+            return false;
+        }
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+        if ($httpCode >= 200 && $httpCode < 300 && isset($result['success']) && $result['success'] == true) {
+            return true;
+        } else {
+            error_log("[EmailService] ElasticEmail API Error: " . $response);
             return false;
         }
     }
