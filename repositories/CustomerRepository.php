@@ -14,6 +14,14 @@ require_once 'BaseRepository.php';
 class CustomerRepository extends BaseRepository {
 
     /**
+     * Get Basic Customer Info By ID
+     */
+    public function getById(int $id): ?array {
+        $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
+        return $this->fetchOne($sql, [':id' => $id]);
+    }
+
+    /**
      * Get All Customers (Production Listing Source)
      */
     public function getAllCustomers(): array {
