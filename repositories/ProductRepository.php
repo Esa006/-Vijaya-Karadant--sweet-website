@@ -542,17 +542,16 @@ class ProductRepository extends BaseRepository {
 
         if (!empty($filters['search'])) {
             $searchStr = trim((string)$filters['search']);
-            $whereConditions[] = "(MATCH(p.name, p.slug, p.short_description) AGAINST(:search_query IN BOOLEAN MODE) OR MATCH(c.name, c.slug) AGAINST(:search_query IN BOOLEAN MODE))";
-            
-            $words = explode(' ', $searchStr);
-            $boolQuery = '';
-            foreach ($words as $word) {
-                $word = trim($word);
-                if (!empty($word)) {
-                    $boolQuery .= '+' . $word . '* ';
+            $words = array_filter(explode(' ', $searchStr));
+            if (!empty($words)) {
+                $searchConditions = [];
+                foreach ($words as $index => $word) {
+                    $paramKey = 'search_word_' . $index;
+                    $searchConditions[] = "(p.name LIKE :$paramKey OR p.slug LIKE :$paramKey OR p.short_description LIKE :$paramKey OR c.name LIKE :$paramKey OR c.slug LIKE :$paramKey)";
+                    $params[$paramKey] = '%' . $word . '%';
                 }
+                $whereConditions[] = "(" . implode(" AND ", $searchConditions) . ")";
             }
-            $params['search_query'] = trim($boolQuery);
         }
 
         $whereSql = !empty($whereConditions) ? " WHERE " . implode(" AND ", $whereConditions) : "";

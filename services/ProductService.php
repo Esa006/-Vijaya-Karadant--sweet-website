@@ -442,7 +442,16 @@ class ProductService {
                 $productCategory
             ));
 
-            if (strpos($haystack, $query) !== false) {
+            $searchWords = array_filter(explode(' ', $query));
+            $matchAll = true;
+            foreach ($searchWords as $word) {
+                if (strpos($haystack, $word) === false) {
+                    $matchAll = false;
+                    break;
+                }
+            }
+
+            if ($matchAll) {
                 $matches[] = $product;
             }
         }
