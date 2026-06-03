@@ -201,6 +201,32 @@ class CustomerRepository extends BaseRepository {
     }
 
     /**
+     * Admin Update Full Profile
+     */
+    public function updateFullProfile(int $id, array $userData, array $addressData): bool {
+        try {
+            $this->beginTransaction();
+
+            // Update basic user info including status
+            $stmtUser = $this->db->prepare("UPDATE users SET full_name = :full_name, email = :email, phone = :phone, status = :status WHERE id = :id");
+            $stmtUser->execute([
+                ':full_name' => $userData['full_name'],
+                ':email'     => $userData['email'],
+                ':phone'     => $userData['phone'],
+                ':status'    => $userData['status'],
+                ':id'        => $id
+            ]);
+
+            $this->commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->rollBack();
+            error_log("Update Full Profile Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Get Lifecycle Summary Metrics
      */
     public function getSummary(int $userId): array {
