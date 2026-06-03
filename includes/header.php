@@ -20,6 +20,7 @@ $isCheckoutPage = in_array($currentPage, ['checkout.php', 'checkout-v2.php'], tr
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token'] ?? ''; ?>">
     <meta name="google-site-verification" content="sMO9uC3Oa8MTFWRYWEdbIGrOPbOD3J8Pk9ZlZtO5npg" />
+   
     
     <?php
     // Dynamic SEO Framework
