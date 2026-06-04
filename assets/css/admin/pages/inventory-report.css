@@ -22,7 +22,7 @@
 .table-card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
     border: 1px solid #eee;
     overflow: hidden;
 }
@@ -79,8 +79,17 @@
 }
 
 /* Custom Elements */
-.product-bold { font-weight: 600; display: block; }
-.sku-sub { font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 2px; }
+.product-bold {
+    font-weight: 600;
+    display: block;
+}
+
+.sku-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
 
 .status-pill {
     padding: 6px 16px;
@@ -91,9 +100,21 @@
     min-width: 120px;
     text-align: center;
 }
-.status-healthy { background: #E8F5E9; color: #2E7D32; }
-.status-low { background: #FFF3E0; color: #EF6C00; }
-.status-out { background: #FFEBEE; color: #C62828; }
+
+.status-healthy {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.status-low {
+    background: #FFF3E0;
+    color: #EF6C00;
+}
+
+.status-out {
+    background: #FFEBEE;
+    color: #C62828;
+}
 
 .progress-custom {
     height: 6px;
@@ -111,15 +132,20 @@
 /* --- MOBILE CARD TRANSFORMATION (< 576px) --- */
 @media (max-width: 575.98px) {
     .scroll-container {
-        max-height: none; /* Let it expand on mobile */
+        max-height: none;
+        /* Let it expand on mobile */
         overflow: visible;
     }
 
     .table-report thead {
-        display: none; /* Hide standard headers */
+        display: none;
+        /* Hide standard headers */
     }
 
-    .table-report, .table-report tbody, .table-report tr, .table-report td {
+    .table-report,
+    .table-report tbody,
+    .table-report tr,
+    .table-report td {
         display: block;
         width: 100%;
     }
@@ -160,7 +186,10 @@
         padding-top: 1rem;
         border-top: 1px solid #f8f9fa;
     }
-    .table-report td[data-label="Product"]::before { margin-bottom: 5px; }
+
+    .table-report td[data-label="Product"]::before {
+        margin-bottom: 5px;
+    }
 
     /* Checkbox positioning on mobile card */
     .table-report td:first-child {
@@ -170,5 +199,8 @@
         width: auto;
         padding: 0;
     }
-    .table-report td:first-child::before { display: none; }
+
+    .table-report td:first-child::before {
+        display: none;
+    }
 }

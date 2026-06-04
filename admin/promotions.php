@@ -2,7 +2,7 @@
 /**
  * Sweets Website - Admin
  * =============================================================
- * File: admin/promotions.php
+ * File: admin
  * Description: High-Fidelity Offers & Coupons Management Dashboard
  * Author: Antigravity
  * Version: 2.1.0
@@ -199,7 +199,7 @@ $coupons = $repo->getAllCoupons();
         </div>
 
         <!-- Coupons Table -->
-        <div class="table-card">
+        <div class="">
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>

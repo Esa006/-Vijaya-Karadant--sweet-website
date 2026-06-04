@@ -27,33 +27,43 @@ $slides      = $heroService->getAllSlides();
 
 /* ── PAGE LAYOUT ── */
 .hs-content { 
-    padding: 24px 28px; 
+    padding: 20px 24px; 
     overflow-x: hidden;
     width: 100%;
     box-sizing: border-box;
+    min-width: 0;
 }
-@media (max-width: 767px) {
-    .hs-content { padding: 16px; }
+@media (max-width: 575.98px) {
+    .hs-content { padding: 12px 10px; }
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .hs-content { padding: 16px 14px; }
 }
 .hs-header {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 24px; flex-wrap: wrap; gap: 10px;
 }
-.hs-header h1 { font-size: 1.7rem; font-weight: 800; color: var(--brand); margin: 0; }
-.hs-header p  { color: #666; font-size: 0.95rem; margin: 4px 0 0; }
+.hs-header h1 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 800; color: var(--brand); margin: 0; }
+.hs-header p  { color: #666; font-size: 0.9rem; margin: 4px 0 0; }
 
+/* ── SLIDE CARDS GRID ── */
+/* Mobile first: 1 column */
 .hs-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: 16px;
+    margin-bottom: 32px;
     width: 100%;
+    box-sizing: border-box;
 }
-@media (min-width: 768px) {
+/* Tablet 576px+: 2 columns */
+@media (min-width: 576px) {
     .hs-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
     }
 }
+/* Desktop 1200px+: 3 columns */
 @media (min-width: 1200px) {
     .hs-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
