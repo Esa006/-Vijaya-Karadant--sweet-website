@@ -209,6 +209,68 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         .card-custom { box-shadow: none !important; border: 1px solid var(--border-light) !important; break-inside: avoid; }
         .page-header { margin-top: 0; padding-top: 20px; }
     }
+
+    /* ── Mobile: stack action buttons & shrink heading ─────── */
+    @media (max-width: 575.98px) {
+        .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+        .page-header h1 { font-size: 18px; word-break: break-word; }
+        .page-header-actions { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+        .page-header-actions .btn-accent,
+        .page-header-actions .btn-outline-custom { flex: 1 1 auto; justify-content: center; font-size: 12px; padding: 8px 10px; }
+        .page-content { padding: 12px !important; }
+        .card-body-custom { padding: 14px; }
+        .card-header-custom { padding: 12px 14px; }
+    }
+
+    /* ── Products table → card flip on mobile ─────────────── */
+    @media (max-width: 767.98px) {
+        /* Hide the desktop table header */
+        .products-table thead { display: none; }
+
+        /* Turn each table row into a card */
+        .products-table,
+        .products-table tbody,
+        .products-table tr,
+        .products-table td { display: block; width: 100%; }
+
+        .products-table tr {
+            background: var(--bg-body);
+            border-radius: 10px;
+            margin: 0 0 12px;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .products-table td {
+            padding: 6px 0;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        /* Label each cell via data-label */
+        .products-table td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            min-width: 80px;
+        }
+
+        /* Product cell spans full width */
+        .products-table td:first-child {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 4px;
+        }
+        .products-table td:first-child::before { display: none; }
+        .product-cell { gap: 10px; }
+    }
 </style>
 
 <div class="main-content p-0 main-wrapper-custom">
@@ -272,7 +334,7 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
                       <th class="text-end">Total</th>
                     </tr>
                   </thead>
-                  <tbody>
+                   <tbody>
                     <?php foreach ($items as $item): 
                         $price = (float)$item['price_at_time'];
                         $qty   = (int)$item['quantity'];
@@ -291,9 +353,9 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
                           </div>
                         </div>
                       </td>
-                      <td>₹ <?php echo number_format($price, 2); ?></td>
-                      <td class="text-center"><?php echo $qty; ?></td>
-                      <td class="text-end"><strong>₹ <?php echo number_format($line, 2); ?></strong></td>
+                      <td data-label="Price">₹ <?php echo number_format($price, 2); ?></td>
+                      <td class="text-center" data-label="Qty"><?php echo $qty; ?></td>
+                      <td class="text-end" data-label="Total"><strong>₹ <?php echo number_format($line, 2); ?></strong></td>
                     </tr>
                     <?php endforeach; ?>
                   </tbody>

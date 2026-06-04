@@ -207,7 +207,8 @@ const ReportsEngine = {
                 type: 'line',
                 stacked: false,
                 toolbar: { show: false },
-                zoom: { enabled: false }
+                zoom: { enabled: false },
+                parentHeightOffset: 0
             },
             colors: ['#A02040', '#1565C0'],
             stroke: {
@@ -227,16 +228,16 @@ const ReportsEngine = {
             },
             xaxis: {
                 categories: dates,
-                labels: { style: { fontSize: '10px' } }
+                labels: { style: { fontSize: '9px' }, rotate: -30, rotateAlways: false, hideOverlappingLabels: true }
             },
             yaxis: [
                 {
                     title: {
                         text: '● Revenue (₹)',
-                        style: { color: '#A02040', fontWeight: 700, fontSize: '11px' }
+                        style: { color: '#A02040', fontWeight: 700, fontSize: '9px' }
                     },
                     labels: {
-                        style: { colors: '#A02040', fontSize: '10px' },
+                        style: { colors: '#A02040', fontSize: '9px' },
                         formatter: val => '₹' + Number(val).toLocaleString('en-IN', { maximumFractionDigits: 0 })
                     }
                 },
@@ -244,16 +245,17 @@ const ReportsEngine = {
                     opposite: true,
                     title: {
                         text: '● Orders',
-                        style: { color: '#1565C0', fontWeight: 700, fontSize: '11px' }
+                        style: { color: '#1565C0', fontWeight: 700, fontSize: '9px' }
                     },
                     labels: {
-                        style: { colors: '#1565C0', fontSize: '10px' },
+                        style: { colors: '#1565C0', fontSize: '9px' },
                         formatter: val => Math.round(val)
                     }
                 }
             ],
             grid: {
-                borderColor: '#f1f1f1'
+                borderColor: '#f1f1f1',
+                padding: { left: 0, right: 0 }
             },
             tooltip: {
                 shared: true,
@@ -266,7 +268,20 @@ const ReportsEngine = {
                         return y;
                     }
                 }
-            }
+            },
+            responsive: [
+                {
+                    breakpoint: 576,
+                    options: {
+                        chart: { height: 200 },
+                        yaxis: [
+                            { title: { text: '' }, labels: { style: { fontSize: '8px' }, formatter: val => '₹' + Math.round(val / 1000) + 'k' } },
+                            { opposite: true, title: { text: '' }, labels: { style: { fontSize: '8px' }, formatter: val => Math.round(val) } }
+                        ],
+                        xaxis: { labels: { style: { fontSize: '8px' }, rotate: -45 } }
+                    }
+                }
+            ]
         });
         this.charts[key].render();
     },
@@ -281,14 +296,15 @@ const ReportsEngine = {
 
         this.charts[key] = new ApexCharts(document.getElementById(elementId), {
             series: [{ name, data }],
-            chart: { type: 'area', height: 260, toolbar: { show: false }, zoom: { enabled: false } },
+            chart: { type: 'area', height: 220, toolbar: { show: false }, zoom: { enabled: false }, parentHeightOffset: 0 },
             colors: [color],
             stroke: { curve: 'smooth', width: 2 },
             fill: { type: 'gradient', gradient: { opacityFrom: 0.4, opacityTo: 0.05 } },
             dataLabels: { enabled: false },
-            xaxis: { categories: dates, labels: { style: { fontSize: '10px' } } },
-            yaxis: { labels: { style: { fontSize: '10px' } } },
-            grid: { borderColor: '#f1f1f1' }
+            xaxis: { categories: dates, labels: { style: { fontSize: '9px' }, hideOverlappingLabels: true } },
+            yaxis: { labels: { style: { fontSize: '9px' } } },
+            grid: { borderColor: '#f1f1f1', padding: { left: 0, right: 0 } },
+            responsive: [{ breakpoint: 576, options: { chart: { height: 180 }, xaxis: { labels: { style: { fontSize: '8px' }, rotate: -45 } }, yaxis: { labels: { style: { fontSize: '8px' } } } } }]
         });
         this.charts[key].render();
     },
@@ -302,13 +318,14 @@ const ReportsEngine = {
 
         this.charts[key] = new ApexCharts(document.getElementById(elementId), {
             series: [{ name, data }],
-            chart: { type: 'bar', height: 260, toolbar: { show: false } },
+            chart: { type: 'bar', height: 220, toolbar: { show: false }, parentHeightOffset: 0 },
             colors: [color],
             plotOptions: { bar: { borderRadius: 4, columnWidth: '45%' } },
             dataLabels: { enabled: false },
-            xaxis: { categories: dates, labels: { style: { fontSize: '10px' } } },
-            yaxis: { labels: { style: { fontSize: '10px' } } },
-            grid: { borderColor: '#f1f1f1' }
+            xaxis: { categories: dates, labels: { style: { fontSize: '9px' }, hideOverlappingLabels: true } },
+            yaxis: { labels: { style: { fontSize: '9px' } } },
+            grid: { borderColor: '#f1f1f1', padding: { left: 0, right: 0 } },
+            responsive: [{ breakpoint: 576, options: { chart: { height: 180 }, xaxis: { labels: { style: { fontSize: '8px' }, rotate: -45 } }, yaxis: { labels: { style: { fontSize: '8px' } } } } }]
         });
         this.charts[key].render();
     },
