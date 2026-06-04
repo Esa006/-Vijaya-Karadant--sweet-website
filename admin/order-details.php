@@ -276,6 +276,28 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         .product-thumb { width: 44px; height: 44px; }
     }
 
+    /* ── Extra Small Mobile (320px tier) ─────────────── */
+    @media (max-width: 359.98px) {
+        .page-header h1 { font-size: 16px; }
+        .page-header-actions .btn-accent,
+        .page-header-actions .btn-outline-custom { font-size: 11px; padding: 6px 8px; }
+        
+        /* Tighter card padding */
+        .page-content { padding: 8px !important; }
+        .card-custom { margin-bottom: 16px; }
+        .card-body-custom { padding: 12px; }
+        .card-header-custom { padding: 10px 12px; }
+        
+        /* Stack info rows */
+        .info-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px 0; }
+        .info-value { text-align: left; }
+        .info-row-total { margin: 0 -12px; padding: 12px; }
+        
+        /* Shrink products table slightly more */
+        .products-table td { font-size: 12px; padding: 4px 0; }
+        .products-table td::before { font-size: 10px; min-width: 60px; }
+        .product-thumb { width: 36px; height: 36px; }
+    }
 </style>
 
 <div class="main-content p-0 main-wrapper-custom">
