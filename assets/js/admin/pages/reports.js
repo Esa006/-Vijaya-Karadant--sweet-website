@@ -167,8 +167,9 @@ const ReportsEngine = {
                 chart: { type: 'donut', height: 320 },
                 labels: labels,
                 colors: ['#A02040', '#EF6C00', '#2E7D32', '#1565C0', '#4527A0'],
-                legend: { position: 'bottom' },
+                legend: { position: 'bottom', fontSize: '12px', markers: { width: 10, height: 10, radius: 3 } },
                 dataLabels: { enabled: true, formatter: val => `${val.toFixed(1)}%` },
+                plotOptions: { pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Total', formatter: (w) => '₹ ' + w.globals.seriesTotals.reduce((a, b) => a + b, 0).toLocaleString('en-IN') } } } } },
                 tooltip: { y: { formatter: v => `₹ ${Number(v).toLocaleString('en-IN')}` } }
             });
             this.charts.category.render();
@@ -231,8 +232,8 @@ const ReportsEngine = {
             yaxis: [
                 {
                     title: {
-                        text: 'Revenue (₹)',
-                        style: { color: '#A02040' }
+                        text: '● Revenue (₹)',
+                        style: { color: '#A02040', fontWeight: 700, fontSize: '11px' }
                     },
                     labels: {
                         style: { colors: '#A02040', fontSize: '10px' },
@@ -242,8 +243,8 @@ const ReportsEngine = {
                 {
                     opposite: true,
                     title: {
-                        text: 'Orders',
-                        style: { color: '#1565C0' }
+                        text: '● Orders',
+                        style: { color: '#1565C0', fontWeight: 700, fontSize: '11px' }
                     },
                     labels: {
                         style: { colors: '#1565C0', fontSize: '10px' },

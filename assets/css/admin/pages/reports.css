@@ -275,10 +275,10 @@
 
 .category-chart-container {
     position: relative;
-    height: 200px;
+    min-height: 340px;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* Table Section */
