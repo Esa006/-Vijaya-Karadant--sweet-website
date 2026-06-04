@@ -230,20 +230,22 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         /* Turn each table row into a card */
         .products-table,
         .products-table tbody,
-        .products-table tr,
         .products-table td { display: block; width: 100%; }
 
+        /* Override Bootstrap table background inheritance */
         .products-table tr {
-            background: var(--bg-body);
+            background: #ffffff !important;
             border-radius: 10px;
-            margin: 0 0 12px;
-            padding: 12px;
+            margin-bottom: 10px;
+            padding: 12px 14px;
             border: 1px solid var(--border-light);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         }
 
         .products-table td {
-            padding: 6px 0;
-            border: none;
+            padding: 5px 0;
+            border: none !important;
+            background: transparent !important;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -254,23 +256,26 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         .products-table td::before {
             content: attr(data-label);
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--accent-primary);
             font-size: 11px;
             text-transform: uppercase;
-            min-width: 80px;
+            letter-spacing: 0.4px;
+            min-width: 70px;
         }
 
-        /* Product cell spans full width */
+        /* Product cell spans full width — no label prefix */
         .products-table td:first-child {
             flex-direction: column;
             align-items: flex-start;
             padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 4px;
+            border-bottom: 1px solid var(--border-light) !important;
+            margin-bottom: 6px;
         }
         .products-table td:first-child::before { display: none; }
         .product-cell { gap: 10px; }
+        .product-thumb { width: 44px; height: 44px; }
     }
+
 </style>
 
 <div class="main-content p-0 main-wrapper-custom">
