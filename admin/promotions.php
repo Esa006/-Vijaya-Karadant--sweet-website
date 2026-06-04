@@ -81,6 +81,46 @@ $coupons = $repo->getAllCoupons();
     .modal-header { border-bottom: 1px solid var(--border-maroon); padding: 24px; background: #FDF8F5; border-radius: 20px 20px 0 0; }
     .form-label { font-weight: 600; color: #444; font-size: 0.9rem; }
     .form-control, .form-select { border-radius: 10px; border: 1px solid var(--border-maroon); padding: 12px; }
+
+    /* Responsive Mobile Cards */
+    @media (max-width: 767px) {
+        .table-responsive table { display: block; }
+        .table-responsive thead { display: none; }
+        .table-responsive tbody { display: block; }
+        .table-responsive tr {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08) !important;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .table-responsive td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+            text-align: right;
+        }
+        .table-responsive td:last-child {
+            border-bottom: none !important;
+            border-top: 1px solid #eee !important;
+            margin-top: 0.5rem;
+            padding-top: 1rem !important;
+            justify-content: center;
+        }
+        .table-responsive td::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #8C3333;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: left;
+        }
+    }
 </style>
 
 <div class="main-content">
@@ -97,8 +137,7 @@ $coupons = $repo->getAllCoupons();
             </button>
         </div>
 
-        <!-- ── Festival Countdown Timer Card ─────────────────────────────────── -->
-        <div class="table-card p-4 mb-4" id="festival-timer-card">
+        <div class="table-card p-3 p-md-4 mb-4" id="festival-timer-card" style="max-width: 100%; overflow: hidden;">
             <style>
                 #timerEndInput::-webkit-calendar-picker-indicator {
                     opacity: 0;
@@ -111,16 +150,16 @@ $coupons = $repo->getAllCoupons();
             </style>
             
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-                <div class="d-flex align-items-center gap-3">
-                    <div style="width:52px;height:52px;background:rgba(139,46,46,0.08);border-radius:14px;display:flex;align-items:center;justify-content:center;border: 1px solid rgba(139,46,46,0.1);">
+                <div class="d-flex align-items-start align-items-sm-center gap-3 w-100">
+                    <div style="width:52px;height:52px;background:rgba(139,46,46,0.08);border-radius:14px;display:flex;align-items:center;justify-content:center;border: 1px solid rgba(139,46,46,0.1);flex-shrink:0;">
                         <i class="bi bi-clock-history" style="font-size:1.5rem;color:#8B2E2E;"></i>
                     </div>
-                    <div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <h5 class="fw-bold mb-0" style="color:#4A1D1D;">Festival Countdown Timer</h5>
+                    <div style="min-width: 0;">
+                        <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
+                            <h5 class="fw-bold mb-0 text-truncate" style="color:#4A1D1D;">Festival Countdown Timer</h5>
                             <span id="timerStatusBadge" class="badge rounded-pill px-3 py-1" style="background:#F3F4F6;color:#6B7280;font-size:0.75rem;">Loading…</span>
                         </div>
-                        <p class="text-muted small mb-0">Manage the live countdown timer shown on the storefront.</p>
+                        <p class="text-muted small mb-0" style="word-wrap: break-word; white-space: normal;">Manage the live countdown timer shown on the storefront.</p>
                     </div>
                 </div>
             </div>
@@ -166,9 +205,9 @@ $coupons = $repo->getAllCoupons();
                 <thead>
                     <tr>
                         <th>Coupon Code</th>
-                        <th>Offer Type</th>
+                        <th class="d-none d-lg-table-cell">Offer Type</th>
                         <th>Value</th>
-                        <th>Usage</th>
+                        <th class="d-none d-lg-table-cell">Usage</th>
                         <th>Expiry</th>
                         <th>Status</th>
                         <th class="text-end">Actions</th>
@@ -181,13 +220,13 @@ $coupons = $repo->getAllCoupons();
                         $statusText = $isExpired ? 'Expired' : ($c['is_active'] ? 'Active' : 'Inactive');
                     ?>
                     <tr>
-                        <td><span class="coupon-code-tag"><?php echo $c['code']; ?></span></td>
-                        <td class="text-capitalize"><?php echo $c['type']; ?> Discount</td>
-                        <td class="fw-bold"><?php echo $c['type'] === 'percentage' ? $c['value'].'%' : '₹'.$c['value']; ?></td>
-                        <td><span class="text-muted"><?php echo $c['usage_limit']; ?> Max</span></td>
-                        <td><?php echo $c['expires_at'] ? date('M d, Y', strtotime($c['expires_at'])) : 'No Expiry'; ?></td>
-                        <td><span class="<?php echo $statusBadge; ?>"><?php echo $statusText; ?></span></td>
-                        <td class="text-end">
+                        <td data-label="Coupon Code"><span class="coupon-code-tag"><?php echo $c['code']; ?></span></td>
+                        <td class="text-capitalize d-none d-lg-table-cell" data-label="Offer Type"><?php echo $c['type']; ?> Discount</td>
+                        <td class="fw-bold" data-label="Value"><?php echo $c['type'] === 'percentage' ? $c['value'].'%' : '₹'.$c['value']; ?></td>
+                        <td class="d-none d-lg-table-cell" data-label="Usage"><span class="text-muted"><?php echo $c['usage_limit']; ?> Max</span></td>
+                        <td data-label="Expiry"><?php echo $c['expires_at'] ? date('M d, Y', strtotime($c['expires_at'])) : 'No Expiry'; ?></td>
+                        <td data-label="Status"><span class="<?php echo $statusBadge; ?>"><?php echo $statusText; ?></span></td>
+                        <td class="text-end" data-label="">
                             <div class="d-flex justify-content-end gap-2">
                                 <a href="offer-details.php?id=<?php echo $c['id']; ?>" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
                                     <i class="bi bi-eye"></i>

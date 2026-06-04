@@ -171,11 +171,11 @@ function getPaymentStatusBadge($status) {
                         <tr>
                             <th width="40"><input type="checkbox" class="form-check-input shadow-none" id="selectAllOrders"></th>
                             <th>Customer & Order ID</th>
-                            <th>Items</th>
+                            <th class="d-none d-lg-table-cell">Items</th>
                             <th>Total Amount</th>
-                            <th class="text-center">Payment Status</th>
+                            <th class="text-center d-none d-lg-table-cell">Payment Status</th>
                             <th class="text-center">Order Status</th>
-                            <th class="text-center">Date & Time</th>
+                            <th class="text-center d-none d-lg-table-cell">Date & Time</th>
                             <th class="text-end">Actions</th>
                         </tr>
                     </thead>
@@ -215,7 +215,7 @@ function getPaymentStatusBadge($status) {
                                         </div>
                                     </div>
                                 </td>
-                                <td data-label="Items" class="td-items">
+                                <td data-label="Items" class="td-items d-none d-lg-table-cell">
                                     <div class="fw-bold">
                                         <?php echo $itemCount; ?> item<?php echo $itemCount !== 1 ? 's' : ''; ?>
                                     </div>
@@ -223,13 +223,13 @@ function getPaymentStatusBadge($status) {
                                 <td data-label="Total Amount" class="td-price">
                                     <div class="fw-bold">₹ <?php echo number_format($total, 2); ?></div>
                                 </td>
-                                <td data-label="Payment" class="text-center td-pay">
+                                <td data-label="Payment" class="text-center td-pay d-none d-lg-table-cell">
                                     <?php echo getPaymentStatusBadge($paymentStatus); ?>
                                 </td>
                                 <td data-label="Status" class="text-center td-status">
                                     <?php echo getOrderStatusBadge($orderStatus); ?>
                                 </td>
-                                <td data-label="Date" class="text-center td-date">
+                                <td data-label="Date" class="text-center td-date d-none d-lg-table-cell">
                                     <div class="fw-semibold text-dark"><?php echo $createdAt; ?></div>
                                     <div class="text-muted x-small" style="font-size: 0.75rem;"><?php echo $createdAtTime; ?></div>
                                 </td>
@@ -272,7 +272,7 @@ function getPaymentStatusBadge($status) {
             </div>
             
             <!-- Pagination Footer -->
-            <div class="p-4 bg-white border-top d-flex justify-content-between align-items-center">
+            <div class="p-4 bg-white border-top d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
                 <div class="text-muted small pagination-text-modern">
                     Page 1 of <?php echo ceil(count($orders) / 10); ?> · 1–10 of <?php echo count($orders); ?> orders
                 </div>

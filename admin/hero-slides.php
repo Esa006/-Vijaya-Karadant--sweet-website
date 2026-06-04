@@ -26,7 +26,15 @@ $slides      = $heroService->getAllSlides();
 }
 
 /* ── PAGE LAYOUT ── */
-.hs-content { padding: 24px 28px; }
+.hs-content { 
+    padding: 24px 28px; 
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 767px) {
+    .hs-content { padding: 16px; }
+}
 .hs-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
@@ -34,12 +42,22 @@ $slides      = $heroService->getAllSlides();
 .hs-header h1 { font-size: 1.7rem; font-weight: 800; color: var(--brand); margin: 0; }
 .hs-header p  { color: #666; font-size: 0.95rem; margin: 4px 0 0; }
 
-/* ── SLIDE CARDS GRID ── */
 .hs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
     margin-bottom: 40px;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .hs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (min-width: 1200px) {
+    .hs-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 .hs-card {
     background: #fff;
@@ -106,6 +124,7 @@ $slides      = $heroService->getAllSlides();
 .hs-card__actions {
     display: flex; gap: 8px; margin-top: 12px;
     padding-top: 12px; border-top: 1px solid var(--border);
+    flex-wrap: wrap;
 }
 .btn-hs-edit {
     /* flex: 1; */

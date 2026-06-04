@@ -222,8 +222,8 @@ require_once 'includes/sidebar.php';
                             <tr>
                                 <th class="py-3 px-4 fw-bold text-dark border-0">Customer Email</th>
                                 <th class="py-3 px-4 fw-bold text-dark border-0">Item Name</th>
-                                <th class="py-3 px-4 fw-bold text-dark border-0">Type</th>
-                                <th class="py-3 px-4 fw-bold text-dark border-0">Requested On</th>
+                                <th class="py-3 px-4 fw-bold text-dark border-0 d-none d-lg-table-cell">Type</th>
+                                <th class="py-3 px-4 fw-bold text-dark border-0 d-none d-lg-table-cell">Requested On</th>
                                 <th class="py-3 px-4 fw-bold text-dark border-0">Status</th>
                                 <th class="py-3 px-4 fw-bold text-dark border-0 text-end">Action</th>
                             </tr>
@@ -237,24 +237,24 @@ require_once 'includes/sidebar.php';
                                         data-status="<?php echo htmlspecialchars($req['status']); ?>"
                                         data-email="<?php echo htmlspecialchars(strtolower((string)($req['email'] ?? '')), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-item="<?php echo htmlspecialchars(strtolower((string)($req['item_name'] ?? '')), ENT_QUOTES, 'UTF-8'); ?>">
-                                        <td class="py-3 px-4 fw-bold"><?php echo htmlspecialchars((string)($req['email'] ?? '')); ?></td>
-                                        <td class="py-3 px-4">
+                                        <td class="py-3 px-4 fw-bold" data-label="Email"><?php echo htmlspecialchars((string)($req['email'] ?? '')); ?></td>
+                                        <td class="py-3 px-4" data-label="Item">
                                             <div class="d-flex align-items-center gap-3">
                                                 <?php $img = $req['item_image'] ? '../' . $req['item_image'] : '../assets/images/placeholders/product-placeholder.png'; ?>
                                                 <img src="<?php echo htmlspecialchars($img); ?>" style="width: 40px; height: 40px; object-fit:cover; border-radius: 6px;">
                                                 <span class="text-dark fw-medium"><?php echo htmlspecialchars($req['item_name'] ?? 'Unknown Item'); ?></span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-4"><span class="badge bg-secondary text-capitalize"><?php echo $req['product_type']; ?></span></td>
-                                        <td class="py-3 px-4 text-muted"><?php echo date('M d, Y h:i A', strtotime($req['created_at'])); ?></td>
-                                        <td class="py-3 px-4">
+                                        <td class="py-3 px-4 d-none d-lg-table-cell" data-label="Type"><span class="badge bg-secondary text-capitalize"><?php echo $req['product_type']; ?></span></td>
+                                        <td class="py-3 px-4 text-muted d-none d-lg-table-cell" data-label="Date"><?php echo date('M d, Y h:i A', strtotime($req['created_at'])); ?></td>
+                                        <td class="py-3 px-4" data-label="Status">
                                             <?php if($req['status'] === 'pending'): ?>
                                                 <span class="badge bg-warning text-dark"><i class="bi bi-clock"></i> Pending</span>
                                             <?php else: ?>
                                                 <span class="badge bg-success"><i class="bi bi-check-circle"></i> Notified</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td class="py-3 px-4 text-end">
+                                        <td class="py-3 px-4 text-end td-action" data-label="Action">
                                             <?php if($req['status'] === 'pending'): ?>
                                                 <form method="POST" style="display:inline;">
                                                     <input type="hidden" name="action" value="mark_notified">
@@ -310,6 +310,56 @@ require_once 'includes/sidebar.php';
 
     .stock-filter-card.is-active {
         box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2), 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    /* Responsive Mobile Cards */
+    @media (max-width: 767px) {
+        .table-responsive table {
+            display: block;
+        }
+        .table-responsive thead {
+            display: none;
+        }
+        .table-responsive tbody {
+            display: block;
+        }
+        .table-responsive tr {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08) !important;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .table-responsive td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+            text-align: right;
+            border-top: none !important;
+        }
+        .table-responsive td::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #8C3333;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: left;
+        }
+        .table-responsive td.td-action {
+            border-bottom: none !important;
+            border-top: 1px solid #eee !important;
+            margin-top: 0.5rem;
+            padding-top: 1rem !important;
+            justify-content: center;
+        }
+        .table-responsive td.td-action::before {
+            display: none;
+        }
     }
 </style>
 

@@ -95,10 +95,10 @@ require_once 'includes/sidebar.php';
                             <tr>
                                 <th>Order Reference</th>
                                 <th>Customer</th>
-                                <th>Destination</th>
+                                <th class="d-none d-lg-table-cell">Destination</th>
                                 <th>Value</th>
                                 <th>Status</th>
-                                <th>Updated time</th>
+                                <th class="d-none d-lg-table-cell">Updated time</th>
                             </tr>
                         </thead>
                         <tbody id="shipmentsTableBody"></tbody>
@@ -159,6 +159,54 @@ require_once 'includes/sidebar.php';
     .filter-card.active {
         border-color: #7B1F1F !important;
         background-color: #fdf5f2 !important;
+    }
+
+    /* Responsive Mobile Cards */
+    @media (max-width: 767px) {
+        .table-responsive table {
+            display: block;
+        }
+        .table-responsive thead {
+            display: none;
+        }
+        .table-responsive tbody {
+            display: block;
+        }
+        .table-responsive tr {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08) !important;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .table-responsive td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+            text-align: right;
+            border-top: none !important;
+        }
+        .table-responsive td:last-child {
+            border-bottom: none !important;
+        }
+        .table-responsive td::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #8C3333;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: left;
+        }
+        .table-responsive td.td-status {
+            border-top: 1px solid #eee !important;
+            margin-top: 0.5rem;
+            padding-top: 1rem !important;
+        }
     }
 </style>
 
@@ -304,23 +352,23 @@ require_once 'includes/sidebar.php';
 
             return `
                 <tr data-order-id="${item.order_id}">
-                    <td>
+                    <td data-label="Order Ref">
                         <a href="delivery-details.php?id=${item.order_id}" class="text-decoration-none d-flex align-items-center gap-2">
                             <span class="fw-semibold text-primary">${escapeHtml(orderRef)}</span>
                             <i class="bi bi-box-arrow-up-right small"></i>
                         </a>
                     </td>
-                    <td>${escapeHtml(item.customer_name)}</td>
-                    <td>${escapeHtml(item.destination || 'N/A')}</td>
-                    <td>INR ${formatAmount(item.total_amount)}</td>
-                    <td>
-                        <div class="d-flex align-items-center">
+                    <td data-label="Customer">${escapeHtml(item.customer_name)}</td>
+                    <td class="d-none d-lg-table-cell" data-label="Destination">${escapeHtml(item.destination || 'N/A')}</td>
+                    <td data-label="Value">INR ${formatAmount(item.total_amount)}</td>
+                    <td class="td-status" data-label="Status">
+                        <div class="d-flex align-items-center justify-content-end">
                             <select class="form-select form-select-sm status-select ${statusClass}" id="select-${item.order_id}" data-order-id="${item.order_id}" onchange="handleStatusChange(event)">
                                 ${renderStatusOptions(item.status)}
                             </select>
                         </div>
                     </td>
-                    <td id="updated-${item.order_id}">${formatDateTime(item.updated_at)}</td>
+                    <td class="d-none d-lg-table-cell" id="updated-${item.order_id}" data-label="Updated">${formatDateTime(item.updated_at)}</td>
                 </tr>
             `;
         }).join('');

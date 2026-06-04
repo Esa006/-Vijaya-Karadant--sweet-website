@@ -18,8 +18,8 @@ $recentNotifs = $topbarNotifs['recent'];
         <button class="sidebar-toggle btn p-0 text-dark" id="sidebarToggle">
             <i class="bi bi-list fs-3"></i>
         </button>
-        <div class="topbar-search d-none d-md-block">
-            <div class="input-group align-items-center" style="background-color: #FCF8F5; border: 1px solid #ECCCBC; border-radius: 6px; width: 320px; height: 42px;">
+        <div class="topbar-search d-none d-md-block" style="flex: 1; max-width: 320px;">
+            <div class="input-group align-items-center" style="background-color: #FCF8F5; border: 1px solid #ECCCBC; border-radius: 6px; width: 100%; height: 42px;">
                 <span class="input-group-text border-0 bg-transparent ps-3 pe-2" style="color: #AE4B3A;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -30,7 +30,7 @@ $recentNotifs = $topbarNotifs['recent'];
         </div>
     </div>
 
-    <div class="topbar-right d-flex align-items-center gap-3 gap-md-4">
+    <div class="topbar-right d-flex align-items-center justify-content-end gap-2 gap-md-3">
         <!-- Bell Icon with dynamic notification dropdown -->
         <div class="topbar-item dropdown" id="notifDropdown">
             <a href="#" class="d-flex align-items-center justify-content-center position-relative text-decoration-none"
@@ -105,7 +105,7 @@ $recentNotifs = $topbarNotifs['recent'];
                    ?>
                    <img src="<?php echo htmlspecialchars($topbarImgSrc); ?>" alt="<?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Admin'); ?>" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover;">
                 </div>
-                <div class="profile-text text-start d-none d-md-flex flex-column justify-content-center">
+                <div class="profile-text text-start d-none d-lg-flex flex-column justify-content-center">
                     <span class="profile-name fw-bolder text-dark" style="font-size: 13px; line-height: 1.2;"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Admin'); ?></span>
                     <span class="profile-role text-muted" style="font-size: 11px;"><?php echo ucfirst($_SESSION['user_role'] ?? 'Admin'); ?></span>
                 </div>

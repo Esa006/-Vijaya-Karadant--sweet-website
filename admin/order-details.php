@@ -187,10 +187,24 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
     .badge-processing { background: var(--badge-processing-bg); color: var(--badge-processing); }
     .badge-failed { background: var(--badge-failed-bg); color: var(--badge-failed); }
 
-    .info-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-light); gap: 12px; }
-    .info-row:last-child { border-bottom: none; }
-    .info-label { font-size: 13px; color: var(--text-secondary); }
-    .info-value { font-size: 13px; font-weight: 600; color: var(--text-primary); text-align: right; }
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-light);
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-label { color: var(--text-secondary); font-size: 13px; font-weight: 500; min-width: 100px; }
+    .info-value { 
+        font-weight: 600; 
+        color: var(--text-dark); 
+        text-align: right;
+        word-break: break-word;
+        flex: 1;
+    }
     .info-row-total { background: var(--accent-light); margin: 0 -22px; padding: 16px 22px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
     .info-row-total .info-value { font-size: 20px; font-weight: 800; color: var(--accent-primary); }
 
@@ -227,9 +241,13 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         /* Hide the desktop table header */
         .products-table thead { display: none; }
 
+        /* Disable Bootstrap's table-responsive clipping */
+        .table-responsive { overflow: visible !important; }
+
         /* Turn each table row into a card */
         .products-table,
         .products-table tbody,
+        .products-table tr,
         .products-table td { display: block; width: 100%; }
 
         /* Override Bootstrap table background inheritance */
@@ -243,7 +261,7 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         }
 
         .products-table td {
-            /* padding: 8px 0; */
+            padding: 8px 0;
             border: none !important;
             border-bottom: 1px dashed var(--border-light) !important;
             background: transparent !important;

@@ -202,4 +202,73 @@
     transform: scale(1.1);
 }
 
+/* =========================================================
+   Mobile Cards (Table to Cards Transform)
+   ========================================================= */
+@media (max-width: 767px) {
+    .orders-mobile-card-grid thead {
+        display: none;
+    }
+    .orders-mobile-card-grid tbody,
+    .orders-mobile-card-grid tr,
+    .orders-mobile-card-grid td {
+        display: block;
+        width: 100%;
+    }
+    .orders-mobile-card-grid tr {
+        margin-bottom: 1rem;
+        border: 1px solid var(--table-border);
+        border-radius: 12px;
+        padding: 12px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        position: relative;
+    }
+    .orders-mobile-card-grid td {
+        border-bottom: 1px solid #f9f7f4;
+        text-align: right;
+        padding: 10px 5px !important;
+        position: relative;
+    }
+    .orders-mobile-card-grid td:last-child {
+        border-bottom: none;
+    }
+    /* Pseudo elements for data-label */
+    .orders-mobile-card-grid td[data-label]::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 700;
+        color: #777;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+    /* Special Handling for Info Cell */
+    .orders-mobile-card-grid .td-info {
+        text-align: left;
+        padding-bottom: 15px !important;
+    }
+    .orders-mobile-card-grid .td-info::before {
+        display: none; /* No label for main info */
+    }
+    .orders-mobile-card-grid .td-check {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        border: none;
+        width: auto;
+        padding: 0 !important;
+    }
+    .orders-mobile-card-grid .td-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+    }
+    .orders-mobile-card-grid .td-actions::before {
+        display: none;
+    }
+}
 

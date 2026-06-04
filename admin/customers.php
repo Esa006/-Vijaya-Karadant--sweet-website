@@ -61,78 +61,94 @@ foreach ($dbCustomers as $c) {
 
     <div class="content-body pt-0 customers-content-body px-4">
         <!-- Page Header -->
-        <div class="d-flex justify-content-between align-items-center py-4">
-            <h1 class="fw-bold mb-0" style="color: #8C3333; font-size: 2.2rem;">Customers</h1>
-            <div class="customer-actions d-flex gap-2">
-                <button class="btn-export shadow-sm" onclick="exportCSV()">
-                    <i class="bi bi-file-earmark-spreadsheet"></i> CSV
-                </button>
-                <button class="btn-export shadow-sm"  onclick="exportPDF()">
-                    <i class="bi bi-file-earmark-pdf"></i> PDF
-                </button>
-                <button class="btn-add-cust shadow-sm" type="button" id="openAddCustomerPanel">
-                    <i class="bi bi-plus-lg"></i> Add Customer
-                </button>
+        <div class="row align-items-center mb-4">
+            <div class="col-12 col-lg-auto mb-3 mb-lg-0">
+                <h1 class="fw-bold mb-0" style="color: #8C3333; font-size: 2.2rem;">Customers</h1>
+            </div>
+            <div class="col-12 col-lg-auto ms-lg-auto">
+                <div class="d-flex flex-wrap gap-2 w-100">
+                    <button class="btn-export shadow-sm flex-grow-1 flex-md-grow-0" onclick="exportCSV()">
+                        <i class="bi bi-file-earmark-spreadsheet"></i> CSV
+                    </button>
+                    <button class="btn-export shadow-sm flex-grow-1 flex-md-grow-0"  onclick="exportPDF()">
+                        <i class="bi bi-file-earmark-pdf"></i> PDF
+                    </button>
+                    <button class="btn-add-cust shadow-sm flex-grow-1 flex-md-grow-0" type="button" id="openAddCustomerPanel">
+                        <i class="bi bi-plus-lg"></i> Add Customer
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- High Fidelity Stat Cards -->
-        <div class="stats-row">
-            <div class="stat-card" onclick="window.location.reload()" style="cursor:pointer;">
-                <div class="stat-info">
-                    <span class="stat-label">Total Customers</span>
-                    <span class="stat-value" id="statTotal"><?php echo number_format($stats['total_customers']); ?></span>
-                    <span class="stat-trend">+12% from last month</span>
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="stat-card h-100" onclick="window.location.reload()" style="cursor:pointer;">
+                    <div class="stat-info">
+                        <span class="stat-label">Total Customers</span>
+                        <span class="stat-value" id="statTotal"><?php echo number_format($stats['total_customers']); ?></span>
+                        <span class="stat-trend">+12% from last month</span>
+                    </div>
+                    <div class="stat-icon-wrap icon-blue"><i class="bi bi-people-fill"></i></div>
                 </div>
-                <div class="stat-icon-wrap icon-blue"><i class="bi bi-people-fill"></i></div>
             </div>
             
-            <div class="stat-card" onclick="applyStatusFilter('Active')" style="cursor:pointer;">
-                <div class="stat-info">
-                    <span class="stat-label">Active Accounts</span>
-                    <span class="stat-value" id="statActive"><?php echo number_format($stats['active_accounts']); ?></span>
-                    <span class="stat-trend">Customers who purchased in last 90 days</span>
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="stat-card h-100" onclick="applyStatusFilter('Active')" style="cursor:pointer;">
+                    <div class="stat-info">
+                        <span class="stat-label">Active Accounts</span>
+                        <span class="stat-value" id="statActive"><?php echo number_format($stats['active_accounts']); ?></span>
+                        <span class="stat-trend">Purchased in last 90 days</span>
+                    </div>
+                    <div class="stat-icon-wrap icon-pink"><i class="bi bi-person-check-fill"></i></div>
                 </div>
-                <div class="stat-icon-wrap icon-pink"><i class="bi bi-person-check-fill"></i></div>
             </div>
 
-            <div class="stat-card" onclick="window.location.href='orders.php'" style="cursor:pointer;">
-                <div class="stat-info">
-                    <span class="stat-label">Average Order Value</span>
-                    <span class="stat-value" id="statRevenue">₹<?php echo number_format($stats['average_order_value']); ?></span>
-                    <span class="stat-trend">Orders currently being packed.</span>
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="stat-card h-100" onclick="window.location.href='orders.php'" style="cursor:pointer;">
+                    <div class="stat-info">
+                        <span class="stat-label">Average Order Value</span>
+                        <span class="stat-value" id="statRevenue">₹<?php echo number_format($stats['average_order_value']); ?></span>
+                        <span class="stat-trend">Orders currently being packed.</span>
+                    </div>
+                    <div class="stat-icon-wrap icon-success"><i class="bi bi-currency-rupee"></i></div>
                 </div>
-                <div class="stat-icon-wrap icon-success"><i class="bi bi-currency-rupee"></i></div>
             </div>
 
-            <div class="stat-card" onclick="window.location.reload()" style="cursor:pointer;">
-                <div class="stat-info">
-                    <span class="stat-label">Returning Customers</span>
-                    <span class="stat-value" id="statRetention"><?php echo round($stats['returning_rate']); ?>%</span>
-                    <span class="stat-trend">High retention for signature mithai</span>
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="stat-card h-100" onclick="window.location.reload()" style="cursor:pointer;">
+                    <div class="stat-info">
+                        <span class="stat-label">Returning Customers</span>
+                        <span class="stat-value" id="statRetention"><?php echo round($stats['returning_rate']); ?>%</span>
+                        <span class="stat-trend">High retention for mithai</span>
+                    </div>
+                    <div class="stat-icon-wrap icon-indigo"><i class="bi bi-arrow-repeat"></i></div>
                 </div>
-                <div class="stat-icon-wrap icon-indigo"><i class="bi bi-arrow-repeat"></i></div>
             </div>
         </div>
 
         <!-- Refined Filter Bar -->
-        <div class="filter-container">
-            <div class="filter-left">
-                <div class="search-box-wrap">
+        <div class="row g-3 mb-4 align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="search-box-wrap w-100" style="max-width: 100%;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #AE4B3A; font-size: 1.1rem; pointer-events: none;">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                     </svg>
-                    <input type="text" id="searchInput" placeholder="Search by name or email...." oninput="filterData()">
+                    <input type="text" id="searchInput" placeholder="Search by name or email....">
                 </div>
-                
-                <select class="filter-item-select" id="statusFilter" onchange="filterData()">
+            </div>
+            
+            <div class="col-12 col-sm-6 col-lg-3">
+                <select class="filter-item-select w-100" id="statusFilter" onchange="filterData()">
                     <option value="">Status All</option>
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
                     <option value="Blocked">Blocked</option>
                 </select>
+            </div>
 
-                <button class="filter-item-btn" onclick="document.getElementById('dateInput').showPicker?.() || document.getElementById('dateInput').click()">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <button class="filter-item-btn w-100 d-flex justify-content-between align-items-center" onclick="document.getElementById('dateInput').showPicker?.() || document.getElementById('dateInput').click()">
                     <span>Join Date</span>
                     <i class="bi bi-calendar3"></i>
                     <input type="date" id="dateInput" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" onchange="filterData()" />
@@ -148,15 +164,17 @@ foreach ($dbCustomers as $c) {
                 <table class="inventory-table-maroon" id="mainTable">
                     <thead>
                         <tr>
-                            <th style="width:50px;" class="text-center">
+                            <th class="text-center" style="width: 1%;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleAll(this)" style="border-color: #BC5B4A;" />
                             </th>
                             <th>Customer Name</th>
+                            <th class="d-none d-xl-table-cell">Email</th>
                             <th>Phone Number</th>
-                            <th>Total Orders</th>
-                            <th>Total Spend (₹)</th>
+                            <th class="text-center">Total Orders</th>
+                            <th class="d-none d-xl-table-cell">Total Spend (₹)</th>
+                            <th class="d-none d-xl-table-cell">Last Order</th>
                             <th>Status</th>
-                            <th>Join Date</th>
+                            <th class="d-none d-xl-table-cell">Join Date</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -370,12 +388,22 @@ require_once 'includes/modals/delete-confirm.php';
     const perPage = 8;
     let deleteId = null;
     let editModal, deleteModal;
+    let renderTimeout = null;
 
     document.addEventListener('DOMContentLoaded', () => {
         editModal = new bootstrap.Modal(document.getElementById('editModal'));
         if(document.getElementById('deleteModal')) {
             deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         }
+        
+        // Debounce Search
+        const searchInput = document.getElementById('searchInput');
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterData, 300);
+        });
+
         render();
     });
 
@@ -386,83 +414,122 @@ require_once 'includes/modals/delete-confirm.php';
     }
 
     function render() {
-        const start = (currentPage - 1) * perPage;
-        const pageData = filtered.slice(start, start + perPage);
-        const total = filtered.length;
-        const pages = Math.ceil(total / perPage) || 1;
-
-        // Desktop
         const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = pageData.map(c => `
+        const mc = document.getElementById('mobileCards');
+
+        // 1) Show Skeleton State
+        tbody.innerHTML = Array(perPage).fill(0).map(() => `
         <tr>
-            <td style="width:50px;text-align:center;">
-                <input type="checkbox" class="form-check-input row-check" style="border-color:#ccc;" />
-            </td>
+            <td><div class="skeleton skeleton-text w-50 mx-auto"></div></td>
             <td>
-                <div class="cust-cell">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div class="w-100"><div class="skeleton skeleton-text w-75"></div></div>
+                </div>
+            </td>
+            <td class="d-none d-xl-table-cell"><div class="skeleton skeleton-text w-75"></div></td>
+            <td><div class="skeleton skeleton-text w-75"></div></td>
+            <td><div class="skeleton skeleton-text w-50 mx-auto"></div></td>
+            <td class="d-none d-xl-table-cell"><div class="skeleton skeleton-text w-50"></div></td>
+            <td class="d-none d-xl-table-cell"><div class="skeleton skeleton-text w-50"></div></td>
+            <td><div class="skeleton skeleton-text w-50"></div></td>
+            <td class="d-none d-xl-table-cell"><div class="skeleton skeleton-text w-50"></div></td>
+            <td><div class="skeleton skeleton-text w-75 mx-auto"></div></td>
+        </tr>`).join('');
+
+        mc.innerHTML = Array(perPage).fill(0).map(() => `
+        <div class="mob-card-maroon">
+            <div class="mob-card-header-maroon">
+                <div class="skeleton skeleton-avatar"></div>
+                <div class="w-100">
+                    <div class="skeleton skeleton-text w-75"></div>
+                    <div class="skeleton skeleton-text w-50"></div>
+                </div>
+            </div>
+            <div class="mob-card-body-maroon p-3">
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+            </div>
+        </div>`).join('');
+
+        clearTimeout(renderTimeout);
+        renderTimeout = setTimeout(() => {
+            const start = (currentPage - 1) * perPage;
+            const pageData = filtered.slice(start, start + perPage);
+            const total = filtered.length;
+            const pages = Math.ceil(total / perPage) || 1;
+
+            // Desktop
+            tbody.innerHTML = pageData.map(c => `
+            <tr>
+                <td class="text-center" style="width: 1%;">
+                    <input type="checkbox" class="form-check-input row-check" style="border-color:#ccc;" />
+                </td>
+                <td>
+                    <div class="cust-cell">
+                        <div class="cust-thumb">${c.initials}</div>
+                        <div>
+                            <div class="cust-name-main">
+                                <a href="customer-details.php?id=${c.id}" class="text-decoration-none text-dark hover-primary">${c.name}</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="d-none d-xl-table-cell cust-subtext">${c.email}</td>
+                <td style="color:#444;font-weight:500;">${c.phone}</td>
+                <td style="text-align:center;font-weight:600;color:#444;">${c.orders}</td>
+                <td class="d-none d-xl-table-cell" style="font-weight:600;color:#1a1a1a;">₹ ${Number(c.spend).toLocaleString('en-IN')}</td>
+                <td class="d-none d-xl-table-cell" style="color:#888;font-size:0.88rem;">${c.join}</td>
+                <td>${getBadge(c.status)}</td>
+                <td class="d-none d-xl-table-cell" style="color:#888;font-size:0.88rem;">${c.join}</td>
+                <td>
+                    <div style="display:flex;gap:8px;justify-content:center;">
+                        <button class="act-btn-maroon" title="Edit" aria-label="Edit Customer" onclick="openEdit(${c.id})"><i class="bi bi-pencil"></i></button>
+                        <a href="customer-details.php?id=${c.id}" class="act-btn-maroon text-decoration-none" title="View Details" aria-label="View Customer Details">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <button class="act-btn-maroon" title="Delete" aria-label="Delete Customer" onclick='openDeleteModal(${JSON.stringify(c)}, "customer")'><i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+
+            // Mobile (Premium Stacked Cards as requested)
+            mc.innerHTML = pageData.map(c => `
+            <div class="mob-card-maroon">
+                <div class="mob-card-header-maroon">
                     <div class="cust-thumb">${c.initials}</div>
-                    <div>
+                    <div style="flex:1;">
                         <div class="cust-name-main">
                             <a href="customer-details.php?id=${c.id}" class="text-decoration-none text-dark hover-primary">${c.name}</a>
                         </div>
                         <div class="cust-subtext">${c.email}</div>
                     </div>
+                    <input type="checkbox" class="form-check-input shadow-none" />
                 </div>
-            </td>
-            <td style="color:#444;font-weight:500;">${c.phone}</td>
-            <td style="text-align:center;font-weight:600;color:#444;">${c.orders}</td>
-            <td style="font-weight:600;color:#1a1a1a;">₹ ${Number(c.spend).toLocaleString('en-IN')}</td>
-            <td>${getBadge(c.status)}</td>
-            <td style="color:#888;font-size:0.88rem;">${c.join}</td>
-            <td>
-                <div style="display:flex;gap:8px;justify-content:center;">
-                    <button class="act-btn-maroon" title="Edit" onclick="openEdit(${c.id})"><i class="bi bi-pencil"></i></button>
-                    <a href="customer-details.php?id=${c.id}" class="act-btn-maroon text-decoration-none" title="View Details">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                    <button class="act-btn-maroon" title="Delete" onclick='openDeleteModal(${JSON.stringify(c)}, "customer")'><i class="bi bi-trash"></i></button>
+                <div class="mob-card-body-maroon">
+                    <div class="mob-data-point"><i class="bi bi-telephone text-primary"></i> <span>${c.phone}</span></div>
+                    <div class="mob-data-point"><i class="bi bi-bag-check text-success"></i> <span>${c.orders} <span class="text-muted">Orders</span></span></div>
+                    <div class="mob-data-point"><i class="bi bi-cash-stack text-warning"></i> <span>₹ ${Number(c.spend).toLocaleString('en-IN')}</span></div>
+                    <div class="mob-data-point"><i class="bi bi-circle-fill text-muted" style="font-size:0.6rem;"></i> <span>${getBadge(c.status)}</span></div>
                 </div>
-            </td>
-        </tr>
-    `).join('');
-
-        // Mobile
-        const mc = document.getElementById('mobileCards');
-        mc.innerHTML = pageData.map(c => `
-        <div class="mob-card-maroon">
-            <div class="mob-card-header-maroon">
-                <div class="cust-thumb">${c.initials}</div>
-                <div style="flex:1;">
-                    <div class="cust-name-main">
-                        <a href="customer-details.php?id=${c.id}" class="text-decoration-none text-dark hover-primary">${c.name}</a>
-                    </div>
-                    <div class="cust-subtext">${c.email}</div>
+                <div class="mob-card-footer-maroon">
+                    <a href="customer-details.php?id=${c.id}" class="mob-act-btn-maroon"><i class="bi bi-eye"></i> View</a>
+                    <a href="javascript:void(0)" class="mob-act-btn-maroon edit" onclick="openEdit(${c.id})"><i class="bi bi-pencil-square"></i> Edit</a>
                 </div>
-                <input type="checkbox" class="form-check-input shadow-none" />
             </div>
-            <div class="mob-card-body-maroon">
-                <div class="mob-row-maroon"><span class="mob-label-maroon">Contact</span><span class="mob-value-maroon">${c.phone}</span></div>
-                <div class="mob-row-maroon"><span class="mob-label-maroon">Spend</span><span class="mob-value-maroon">₹ ${c.spend.toLocaleString()}</span></div>
-                <div class="mob-row-maroon"><span class="mob-label-maroon">Orders</span><span class="mob-value-maroon">${c.orders}</span></div>
-                <div class="mob-row-maroon"><span class="mob-label-maroon">Status</span>${getBadge(c.status)}</div>
-            </div>
-            <div class="mob-card-footer-maroon">
-                <a href="customer-details.php?id=${c.id}" class="mob-act-btn-maroon view" style="color: var(--primary-dark);"><i class="bi bi-eye"></i> Details</a>
-                <a href="javascript:void(0)" class="mob-act-btn-maroon edit" onclick="openEdit(${c.id})"><i class="bi bi-pencil-square"></i> Edit</a>
-                <button type="button" class="mob-act-btn-maroon delete" onclick='openDeleteModal(${JSON.stringify(c)}, "customer")'><i class="bi bi-trash3"></i> Delete</button>
-            </div>
-        </div>
-    `).join('');
+        `).join('');
 
-        // Info & Pagination
-        const range = total === 0 ? '0' : `${start + 1}–${Math.min(start + perPage, total)}`;
-        const info = total === 0 ? 'No customers found' : `Page ${currentPage} of ${pages} · ${range} of ${total} customers`;
-        document.getElementById('pageInfoDesktop').textContent = info;
+            // Info & Pagination
+            const range = total === 0 ? '0' : `${start + 1}–${Math.min(start + perPage, total)}`;
+            const info = total === 0 ? 'No customers found' : `Page ${currentPage} of ${pages} · ${range} of ${total} customers`;
+            document.getElementById('pageInfoDesktop').textContent = info;
 
-        buildPagination(pages, 'paginationDesktop');
-        buildPagination(pages, 'paginationMobile');
+            buildPagination(pages, 'paginationDesktop');
+            buildPagination(pages, 'paginationMobile');
 
-        document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+            document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+        }, 400); // 400ms delay to simulate loading for premium feel
     }
 
     function buildPagination(pages, containerId) {
