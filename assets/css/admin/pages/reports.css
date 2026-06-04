@@ -242,7 +242,7 @@
 }
 
 /* Charts */
-.chart-card {
+.chart-card, .category-card, .table-card {
     background: var(--bg-card);
     border-radius: var(--radius);
     padding: var(--space-md);
@@ -269,19 +269,20 @@
     position: relative;
     height: 250px;
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .category-chart-container {
+    position: relative;
     height: 200px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Table Section */
-.table-card {
-    background: var(--bg-card);
-    border-radius: var(--radius);
-    padding: var(--space-md);
-    box-shadow: var(--shadow);
-}
+/* Styles for table-card are combined with chart-card above */
 
 /* Mobile Products */
 .products-mobile {
@@ -310,6 +311,18 @@
 }
 
 /* Media Queries */
+@media (max-width: 991.98px) {
+    .charts-row, .bottom-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .chart-card, .category-card, .table-card {
+        margin-bottom: 0; /* Gap handles the spacing */
+    }
+}
+
 @media (min-width: 576px) {
     .summary-grid {
         grid-template-columns: repeat(2, 1fr);
