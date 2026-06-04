@@ -243,7 +243,7 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         }
 
         .products-table td {
-            padding: 8px 0;
+            /* padding: 8px 0; */
             border: none !important;
             border-bottom: 1px dashed var(--border-light) !important;
             background: transparent !important;
