@@ -214,9 +214,9 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
     @media (max-width: 575.98px) {
         .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
         .page-header h1 { font-size: 18px; word-break: break-word; }
-        .page-header-actions { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+        .page-header-actions { display: flex; flex-direction: column; width: 100%; gap: 10px; }
         .page-header-actions .btn-accent,
-        .page-header-actions .btn-outline-custom { flex: 1 1 auto; justify-content: center; font-size: 12px; padding: 8px 10px; }
+        .page-header-actions .btn-outline-custom { width: 100% !important; justify-content: center; font-size: 13px; padding: 10px; margin: 0 !important; text-align: center; }
         .page-content { padding: 12px !important; }
         .card-body-custom { padding: 14px; }
         .card-header-custom { padding: 12px 14px; }
@@ -243,13 +243,18 @@ $billingAddr  = ($order['billing_address_id'] === $order['shipping_address_id'])
         }
 
         .products-table td {
-            padding: 5px 0;
+            padding: 8px 0;
             border: none !important;
+            border-bottom: 1px dashed var(--border-light) !important;
             background: transparent !important;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 13px;
+        }
+        .products-table td:last-child {
+            border-bottom: none !important;
+            padding-bottom: 0;
         }
 
         /* Label each cell via data-label */
