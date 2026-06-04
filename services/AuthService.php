@@ -74,6 +74,83 @@ class AuthService {
         
         // CSRF Token for administrative actions
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+        // Record login activity
+        $this->recordLoginActivity($user['id']);
+    }
+
+    /**
+     * Record login activity into admin_login_activity table
+     * Detects device type and browser from User-Agent automatically
+     */
+    private function recordLoginActivity(int $userId): void {
+        try {
+            $ip        = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+            $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+            // --- Device Label & Type Detection ---
+            $deviceType  = 'desktop';
+            $deviceLabel = 'Unknown Device - Unknown Browser';
+
+            $ua = strtolower($userAgent);
+
+            // Detect device type
+            if (preg_match('/android|iphone|ipod|windows phone|mobile/i', $userAgent)) {
+                $deviceType = 'mobile';
+            } elseif (preg_match('/ipad|tablet/i', $userAgent)) {
+                $deviceType = 'tablet';
+            }
+
+            // Detect OS
+            $os = 'Unknown OS';
+            if (str_contains($ua, 'windows nt'))       $os = 'Windows PC';
+            elseif (str_contains($ua, 'macintosh'))    $os = 'Mac';
+            elseif (str_contains($ua, 'android'))      $os = 'Android Phone';
+            elseif (str_contains($ua, 'iphone'))       $os = 'iPhone';
+            elseif (str_contains($ua, 'ipad'))         $os = 'iPad';
+            elseif (str_contains($ua, 'linux'))        $os = 'Linux PC';
+
+            // Detect Browser
+            $browser = 'Unknown Browser';
+            if (str_contains($ua, 'edg/'))             $browser = 'Edge';
+            elseif (str_contains($ua, 'opr/') || str_contains($ua, 'opera/')) $browser = 'Opera';
+            elseif (str_contains($ua, 'chrome/') && !str_contains($ua, 'chromium')) $browser = 'Chrome';
+            elseif (str_contains($ua, 'firefox/'))     $browser = 'Firefox';
+            elseif (str_contains($ua, 'safari/') && !str_contains($ua, 'chrome')) $browser = 'Safari';
+
+            $deviceLabel = "$os - $browser";
+
+            // Detect location (local vs public IP)
+            $location = 'Unknown';
+            if ($ip === '::1' || $ip === '127.0.0.1' || str_starts_with($ip, '192.168.') || str_starts_with($ip, '10.')) {
+                $location = 'Local Network';
+            } else {
+                $location = 'Public Network';
+            }
+
+            // Mark all previous sessions for this admin as NOT current
+            $resetStmt = $this->db->prepare("UPDATE admin_login_activity SET is_current = 0 WHERE admin_id = :id");
+            $resetStmt->execute([':id' => $userId]);
+
+            // Insert new login record as current
+            $insertStmt = $this->db->prepare("
+                INSERT INTO admin_login_activity 
+                    (admin_id, ip_address, user_agent, device_label, device_type, location, status, action_label, is_current, created_at)
+                VALUES 
+                    (:admin_id, :ip, :ua, :device_label, :device_type, :location, 'success', 'Logged In', 1, NOW())
+            ");
+            $insertStmt->execute([
+                ':admin_id'     => $userId,
+                ':ip'           => $ip,
+                ':ua'           => $userAgent,
+                ':device_label' => $deviceLabel,
+                ':device_type'  => $deviceType,
+                ':location'     => $location,
+            ]);
+        } catch (\Exception $e) {
+            // Don't block login if activity logging fails
+            error_log('[AuthService] Login activity recording failed: ' . $e->getMessage());
+        }
     }
 
     private function upgradePassword(int $userId, string $plainPassword): void {
