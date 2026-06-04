@@ -78,6 +78,16 @@ require_once 'includes/auth.php';
 require_once 'includes/sidebar.php';
 ?>
 
+<style>
+@media (max-width: 767.98px) {
+    /* Hide table header on mobile */
+    table thead, 
+    .table-responsive thead {
+        display: none !important;
+    }
+}
+</style>
+
 <div class="main-content products-page">
     <?php require_once 'includes/topbar.php'; ?>
 
