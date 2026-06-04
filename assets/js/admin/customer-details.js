@@ -97,6 +97,16 @@ const CustomerApp = {
                 badgeContainer.style.color = status === 'active' ? '#166534' : '#991B1B';
             }
 
+            // Pre-fill Edit Modal
+            const editFullName = document.getElementById('editFullName');
+            if (editFullName) editFullName.value = profile.name || '';
+            const editEmail = document.getElementById('editEmail');
+            if (editEmail) editEmail.value = profile.email || '';
+            const editPhone = document.getElementById('editPhone');
+            if (editPhone) editPhone.value = profile.phone || '';
+            const editStatus = document.getElementById('editStatus');
+            if (editStatus) editStatus.value = profile.status || 'active';
+
             // 4. Addresses
             const addrBox = document.getElementById('addressContainer');
             if (addrBox && data.addresses) {
@@ -208,12 +218,12 @@ const CustomerApp = {
     }
 };
 
-window.saveNote = async function() {
+window.saveNote = async function(event) {
     const input = document.getElementById('noteInput');
     if (!input || !input.value.trim()) return;
 
     try {
-        const btn = event.currentTarget;
+        const btn = event ? event.currentTarget : document.querySelector('button[onclick="saveNote()"]');
         const origText = btn.innerHTML;
         btn.innerHTML = 'Saving...';
         btn.disabled = true;
@@ -237,6 +247,51 @@ window.saveNote = async function() {
         btn.disabled = false;
     } catch (e) {
         alert('Network error');
+    }
+};
+
+window.saveCustomer = async function(event) {
+    const form = document.getElementById('editCustomerForm');
+    if (!form.reportValidity()) return;
+
+    const btn = event.currentTarget;
+    const origText = btn.innerHTML;
+    btn.innerHTML = 'Saving...';
+    btn.disabled = true;
+
+    try {
+        const payload = {
+            action: 'update_profile',
+            full_name: document.getElementById('editFullName').value.trim(),
+            email: document.getElementById('editEmail').value.trim(),
+            phone: document.getElementById('editPhone').value.trim(),
+            status: document.getElementById('editStatus').value
+        };
+
+        const response = await fetch(`api/v1/customer-details.php?id=${CustomerApp.userId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            // close modal
+            const modalEl = document.getElementById('editCustomerModal');
+            if (typeof bootstrap !== 'undefined') {
+                const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                if (modalInstance) modalInstance.hide();
+            }
+            
+            CustomerApp.fetchData(); // reload
+        } else {
+            alert(result.error || 'Failed to update customer');
+        }
+    } catch (e) {
+        alert('Network error');
+    } finally {
+        btn.innerHTML = origText;
+        btn.disabled = false;
     }
 };
 

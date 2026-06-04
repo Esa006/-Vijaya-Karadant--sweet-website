@@ -87,6 +87,43 @@ $orderDate = date('d M Y', strtotime($order['created_at'] ?? 'now'));
             font-size: 1.2rem;
             color: #8a2c22;
         }
+        @media (max-width: 767.98px) {
+            /* Table Card Flip */
+            .table thead {
+                display: none;
+            }
+            .table, .table tbody, .table tr, .table td {
+                display: block;
+                width: 100%;
+            }
+            .table tr {
+                margin-bottom: 15px;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                padding: 10px 15px;
+                background: #fff;
+            }
+            .table td {
+                text-align: right !important;
+                padding: 8px 0 !important;
+                border: none !important;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #6c757d;
+            }
+            .table td strong {
+                text-align: right;
+            }
+            .summary-box {
+                width: 100%;
+                float: none;
+            }
+        }
         @media print {
             .no-print {
                 display: none;
@@ -112,14 +149,14 @@ $orderDate = date('d M Y', strtotime($order['created_at'] ?? 'now'));
     </div>
 
     <div class="invoice-box">
-        <div class="invoice-header d-flex justify-content-between align-items-center">
-            <div>
+        <div class="invoice-header d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start text-center text-md-start">
+            <div class="mb-3 mb-md-0">
                 <img src="assets/images/logo-1.png" alt="Vijaya Karadant" class="brand-logo mb-2">
                 <p class="mb-0 small">Amingad, Bagalkot, Karnataka - 587112</p>
                 <p class="mb-0 small">Email: support@vijayakaradant.in</p>
                 <p class="mb-0 small">Phone: +91 7259699366</p>
             </div>
-            <div class="text-end">
+            <div class="text-center text-md-end">
                 <h1 class="invoice-title">Invoice</h1>
                 <p class="mb-0"><strong>Invoice No:</strong> <?php echo $orderNumber; ?></p>
                 <p class="mb-0"><strong>Date:</strong> <?php echo $orderDate; ?></p>
@@ -127,13 +164,13 @@ $orderDate = date('d M Y', strtotime($order['created_at'] ?? 'now'));
         </div>
 
         <div class="row mb-4">
-            <div class="col-6">
+            <div class="col-12 col-md-6 mb-4 mb-md-0 text-center text-md-start">
                 <h6 class="text-muted text-uppercase small fw-bold">Billed To:</h6>
                 <p class="fw-bold mb-1"><?php echo htmlspecialchars($order['full_name'] ?? 'Customer'); ?></p>
                 <p class="mb-0 small"><?php echo nl2br(htmlspecialchars($order['address'] ?? '')); ?></p>
                 <p class="mb-0 small">Phone: <?php echo htmlspecialchars($order['phone'] ?? ''); ?></p>
             </div>
-            <div class="col-6 text-end">
+            <div class="col-12 col-md-6 text-center text-md-end">
                 <h6 class="text-muted text-uppercase small fw-bold">Order Summary:</h6>
                 <p class="mb-0 small"><strong>Order ID:</strong> <?php echo htmlspecialchars($orderNumber); ?></p>
                 <p class="mb-0 small"><strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method'] ?? 'Online'); ?></p>
@@ -154,21 +191,23 @@ $orderDate = date('d M Y', strtotime($order['created_at'] ?? 'now'));
             <tbody>
                 <?php foreach ($items as $index => $item): ?>
                 <tr>
-                    <td class="text-center"><?php echo $index + 1; ?></td>
-                    <td>
-                        <strong><?php echo htmlspecialchars($item['name']); ?></strong>
-                        <br><small class="text-muted">SKU: <?php echo htmlspecialchars($item['sku'] ?? 'N/A'); ?></small>
+                    <td data-label="#" class="text-center"><?php echo $index + 1; ?></td>
+                    <td data-label="Product">
+                        <div class="text-md-start">
+                            <strong><?php echo htmlspecialchars($item['name']); ?></strong>
+                            <br><small class="text-muted">SKU: <?php echo htmlspecialchars($item['sku'] ?? 'N/A'); ?></small>
+                        </div>
                     </td>
-                    <td class="text-center">₹<?php echo number_format((float)$item['price_at_time'], 2); ?></td>
-                    <td class="text-center"><?php echo (int)$item['quantity']; ?></td>
-                    <td class="text-end">₹<?php echo number_format((float)$item['price_at_time'] * (int)$item['quantity'], 2); ?></td>
+                    <td data-label="Price" class="text-center">₹<?php echo number_format((float)$item['price_at_time'], 2); ?></td>
+                    <td data-label="Qty" class="text-center"><?php echo (int)$item['quantity']; ?></td>
+                    <td data-label="Total" class="text-end">₹<?php echo number_format((float)$item['price_at_time'] * (int)$item['quantity'], 2); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
         <div class="row justify-content-end">
-            <div class="col-5">
+            <div class="col-12 col-md-6 col-lg-5">
                 <div class="summary-box w-100">
                     <div class="summary-item">
                         <span>Subtotal</span>

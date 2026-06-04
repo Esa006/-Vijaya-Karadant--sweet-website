@@ -57,6 +57,22 @@ try {
                 echo json_encode(['success' => true, 'message' => 'Status updated to ' . $input['status']]);
                 break;
 
+            case 'update_profile':
+                if (empty($input['full_name']) || empty($input['email'])) {
+                    throw new Exception('Name and Email are required');
+                }
+                
+                $userData = [
+                    'full_name' => $input['full_name'],
+                    'email'     => $input['email'],
+                    'phone'     => $input['phone'] ?? '',
+                    'status'    => $input['status'] ?? 'active'
+                ];
+                
+                $repo->updateFullProfile($userId, $userData, []);
+                echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
+                break;
+
             default:
                 throw new Exception('Invalid action specified');
         }
