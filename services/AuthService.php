@@ -166,6 +166,17 @@ class AuthService {
 
     public function logout(): void {
         if (session_status() === PHP_SESSION_NONE) session_start();
+
+        // Mark session as no longer current in DB
+        if (!empty($_SESSION['user_id'])) {
+            try {
+                $stmt = $this->db->prepare("UPDATE admin_login_activity SET is_current = 0 WHERE admin_id = :id AND is_current = 1");
+                $stmt->execute([':id' => $_SESSION['user_id']]);
+            } catch (\Exception $e) {
+                error_log('[AuthService] Logout activity update failed: ' . $e->getMessage());
+            }
+        }
+
         session_unset();
         session_destroy();
     }
