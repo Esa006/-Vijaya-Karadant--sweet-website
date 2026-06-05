@@ -77,14 +77,15 @@ const CustomerApp = {
             this.safeSetText('infoPhone', profile.phone || 'N/A');
             this.safeSetText('infoDob', profile.dob || 'Not Provided');
             this.safeSetText('profileSince', 'Member since ' + (profile.join_date || profile.created_at || 'Unknown').split(' ')[0]);
+            this.safeSetText('profileSinceMobile', 'Member since ' + (profile.join_date || profile.created_at || 'Unknown').split(' ')[0]);
 
             const initials = (profile.name || 'U').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             this.safeSetText('profileInitials', initials);
 
             // 2. Stats
             this.safeSetText('statOrders', data.summary.orders_count || 0);
-            this.safeSetText('statSpend', '₹ ' + parseFloat(data.summary.total_spend || 0).toLocaleString('en-IN'));
-            this.safeSetText('statAov', '₹ ' + parseFloat(data.summary.aov || 0).toLocaleString('en-IN'));
+            this.safeSetText('statSpend', parseFloat(data.summary.total_spend || 0).toLocaleString('en-IN'));
+            this.safeSetText('statAov', parseFloat(data.summary.aov || 0).toLocaleString('en-IN'));
             this.safeSetText('statLastOrder', data.summary.last_order_date || 'N/A');
 
             // 3. Status Badge
@@ -143,16 +144,16 @@ const CustomerApp = {
                         
                     return `
                         <tr>
-                            <td class="fw-bold" style="color:#8B2E2E">#ORD-${o.id}</td>
-                            <td>${o.created_at.split(' ')[0]}</td>
-                            <td>
+                            <td data-label="Order ID" class="fw-bold" style="color:#8B2E2E">#ORD-${o.id}</td>
+                            <td data-label="Date">${o.created_at.split(' ')[0]}</td>
+                            <td data-label="Items">
                                 <div class="d-flex align-items-center">
                                     ${o.item_count || 0} Items ${comboBadge}
                                 </div>
                             </td>
-                            <td class="fw-bold">₹ ${parseFloat(o.total_amount).toLocaleString('en-IN')}</td>
-                            <td><span class="badge ${o.status === 'delivered' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'} p-2 rounded">${o.status}</span></td>
-                            <td class="text-end">
+                            <td data-label="Total" class="fw-bold">₹ ${parseFloat(o.total_amount).toLocaleString('en-IN')}</td>
+                            <td data-label="Status"><span class="badge ${o.status === 'delivered' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'} p-2 rounded">${o.status}</span></td>
+                            <td data-label="Action" class="text-end">
                                 <a href="order-details.php?id=${o.id}" class="btn btn-sm btn-outline-secondary">
                                     <i class="bi bi-eye"></i>
                                 </a>

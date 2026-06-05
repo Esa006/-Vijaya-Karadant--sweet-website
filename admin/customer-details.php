@@ -76,6 +76,276 @@ $userId = (int)($_GET['id'] ?? 0);
     /* Skeleton Loading */
     .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; border-radius: 12px; }
     @keyframes skeleton-loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ═══════════════════════════════════════════
+       AMAZON-STYLE MOBILE RESPONSIVE
+    ═══════════════════════════════════════════ */
+
+    /* ── Tablet (≤ 991px) ── */
+    @media (max-width: 991.98px) {
+        .crm-details-page .container-fluid {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        /* Customer header: stack avatar+info then buttons below */
+        .crm-header-inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .crm-header-actions {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+        }
+
+        .crm-header-actions .btn {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            padding: 10px 8px;
+        }
+
+        /* Stat grid: 2×2 on tablet */
+        .crm-stat-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .crm-stat-grid > [class*="col-"] {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: none !important;
+            padding: 0 !important;
+        }
+
+        .stat-card {
+            padding: 14px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+        }
+
+        .section-card {
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Side-panel below main on tablet */
+        .crm-sidebar-col {
+            margin-top: 0;
+        }
+    }
+
+    /* ── Mobile (≤ 575px) ── */
+    @media (max-width: 575.98px) {
+        .crm-details-page .container-fluid {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 12px !important;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 13px;
+            flex-wrap: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Header card */
+        .section-card.crm-header-card {
+            padding: 14px;
+        }
+
+        /* Avatar + name row */
+        .crm-header-inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .customer-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            border-radius: 6px;
+        }
+
+        #profileName {
+            font-size: 1.1rem !important;
+        }
+
+        #profileEmail,
+        #profileSince {
+            font-size: 12px;
+        }
+
+        .status-badge {
+            font-size: 12px;
+            padding: 4px 12px;
+        }
+
+        /* Buttons: full-width stacked */
+        .crm-header-actions {
+            width: 100%;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .crm-header-actions .btn {
+            width: 100%;
+            font-size: 13px;
+            padding: 10px 12px;
+        }
+
+        /* Stat grid: strict 2-column — no overflow */
+        .crm-stat-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .crm-stat-grid > [class*="col-"] {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: none !important;
+            padding: 0 !important;
+        }
+
+        .stat-card {
+            padding: 12px 10px;
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            line-height: 1.2;
+        }
+
+        .stat-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            line-height: 1.3;
+            word-break: break-all;
+        }
+
+        /* Section cards */
+        .section-card {
+            padding: 14px 12px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+        }
+
+        /* Personal info: single column */
+        .section-card .row.g-3 > [class*="col-"] {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: none !important;
+        }
+
+        .info-label {
+            font-size: 0.78rem;
+        }
+
+        .info-value {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Address boxes */
+        .address-box {
+            padding: 14px 12px;
+        }
+
+        /* Orders table: card-style rows on mobile */
+        .orders-table thead {
+            display: none;
+        }
+
+        .orders-table tbody tr {
+            display: block;
+            background: var(--bg-light);
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 12px;
+        }
+
+        .orders-table tbody td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border: none;
+            font-size: 13px;
+        }
+
+        .orders-table tbody td::before {
+            content: attr(data-label);
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+
+        /* Tags */
+        .tag-badge {
+            font-size: 12px;
+            padding: 4px 10px;
+        }
+
+        /* Notes textarea */
+        .notes-box {
+            font-size: 14px;
+        }
+
+        /* Timeline */
+        .timeline-item {
+            padding-left: 26px;
+            padding-bottom: 18px;
+        }
+
+        .timeline-date {
+            font-size: 0.78rem;
+        }
+    }
+
+    /* ── Extra-small phones (≤ 380px) ── */
+    @media (max-width: 380px) {
+        .stat-value {
+            font-size: 0.95rem;
+        }
+
+        .crm-stat-grid {
+            gap: 8px;
+        }
+
+        .stat-card {
+            padding: 10px 8px;
+        }
+    }
 </style>
 
 <div class="main-content crm-details-page">
@@ -113,23 +383,24 @@ $userId = (int)($_GET['id'] ?? 0);
             </nav>
 
             <!-- Customer Header Card -->
-            <div class="section-card">
-                <div class="row align-items-center">
-                    <div class="col-md-7 d-flex align-items-center gap-3">
-                        <div class="customer-avatar" id="profileInitials">JD</div>
-                        <div>
+            <div class="section-card crm-header-card">
+                <div class="crm-header-inner d-flex align-items-start gap-3">
+                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                        <div class="customer-avatar flex-shrink-0" id="profileInitials">JD</div>
+                        <div class="min-w-0">
                             <h4 class="mb-1 fw-bold h3" id="profileName">Loading...</h4>
-                            <div class="d-flex align-items-center gap-3 flex-wrap">
+                            <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
                                 <span class="text-muted" id="profileEmail">...</span>
-                                <span class="text-muted" id="profileSince">...</span>
+                                <span class="text-muted d-none d-sm-inline" id="profileSince">...</span>
                                 <span class="status-badge" id="statusBadgeContainer">
                                     <span class="status-dot"></span>
                                     <span id="statusText">Active</span>
                                 </span>
                             </div>
+                            <div class="d-sm-none text-muted mt-1" style="font-size:12px;" id="profileSinceMobile"></div>
                         </div>
                     </div>
-                    <div class="col-md-5 d-flex gap-2 justify-content-md-end mt-3 mt-md-0">
+                    <div class="crm-header-actions d-flex gap-2 justify-content-md-end flex-shrink-0">
                         <a href="orders.php?user_id=<?php echo $userId; ?>" class="btn btn-outline-custom px-4">
                             <i class="bi bi-bag me-2"></i>View all Orders
                         </a>
@@ -143,39 +414,39 @@ $userId = (int)($_GET['id'] ?? 0);
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Stats Grid -->
-                    <div class="row mb-4">
+                    <div class="crm-stat-grid row g-3 mb-4">
                         <div class="col-6 col-md-3">
-                            <div class="stat-card">
+                            <div class="stat-card h-100">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="stat-label">Total Orders</span>
-                                    <div class="stat-icon"><i class="bi bi-bag"></i></div>
+                                    <div class="stat-icon flex-shrink-0"><i class="bi bi-bag"></i></div>
                                 </div>
                                 <div class="stat-value" id="statOrders">0</div>
                             </div>
                         </div>
                         <div class="col-6 col-md-3">
-                            <div class="stat-card">
+                            <div class="stat-card h-100">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="stat-label">Total Spend</span>
-                                    <div class="stat-icon"><i class="bi bi-currency-rupee"></i></div>
+                                    <div class="stat-icon flex-shrink-0"><i class="bi bi-currency-rupee"></i></div>
                                 </div>
-                                <div class="stat-value">₹ <span id="statSpend">0</span></div>
+                                <div class="stat-value">₹&thinsp;<span id="statSpend">0</span></div>
                             </div>
                         </div>
                         <div class="col-6 col-md-3">
-                            <div class="stat-card">
+                            <div class="stat-card h-100">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="stat-label">Avg. Order Value</span>
-                                    <div class="stat-icon"><i class="bi bi-graph-up"></i></div>
+                                    <div class="stat-icon flex-shrink-0"><i class="bi bi-graph-up"></i></div>
                                 </div>
-                                <div class="stat-value">₹ <span id="statAov">0</span></div>
+                                <div class="stat-value">₹&thinsp;<span id="statAov">0</span></div>
                             </div>
                         </div>
                         <div class="col-6 col-md-3">
-                            <div class="stat-card">
+                            <div class="stat-card h-100">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="stat-label">Last Order</span>
-                                    <div class="stat-icon"><i class="bi bi-calendar"></i></div>
+                                    <div class="stat-icon flex-shrink-0"><i class="bi bi-calendar"></i></div>
                                 </div>
                                 <div class="stat-value" id="statLastOrder">N/A</div>
                             </div>
@@ -231,7 +502,7 @@ $userId = (int)($_GET['id'] ?? 0);
                                     </tr>
                                 </thead>
                                 <tbody id="ordersTable">
-                                    <!-- Orders injected by JS -->
+                                    <!-- Orders injected by JS. Each <td> must have data-label for mobile card view -->
                                 </tbody>
                             </table>
                         </div>

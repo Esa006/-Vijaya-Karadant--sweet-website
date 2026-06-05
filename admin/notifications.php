@@ -163,4 +163,55 @@ function time_elapsed_string($datetime, $full = false) {
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('.notif-search input');
+    const notifList = document.querySelector('.notif-list');
+    const notifItems = document.querySelectorAll('.notif-item');
+    
+    // Create a "No matches found" placeholder element
+    const noMatchesEl = document.createElement('div');
+    noMatchesEl.className = 'text-center py-5 text-muted d-none';
+    noMatchesEl.id = 'notifNoMatches';
+    noMatchesEl.textContent = 'No matching notifications found on this page. Press Enter to search globally.';
+    if (notifList) {
+        notifList.appendChild(noMatchesEl);
+    }
+
+    if (searchInput) {
+        // Listen to input for instant local filtering
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            notifItems.forEach(item => {
+                // Ignore the placeholder element itself
+                if (item === noMatchesEl) return;
+                
+                const headline = item.querySelector('.notif-headline')?.textContent.toLowerCase() || '';
+                const desc = item.querySelector('.notif-desc')?.textContent.toLowerCase() || '';
+
+                if (headline.includes(query) || desc.includes(query)) {
+                    // Restore original display style (flex on desktop, grid on mobile)
+                    item.style.setProperty('display', '', 'important');
+                    visibleCount++;
+                } else {
+                    item.style.setProperty('display', 'none', 'important');
+                }
+            });
+
+            // Toggle no matches message
+            if (noMatchesEl) {
+                if (visibleCount === 0 && notifItems.length > 0) {
+                    noMatchesEl.classList.remove('d-none');
+                } else {
+                    noMatchesEl.classList.add('d-none');
+                }
+            }
+        });
+    }
+});
+</script>
+
 <?php require_once 'includes/footer.php'; ?>
+

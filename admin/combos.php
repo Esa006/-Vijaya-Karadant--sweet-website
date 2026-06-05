@@ -80,7 +80,7 @@ $products = $productService->getAllProducts();
             <!-- Table -->
             <h4 class="fw-bold text-dark mb-4 products-table-title">All Combo Offers</h4>
             <div class="table-responsive products-table-wrapper">
-                <table class="table align-middle mb-0" id="combosTable">
+                <table class="table align-middle mb-0 products-mobile-card-grid" id="combosTable">
                     <thead class="products-table-head">
                         <tr>
                             <th class="ps-4 py-3">Image</th>
@@ -109,25 +109,25 @@ $products = $productService->getAllProducts();
                             </tr>
                         <?php else: ?>
                             <?php foreach ($combos as $combo): ?>
-                                <tr class="combo-row" data-active="<?php echo $combo['is_active'] ? '1' : '0'; ?>">
-                                    <td class="ps-4 py-3">
+                                 <tr class="combo-row" data-active="<?php echo $combo['is_active'] ? '1' : '0'; ?>">
+                                    <td class="ps-4 py-3 td-image">
                                         <img src="<?php echo BASE_URL . htmlspecialchars($combo['image'] ?? 'assets/images/placeholder.png'); ?>"
                                              class="rounded-2 product-thumb"
                                              style="width:56px;height:56px;object-fit:cover;"
                                              onerror="this.src='<?php echo BASE_URL; ?>assets/images/placeholder.png'">
                                     </td>
-                                    <td class="py-3">
+                                    <td class="py-3 td-info">
                                         <div class="fw-bold text-dark"><?php echo htmlspecialchars($combo['name']); ?></div>
                                         <div class="text-muted small mt-1" style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                             <?php echo htmlspecialchars($combo['description'] ?? ''); ?>
                                         </div>
                                     </td>
-                                    <td class="py-3 d-none d-md-table-cell">
+                                    <td class="py-3 d-none d-md-table-cell" data-label="Category">
                                         <span class="badge bg-light text-dark border text-capitalize">
                                             <?php echo htmlspecialchars($combo['category'] ?? '—'); ?>
                                         </span>
                                     </td>
-                                    <td class="py-3 d-none d-md-table-cell fw-bold">
+                                    <td class="py-3 d-none d-md-table-cell fw-bold" data-label="Price">
                                         <?php 
                                             if ($combo['price'] > 0) {
                                                 echo '₹' . number_format($combo['price'], 2);
@@ -136,12 +136,12 @@ $products = $productService->getAllProducts();
                                             }
                                         ?>
                                     </td>
-                                    <td class="py-3 text-center">
+                                    <td class="py-3 text-center td-items" data-label="Items">
                                         <span class="badge rounded-pill" style="background:#f0e6c8;color:#7A1E1E;font-size:0.85rem;">
                                             <?php echo (int)($combo['item_count'] ?? 0); ?> items
                                         </span>
                                     </td>
-                                    <td class="py-3 text-center">
+                                    <td class="py-3 text-center td-status" data-label="Status">
                                         <div class="form-check form-switch d-flex justify-content-center">
                                             <input class="form-check-input combo-toggle" type="checkbox"
                                                    role="switch"
@@ -152,8 +152,8 @@ $products = $productService->getAllProducts();
                                             <?php echo $combo['is_active'] ? 'Active' : 'Inactive'; ?>
                                         </div>
                                     </td>
-                                    <td class="py-3 pe-4 text-center">
-                                        <div class="d-flex justify-content-center gap-2">
+                                    <td class="py-3 pe-4 text-center td-actions">
+                                        <div class="d-flex justify-content-center gap-2 td-actions-wrapper">
                                             <?php
                                             $jsData = htmlspecialchars(json_encode([
                                                 'id'          => $combo['id'],
@@ -464,6 +464,208 @@ $products = $productService->getAllProducts();
     margin-right: 5px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ══════════════════════════════════════════════
+   COMBOS PAGE — AMAZON-STYLE MOBILE RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Stat cards: 2-col on mobile */
+@media (max-width: 767.98px) {
+    .products-page .row.g-4.mb-5 > [class*="col-"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Page title area: keep compact */
+    .products-page .products-page-title {
+        font-size: 22px;
+    }
+
+    /* Offcanvas: full width on mobile */
+    .products-page .products-add-offcanvas {
+        width: 100% !important;
+    }
+
+    /* Table wrapper: no horizontal scroll — card mode takes over */
+    .products-page .products-table-wrapper {
+        overflow-x: visible;
+    }
+
+    /* ── Combo card layout (piggybacks on products-mobile-card-grid) ── */
+
+    /* Hide the table header */
+    #combosTable .products-table-head {
+        display: none !important;
+    }
+
+    /* Make table, tbody, tr, td all block */
+    #combosTable,
+    #combosTable tbody,
+    #combosTable .combo-row,
+    #combosTable .combo-row td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Each row becomes an Amazon-style card */
+    #combosTable .combo-row {
+        background: #fff;
+        border: 1px solid #fee7d6;
+        border-radius: 14px;
+        padding: 14px 14px 12px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Strip default td padding/borders */
+    #combosTable .combo-row td {
+        border: none !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    /* ── TOP ROW: Image floated left, info fills right ── */
+    #combosTable .combo-row .td-image {
+        float: left;
+        width: 64px !important;
+        margin-right: 14px;
+        margin-bottom: 4px;
+    }
+
+    #combosTable .combo-row .td-image img {
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 10px;
+        object-fit: cover;
+        display: block;
+    }
+
+    #combosTable .combo-row .td-info {
+        min-height: 64px;
+        padding-bottom: 12px !important;
+        border-bottom: 1px solid #f3ede7 !important;
+        margin-bottom: 10px;
+        overflow: hidden; /* clearfix */
+    }
+
+    /* Clearfix for float */
+    #combosTable .combo-row .td-info::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    #combosTable .combo-row .td-info .fw-bold {
+        font-size: 15px;
+        line-height: 1.3;
+        color: #1a1a1a;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    #combosTable .combo-row .td-info .text-muted.small {
+        font-size: 12px;
+        max-width: 100% !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-top: 4px;
+    }
+
+    /* ── MIDDLE ROWS: data-label key/value rows ── */
+    #combosTable .combo-row .td-items,
+    #combosTable .combo-row .td-status {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0 !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        font-size: 13px;
+    }
+
+    /* Show hidden columns (Category, Price) as labeled rows */
+    #combosTable .combo-row .d-none.d-md-table-cell {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0 !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        font-size: 13px;
+    }
+
+    /* data-label pseudo-element */
+    #combosTable .combo-row td[data-label]::before {
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 700;
+        color: #8B2E2E;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+        margin-right: 10px;
+        opacity: 0.85;
+    }
+
+    /* Status toggle: keep inline */
+    #combosTable .combo-row .td-status .form-check {
+        margin: 0;
+    }
+
+    /* ── BOTTOM ROW: Actions full-width ── */
+    #combosTable .combo-row .td-actions {
+        padding-top: 12px !important;
+    }
+
+    #combosTable .combo-row .td-actions-wrapper {
+        display: flex !important;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    #combosTable .combo-row .td-actions-wrapper button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+        border-radius: 8px;
+        background: #fafafa;
+        border: 1px solid #f0ece8;
+        font-size: 16px;
+        color: #4b5563;
+        transition: all 0.2s;
+        text-decoration: none;
+    }
+
+    #combosTable .combo-row .td-actions-wrapper button.text-danger {
+        color: #dc2626 !important;
+    }
+
+    #combosTable .combo-row .td-actions-wrapper button:hover {
+        background: #fff0eb;
+        border-color: #e5cfc8;
+        color: #8B2E2E !important;
+    }
+
+    /* Empty state still works */
+    #combosTable .combo-row td[colspan] {
+        display: block !important;
+        padding: 30px 15px !important;
+    }
+}
+
+/* Stat cards: single col on very small phones */
+@media (max-width: 400px) {
+    .products-page .row.g-4.mb-5 > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
 </style>
 
 <!-- Product catalog for JS (used in item picker) -->

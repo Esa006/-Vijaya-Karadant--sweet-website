@@ -19,13 +19,192 @@ require_once 'includes/sidebar.php';
 <!-- Load Google Fonts for the premium look -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
+<style>
+    /* Report Tabs Styling (inline to bypass browser caching) */
+    .report-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 0 0 auto;
+        min-width: 100px;
+        border: 1px solid #E5E5E5;
+        background: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: #2D3436;
+        font-family: inherit;
+        font-size: 0.9rem;
+    }
+
+    .tab-btn:hover {
+        background-color: #fcfcfc;
+    }
+
+    .tab-btn.active {
+        background: #822D1D !important;
+        color: white !important;
+        border-color: #822D1D !important;
+    }
+
+    /* Mobile Header Layout Stack */
+    @media (max-width: 575.98px) {
+        .page-header-flex {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+            margin-top: 12px !important;
+            margin-bottom: 16px !important;
+        }
+        .dashboard-title {
+            font-size: 1.4rem !important;
+            margin-bottom: 0 !important;
+            text-align: left !important;
+        }
+        .inventory-report-page .header-actions {
+            width: 100% !important;
+        }
+        .inventory-report-page .header-actions button {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 10px 16px !important;
+            font-size: 0.85rem !important;
+            height: auto !important;
+        }
+        .report-tabs {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 6px !important;
+        }
+        .tab-btn {
+            flex: 1 !important;
+            min-width: 0 !important;
+            padding: 8px 4px !important;
+            font-size: 0.82rem !important;
+            text-align: center !important;
+        }
+        .inventory-report-page .container-fluid {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .dashboard-title {
+            font-size: 1.2rem !important;
+        }
+        .tab-btn {
+            font-size: 0.78rem !important;
+        }
+        .kpi-card {
+            padding: 10px 12px !important;
+        }
+        .kpi-label {
+            font-size: 10px !important;
+        }
+        .kpi-value {
+            font-size: 1.25rem !important;
+        }
+        .kpi-sub {
+            font-size: 10px !important;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .dashboard-title {
+            font-size: 1.1rem !important;
+        }
+        .tab-btn {
+            font-size: 0.72rem !important;
+            padding: 6px 2px !important;
+        }
+        #summaryCards {
+            margin-bottom: 12px !important;
+            --bs-gutter-x: 8px !important;
+            --bs-gutter-y: 8px !important;
+        }
+        .kpi-card {
+            padding: 8px !important;
+            border-radius: 8px !important;
+        }
+        .kpi-label {
+            font-size: 9px !important;
+            letter-spacing: 0px !important;
+        }
+        .kpi-value {
+            font-size: 1.15rem !important;
+            margin: 2px 0 !important;
+        }
+        .kpi-sub {
+            font-size: 9px !important;
+        }
+        .filter-row {
+            padding: 10px !important;
+        }
+        .filter-row .form-control,
+        .filter-row .form-select,
+        .filter-row .input-group-text {
+            font-size: 12px !important;
+            padding: 6px 10px !important;
+            height: 36px !important;
+        }
+        .table-report tr {
+            padding: 10px !important;
+            margin-bottom: 12px !important;
+            border-radius: 8px !important;
+        }
+        .table-report td {
+            padding: 4px 0 !important;
+            font-size: 11px !important;
+        }
+        .table-report td::before {
+            font-size: 10px !important;
+        }
+        .table-report td[data-label="Product"] {
+            padding-top: 8px !important;
+        }
+        .product-bold {
+            font-size: 12px !important;
+        }
+        .sku-sub {
+            font-size: 10px !important;
+        }
+        .status-pill {
+            font-size: 10px !important;
+            padding: 4px 8px !important;
+            min-width: 80px !important;
+        }
+        .progress-custom {
+            width: 90px !important;
+        }
+        /* Topbar extra compact */
+        .topbar-right {
+            gap: 6px !important;
+        }
+        .profile-avatar img {
+            width: 36px !important;
+            height: 36px !important;
+        }
+        .topbar-profile button {
+            width: 24px !important;
+            height: 24px !important;
+        }
+    }
+</style>
+
 <div class="main-content inventory-report-page">
     <?php require_once 'includes/topbar.php'; ?>
 
     <div class="container-fluid px-4">
 
         <!-- Page Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 mt-4 page-header-flex">
             <h2 class="dashboard-title mb-0">Inventory Status</h2>
             <div class="header-actions d-flex gap-2">
                 <button class="btn btn-outline-brown d-flex align-items-center" onclick="window.print()">
@@ -34,7 +213,11 @@ require_once 'includes/sidebar.php';
                 </button>
             </div>
         </div>
-
+        <!-- Report Tabs -->
+        <div class="report-tabs mb-4">
+            <button class="tab-btn" onclick="window.location='reports.php'">Sales Report</button>
+            <button class="tab-btn active" onclick="window.location='inventory-report.php'">Stock Report</button>
+        </div>
         <!-- KPI Summary Cards (populated dynamically) -->
         <div class="row g-3 mb-4" id="summaryCards">
             <div class="col-6 col-md-3">
@@ -84,7 +267,7 @@ require_once 'includes/sidebar.php';
         </div>
 
         <!-- Filters Row -->
-        <div class="table-card mb-0 p-3">
+        <div class="table-card mb-0 p-3 filter-row">
             <div class="row g-2 align-items-center">
                 <div class="col-md-5">
                     <div class="input-group">
@@ -177,10 +360,157 @@ require_once 'includes/sidebar.php';
     .btn-outline-brown:hover { background-color: var(--brand-brown, #8B3A3A); color: white; }
 
     @media print {
-        .admin-sidebar, .topbar, .header-actions { display: none !important; }
-        .main-content { margin-left: 0 !important; padding: 0 !important; }
-        .table-card { box-shadow: none; border: none; }
-        .scroll-container { max-height: none; overflow: visible; }
+        /* 1. Hide interactive/navigation elements */
+        .admin-sidebar, 
+        .admin-topbar, 
+        .header-actions, 
+        .report-tabs, 
+        .filter-row, 
+        .table-report th:first-child, 
+        .table-report td:first-child { 
+            display: none !important; 
+        }
+
+        /* 2. Reset main content container */
+        .main-content { 
+            margin-left: 0 !important; 
+            padding: 0 !important; 
+            background: #fff !important; 
+            color: #000 !important; 
+        }
+        
+        .container-fluid {
+            padding: 0 !important;
+        }
+
+        body {
+            background: #fff !important;
+            color: #000 !important;
+        }
+
+        /* 3. Style title */
+        .dashboard-title {
+            color: #000 !important;
+            font-size: 24px !important;
+            margin-bottom: 20px !important;
+            border-bottom: 2px solid #000 !important;
+            padding-bottom: 10px !important;
+        }
+
+        /* 4. Format KPI Cards for Print (Flat, grid-like border boxes) */
+        #summaryCards {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 12px !important;
+            margin-bottom: 24px !important;
+        }
+        
+        #summaryCards > div {
+            flex: 1 !important;
+            width: 25% !important;
+            max-width: 25% !important;
+        }
+
+        .kpi-card {
+            border: 1px solid #ccc !important;
+            background: #fff !important;
+            box-shadow: none !important;
+            padding: 12px 10px !important;
+            border-radius: 6px !important;
+            text-align: center !important;
+            height: 100% !important;
+        }
+
+        .kpi-label {
+            font-size: 10px !important;
+            color: #555 !important;
+        }
+
+        .kpi-value {
+            font-size: 20px !important;
+            color: #000 !important;
+            font-weight: bold !important;
+        }
+
+        .kpi-sub {
+            font-size: 9px !important;
+            color: #777 !important;
+        }
+
+        /* 5. Keep Charts Neatly Displayed Side-by-Side */
+        .row {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .col-md-6 {
+            width: 50% !important;
+            flex: 0 0 50% !important;
+        }
+
+        .table-card { 
+            box-shadow: none !important; 
+            border: 1px solid #ddd !important; 
+            background: #fff !important;
+            padding: 12px !important;
+        }
+
+        #stockFlowChart, #netChangeChart {
+            page-break-inside: avoid !important;
+        }
+
+        /* 6. Clean and Structured Table */
+        .scroll-container { 
+            max-height: none !important; 
+            overflow: visible !important; 
+        }
+
+        .table-report {
+            width: 100% !important;
+            border: 1px solid #ddd !important;
+            border-collapse: collapse !important;
+        }
+
+        .table-report thead th {
+            position: static !important;
+            background-color: #f5f5f5 !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            font-size: 11px !important;
+            padding: 8px 6px !important;
+            border-bottom: 2px solid #000 !important;
+            border-right: 1px solid #ddd !important;
+        }
+
+        .table-report tbody td {
+            padding: 8px 6px !important;
+            font-size: 11px !important;
+            border-bottom: 1px solid #ddd !important;
+            border-right: 1px solid #ddd !important;
+            background: transparent !important;
+            color: #000 !important;
+        }
+
+        .table-report tr {
+            page-break-inside: avoid !important;
+        }
+
+        /* 7. Status Pill and Custom Progress Bar styling for print */
+        .status-pill {
+            background: transparent !important;
+            border: 1px solid #999 !important;
+            color: #000 !important;
+            padding: 2px 6px !important;
+            font-size: 10px !important;
+            min-width: 80px !important;
+            text-align: center !important;
+        }
+
+        .progress-custom {
+            display: none !important;
+        }
     }
 </style>
 

@@ -34,10 +34,10 @@ $allCategories = $categoryService->getCategoriesTree(); // Or getAllFlat
                 <h2 class="fw-bold mb-0 products-page-title">Inventory</h2>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn rounded-2 d-flex align-items-center products-outline-btn products-export-btn" onclick="exportInventoryCSV()">
+                <button class="btn rounded-2 d-flex align-items-center products-outline-btn products-export-btn" onclick="exportInventoryCSV()" >
                     <i class="bi bi-download me-2 fs-5"></i> Export
                 </button>
-                <button class="btn btn-primary rounded-2 d-flex align-items-center products-add-btn" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
+                <button class="btn-primary rounded-2 d-flex align-items-center products-add-btn" data-bs-toggle="modal" data-bs-target="#addInventoryModal" style="background-color: #8c3333;">
                     <i class="bi bi-plus-lg me-2 fs-5"></i> Add Stock
                 </button>
             </div>

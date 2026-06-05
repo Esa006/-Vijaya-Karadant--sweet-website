@@ -91,10 +91,10 @@
 
 /* ===== STAT CARDS ===== */
 .stats-section-perm {
-    padding: 24px 32px;
+    padding: 20px 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 16px;
 }
 
 .stat-card-perm {
@@ -128,10 +128,25 @@
     flex-shrink: 0;
 }
 
-.stat-icon-perm.blue { background: var(--primary-light); color: var(--primary); }
-.stat-icon-perm.green { background: var(--green-light); color: var(--green); }
-.stat-icon-perm.orange { background: var(--orange-light); color: var(--orange); }
-.stat-icon-perm.purple { background: var(--purple-light); color: var(--purple); }
+.stat-icon-perm.blue {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.stat-icon-perm.green {
+    background: var(--green-light);
+    color: var(--green);
+}
+
+.stat-icon-perm.orange {
+    background: var(--orange-light);
+    color: var(--orange);
+}
+
+.stat-icon-perm.purple {
+    background: var(--purple-light);
+    color: var(--purple);
+}
 
 .stat-content-perm .stat-label {
     font-size: 0.85rem;
@@ -154,10 +169,11 @@
 
 /* ===== MAIN LAYOUT ===== */
 .main-layout-perm {
-    padding: 0 32px 32px;
+    padding: 0 24px 32px;
     display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 24px;
+    grid-template-columns: 280px minmax(0, 1fr);
+    /* minmax(0) prevents overflow */
+    gap: 20px;
 }
 
 /* ===== ROLES SIDEBAR ===== */
@@ -261,14 +277,19 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(122, 31, 31, 0.04);
+    min-width: 0;
+    /* critical for grid child */
 }
 
 .permissions-header {
-    padding: 24px 32px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    /* wrap on small panels */
+    gap: 10px;
 }
 
 .perm-title {
@@ -299,9 +320,19 @@
     cursor: pointer;
 }
 
+/* ===== PERMISSIONS TABLE WRAPPER ===== */
+.permissions-table-wrapper {
+    overflow-x: auto;
+    /* horizontal scroll INSIDE the panel */
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
 /* ===== PERMISSIONS TABLE ===== */
 .permissions-table {
     width: 100%;
+    min-width: 480px;
+    /* table minimum — scroll kicks in below this */
     border-collapse: collapse;
 }
 
@@ -365,11 +396,14 @@
 
 /* ===== FOOTER ===== */
 .permissions-footer {
-    padding: 24px 32px;
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--primary-light);
+    flex-wrap: wrap;
+    /* wrap button groups on small screens */
+    gap: 10px;
 }
 
 .btn-save-perm {
@@ -399,8 +433,417 @@
     cursor: pointer;
 }
 
-@media (max-width: 991px) {
+/* ══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════════ */
+
+/* Tablet: stack roles panel above permissions panel */
+@media (max-width: 991.98px) {
     .main-layout-perm {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0 16px 24px;
+    }
+
+    .stats-section-perm {
+        padding: 16px;
+    }
+
+    .page-header-perm {
+        padding: 16px 20px;
+    }
+}
+
+/* Mobile (≤575px): compact everything */
+@media (max-width: 575.98px) {
+    .stats-section-perm {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .stat-card-perm {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .stat-icon-perm {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .stat-content-perm .stat-value {
+        font-size: 1.4rem;
+    }
+
+    .permissions-header {
+        padding: 12px 14px;
+    }
+
+    .perm-title {
+        font-size: 1rem;
+    }
+
+    .module-filter {
+        width: 100%;
+        padding: 8px 12px;
+    }
+
+    /* Table: allow horizontal scroll on phones */
+    .permissions-table {
+        min-width: 420px;
+    }
+
+    .permissions-table thead th {
+        padding: 10px 12px;
+        font-size: 0.7rem;
+    }
+
+    .permissions-table tbody td {
+        padding: 12px;
+    }
+
+    .permissions-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .permissions-footer>div {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .btn-save-perm,
+    .btn-reset-perm {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+
+    .page-header-perm {
+        padding: 12px 14px;
+    }
+
+    .page-header-perm h1 {
+        font-size: 1.3rem;
+    }
+
+    .roles-header h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Very small (≤374px): single stat column */
+@media (max-width: 374px) {
+    .stats-section-perm {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ══════════════════════════════════════════════
+   AMAZON-STYLE RESPONSIVE TABLE
+   Desktop (≥768px) : normal table
+   Mobile  (<768px) : each <tr> becomes a card
+   ── same pattern used by Amazon Seller Central,
+      Shopify Admin, Flipkart Seller Hub ──
+══════════════════════════════════════════════ */
+
+/* Wrapper: allow normal scroll on desktop */
+.admin-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ── MOBILE CARD MODE ── */
+@media (max-width: 767.98px) {
+
+    /* Hide the header row — labels come from data-label */
+    .admin-table-responsive thead {
+        display: none;
+    }
+
+    /* Make tbody a flex column of cards */
+    .admin-table-responsive table,
+    .admin-table-responsive tbody {
+        display: block;
+        width: 100%;
+    }
+
+    /* Each row = a card */
+    .admin-table-responsive tr {
+        display: block;
+        background: #fff;
+        border: 1px solid #f1e6d6;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        padding: 4px 0;
+        box-shadow: 0 2px 8px rgba(122, 31, 31, 0.05);
+        overflow: hidden;
+    }
+
+    /* Each cell = a label:value row inside the card */
+    .admin-table-responsive td {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px !important;
+        border-bottom: 1px solid #f9f0e8 !important;
+        font-size: 0.88rem;
+        text-align: right;
+    }
+
+    /* Last cell (Actions) — stack label above buttons */
+    .admin-table-responsive td:last-child {
+        border-bottom: none !important;
+        flex-direction: column;        /* label on top, buttons below */
+        align-items: flex-start;
+        gap: 8px;
+        padding-bottom: 14px !important;
+    }
+
+    /* Actions buttons: wrap and fill width on small screens */
+    .admin-table-responsive td:last-child .d-flex {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .admin-table-responsive td:last-child .btn {
+        flex: 1;
+        min-width: 100px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Label on the left using data-label */
+    .admin-table-responsive td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #7a1f1f;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: left;
+        padding-top: 2px;
+        /* align with multi-line values */
+    }
+
+    /* Admin Name cell: avatar + name stacked nicely */
+    .admin-table-responsive td:first-child {
+        background: #fdf8f5;
+        border-bottom: 2px solid #f1e6d6 !important;
+        padding: 14px 16px !important;
+        justify-content: flex-start;
+        gap: 12px;
+        font-size: 1rem;
+    }
+
+    .admin-table-responsive td:first-child::before {
+        display: none;
+        /* Name cell: label not needed, avatar speaks */
+    }
+
+    /* Make select full-width on mobile */
+    .admin-table-responsive td .form-select {
+        width: 100% !important;
+        max-width: 180px;
+    }
+}
+
+/* ══════════════════════════════════════════════
+   PERMISSIONS CHECKBOXES TABLE — AMAZON CARD MODE
+   Breakpoint: ≤ 576px
+   Each module row becomes a card.
+   View / Create / Edit / Delete / Export
+   become label + checkbox rows inside the card.
+══════════════════════════════════════════════ */
+@media (max-width: 575.98px) {
+
+    /* Hide column headers */
+    .perm-card-table thead {
+        display: none;
+    }
+
+    /* Table and tbody become block containers */
+    .perm-card-table .permissions-table,
+    .perm-card-table tbody {
+        display: block;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Each row = a module card */
+    .perm-card-table .perm-row {
+        display: block;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(122, 31, 31, 0.05);
+    }
+
+    /* Module Name cell = card header */
+    .perm-card-table .perm-name-cell {
+        display: block;
+        background: var(--primary-light);
+        padding: 14px 16px !important;
+        border-bottom: 2px solid var(--border) !important;
+    }
+
+    .perm-card-table .perm-name {
+        font-size: 0.95rem;
+    }
+
+    /* Each action cell = label : checkbox row */
+    .perm-card-table .perm-action-cell {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px !important;
+        border-bottom: 1px solid #f9f0e8 !important;
+        text-align: left !important;
+    }
+
+    .perm-card-table .perm-action-cell:last-child {
+        border-bottom: none !important;
+    }
+
+    /* Label from data-label */
+    .perm-card-table .perm-action-cell::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* System row: colspan cell */
+    .perm-card-table td[colspan] {
+        display: block;
+        padding: 14px 16px !important;
+    }
+
+    .perm-card-table td[colspan]::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 10px;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE & RESPONSIVE FIXES (≤ 380px)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 575.98px) {
+    .btn-add-permission {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .page-header-perm h1 {
+        font-size: 1.15rem !important;
+    }
+    .breadcrumb-custom-perm {
+        font-size: 0.7rem !important;
+        gap: 4px !important;
+    }
+    .stats-section-perm {
+        grid-template-columns: minmax(0, 1fr) !important;
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+    .stat-card-perm {
+        padding: 12px !important;
+        gap: 12px !important;
+    }
+    .stat-icon-perm {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1rem !important;
+    }
+    .stat-content-perm .stat-label {
+        font-size: 0.78rem !important;
+    }
+    .stat-content-perm .stat-value {
+        font-size: 1.35rem !important;
+    }
+    .stat-content-perm .stat-sub {
+        font-size: 0.7rem !important;
+    }
+    .roles-search input {
+        padding: 8px 12px !important;
+        font-size: 0.82rem !important;
+    }
+    .role-item {
+        padding: 12px 16px !important;
+    }
+    .role-name {
+        font-size: 0.9rem !important;
+    }
+    .role-users {
+        font-size: 0.75rem !important;
+    }
+    .permissions-header {
+        padding: 12px !important;
+        gap: 8px !important;
+    }
+    .perm-title {
+        font-size: 0.95rem !important;
+    }
+    .perm-subtitle {
+        font-size: 0.75rem !important;
+    }
+    .module-filter {
+        font-size: 0.8rem !important;
+        padding: 6px 10px !important;
+    }
+    .permissions-footer {
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+    .permissions-footer > .d-flex {
+        width: 100% !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+    .permissions-footer button, .permissions-footer a {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        font-size: 0.8rem !important;
+        padding: 8px 12px !important;
+        min-height: auto !important;
+    }
+    .admin-table-responsive td:first-child {
+        padding: 10px 12px !important;
+        font-size: 0.9rem !important;
+    }
+    .admin-table-responsive td {
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+    }
+    .admin-table-responsive td .form-select {
+        font-size: 0.78rem !important;
+        padding: 4px 8px !important;
+    }
+    .admin-table-responsive td:last-child .btn {
+        font-size: 0.75rem !important;
+        padding: 6px 10px !important;
+        min-width: 80px !important;
     }
 }

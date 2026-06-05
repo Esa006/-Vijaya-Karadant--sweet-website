@@ -85,6 +85,40 @@ require_once 'includes/sidebar.php';
     .table-responsive thead {
         display: none !important;
     }
+    /* Action buttons form wrapping */
+    .products-mobile-card-grid .product-row .td-actions-wrapper form {
+        flex: 1;
+        display: flex;
+    }
+    .products-mobile-card-grid .product-row .td-actions-wrapper form button {
+        width: 100%;
+    }
+    .news-desc-text {
+        white-space: normal !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-align: right;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .products-page-title {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .products-page-title {
+        font-size: 1.25rem !important;
+    }
+    .products-add-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        font-size: 0.85rem !important;
+    }
 }
 </style>
 
@@ -135,27 +169,27 @@ require_once 'includes/sidebar.php';
                         <tbody>
                             <?php if (!empty($newsList)): ?>
                                 <?php foreach ($newsList as $news): ?>
-                                    <tr>
-                                        <td class="px-4 py-3">
+                                    <tr class="product-row">
+                                        <td class="px-4 py-3 td-image">
                                             <?php $imgSrc = !empty($news['image_path']) ? BASE_URL . $news['image_path'] : BASE_URL . 'assets/images/placeholders/product-placeholder.png'; ?>
-                                            <img src="<?php echo htmlspecialchars($imgSrc); ?>" alt="" class="rounded" style="width: 80px; height: 60px; object-fit: cover;">
+                                            <img src="<?php echo htmlspecialchars($imgSrc); ?>" alt="" class="rounded product-thumb" style="width: 80px; height: 60px; object-fit: cover;">
                                         </td>
-                                        <td class="py-3">
-                                            <div class="fw-bold text-dark"><?php echo htmlspecialchars($news['title']); ?></div>
-                                            <div class="text-muted small fw-medium mt-1"><i class="bi bi-calendar"></i> <?php echo date('M d, Y', strtotime($news['publish_date'])); ?></div>
+                                        <td class="py-3 td-info">
+                                            <div class="fw-bold text-dark products-product-name"><?php echo htmlspecialchars($news['title']); ?></div>
+                                            <div class="text-muted small fw-medium mt-1 products-product-sku"><i class="bi bi-calendar"></i> <?php echo date('M d, Y', strtotime($news['publish_date'])); ?></div>
                                         </td>
-                                        <td class="py-3 d-none d-lg-table-cell text-muted small" style="max-width: 300px;">
-                                            <div class="text-truncate" style="max-height: 40px; overflow: hidden;"><?php echo htmlspecialchars($news['description']); ?></div>
+                                        <td class="py-3 d-none d-lg-table-cell text-muted small" style="max-width: 300px;" data-label="Description">
+                                            <div class="news-desc-text" style="max-height: 60px; overflow: hidden;"><?php echo htmlspecialchars($news['description']); ?></div>
                                         </td>
-                                        <td class="py-3 text-center">
+                                        <td class="py-3 text-center td-status" data-label="Status">
                                             <?php if ($news['status'] === 'active'): ?>
                                                 <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">Active</span>
                                             <?php else: ?>
                                                 <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2 rounded-pill">Inactive</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td class="py-3 text-center pe-4">
-                                            <div class="d-flex justify-content-center gap-2">
+                                        <td class="py-3 text-center pe-4 td-actions">
+                                            <div class="d-flex justify-content-center gap-2 td-actions-wrapper">
                                                 <button type="button" class="btn btn-sm btn-outline-primary shadow-none" 
                                                     title="Edit"
                                                     onclick='populateEditModal(<?php echo htmlspecialchars(json_encode($news), ENT_QUOTES, 'UTF-8'); ?>)'

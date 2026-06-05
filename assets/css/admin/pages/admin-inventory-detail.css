@@ -632,3 +632,199 @@
 .activity-table tbody tr:last-child td {
     border-bottom: none;
 }
+
+/* ════════════════════════════════════════════════
+   320px / SMALL PHONE FIXES
+   ════════════════════════════════════════════════ */
+
+/* ── Weight Variants card header: wrap on small screens ── */
+@media (max-width: 575.98px) {
+    /* Card header: allow button to wrap */
+    .card-header.d-flex {
+        flex-wrap: wrap !important;
+        gap: 10px;
+    }
+
+    /* "Add Weight" button: full-width when wrapped */
+    .card-header .btn[data-bs-target="#addVariantModal"] {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Product action buttons: shrink-to-fit, allow wrap */
+    .product-actions {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    .btn-reduce-stock,
+    .btn-add-stock-btn {
+        flex: 1 1 120px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        font-size: 0.78rem !important;
+        padding: 9px 12px !important;
+    }
+
+    /* mc-label: reduce width so values have room */
+    .mc-label {
+        width: 110px !important;
+    }
+}
+
+/* ── Weight Variants Table → Amazon Card Layout ── */
+@media (max-width: 767.98px) {
+
+    /* Hide the traditional thead */
+    #variantTable thead {
+        display: none !important;
+    }
+
+    /* Make table/tbody/tr/td all block */
+    #variantTable,
+    #variantTable tbody,
+    #variantTable tr,
+    #variantTable td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Each variant row = a card */
+    #variantTable tr[data-vid] {
+        background: #fff;
+        border: 1px solid #f0e8dd;
+        border-radius: 12px;
+        padding: 14px 14px 10px;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+        position: relative;
+    }
+
+    /* Strips default td padding/border */
+    #variantTable tr[data-vid] td {
+        border: none !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    /* ── Weight badge: top of card ── */
+    #variantTable tr[data-vid] td:first-child {
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid #f3ede7 !important;
+        margin-bottom: 8px;
+    }
+
+    /* ── Middle rows: flex key/value layout ── */
+    #variantTable tr[data-vid] td:not(:first-child):not(:last-child) {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0 !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        font-size: 13px;
+    }
+
+    /* data-label pseudo-element */
+    #variantTable tr[data-vid] td[data-label]::before {
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 700;
+        color: #8B2E2E;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+        margin-right: 10px;
+        opacity: 0.85;
+    }
+
+    /* ── Actions td: full-width button row ── */
+    #variantTable tr[data-vid] td:last-child {
+        display: flex !important;
+        justify-content: flex-end;
+        gap: 8px;
+        padding-top: 10px !important;
+        border-top: 1px solid #f3ede7;
+        margin-top: 4px;
+    }
+
+    #variantTable tr[data-vid] td:last-child .btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 0;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    /* Empty state row */
+    #variantTable tr#no-variants-row td {
+        display: block !important;
+        padding: 30px 15px !important;
+        text-align: center !important;
+    }
+}
+
+/* ── 320px micro-adjustments ── */
+@media (max-width: 380px) {
+    .product-card {
+        padding: 14px 12px;
+        gap: 10px;
+    }
+
+    .product-img {
+        width: 72px !important;
+        height: 72px !important;
+    }
+
+    .product-info h2 {
+        font-size: 1.05rem;
+    }
+
+    /* Stat cards: 1-col on 320px */
+    .stats-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .stat-card {
+        border-right: none !important;
+        border-bottom: 1px solid #F0E8DD;
+        padding: 14px 14px;
+    }
+
+    .stat-card:last-child {
+        border-bottom: none;
+    }
+
+    .stat-value {
+        font-size: 1.1rem;
+    }
+
+    /* mc-label on 320px: even tighter */
+    .mc-label {
+        width: 95px !important;
+        font-size: 0.78rem !important;
+    }
+
+    .mobile-card {
+        padding: 14px 12px;
+    }
+
+    /* Title row: stack on 320px */
+    .title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .btn-edit {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Content padding: reduce */
+    .content-body .px-4 {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}

@@ -185,7 +185,7 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                 <i class="fas fa-lock me-2"></i> <strong>Read-Only:</strong> This role is at or above your access level and cannot be modified.
             </div>
 
-            <div class="permissions-table-wrapper">
+            <div class="permissions-table-wrapper perm-card-table">
                 <table class="permissions-table">
                     <thead>
                         <tr>
@@ -220,13 +220,13 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                                     <div class="perm-desc">Manage granular access for <?= htmlspecialchars($module) ?></div>
                                 </td>
                                 <?php foreach (['view', 'create', 'edit', 'delete', 'export'] as $action): ?>
-                                    <td class="text-center">
+                                    <td class="text-center perm-action-cell" data-label="<?= ucfirst($action) ?>">
                                         <?php if (isset($actions[$action])): ?>
                                             <div class="custom-check-perm" 
                                                  data-key="<?= $actions[$action] ?>"
                                                  onclick="toggleCheck(this)"></div>
                                         <?php else: ?>
-                                            <span class="text-muted opacity-25">-</span>
+                                            <span class="text-muted opacity-25">—</span>
                                         <?php endif; ?>
                                     </td>
                                 <?php endforeach; ?>
@@ -236,11 +236,11 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                         <!-- System Permissions (Single Row) -->
                         <tr class="perm-row" data-module="System">
                              <td class="perm-name-cell">
-                                <div class="perm-name">System & Settings</div>
+                                <div class="perm-name">System &amp; Settings</div>
                                 <div class="perm-desc">Critical system-wide configurations</div>
                             </td>
-                            <td colspan="5">
-                                <div class="d-flex gap-4 ps-3">
+                            <td colspan="5" data-label="System Permissions">
+                                <div class="d-flex gap-3 flex-wrap">
                                     <?php 
                                     $systemPerms = array_filter($permissions, fn($p) => !strpos($p['key_name'], ':'));
                                     foreach ($systemPerms as $p): ?>
@@ -291,7 +291,7 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                     <i class="fas fa-user-plus me-2"></i> Add Admin
                 </button>
             </div>
-            <div class="table-responsive">
+            <div class="admin-table-responsive">
                 <table class="table admin-table m-0">
                     <thead>
                         <tr class="bg-light">
@@ -317,7 +317,7 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                             $isSelf = ($admin['id'] == ($_SESSION['user_id'] ?? 0));
                         ?>
                             <tr id="admin-row-<?= $admin['id'] ?>">
-                                <td class="ps-4 fw-bold align-middle">
+                                <td class="ps-4 fw-bold align-middle" data-label="Admin Name">
                                     <div class="d-flex align-items-center gap-2">
                                         <div style="width:36px;height:36px;border-radius:50%;background:#f5e6e6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#7a1f1f;font-size:.85rem;flex-shrink:0;">
                                             <?= strtoupper(substr($admin['full_name'], 0, 1)) ?>
@@ -326,21 +326,21 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                                         <?= $isSelf ? '<span class="badge bg-secondary ms-1" style="font-size:.65rem;">You</span>' : '' ?>
                                     </div>
                                 </td>
-                                <td class="align-middle text-muted"><?= htmlspecialchars($admin['email']) ?></td>
-                                <td class="align-middle">
+                                <td class="align-middle text-muted" data-label="Email"><?= htmlspecialchars($admin['email']) ?></td>
+                                <td class="align-middle" data-label="Role">
                                     <span class="badge rounded-pill px-3 py-2" style="background:#f5e6e6;color:#7a1f1f;">
                                         <?= htmlspecialchars($admin['role_name'] ?? 'Not Assigned') ?>
                                     </span>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle" data-label="Status">
                                     <span class="badge rounded-pill px-3 py-2" style="background:<?= $statusBadge['bg'] ?>;color:<?= $statusBadge['color'] ?>;">
                                         <?= $statusBadge['label'] ?>
                                     </span>
                                 </td>
-                                <td class="align-middle text-muted small">
+                                <td class="align-middle text-muted small" data-label="Last Login">
                                     <?= !empty($admin['last_login_at']) ? date('d M Y, h:i A', strtotime($admin['last_login_at'])) : '<em>Never</em>' ?>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle" data-label="Reassign Role">
                                     <?php if (!$isSelf): ?>
                                     <select class="form-select form-select-sm d-inline-block w-auto"
                                             onchange="updateUserRole(<?= $admin['id'] ?>, this.value)">
@@ -353,9 +353,9 @@ $superAdmins = count(array_filter($admins, fn($a) => ($a['role_slug'] ?? '') ===
                                     </select>
                                     <?php else: ?><span class="text-muted small">—</span><?php endif; ?>
                                 </td>
-                                <td class="text-end pe-4 align-middle">
+                                <td class="text-end pe-4 align-middle" data-label="Actions">
                                     <?php if (!$isSelf): ?>
-                                    <div class="d-flex gap-2 justify-content-end">
+                                    <div class="d-flex gap-2 justify-content-end flex-wrap">
                                         <?php if ($status === 'suspended'): ?>
                                             <button onclick="adminAction(<?= $admin['id'] ?>, 'reactivate')"
                                                 class="btn btn-sm btn-success rounded-pill px-3">

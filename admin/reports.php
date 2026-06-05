@@ -119,8 +119,8 @@ require_once 'includes/sidebar.php';
 
         <!-- Report Tabs -->
         <div class="report-tabs">
-            <button class="tab-btn active">Sales Report</button>
-            <button class="tab-btn">Stock Report</button>
+            <button class="tab-btn active" onclick="window.location='reports.php'">Sales Report</button>
+            <button class="tab-btn" onclick="window.location='inventory-report.php'">Stock Report</button>
         </div>
 
         <!-- Period Selector -->

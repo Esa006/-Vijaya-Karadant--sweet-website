@@ -237,17 +237,17 @@ require_once 'includes/sidebar.php';
                                         data-status="<?php echo htmlspecialchars($req['status']); ?>"
                                         data-email="<?php echo htmlspecialchars(strtolower((string)($req['email'] ?? '')), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-item="<?php echo htmlspecialchars(strtolower((string)($req['item_name'] ?? '')), ENT_QUOTES, 'UTF-8'); ?>">
-                                        <td class="py-3 px-4 fw-bold" data-label="Email"><?php echo htmlspecialchars((string)($req['email'] ?? '')); ?></td>
-                                        <td class="py-3 px-4" data-label="Item">
-                                            <div class="d-flex align-items-center gap-3">
+                                        <td class="py-3 px-4 fw-bold td-email" data-label="Email"><?php echo htmlspecialchars((string)($req['email'] ?? '')); ?></td>
+                                        <td class="py-3 px-4 td-item" data-label="Item">
+                                            <div class="d-flex align-items-center gap-2">
                                                 <?php $img = $req['item_image'] ? '../' . $req['item_image'] : '../assets/images/placeholders/product-placeholder.png'; ?>
-                                                <img src="<?php echo htmlspecialchars($img); ?>" style="width: 40px; height: 40px; object-fit:cover; border-radius: 6px;">
-                                                <span class="text-dark fw-medium"><?php echo htmlspecialchars($req['item_name'] ?? 'Unknown Item'); ?></span>
+                                                <img src="<?php echo htmlspecialchars($img); ?>" class="sr-item-img" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;">
+                                                <span class="text-dark fw-medium sr-item-name"><?php echo htmlspecialchars($req['item_name'] ?? 'Unknown Item'); ?></span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-4 d-none d-lg-table-cell" data-label="Type"><span class="badge bg-secondary text-capitalize"><?php echo $req['product_type']; ?></span></td>
-                                        <td class="py-3 px-4 text-muted d-none d-lg-table-cell" data-label="Date"><?php echo date('M d, Y h:i A', strtotime($req['created_at'])); ?></td>
-                                        <td class="py-3 px-4" data-label="Status">
+                                        <td class="py-3 px-4 d-none d-lg-table-cell td-type" data-label="Type"><span class="badge bg-secondary text-capitalize"><?php echo $req['product_type']; ?></span></td>
+                                        <td class="py-3 px-4 text-muted d-none d-lg-table-cell td-date" data-label="Date"><?php echo date('M d, Y h:i A', strtotime($req['created_at'])); ?></td>
+                                        <td class="py-3 px-4 td-status" data-label="Status">
                                             <?php if($req['status'] === 'pending'): ?>
                                                 <span class="badge bg-warning text-dark"><i class="bi bi-clock"></i> Pending</span>
                                             <?php else: ?>
@@ -256,11 +256,11 @@ require_once 'includes/sidebar.php';
                                         </td>
                                         <td class="py-3 px-4 text-end td-action" data-label="Action">
                                             <?php if($req['status'] === 'pending'): ?>
-                                                <form method="POST" style="display:inline;">
+                                                <form method="POST" style="display:inline;width:100%;">
                                                     <input type="hidden" name="action" value="mark_notified">
                                                     <input type="hidden" name="id" value="<?php echo $req['id']; ?>">
                                                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
-                                                    <button type="submit" class="btn btn-sm btn-outline-success fw-bold" onclick="return confirm('Send an automated email to this customer and mark as notified?')">Send Email & Mark Notified</button>
+                                                    <button type="submit" class="btn btn-sm btn-outline-success fw-bold sr-notify-btn" onclick="return confirm('Send an automated email to this customer and mark as notified?')">Send Email &amp; Mark Notified</button>
                                                 </form>
                                             <?php else: ?>
                                                 <span class="text-muted small"><i class="bi bi-check"></i> Done</span>
@@ -311,54 +311,195 @@ require_once 'includes/sidebar.php';
     .stock-filter-card.is-active {
         box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2), 0 10px 20px rgba(0, 0, 0, 0.08) !important;
     }
-    
-    /* Responsive Mobile Cards */
-    @media (max-width: 767px) {
+
+    /* ================================================
+       AMAZON-STYLE MOBILE CARD TABLE — ≤767px
+       ================================================ */
+    @media (max-width: 767.98px) {
+
+        /* Page header: stack on mobile */
+        .content-body > .d-flex.justify-content-between {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 10px;
+        }
+
+        .content-body > .d-flex.justify-content-between form .btn {
+            width: 100%;
+        }
+
+        /* Table → card transform */
         .table-responsive table {
             display: block;
         }
         .table-responsive thead {
-            display: none;
+            display: none !important;
         }
         .table-responsive tbody {
             display: block;
         }
         .table-responsive tr {
-            display: flex;
-            flex-direction: column;
+            display: block;
             background: #fff;
-            border: 1px solid rgba(0,0,0,0.08) !important;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #fee7d6 !important;
+            border-radius: 14px;
+            margin-bottom: 14px;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
         }
         .table-responsive td {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 0 !important;
-            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
-            text-align: right;
+            padding: 6px 0 !important;
+            border-bottom: 1px solid #f8f4f0 !important;
             border-top: none !important;
+            text-align: right;
+            font-size: 13px;
         }
+        .table-responsive td:last-child {
+            border-bottom: none !important;
+        }
+
+        /* data-label pseudo-elements */
         .table-responsive td::before {
             content: attr(data-label);
             font-weight: 700;
-            color: #8C3333;
-            font-size: 0.8rem;
+            color: #8B2E2E;
+            font-size: 11px;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
             text-align: left;
+            flex-shrink: 0;
+            margin-right: 10px;
+            opacity: 0.85;
         }
+
+        /* Email: word-break so long addresses wrap */
+        .table-responsive td.td-email {
+            word-break: break-all;
+            overflow-wrap: anywhere;
+            align-items: flex-start;
+        }
+
+        .table-responsive td.td-email::before {
+            padding-top: 1px;
+            flex-shrink: 0;
+        }
+
+        /* Item: image fixed size, name truncates */
+        .table-responsive td.td-item {
+            align-items: center;
+        }
+
+        .table-responsive td.td-item .sr-item-img {
+            width: 36px !important;
+            height: 36px !important;
+            flex-shrink: 0;
+        }
+
+        .table-responsive td.td-item .sr-item-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 130px;
+            display: block;
+        }
+
+        /* Hidden columns (Type, Date): show as labeled rows */
+        .table-responsive td.d-none.d-lg-table-cell {
+            display: flex !important;
+        }
+
+        /* Status: badge aligns right */
+        .table-responsive td.td-status {
+            align-items: center;
+        }
+
+        /* Action: full-width centered button */
         .table-responsive td.td-action {
+            flex-direction: column;
+            align-items: stretch;
             border-bottom: none !important;
-            border-top: 1px solid #eee !important;
-            margin-top: 0.5rem;
-            padding-top: 1rem !important;
-            justify-content: center;
+            border-top: 1px solid #f3ede7 !important;
+            margin-top: 4px;
+            padding-top: 10px !important;
         }
+
         .table-responsive td.td-action::before {
             display: none;
+        }
+
+        .table-responsive td.td-action form {
+            display: block !important;
+            width: 100%;
+        }
+
+        .table-responsive td.td-action .sr-notify-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .table-responsive td.td-action .text-muted.small {
+            display: block;
+            text-align: center;
+            padding: 8px 0;
+        }
+    }
+
+    /* ================================================
+       320px MICRO-ADJUSTMENTS
+       ================================================ */
+    @media (max-width: 380px) {
+
+        /* Stat cards: single column */
+        .row.g-4.mb-4 > [class*="col-"] {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
+        .stock-filter-card {
+            padding: 14px 12px !important;
+        }
+
+        .stock-filter-card h5 {
+            font-size: 0.85rem;
+        }
+
+        .stock-filter-card h2 {
+            font-size: 1.5rem;
+        }
+
+        /* Page title: smaller */
+        .content-body h2 {
+            font-size: 1.2rem !important;
+        }
+
+        /* Card table rows: tighter padding */
+        .table-responsive tr {
+            padding: 12px 10px;
+            border-radius: 12px;
+        }
+
+        /* Item name: narrower max-width */
+        .table-responsive td.td-item .sr-item-name {
+            max-width: 100px;
+        }
+
+        /* Email text: smaller */
+        .table-responsive td.td-email {
+            font-size: 12px;
+        }
+
+        /* Content padding */
+        .content-body.px-4 {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
         }
     }
 </style>

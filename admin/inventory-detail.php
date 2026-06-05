@@ -253,18 +253,18 @@ function formatQuantity(string $actionType, int $quantityChange, ?int $previousS
                                             <?php echo htmlspecialchars($v['weight']); ?>
                                         </span>
                                     </td>
-                                    <td class="text-muted small">
+                                    <td class="text-muted small" data-label="Label">
                                         <span class="var-label-text"><?php echo htmlspecialchars($v['label']); ?></span>
                                     </td>
-                                    <td class="fw-semibold" style="color:#2d6a4f;">
-                                        ₹<span class="var-price-text"><?php echo number_format($v['price'], 2); ?></span>
+                                    <td class="fw-semibold" style="color:#2d6a4f;" data-label="Price (&#8377;)">
+                                        &#8377;<span class="var-price-text"><?php echo number_format($v['price'], 2); ?></span>
                                     </td>
-                                    <td>
+                                    <td data-label="Stock">
                                         <span class="var-stock-badge fw-bold <?php echo $v['stock'] <= 0 ? 'text-danger' : ($v['stock'] <= 10 ? 'text-warning' : 'text-success'); ?>">
                                             <?php echo $v['stock']; ?> units
                                         </span>
                                     </td>
-                                    <td>
+                                    <td data-label="Status">
                                         <?php if ($v['stock'] <= 0): ?>
                                             <span class="badge bg-danger-subtle text-danger px-2 py-1 rounded-pill">Out of Stock</span>
                                         <?php elseif ($v['stock'] <= 10): ?>
@@ -696,10 +696,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="px-4 fw-bold" style="color:#3d1c02;">
                         <span class="badge px-3 py-2 rounded-pill fw-semibold" style="background:#fdf0e8;color:#b5451b;font-size:.85rem;">${weight}</span>
                     </td>
-                    <td class="text-muted small"><span class="var-label-text">${label || weight + ' Pack'}</span></td>
-                    <td class="fw-semibold" style="color:#2d6a4f;">₹<span class="var-price-text">${parseFloat(price).toFixed(2)}</span></td>
-                    <td><span class="var-stock-badge fw-bold ${stockClass}">${stock} units</span></td>
-                    <td>${statusBadge}</td>
+                    <td class="text-muted small" data-label="Label"><span class="var-label-text">${label || weight + ' Pack'}</span></td>
+                    <td class="fw-semibold" style="color:#2d6a4f;" data-label="Price (₹)">&#8377;<span class="var-price-text">${parseFloat(price).toFixed(2)}</span></td>
+                    <td data-label="Stock"><span class="var-stock-badge fw-bold ${stockClass}">${stock} units</span></td>
+                    <td data-label="Status">${statusBadge}</td>
                     <td class="text-end pe-4">
                         <button class="btn btn-sm btn-outline-secondary me-1 btn-edit-variant"
                             data-vid="${data.id}" data-weight="${weight}" data-label="${label || weight + ' Pack'}"

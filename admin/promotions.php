@@ -121,6 +121,88 @@ $coupons = $repo->getAllCoupons();
             text-align: left;
         }
     }
+
+    /* ══════════════════════════════════════════════════════════════════════════
+       MOBILE & RESPONSIVE FIXES (≤ 380px)
+       ══════════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 575px) {
+        .content-body {
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+        }
+        .content-body > .d-flex.justify-content-between {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+        }
+        .content-body h1 {
+            font-size: 1.4rem !important;
+        }
+        .content-body p.text-muted {
+            font-size: 0.8rem !important;
+        }
+        .btn-maroon {
+            width: 100% !important;
+            justify-content: center;
+        }
+        .table-card {
+            padding: 0.75rem !important;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .content-body h1 {
+            font-size: 1.2rem !important;
+        }
+        .content-body p.text-muted {
+            font-size: 0.75rem !important;
+        }
+        #festival-timer-card h5 {
+            font-size: 1rem !important;
+        }
+        #timerStatusBadge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        #festival-timer-card p.text-muted {
+            font-size: 0.75rem !important;
+        }
+        .form-label {
+            font-size: 0.78rem !important;
+        }
+        .form-control, .input-group-text {
+            font-size: 0.8rem !important;
+            padding: 8px 10px !important;
+        }
+        #setTimerBtn, #stopTimerBtn {
+            height: 40px !important;
+            padding: 0 16px !important;
+            font-size: 0.8rem !important;
+            width: 100% !important;
+        }
+        .table-responsive tr {
+            padding: 0.75rem !important;
+        }
+        .table-responsive td {
+            font-size: 0.78rem !important;
+            padding: 0.6rem 0 !important;
+        }
+        .table-responsive td::before {
+            font-size: 0.72rem !important;
+        }
+        .coupon-code-tag {
+            font-size: 0.72rem !important;
+            padding: 4px 8px !important;
+        }
+        .badge-active, .badge-expired {
+            font-size: 0.72rem !important;
+            padding: 4px 8px !important;
+        }
+        .table-responsive td:last-child .btn {
+            padding: 4px 10px !important;
+            font-size: 0.75rem !important;
+        }
+    }
 </style>
 
 <div class="main-content">
@@ -156,7 +238,7 @@ $coupons = $repo->getAllCoupons();
                     </div>
                     <div style="min-width: 0;">
                         <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
-                            <h5 class="fw-bold mb-0 text-truncate" style="color:#4A1D1D;">Festival Countdown Timer</h5>
+                            <h5 class="fw-bold mb-0" style="color:#4A1D1D;">Festival Countdown Timer</h5>
                             <span id="timerStatusBadge" class="badge rounded-pill px-3 py-1" style="background:#F3F4F6;color:#6B7280;font-size:0.75rem;">Loading…</span>
                         </div>
                         <p class="text-muted small mb-0" style="word-wrap: break-word; white-space: normal;">Manage the live countdown timer shown on the storefront.</p>

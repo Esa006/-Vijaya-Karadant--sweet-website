@@ -153,12 +153,51 @@ $actionMeta = [
 ];
 ?>
 
+<style>
+    /* Back button styling (inline to bypass browser caching) */
+    .btn-back-audit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1.5px solid var(--maroon, #7a1f1f);
+        color: var(--maroon, #7a1f1f);
+        background: transparent;
+        transition: all 0.25s ease;
+        font-size: 1.2rem;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+    .btn-back-audit:hover {
+        background: var(--maroon, #7a1f1f);
+        color: #fff;
+        transform: translateX(-3px);
+        box-shadow: 0 4px 12px rgba(122, 31, 31, 0.15);
+    }
+    @media (max-width: 575.98px) {
+        .btn-back-audit {
+            width: 36px;
+            height: 36px;
+            font-size: 1.05rem;
+        }
+    }
+</style>
+
 <div class="main-content">
+    <?php require_once 'includes/topbar.php'; ?>
+
     <!-- Page Header -->
     <div class="audit-page-header">
-        <div>
-            <h1 class="audit-title"><i class="bi bi-journal-text me-2"></i>Audit Logs</h1>
-            <p class="audit-subtitle">Complete activity trail for all admin actions</p>
+        <div class="d-flex align-items-center gap-3">
+            <a href="audit-logs.php" class="btn-back-audit" title="Back to Audit Logs">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div>
+                <h1 class="audit-title"><i class="bi bi-journal-text me-2"></i>Audit Logs</h1>
+                <p class="audit-subtitle">Complete activity trail for all admin actions</p>
+            </div>
         </div>
         <button onclick="exportLogs()" class="btn-export-audit">
             <i class="bi bi-download me-2"></i>Export CSV

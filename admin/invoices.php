@@ -64,15 +64,15 @@ $paymentLabels = [
             </div>
 
             <div class="table-responsive products-table-wrapper">
-                <table class="table align-middle mb-0" id="invoicesTable">
+                <table class="table align-middle mb-0 products-mobile-card-grid" id="invoicesTable">
                     <thead class="products-table-head">
                         <tr>
                             <th class="ps-4 py-3">Invoice / Order #</th>
                             <th class="py-3">Customer</th>
-                            <th class="py-3 text-center">Amount</th>
-                            <th class="py-3 text-center">Payment</th>
+                            <th class="py-3 text-center d-none d-md-table-cell">Amount</th>
+                            <th class="py-3 text-center d-none d-md-table-cell">Payment</th>
                             <th class="py-3 text-center">Order Status</th>
-                            <th class="py-3 text-center">Date</th>
+                            <th class="py-3 text-center d-none d-md-table-cell">Date</th>
                             <th class="py-3 text-center pe-4">Actions</th>
                         </tr>
                     </thead>
@@ -92,7 +92,7 @@ $paymentLabels = [
                                 $isGenerated = !empty($invoiceNum);
                             ?>
                                 <tr class="product-row" data-search="<?php echo strtolower($displayNum . ' ' . ($ord['customer_name'] ?? '')); ?>">
-                                    <td class="ps-4 border-0 py-3">
+                                    <td class="ps-3 border-0 py-3 td-info">
                                         <div class="fw-bold <?php echo $isGenerated ? 'text-primary' : 'text-dark'; ?>">
                                             <?php echo $displayNum; ?>
                                         </div>
@@ -100,7 +100,7 @@ $paymentLabels = [
                                             <span class="badge bg-warning-subtle text-warning x-small" style="font-size:0.65rem">PENDING GENERATION</span>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="border-0 py-3">
+                                    <td class="border-0 py-3 td-customer">
                                         <div class="fw-bold text-dark">
                                             <a href="customer-details.php?id=<?php echo (int)($ord['user_id'] ?? 0); ?>" class="text-decoration-none text-dark hover-primary">
                                                 <?php echo htmlspecialchars((string)($ord['customer_name'] ?? 'Guest')); ?>
@@ -108,23 +108,24 @@ $paymentLabels = [
                                         </div>
                                         <div class="text-muted small"><?php echo htmlspecialchars((string)($ord['customer_email'] ?? '')); ?></div>
                                     </td>
-                                    <td class="border-0 py-3 text-center">
-                                        <span class="fw-bolder text-dark">₹ <?php echo number_format($ord['total_amount'], 2); ?></span>
+                                    <td class="border-0 py-3 text-center td-amount d-none d-md-table-cell" data-label="Amount">
+                                        <span class="fw-bolder text-dark">&#8377; <?php echo number_format($ord['total_amount'], 2); ?></span>
                                     </td>
-                                    <td class="border-0 py-3 text-center">
+                                    <td class="border-0 py-3 text-center td-pay d-none d-md-table-cell" data-label="Payment">
                                         <span class="small fw-semibold <?php echo $payInfo['cls']; ?>"><?php echo $payInfo['label']; ?></span>
                                     </td>
-                                    <td class="border-0 py-3 text-center">
+                                    <td class="border-0 py-3 text-center td-status" data-label="Status">
                                         <span class="d-inline-block fw-bold text-center products-status-pill <?php echo $statusClass; ?>">
                                             <?php echo ucfirst($status); ?>
                                         </span>
                                     </td>
-                                    <td class="border-0 py-3 text-center">
+                                    <td class="border-0 py-3 text-center td-date d-none d-md-table-cell" data-label="Date">
                                         <span class="small text-muted"><?php echo date('d M, Y', strtotime($ord['invoice_date'] ?? $ord['created_at'])); ?></span>
                                     </td>
-                                    <td class="text-center pe-4 border-0 py-3">
-                                        <a href="invoice.php?id=<?php echo $ord['order_id']; ?>" target="_blank" class="btn btn-sm <?php echo $isGenerated ? 'btn-outline-primary' : 'btn-outline-warning'; ?> rounded-pill px-3">
-                                            <i class="bi bi-receipt me-1"></i> <?php echo $isGenerated ? 'View Invoice' : 'Generate & View'; ?>
+                                    <td class="text-center pe-3 border-0 py-3 td-actions">
+                                        <a href="invoice.php?id=<?php echo $ord['order_id']; ?>" target="_blank"
+                                           class="btn btn-sm <?php echo $isGenerated ? 'btn-outline-primary' : 'btn-outline-warning'; ?> rounded-pill px-3 inv-action-btn">
+                                            <i class="bi bi-receipt me-1"></i> <?php echo $isGenerated ? 'View Invoice' : 'Generate &amp; View'; ?>
                                         </a>
                                     </td>
                                 </tr>
@@ -152,3 +153,162 @@ document.getElementById('invoiceSearch')?.addEventListener('input', function() {
 </script>
 
 <?php require_once 'includes/footer.php'; ?>
+
+<style>
+/* ====================================================
+   INVOICES TABLE — AMAZON-STYLE MOBILE CARD LAYOUT
+   ==================================================== */
+@media (max-width: 767.98px) {
+
+    /* Hide table header */
+    #invoicesTable .products-table-head {
+        display: none !important;
+    }
+
+    /* Table / tbody / tr / td all become block */
+    #invoicesTable,
+    #invoicesTable tbody,
+    #invoicesTable .product-row,
+    #invoicesTable .product-row td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Each row = Amazon-style card */
+    #invoicesTable .product-row {
+        background: #fff;
+        border: 1px solid #fee7d6;
+        border-radius: 14px;
+        padding: 14px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        position: relative;
+    }
+
+    /* Strip default td padding/borders */
+    #invoicesTable .product-row td {
+        border: none !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    /* ── Invoice # block: top, full width ── */
+    #invoicesTable .product-row .td-info {
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid #f3ede7 !important;
+        margin-bottom: 8px;
+        word-break: break-word;
+    }
+
+    #invoicesTable .product-row .td-info .fw-bold {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* ── Customer block ── */
+    #invoicesTable .product-row .td-customer {
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        margin-bottom: 6px;
+    }
+
+    #invoicesTable .product-row .td-customer .fw-bold {
+        font-size: 14px;
+    }
+
+    #invoicesTable .product-row .td-customer .text-muted {
+        font-size: 11px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    /* ── Hidden columns revealed as labeled key/value rows ── */
+    #invoicesTable .product-row .d-none.d-md-table-cell {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0 !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        font-size: 13px;
+    }
+
+    /* ── Status row ── */
+    #invoicesTable .product-row .td-status {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0 !important;
+        border-bottom: 1px solid #f8f4f0 !important;
+        font-size: 13px;
+    }
+
+    /* data-label pseudo-element */
+    #invoicesTable .product-row td[data-label]::before {
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 700;
+        color: #8B2E2E;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+        margin-right: 10px;
+        opacity: 0.85;
+    }
+
+    /* Status pill: no min-width on mobile */
+    #invoicesTable .product-row .products-status-pill {
+        min-width: auto !important;
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+
+    /* ── Actions: full-width button ── */
+    #invoicesTable .product-row .td-actions {
+        padding-top: 10px !important;
+    }
+
+    #invoicesTable .product-row .td-actions .inv-action-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+}
+
+/* Very small phones (320px) */
+@media (max-width: 380px) {
+    #invoicesTable .product-row {
+        padding: 12px 10px;
+        border-radius: 12px;
+    }
+
+    #invoicesTable .product-row .td-info .fw-bold {
+        font-size: 13px;
+    }
+
+    #invoicesTable .product-row .td-customer .fw-bold {
+        font-size: 13px;
+    }
+
+    /* Page header: stack buttons */
+    .products-page .d-flex.flex-column.flex-md-row .d-flex.gap-2 {
+        width: 100%;
+    }
+
+    .products-page .d-flex.flex-column.flex-md-row .d-flex.gap-2 .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Filter search: full width */
+    .products-page .products-search-group {
+        max-width: 100% !important;
+        width: 100%;
+    }
+}
+</style>

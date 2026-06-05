@@ -293,6 +293,254 @@ $payStatus   = ucfirst($order['payment_status']);
       .header-actions, .no-print, #invoiceCard__accent { display: none !important; }
       .brand-section, .order-info { background: white; border: 1px solid #eee; }
     }
+
+    /* ============================================
+       MOBILE — ≤575px
+       ============================================ */
+    @media (max-width: 575.98px) {
+      body {
+        padding: var(--space-3) var(--space-2);
+        align-items: flex-start;
+      }
+
+      #invoiceCard {
+        border-radius: var(--radius-lg);
+        /* no overflow:hidden so accent bar doesn't clip content */
+      }
+
+      /* Accent bar: tuck it fully inside, no overflow */
+      #invoiceCard__accent {
+        width: 4px;
+        top: var(--space-4);
+        bottom: var(--space-4);
+      }
+
+      /* Card body: reduce padding, kill extra right padding */
+      .card-body {
+        padding: var(--space-4);
+        padding-right: var(--space-4);
+      }
+
+      /* ── HEADER ── */
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+        margin-bottom: var(--space-4);
+      }
+
+      .header-row__title {
+        font-size: var(--font-xl);
+      }
+
+      /* Buttons: row, equal width */
+      .header-actions {
+        display: flex;
+        width: 100%;
+        gap: var(--space-2);
+      }
+
+      .header-actions .btn {
+        flex: 1;
+        justify-content: center;
+        padding: var(--space-2) var(--space-2);
+        font-size: 0.75rem;
+      }
+
+      /* ── BRAND SECTION ── */
+      .brand-section {
+        flex-direction: column;
+        gap: var(--space-3);
+        padding: var(--space-4);
+        margin-bottom: var(--space-5);
+      }
+
+      /* Company details: left-align, allow wrap */
+      .brand-section__company {
+        text-align: left;
+        width: 100%;
+      }
+
+      .brand-section__company h2 {
+        font-size: var(--font-base);
+      }
+
+      .brand-section__company p {
+        font-size: var(--font-xs);
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      /* ── INVOICE META ── */
+      .invoice-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+        margin-bottom: var(--space-5);
+        padding-bottom: var(--space-4);
+      }
+
+      .invoice-meta h2 {
+        font-size: var(--font-2xl);
+      }
+
+      /* Invoice number: keep on one line */
+      .invoice-meta__data {
+        text-align: left;
+        width: 100%;
+      }
+
+      .invoice-meta__data p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ── ADDRESS GRID ── */
+      .address-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        margin-bottom: var(--space-5);
+      }
+
+      /* ── ORDER INFO: 2x2 grid ── */
+      .order-info {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3);
+        padding: var(--space-3);
+        margin-bottom: var(--space-5);
+      }
+
+      .order-info__value {
+        font-size: var(--font-sm);
+      }
+
+      /* ── ITEMS TABLE: card rows ── */
+      .items-table-container {
+        overflow-x: hidden;
+        margin-bottom: var(--space-5);
+      }
+
+      .items-table thead {
+        display: none;
+      }
+
+      .items-table,
+      .items-table tbody,
+      .items-table tr,
+      .items-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .items-table tr {
+        background: var(--color-gray-50);
+        border: 1px solid var(--color-gray-200);
+        border-radius: var(--radius-md);
+        padding: var(--space-3);
+        margin-bottom: var(--space-3);
+      }
+
+      .items-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0 !important;
+        border: none !important;
+        text-align: left !important;
+        font-size: var(--font-sm);
+      }
+
+      /* First td (Description) spans full width */
+      .items-table td:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: var(--space-2) !important;
+        border-bottom: 1px solid var(--color-gray-200) !important;
+        margin-bottom: var(--space-1);
+      }
+
+      .items-table td[data-label]::before {
+        content: attr(data-label);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-gray-400);
+        flex-shrink: 0;
+        margin-right: var(--space-2);
+      }
+
+      /* ── PRICING GRID: single column ── */
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        margin-bottom: var(--space-5);
+      }
+
+      /* ── FOOTER: stack ── */
+      footer {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: var(--space-4);
+      }
+
+      footer > div:last-child {
+        text-align: left !important;
+        width: 100%;
+      }
+
+      footer > div:last-child > div:first-child {
+        margin-left: 0 !important;
+        width: 120px;
+      }
+    }
+
+    /* ============================================
+       MOBILE — ≤380px (320px phones)
+       ============================================ */
+    @media (max-width: 380px) {
+      body {
+        padding: var(--space-2) var(--space-1);
+      }
+
+      .card-body {
+        padding: var(--space-3);
+        padding-right: var(--space-3);
+      }
+
+      /* Hide the accent bar entirely to stop horizontal overflow */
+      #invoiceCard__accent {
+        display: none;
+      }
+
+      /* Buttons: icon + very short label */
+      .header-actions .btn span {
+        display: none;
+      }
+
+      .header-actions .btn {
+        flex: 0 0 auto;
+        padding: var(--space-2) var(--space-3);
+      }
+
+      .header-row__title {
+        font-size: var(--font-lg);
+      }
+
+      .invoice-meta h2 {
+        font-size: var(--font-xl);
+      }
+
+      /* Order info: single column on 320px */
+      .order-info {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-section__company p {
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -438,9 +686,9 @@ $payStatus   = ucfirst($order['payment_status']);
                 <p class="items-table__name"><?php echo htmlspecialchars((string)($item['name'] ?? '')); ?></p>
                 <p class="items-table__sku">SKU: <?php echo strtoupper((string)($item['slug'] ?? '')); ?></p>
               </td>
-              <td style="text-align:center; font-weight:600;"><?php echo $qty; ?></td>
-              <td style="text-align:right; font-weight:500;">₹<?php echo number_format($price, 2); ?></td>
-              <td style="text-align:right; font-weight:800; color:var(--color-gray-900);">₹<?php echo number_format($line, 2); ?></td>
+              <td style="text-align:center; font-weight:600;" data-label="Qty"><?php echo $qty; ?></td>
+              <td style="text-align:right; font-weight:500;" data-label="Price">₹<?php echo number_format($price, 2); ?></td>
+              <td style="text-align:right; font-weight:800; color:var(--color-gray-900);" data-label="Total">₹<?php echo number_format($line, 2); ?></td>
             </tr>
             <?php endforeach; ?>
           </tbody>

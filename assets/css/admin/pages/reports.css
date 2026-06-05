@@ -460,3 +460,97 @@
 .chart-card-highlight {
     animation: chartHighlight 1s ease;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE & RESPONSIVE FIXES (≤ 380px)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 575px) {
+    .reports-page .page-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    .reports-page .page-header > div {
+        width: 100% !important;
+    }
+    .reports-page .page-title {
+        font-size: 1.35rem !important;
+        text-align: left !important;
+    }
+    .reports-page .btn-export {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 38px !important;
+        font-size: 0.85rem !important;
+    }
+    .report-tabs {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+    }
+    .tab-btn {
+        flex: 1 !important;
+        min-width: 0 !important;
+        padding: 8px 4px !important;
+        font-size: 0.82rem !important;
+        text-align: center !important;
+    }
+    .period-selector {
+        gap: 6px !important;
+        margin-bottom: 16px !important;
+    }
+    .period-btn {
+        font-size: 0.72rem !important;
+        padding: 6px 4px !important;
+        height: 30px !important;
+        min-height: auto !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .reports-page .page-title {
+        font-size: 1.2rem !important;
+    }
+    .tab-btn {
+        font-size: 0.78rem !important;
+    }
+    .period-btn {
+        font-size: 0.68rem !important;
+    }
+    .summary-grid {
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+    .summary-card {
+        padding: 10px !important;
+    }
+    .card-header-row {
+        margin-bottom: 4px !important;
+    }
+    .card-label {
+        font-size: 0.68rem !important;
+    }
+    .card-icon {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 6px !important;
+        font-size: 0.95rem !important;
+    }
+    .card-value {
+        font-size: 1.1rem !important;
+        margin-bottom: 2px !important;
+    }
+    .card-change {
+        font-size: 0.68rem !important;
+    }
+    .chart-card, .category-card, .table-card {
+        padding: 10px !important;
+    }
+    .chart-title {
+        font-size: 0.85rem !important;
+    }
+    .product-mobile-card {
+        padding: 10px !important;
+    }
+}

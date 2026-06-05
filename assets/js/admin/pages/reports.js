@@ -170,7 +170,16 @@ const ReportsEngine = {
                 legend: { position: 'bottom', fontSize: '12px', markers: { width: 10, height: 10, radius: 3 } },
                 dataLabels: { enabled: true, formatter: val => `${val.toFixed(1)}%` },
                 plotOptions: { pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Total', formatter: (w) => '₹ ' + w.globals.seriesTotals.reduce((a, b) => a + b, 0).toLocaleString('en-IN') } } } } },
-                tooltip: { y: { formatter: v => `₹ ${Number(v).toLocaleString('en-IN')}` } }
+                tooltip: { y: { formatter: v => `₹ ${Number(v).toLocaleString('en-IN')}` } },
+                responsive: [
+                    {
+                        breakpoint: 576,
+                        options: {
+                            chart: { height: 260 },
+                            legend: { fontSize: '10px' }
+                        }
+                    }
+                ]
             });
             this.charts.category.render();
         } catch(e) { console.error('Category chart failed:', e); }
@@ -341,7 +350,9 @@ const ReportsEngine = {
             const result = await res.json();
 
             if (result.status !== 'success' || !result.data.length) {
-                tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-4">No sales data.</td></tr>`;
+                const emptyMsg = `<tr><td colspan="5" class="text-center text-muted py-4">No sales data.</td></tr>`;
+                tbody.innerHTML = emptyMsg;
+                if (mobile) mobile.innerHTML = `<div class="text-center text-muted py-4">No sales data.</div>`;
                 return;
             }
 
@@ -353,6 +364,27 @@ const ReportsEngine = {
                     <td class="text-end">₹ ${Number(p.product_revenue ?? 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</td>
                     <td class="text-end"><span class="badge bg-success-subtle text-success">↑</span></td>
                 </tr>`).join('');
+
+            if (mobile) {
+                mobile.innerHTML = result.data.map((p, i) => `
+                    <div class="product-mobile-card">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="fw-bold" style="font-size:0.85rem; color:var(--primary);">${i + 1}. ${this.escHtml(p.name)}</span>
+                            <span class="badge bg-success-subtle text-success" style="font-size:0.75rem;">↑</span>
+                        </div>
+                        <div class="product-stats" style="font-size:0.8rem;">
+                            <div>
+                                <span class="text-muted small d-block" style="font-size:0.7rem; margin-bottom: 2px;">Sold</span>
+                                <span class="fw-semibold" style="color:var(--text-primary);">${Number(p.total_sold ?? 0).toLocaleString()} units</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="text-muted small d-block" style="font-size:0.7rem; margin-bottom: 2px;">Revenue</span>
+                                <span class="fw-semibold" style="color:var(--primary);">₹ ${Number(p.product_revenue ?? 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
         } catch(e) { console.error('Top products failed:', e); }
     },
 

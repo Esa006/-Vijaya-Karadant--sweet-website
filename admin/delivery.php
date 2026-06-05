@@ -181,6 +181,7 @@ require_once 'includes/sidebar.php';
             margin-bottom: 1rem;
             padding: 1rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            font-size: 0.85rem;
         }
         .table-responsive td {
             display: flex;
@@ -206,6 +207,72 @@ require_once 'includes/sidebar.php';
             border-top: 1px solid #eee !important;
             margin-top: 0.5rem;
             padding-top: 1rem !important;
+        }
+    }
+
+    /* ══════════════════════════════════════════════════════════════════════════
+       MOBILE & RESPONSIVE FIXES (≤ 380px)
+       ══════════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 575px) {
+        .products-page h1 {
+            font-size: 1.4rem !important;
+        }
+        .products-page p.text-muted {
+            font-size: 0.8rem !important;
+        }
+        .products-page .bg-white.p-2.rounded-3 {
+            width: 48px !important;
+            height: 48px !important;
+            padding: 6px !important;
+        }
+        .content-body > .card > .card-body {
+            padding: 0.75rem !important;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .products-page h1 {
+            font-size: 1.15rem !important;
+        }
+        .products-page p.text-muted {
+            font-size: 0.75rem !important;
+        }
+        .products-page .d-flex.align-items-center.gap-3 {
+            gap: 8px !important;
+        }
+        .products-page .bg-white.p-2.rounded-3 {
+            width: 40px !important;
+            height: 40px !important;
+            padding: 4px !important;
+        }
+        .filter-card .card-body {
+            padding: 0.75rem !important;
+        }
+        .filter-card p {
+            font-size: 0.72rem !important;
+            margin-bottom: 2px !important;
+        }
+        .filter-card h3 {
+            font-size: 1.2rem !important;
+        }
+        .form-control, .input-group-text {
+            font-size: 0.8rem !important;
+            padding: 0.375rem 0.5rem !important;
+        }
+        .table-responsive tr {
+            padding: 0.75rem !important;
+            font-size: 0.78rem !important;
+        }
+        .table-responsive td {
+            padding: 0.5rem 0 !important;
+        }
+        .table-responsive td::before {
+            font-size: 0.72rem !important;
+        }
+        .status-select {
+            min-width: 110px !important;
+            font-size: 0.75rem !important;
+            padding: 0.25rem 0.5rem !important;
         }
     }
 </style>

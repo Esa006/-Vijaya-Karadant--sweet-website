@@ -28,9 +28,12 @@
 }
 
 .products-page .products-add-btn {
+    background: #8b2e2e;
     font-weight: 500;
     font-size: 15px;
-    padding: 8px 18px;
+    /* padding: 8px 18px; */
+    color: white;
+    border: none;
 }
 
 .products-page .products-export-btn {
@@ -354,7 +357,8 @@
 
 .products-page .products-preview-image-wrap {
     width: 100%;
-    height: 400px; /* BIG PREVIEW HEIGHT */
+    height: 400px;
+    /* BIG PREVIEW HEIGHT */
     overflow: hidden;
 }
 
