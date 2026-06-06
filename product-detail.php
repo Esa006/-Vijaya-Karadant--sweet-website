@@ -353,8 +353,6 @@ $defaultVariant = reset($activeVariants) ?: ['sku' => $skuLabel, 'weight' => '50
                                     </div>
                                     <?php endforeach; ?>
                                 </div>
-                                <div class="pdp-nav pdp-nav--prev"><i class="bi bi-chevron-left"></i></div>
-                                <div class="pdp-nav pdp-nav--next"><i class="bi bi-chevron-right"></i></div>
                             </div>
                         </div>
                     </div>
@@ -803,10 +801,6 @@ $defaultVariant = reset($activeVariants) ?: ['sku' => $skuLabel, 'weight' => '50
 
         const mainSwiper = new Swiper('.pdp-main-swiper', {
             spaceBetween: 10,
-            navigation: {
-                nextEl: '.pdp-nav--next',
-                prevEl: '.pdp-nav--prev',
-            },
             thumbs: {
                 swiper: thumbsSwiper,
             },
