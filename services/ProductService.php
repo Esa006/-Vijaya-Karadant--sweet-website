@@ -21,9 +21,20 @@ class ProductService {
     private ?AuditService $auditService = null;
     private PDO $db;
 
-    public function __construct() {
-        $this->repo = new ProductRepository();
-        $this->db = Database::getInstance();
+    private ?FileService $fileService = null;
+
+    public function __construct(
+        ?ProductRepository $repo = null,
+        ?PDO $db = null,
+        ?FileService $fileService = null,
+        ?AuditService $auditService = null,
+        ?ComboRepository $comboRepo = null
+    ) {
+        $this->db = $db ?? Database::getInstance();
+        $this->repo = $repo ?? new ProductRepository($this->db);
+        $this->fileService = $fileService;
+        $this->auditService = $auditService;
+        $this->comboRepo = $comboRepo;
     }
 
     private function getComboRepo(): ComboRepository {
@@ -566,7 +577,7 @@ class ProductService {
     public function createProduct(array $data, ?array $imageFile = null): int {
         // 1. Image Upload
         if ($imageFile) {
-            $fileService = new FileService();
+            $fileService = $this->fileService ?? new FileService();
             $data['image_path'] = $fileService->upload($imageFile);
         }
 
@@ -623,7 +634,7 @@ class ProductService {
         $existing = $this->repo->getById($id);
         if (!$existing) return false;
 
-        $fileService = new FileService();
+        $fileService = $this->fileService ?? new FileService();
 
         // 1. Handle Main Image
         if ($imageFile && !empty($imageFile['tmp_name'])) {
@@ -735,7 +746,7 @@ class ProductService {
             }
 
             if ($target) {
-                $fileService = new FileService();
+                $fileService = $this->fileService ?? new FileService();
                 $fileService->delete($target['image_path']);
                 return $this->repo->deleteImage($imageId);
             }

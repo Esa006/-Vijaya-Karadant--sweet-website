@@ -15,9 +15,8 @@ require_once ROOT_PATH . '/config/Database.php';
 class PromotionService {
     private PromotionRepository $repo;
 
-    public function __construct() {
-        $pdo = Database::getInstance();
-        $this->repo = new PromotionRepository($pdo);
+    public function __construct(?PromotionRepository $repo = null) {
+        $this->repo = $repo ?? new PromotionRepository(Database::getInstance());
     }
 
     /**

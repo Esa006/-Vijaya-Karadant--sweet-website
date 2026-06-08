@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sweets_web
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_NAME=sweets_db
+      - DB_USER=root
+      - DB_PASS=secret_pass
+      - APP_ENV=development
+      - APP_DEBUG=true
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: sweets_db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=sweets_db
+      - MYSQL_ROOT_PASSWORD=secret_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  db_data:

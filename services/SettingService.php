@@ -34,11 +34,17 @@ class SettingService {
      * Save bulk settings
      */
     public function saveSettings(array $data): bool {
-        // Here we could add validation or auditing
+        if (empty($data)) {
+            throw new InvalidArgumentException("Settings data cannot be empty");
+        }
         foreach ($data as $key => $value) {
+            $trimmedKey = trim((string)$key);
+            if ($trimmedKey === '') {
+                throw new InvalidArgumentException("Setting key cannot be empty");
+            }
             // Determine group based on key prefix or mapping
-            $group = $this->determineGroup($key);
-            $this->repository->update($key, $value, $group);
+            $group = $this->determineGroup($trimmedKey);
+            $this->repository->update($trimmedKey, $value, $group);
         }
         return true;
     }
